@@ -4,7 +4,15 @@ Sistema de auditoría de datos públicos chilenos **sin sesgo ideológico**, tip
 
 ## Estado
 
-**Fase 1 — Core: COMPLETA** (2026-07-01). Pipeline de ingesta, manifiesto con hash-chain y verificador operando; génesis con 2 artefactos reales (1 fiscal + 1 legislativo). Todo el diseño vive en [`CLAUDE.md`](CLAUDE.md), el prompt maestro que guía la construcción. Fase siguiente: **Fase 2 — Módulo Fiscal**.
+**Fases 1–4 COMPLETAS** (2026-07-01): core criptográfico + módulo Fiscal + módulo Legislativo + web pública. El manifiesto tiene 18 artefactos oficiales encadenados. Todo el diseño vive en [`CLAUDE.md`](CLAUDE.md), el prompt maestro que guía la construcción. Fase pendiente (opcional): **Fase 5 — ingesta automática periódica**.
+
+**Sitio público:** https://5egaloz.github.io/auditoria-publica/
+
+## Qué contiene hoy
+
+- **Fiscal:** serie del Balance del Gobierno Central (efectivo y cíclicamente ajustado, % del PIB, años 2025–2030) según 5 publicaciones IFP de Dipres (1T2025 → 1T2026), extraída celda por celda de los cuadros Excel oficiales — 36 registros, cada uno con hash + hoja + celda de origen.
+- **Legislativo:** las 669 votaciones en Sala de la Cámara (2026) y las 13 votaciones de Acusación Constitucional con su voto nominal completo, conteo verificado contra los totales declarados por la fuente.
+- **Web:** tablas + gráfico + fichas AC + manifiesto navegable + página de verificación criptográfica en el navegador.
 
 ## Cómo verificar (cualquier persona, sin confiar en nosotros)
 
