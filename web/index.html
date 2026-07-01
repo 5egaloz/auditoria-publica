@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría Cívica de Datos Abiertos — Chile</title>
+<meta name="description" content="Datos fiscales y legislativos de Chile con trazabilidad criptográfica: cada cifra con fuente oficial, fecha de captura y hash SHA-256 verificable en su navegador.">
+<style>
+:root{
+  --tinta:#1a2332; --tinta2:#4a5568; --fondo:#f7f8fa; --panel:#ffffff;
+  --linea:#e2e8f0; --acento:#0f4c81; --acento2:#1a6fb5; --ok:#1e7d46; --error:#b3261e;
+  --mono:"Consolas","Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,"Times New Roman",serif;background:var(--fondo);color:var(--tinta);line-height:1.55}
+header{background:var(--tinta);color:#fff;padding:28px 16px 22px;text-align:center}
+header h1{font-size:1.5rem;font-weight:normal;letter-spacing:.5px}
+header p{color:#b8c4d4;font-size:.95rem;max-width:760px;margin:8px auto 0}
+nav{background:var(--panel);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:5;
+    display:flex;flex-wrap:wrap;justify-content:center;gap:2px;padding:0 8px}
+nav button{font-family:inherit;font-size:.95rem;background:none;border:none;border-bottom:3px solid transparent;
+    padding:12px 14px;cursor:pointer;color:var(--tinta2)}
+nav button.activo{color:var(--acento);border-bottom-color:var(--acento);font-weight:bold}
+main{max-width:1080px;margin:0 auto;padding:20px 14px 60px}
+section{display:none}
+section.activa{display:block}
+h2{font-size:1.25rem;margin:18px 0 6px;color:var(--acento)}
+h3{font-size:1.05rem;margin:16px 0 4px}
+.nota{color:var(--tinta2);font-size:.9rem;margin:4px 0 12px}
+.panel{background:var(--panel);border:1px solid var(--linea);border-radius:8px;padding:16px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--panel)}
+th,td{border:1px solid var(--linea);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#eef2f7;font-family:inherit}
+td.num,th.num{text-align:right;font-family:var(--mono);font-size:.85rem}
+.hash{font-family:var(--mono);font-size:.75rem;color:var(--tinta2);word-break:break-all}
+.hash a{color:var(--acento2);text-decoration:none}
+.tag{display:inline-block;font-size:.72rem;font-family:var(--mono);padding:1px 7px;border-radius:9px;
+     background:#eef2f7;color:var(--tinta2);border:1px solid var(--linea)}
+.tag.ok{background:#e8f5ee;color:var(--ok);border-color:#bfe3cf}
+.tag.no{background:#fdecea;color:var(--error);border-color:#f5c6c0}
+.scroll{overflow-x:auto}
+.scroll-y{max-height:430px;overflow-y:auto}
+details{margin:6px 0}
+summary{cursor:pointer;color:var(--acento2)}
+input[type=text]{font-family:inherit;font-size:.95rem;padding:8px 10px;border:1px solid var(--linea);
+     border-radius:6px;width:100%;max-width:420px}
+.boton{font-family:inherit;font-size:.95rem;background:var(--acento);color:#fff;border:none;
+     border-radius:6px;padding:10px 18px;cursor:pointer}
+.boton:hover{background:var(--acento2)}
+.drop{border:2px dashed var(--linea);border-radius:8px;padding:26px;text-align:center;color:var(--tinta2)}
+.drop.sobre{border-color:var(--acento2);background:#eef6fd}
+.resultado-ok{color:var(--ok);font-weight:bold}
+.resultado-error{color:var(--error);font-weight:bold}
+footer{border-top:1px solid var(--linea);color:var(--tinta2);font-size:.85rem;text-align:center;
+     padding:22px 14px;max-width:1080px;margin:0 auto}
+svg text{font-family:var(--mono);font-size:11px;fill:var(--tinta2)}
+.leyenda span{margin-right:16px;font-size:.85rem}
+.cargando{color:var(--tinta2);font-style:italic}
+@media (max-width:600px){ th,td{padding:4px 6px;font-size:.82rem} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Auditoría Cívica de Datos Abiertos — Chile</h1>
+  <p>Datos fiscales y legislativos tomados de las fuentes oficiales del Estado, publicados con su
+     magnitud, su fuente y su hash SHA-256. Este sitio no opina: expone. Las conclusiones las saca usted.</p>
+</header>
+
+<nav id="nav">
+  <button data-sec="fiscal" class="activo">💰 Fiscal</button>
+  <button data-sec="ac">📜 Acusaciones Constitucionales</button>
+  <button data-sec="votaciones">🗳️ Votaciones 2026</button>
+  <button data-sec="manifiesto">🛡️ Manifiesto</button>
+  <button data-sec="verificar">🔎 Verificar</button>
+  <button data-sec="metodo">📖 Método</button>
+</nav>
+
+<main>
+
+<!-- ============================ FISCAL ============================ -->
+<section id="sec-fiscal" class="activa">
+  <h2>Balance del Gobierno Central (% del PIB)</h2>
+  <p class="nota">Cifras extraídas celda por celda de los cuadros Excel oficiales de los
+  Informes de Finanzas Públicas (IFP) de Dipres. Cada columna es lo que proyectó una publicación;
+  leer una fila de izquierda a derecha muestra cómo cambió la proyección del mismo año entre
+  publicaciones. Pase el cursor sobre una cifra para ver su celda de origen.</p>
+  <div id="fiscal-contenido" class="cargando">Cargando datos…</div>
+</section>
+
+<!-- ============================ AC ============================ -->
+<section id="sec-ac">
+  <h2>Acusaciones Constitucionales — votaciones en Sala (Cámara, 2026)</h2>
+  <p class="nota">Votaciones cuya descripción literal en opendata.camara.cl es de Acusación
+  Constitucional, con el voto nominal (diputado por diputado). El web service de la fuente no
+  publica el nombre del acusado ni la causal; aquí figura exactamente lo que la fuente entrega.
+  El conteo nominal de cada votación fue comparado con los totales que declara la fuente.</p>
+  <input type="text" id="ac-filtro" placeholder="Filtrar por nombre de diputado/a…">
+  <div id="ac-contenido" class="cargando">Cargando datos…</div>
+</section>
+
+<!-- ============================ VOTACIONES ============================ -->
+<section id="sec-votaciones">
+  <h2>Votaciones en Sala — Cámara de Diputadas y Diputados, 2026</h2>
+  <p class="nota">Todas las votaciones en Sala del año 2026 según opendata.camara.cl.
+  Los campos de texto se copian literalmente de la fuente.</p>
+  <div id="vot-contenido" class="cargando">Cargando datos…</div>
+</section>
+
+<!-- ============================ MANIFIESTO ============================ -->
+<section id="sec-manifiesto">
+  <h2>Manifiesto de artefactos</h2>
+  <p class="nota">Registro append-only de cada archivo descargado de una fuente oficial:
+  URL, fecha de captura (UTC), tamaño y SHA-256. Cada entrada incluye el hash de la entrada
+  anterior (cadena): alterar el pasado rompe la cadena. El archivo original queda guardado
+  intacto en <span class="hash">data/raw/</span> del repositorio.</p>
+  <div id="man-contenido" class="cargando">Cargando manifiesto…</div>
+</section>
+
+<!-- ============================ VERIFICAR ============================ -->
+<section id="sec-verificar">
+  <h2>Verificar</h2>
+  <p class="nota">Las dos verificaciones corren completas en su navegador (Web Crypto API).
+  Nada se envía a ningún servidor.</p>
+
+  <div class="panel">
+    <h3>1 · Verificar la cadena del manifiesto</h3>
+    <p class="nota">Re-calcula el hash de cada entrada del manifiesto y valida el encadenamiento
+    (<span class="hash">sha256_prev</span>). Detecta cualquier entrada alterada, borrada o reordenada.</p>
+    <button class="boton" id="btn-cadena">Verificar cadena ahora</button>
+    <div id="cadena-resultado" style="margin-top:10px"></div>
+  </div>
+
+  <div class="panel">
+    <h3>2 · Verificar un archivo contra el manifiesto</h3>
+    <p class="nota">Descargue un artefacto desde su fuente oficial (columna URL del manifiesto) o
+    desde <span class="hash">data/raw/</span> del repositorio, y suéltelo aquí: su SHA-256 se calcula
+    localmente y se busca en el manifiesto.</p>
+    <div class="drop" id="drop">Arrastre un archivo aquí, o <label style="color:var(--acento2);cursor:pointer;text-decoration:underline">elíjalo<input type="file" id="file" hidden></label>.</div>
+    <div id="file-resultado" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<!-- ============================ MÉTODO ============================ -->
+<section id="sec-metodo">
+  <h2>Método</h2>
+  <div class="panel">
+  <h3>Principios</h3>
+  <ol style="margin-left:22px">
+    <li><b>Neutralidad:</b> el sistema no concluye "quién tiene razón"; publica magnitudes con base de comparación explícita, sin adjetivos valorativos.</li>
+    <li><b>Verificabilidad:</b> toda cifra apunta al hash SHA-256 del artefacto oficial del que salió, con hoja y celda (o campo XML) de origen.</li>
+    <li><b>Reproducibilidad:</b> cualquier persona puede re-descargar las fuentes, re-calcular los hashes y re-derivar cada cifra. El repositorio incluye los scripts.</li>
+    <li><b>Simetría:</b> las mismas reglas para todo gobierno, coalición o período.</li>
+    <li><b>Si no hay dato, se dice "sin dato disponible".</b> Nunca se estima ni se rellena.</li>
+  </ol>
+  <h3 style="margin-top:14px">Flujo</h3>
+  <p style="font-family:var(--mono);font-size:.82rem;background:#eef2f7;padding:10px;border-radius:6px;margin-top:6px">
+  descarga del original → SHA-256 → data/raw/ (intacto, jamás editado) → manifiesto append-only con hash-chain → extracción a JSON (cada cifra con origen) → esta página</p>
+  <h3 style="margin-top:14px">Fuentes</h3>
+  <ul style="margin-left:22px">
+    <li>Dipres — Informes de Finanzas Públicas y datos abiertos presupuestarios (dipres.gob.cl, datos.gob.cl)</li>
+    <li>Cámara de Diputadas y Diputados — web services de datos abiertos (opendata.camara.cl)</li>
+  </ul>
+  <h3 style="margin-top:14px">Sin rastreo</h3>
+  <p>Este sitio no usa cookies, analytics ni publicidad. Un sistema que audita no puede a la vez rastrear.</p>
+  <h3 style="margin-top:14px">Repositorio</h3>
+  <p>Código, datos originales y manifiesto: <a id="link-repo" href="https://github.com/5egaloz/auditoria-publica">github.com/5egaloz/auditoria-publica</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Auditoría Cívica de Datos Abiertos · Los textos de la fuente se citan literalmente ·
+  Cifras con redondeo a 2 decimales en pantalla (el JSON conserva la precisión completa) ·
+  Sin cookies, sin analytics.
+</footer>
+
+<script>
+"use strict";
+/* ---------- utilitarios ---------- */
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const f2 = v => (typeof v === "number" ? (v >= 0 ? "+" : "") + v.toFixed(2) : "—");
+const RUTA_BASE = "..";   // el sitio vive en /web/, los datos en la raíz del repo
+
+/* navegación */
+$("#nav").addEventListener("click", e => {
+  if (e.target.tagName !== "BUTTON") return;
+  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("activo", b === e.target));
+  document.querySelectorAll("main section").forEach(s => s.classList.remove("activa"));
+  $("#sec-" + e.target.dataset.sec).classList.add("activa");
+});
+
+/* JSON canónico idéntico a json.dumps(sort_keys=True, separators=(",",":")) para los tipos usados */
+function jsonCanonico(obj){
+  if (obj === null) return "null";
+  if (typeof obj === "number" || typeof obj === "boolean") return JSON.stringify(obj);
+  if (typeof obj === "string") return JSON.stringify(obj);
+  if (Array.isArray(obj)) return "[" + obj.map(jsonCanonico).join(",") + "]";
+  return "{" + Object.keys(obj).sort().map(k => JSON.stringify(k) + ":" + jsonCanonico(obj[k])).join(",") + "}";
+}
+async function sha256hex(datos){ // datos: ArrayBuffer o string
+  const buf = typeof datos === "string" ? new TextEncoder().encode(datos) : datos;
+  const h = await crypto.subtle.digest("SHA-256", buf);
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+let MANIFIESTO = [];
+
+async function cargar(){
+  try{
+    const txt = await (await fetch(RUTA_BASE + "/manifest.jsonl")).text();
+    MANIFIESTO = txt.split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
+    pintarManifiesto();
+  }catch(e){ $("#man-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar el manifiesto: " + esc(e) + "</p>"; }
+  try{
+    const fiscal = await (await fetch(RUTA_BASE + "/data/derived/fiscal/balance-gobierno-central.json")).json();
+    pintarFiscal(fiscal);
+  }catch(e){ $("#fiscal-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar los datos fiscales: " + esc(e) + "</p>"; }
+  try{
+    const ac = await (await fetch(RUTA_BASE + "/data/derived/legislativo/acusaciones-constitucionales-2026.json")).json();
+    pintarAC(ac);
+  }catch(e){ $("#ac-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar las AC: " + esc(e) + "</p>"; }
+  try{
+    const vot = await (await fetch(RUTA_BASE + "/data/derived/legislativo/votaciones-2026.json")).json();
+    pintarVotaciones(vot);
+  }catch(e){ $("#vot-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar las votaciones: " + esc(e) + "</p>"; }
+}
+
+/* ---------- FISCAL ---------- */
+function pintarFiscal(d){
+  const regs = d.registros;
+  const publicaciones = [...new Set(regs.map(r => r.publicacion))]
+      .sort((a,b) => clavePub(a) - clavePub(b));
+  const variables = [
+    ["balance_ciclicamente_ajustado_pct_pib", "Balance Cíclicamente Ajustado (estructural)"],
+    ["balance_efectivo_pct_pib", "Balance Efectivo"],
+    ["meta_bca_pct_pib", "Meta de Balance Cíclicamente Ajustado (decreto de política fiscal, según IFP)"],
+  ];
+  let html = "";
+  for (const [varId, titulo] of variables){
+    const sub = regs.filter(r => r.variable === varId);
+    if (!sub.length) continue;
+    const annos = [...new Set(sub.map(r => r.anno))].sort();
+    const pubs = publicaciones.filter(p => sub.some(r => r.publicacion === p));
+    html += `<h3>${esc(titulo)}</h3><div class="scroll"><table><thead><tr><th>Año</th>`;
+    for (const p of pubs) html += `<th class="num">${esc(p)}</th>`;
+    html += "</tr></thead><tbody>";
+    for (const a of annos){
+      html += `<tr><td>${a}</td>`;
+      for (const p of pubs){
+        const r = sub.find(x => x.anno === a && x.publicacion === p);
+        if (!r){ html += "<td class='num'>—</td>"; continue; }
+        const title = `${r.origen.archivo} · hoja ${r.origen.hoja} · celda ${r.origen.celda}` +
+                      ` · ${r.caracter}` + (r.nota ? " · " + r.nota : "") +
+                      ` · sha256 ${r.sha256_origen.slice(0,16)}…`;
+        const marca = r.caracter === "cierre_estimado" ? " <span class='tag'>cierre</span>" : "";
+        html += `<td class="num" title="${esc(title)}">${f2(r.valor)}${marca}</td>`;
+      }
+      html += "</tr>";
+    }
+    html += "</tbody></table></div>";
+  }
+  html += `<p class="nota">Unidad: % del PIB (el PIB usado es el proyectado en cada informe, según nota de cada cuadro).
+    "cierre" = cifra publicada como efectiva/estructural del año ya terminado. Las cifras del IFP 1T2025 y 2T2025
+    provienen del cuadro comparativo del IFP 3T2025 e incluyen acciones correctivas, según indica ese cuadro.
+    Origen completo de cada cifra (archivo, hoja, celda, hash) en
+    <span class="hash"><a href="${RUTA_BASE}/data/derived/fiscal/balance-gobierno-central.json">balance-gobierno-central.json</a></span>.</p>`;
+  html += graficoFiscal(regs);
+  $("#fiscal-contenido").innerHTML = html;
+  $("#fiscal-contenido").classList.remove("cargando");
+}
+function clavePub(p){ // "IFP 3T2025" -> 2025*10+3
+  const m = p.match(/(\d)T(\d{4})/); return m ? (+m[2])*10 + (+m[1]) : 0;
+}
+function graficoFiscal(regs){
+  // evolución de la proyección del balance estructural para 2025 y 2026, por publicación
+  const serie = anno => regs
+    .filter(r => r.variable === "balance_ciclicamente_ajustado_pct_pib" && r.anno === anno)
+    .sort((a,b) => clavePub(a.publicacion) - clavePub(b.publicacion));
+  const s25 = serie(2025), s26 = serie(2026);
+  const pubs = [...new Set([...s25, ...s26].map(r => r.publicacion))].sort((a,b) => clavePub(a) - clavePub(b));
+  if (pubs.length < 2) return "";
+  const W = 640, H = 240, mL = 46, mR = 12, mT = 14, mB = 34;
+  const vals = [...s25, ...s26].map(r => r.valor);
+  const vMin = Math.floor(Math.min(...vals) * 2) / 2 - .25, vMax = Math.ceil(Math.max(...vals) * 2) / 2 + .25;
+  const X = p => mL + pubs.indexOf(p) * (W - mL - mR) / (pubs.length - 1);
+  const Y = v => mT + (vMax - v) * (H - mT - mB) / (vMax - vMin);
+  const linea = (s, color) => {
+    if (!s.length) return "";
+    const pts = s.map(r => `${X(r.publicacion).toFixed(1)},${Y(r.valor).toFixed(1)}`).join(" ");
+    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>` +
+      s.map(r => `<circle cx="${X(r.publicacion).toFixed(1)}" cy="${Y(r.valor).toFixed(1)}" r="3.5" fill="${color}"><title>${esc(r.publicacion)}: ${f2(r.valor)}% del PIB (${esc(r.caracter)})</title></circle>`).join("");
+  };
+  let ejes = "";
+  for (let v = Math.ceil(vMin); v <= vMax; v += 1){
+    ejes += `<line x1="${mL}" y1="${Y(v)}" x2="${W-mR}" y2="${Y(v)}" stroke="#e2e8f0"/><text x="4" y="${Y(v)+4}">${v > 0 ? "+"+v : v}%</text>`;
+  }
+  const etiquetas = pubs.map(p => `<text x="${X(p)}" y="${H-10}" text-anchor="middle">${esc(p.replace("IFP ",""))}</text>`).join("");
+  return `<h3>Evolución de la proyección del balance estructural, por publicación</h3>
+  <div class="panel" style="overflow-x:auto">
+  <svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px">
+    ${ejes}${etiquetas}
+    ${linea(s25, "#0f4c81")}${linea(s26, "#c05621")}
+  </svg>
+  <div class="leyenda"><span style="color:#0f4c81">● año 2025</span><span style="color:#c05621">● año 2026</span></div>
+  <p class="nota">Derivado visual de la tabla anterior (mismos valores, sin transformación). El último punto de la
+  serie 2025 es la cifra de cierre publicada en el IFP 1T2026; los demás son proyecciones.</p></div>`;
+}
+
+/* ---------- AC ---------- */
+let AC_DATA = null;
+function pintarAC(d){
+  AC_DATA = d;
+  renderAC("");
+  $("#ac-filtro").addEventListener("input", e => renderAC(e.target.value.trim().toLowerCase()));
+}
+function renderAC(filtro){
+  const cont = $("#ac-contenido");
+  let html = `<p class="nota">${AC_DATA.total_registros} votaciones · fuente:
+    <span class="hash"><a href="${RUTA_BASE}/data/derived/legislativo/acusaciones-constitucionales-2026.json">acusaciones-constitucionales-2026.json</a></span></p>`;
+  for (const r of AC_DATA.registros){
+    const votos = filtro ? r.votos_nominales.filter(v => v.nombre.toLowerCase().includes(filtro)) : r.votos_nominales;
+    if (filtro && !votos.length) continue;
+    const fecha = r.fecha.replace("T", " ");
+    const cls = r.resultado === "Aprobado" ? "ok" : "no";
+    html += `<div class="panel">
+      <b>${esc(fecha)}</b> — <span class="hash">id ${r.id}</span> ·
+      descripción literal: “${esc(r.descripcion_literal)}” ·
+      <span class="tag ${cls}">${esc(r.resultado)}</span>
+      <div style="margin:6px 0">A favor <b>${r.total_si}</b> · En contra <b>${r.total_no}</b> ·
+        Abstención <b>${r.total_abstencion}</b> · ${esc(r.quorum)} ·
+        <span class="tag ok" title="${esc(r.verificacion_conteo)}">conteo nominal ✓</span></div>
+      <div class="hash">artefacto sha256 ${r.sha256_origen.slice(0, 24)}… ·
+        <a href="${esc(r.url_fuente)}" rel="noopener">fuente</a></div>
+      <details ${filtro ? "open" : ""}><summary>Voto nominal (${votos.length}${filtro ? " coinciden" : ""})</summary>
+      <div class="scroll-y"><table><thead><tr><th>Diputado/a</th><th>Voto</th></tr></thead><tbody>` +
+      votos.map(v => `<tr><td>${esc(v.nombre)}</td><td>${esc(v.voto)}</td></tr>`).join("") +
+      `</tbody></table></div></details></div>`;
+  }
+  cont.innerHTML = html;
+  cont.classList.remove("cargando");
+}
+
+/* ---------- VOTACIONES ---------- */
+function pintarVotaciones(d){
+  const regs = d.registros;
+  const porTipo = {};
+  for (const r of regs){
+    const t = r.tipo || "(sin tipo)";
+    porTipo[t] = porTipo[t] || {total: 0, aprobado: 0};
+    porTipo[t].total++;
+    if (r.resultado === "Aprobado") porTipo[t].aprobado++;
+  }
+  let html = `<h3>Resumen por tipo (derivado)</h3>
+  <div class="scroll"><table><thead><tr><th>Tipo (literal de la fuente)</th>
+  <th class="num">Votaciones</th><th class="num">Con resultado "Aprobado"</th></tr></thead><tbody>`;
+  for (const [t, v] of Object.entries(porTipo).sort((a,b) => b[1].total - a[1].total)){
+    html += `<tr><td>${esc(t)}</td><td class="num">${v.total}</td><td class="num">${v.aprobado}</td></tr>`;
+  }
+  html += `</tbody></table></div>
+  <p class="nota">Derivado: conteo simple sobre los ${regs.length} registros (fórmula: total por valor
+  del campo <span class="hash">tipo</span>; "aprobado" = registros con <span class="hash">resultado == "Aprobado"</span>).</p>
+  <h3>Todas las votaciones (${regs.length})</h3>
+  <div class="scroll-y"><table><thead><tr><th>Fecha</th><th>Descripción (literal)</th>
+  <th class="num">Sí</th><th class="num">No</th><th class="num">Abst.</th><th>Resultado</th></tr></thead><tbody>`;
+  for (const r of regs){
+    html += `<tr><td>${esc(r.fecha.replace("T"," "))}</td><td>${esc(r.descripcion_literal)}</td>
+      <td class="num">${r.total_si}</td><td class="num">${r.total_no}</td>
+      <td class="num">${r.total_abstencion}</td><td>${esc(r.resultado ?? "—")}</td></tr>`;
+  }
+  html += "</tbody></table></div>";
+  $("#vot-contenido").innerHTML = html;
+  $("#vot-contenido").classList.remove("cargando");
+}
+
+/* ---------- MANIFIESTO ---------- */
+function pintarManifiesto(){
+  let html = `<p class="nota">${MANIFIESTO.length} entradas ·
+    <span class="hash"><a href="${RUTA_BASE}/manifest.jsonl">manifest.jsonl</a></span></p>
+  <div class="scroll"><table><thead><tr><th>#</th><th>Captura (UTC)</th><th>Módulo</th>
+  <th>Descripción</th><th class="num">Bytes</th><th>SHA-256</th><th>Fuente</th></tr></thead><tbody>`;
+  for (const e of MANIFIESTO){
+    html += `<tr><td class="num">${e.seq}</td><td>${esc(e.timestamp_utc)}</td>
+      <td><span class="tag">${esc(e.modulo)}</span></td><td>${esc(e.descripcion)}</td>
+      <td class="num">${e.bytes.toLocaleString("es-CL")}</td>
+      <td class="hash" title="${esc(e.sha256)}">${e.sha256.slice(0, 20)}…</td>
+      <td class="hash"><a href="${esc(e.url_fuente)}" rel="noopener">URL</a> ·
+        <a href="${RUTA_BASE}/${esc(e.ruta_local)}">copia</a></td></tr>`;
+  }
+  html += "</tbody></table></div>";
+  $("#man-contenido").innerHTML = html;
+  $("#man-contenido").classList.remove("cargando");
+}
+
+/* ---------- VERIFICAR: cadena ---------- */
+$("#btn-cadena").addEventListener("click", async () => {
+  const out = $("#cadena-resultado");
+  out.innerHTML = "<p class='cargando'>Verificando…</p>";
+  try{
+    const txt = await (await fetch(RUTA_BASE + "/manifest.jsonl", {cache: "no-store"})).text();
+    const lineas = txt.split("\n").filter(l => l.trim());
+    let prev = "0".repeat(64);
+    const detalles = [];
+    for (let i = 0; i < lineas.length; i++){
+      const e = JSON.parse(lineas[i]);
+      if (e.seq !== i) throw `seq ${e.seq}: secuencia no contigua (esperado ${i})`;
+      if (e.sha256_prev !== prev) throw `seq ${e.seq}: sha256_prev no coincide con la entrada anterior`;
+      const copia = {...e, sha256_linea: ""};
+      const calc = await sha256hex(jsonCanonico(copia));
+      if (calc !== e.sha256_linea) throw `seq ${e.seq}: sha256_linea no coincide (entrada alterada)`;
+      prev = e.sha256_linea;
+      detalles.push(`seq ${e.seq} ✓ ${e.descripcion}`);
+    }
+    out.innerHTML = `<p class="resultado-ok">CADENA OK (${lineas.length} entradas)</p>
+      <details><summary>detalle</summary><div class="scroll-y"><pre style="font-size:.78rem">${esc(detalles.join("\n"))}</pre></div></details>`;
+  }catch(err){
+    out.innerHTML = `<p class="resultado-error">CADENA ROTA — ${esc(err)}</p>`;
+  }
+});
+
+/* ---------- VERIFICAR: archivo ---------- */
+async function verificarArchivo(file){
+  const out = $("#file-resultado");
+  out.innerHTML = "<p class='cargando'>Calculando SHA-256 de “" + esc(file.name) + "”…</p>";
+  const hash = await sha256hex(await file.arrayBuffer());
+  const hit = MANIFIESTO.find(e => e.sha256 === hash);
+  if (hit){
+    out.innerHTML = `<p class="resultado-ok">COINCIDE — el archivo es byte a byte el artefacto seq ${hit.seq} del manifiesto.</p>
+      <table><tbody>
+      <tr><th>Descripción</th><td>${esc(hit.descripcion)}</td></tr>
+      <tr><th>Capturado</th><td>${esc(hit.timestamp_utc)}</td></tr>
+      <tr><th>Fuente</th><td class="hash"><a href="${esc(hit.url_fuente)}" rel="noopener">${esc(hit.url_fuente)}</a></td></tr>
+      <tr><th>SHA-256</th><td class="hash">${hash}</td></tr></tbody></table>`;
+  }else{
+    out.innerHTML = `<p class="resultado-error">NO COINCIDE con ningún artefacto del manifiesto.</p>
+      <p class="nota">SHA-256 calculado: <span class="hash">${hash}</span><br>
+      Posibles motivos: el archivo no fue ingerido, la fuente lo modificó después de la captura,
+      o el archivo fue alterado. Compare con la columna SHA-256 del manifiesto.</p>`;
+  }
+}
+const drop = $("#drop");
+drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("sobre"); });
+drop.addEventListener("dragleave", () => drop.classList.remove("sobre"));
+drop.addEventListener("drop", e => {
+  e.preventDefault(); drop.classList.remove("sobre");
+  if (e.dataTransfer.files.length) verificarArchivo(e.dataTransfer.files[0]);
+});
+$("#file").addEventListener("change", e => { if (e.target.files.length) verificarArchivo(e.target.files[0]); });
+
+cargar();
+</script>
+</body>
+</html>
