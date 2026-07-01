@@ -1,0 +1,656 @@
+{
+ "descripcion": "Balance del Gobierno Central Total (% del PIB) segun cada publicacion IFP de Dipres. Cifras extraidas celda por celda de los cuadros Excel oficiales; cada registro apunta al sha256 de su artefacto en el manifiesto.",
+ "generado_utc": "2026-07-01T21:29:04Z",
+ "generado_por": "extraer_fiscal.py",
+ "total_registros": 36,
+ "registros": [
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2025,
+   "valor": -1.42996082691199,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2025",
+   "nota": "con acciones correctivas; cifra de IFP 1T2025 segun la reporta IFP 3T2025",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "D11",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2025,
+   "valor": -1.649000029361537,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2025",
+   "nota": "con acciones correctivas; cifra de IFP 1T2025 segun la reporta IFP 3T2025",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "D12",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2025,
+   "valor": -1.5381448274877518,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 2T2025",
+   "nota": "con acciones correctivas; cifra de IFP 2T2025 segun la reporta IFP 3T2025",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "F11",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2025,
+   "valor": -1.8055368809767558,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 2T2025",
+   "nota": "con acciones correctivas; cifra de IFP 2T2025 segun la reporta IFP 3T2025",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "F12",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2025,
+   "valor": -1.9617764228607792,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 3T2025",
+   "nota": "con acciones correctivas",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "H11",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2025,
+   "valor": -2.2498616096484736,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 3T2025",
+   "nota": "con acciones correctivas",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C I.4.2",
+    "celda": "H12",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2026,
+   "valor": -1.4824456049121257,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 3T2025",
+   "nota": "publicado como 'Balance Devengado'",
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C II.5.1",
+    "celda": "C6",
+    "etiqueta_fila": "Balance Devengado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2026,
+   "valor": -1.146945236673591,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 3T2025",
+   "nota": null,
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C II.5.1",
+    "celda": "C18",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "meta_bca_pct_pib",
+   "anno": 2027,
+   "valor": -0.8,
+   "unidad": "% del PIB",
+   "caracter": "meta",
+   "publicacion": "IFP 3T2025",
+   "nota": null,
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C III.8.1",
+    "celda": "C9",
+    "etiqueta_fila": "Meta BCA (% del PIB)"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "meta_bca_pct_pib",
+   "anno": 2028,
+   "valor": -0.5,
+   "unidad": "% del PIB",
+   "caracter": "meta",
+   "publicacion": "IFP 3T2025",
+   "nota": null,
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C III.8.1",
+    "celda": "D9",
+    "etiqueta_fila": "Meta BCA (% del PIB)"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "meta_bca_pct_pib",
+   "anno": 2029,
+   "valor": 0.0,
+   "unidad": "% del PIB",
+   "caracter": "meta",
+   "publicacion": "IFP 3T2025",
+   "nota": null,
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C III.8.1",
+    "celda": "E9",
+    "etiqueta_fila": "Meta BCA (% del PIB)"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "meta_bca_pct_pib",
+   "anno": 2030,
+   "valor": 0.0,
+   "unidad": "% del PIB",
+   "caracter": "meta",
+   "publicacion": "IFP 3T2025",
+   "nota": null,
+   "sha256_origen": "58a236f81fa5813f381bfe02fa4fb35fec27f1ac6c2674b18e3575ce9055ab15",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-3T-cuadros.xlsx",
+    "hoja": "C III.8.1",
+    "celda": "F9",
+    "etiqueta_fila": "Meta BCA (% del PIB)"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2025,
+   "valor": -2.813679444995528,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C I.5.1",
+    "celda": "F10",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2025,
+   "valor": -3.5530785508428524,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C I.5.1",
+    "celda": "F11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2026,
+   "valor": -1.8449978267727325,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C II.4.2",
+    "celda": "F10",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2026,
+   "valor": -2.671293389571183,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C II.4.2",
+    "celda": "F11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2027,
+   "valor": -1.7430095567040216,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "C9",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2028,
+   "valor": -1.533230189187873,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "D9",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2029,
+   "valor": -1.5131495330770648,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "E9",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2030,
+   "valor": -1.1968143397962867,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "F9",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2027,
+   "valor": -2.106724459954407,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "C11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2028,
+   "valor": -1.6919024354813554,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "D11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2029,
+   "valor": -1.5191168620324873,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "E11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2030,
+   "valor": -1.133172554960237,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 4T2025",
+   "nota": null,
+   "sha256_origen": "b0c0668ba9a97a5ec97df7163f368fad330f2db00d4cd6dfeba982019f2bd15e",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2025-4T-cuadros.xlsx",
+    "hoja": "C III.6.2",
+    "celda": "F11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2025,
+   "valor": -2.8018041699923066,
+   "unidad": "% del PIB",
+   "caracter": "cierre_estimado",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C I.7.2",
+    "celda": "C6",
+    "etiqueta_fila": "Balance efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2025,
+   "valor": -3.6749560560751258,
+   "unidad": "% del PIB",
+   "caracter": "cierre_estimado",
+   "publicacion": "IFP 1T2026",
+   "nota": "publicado como 'Balance Estructural'",
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C I.7.2",
+    "celda": "C13",
+    "etiqueta_fila": "Balance Estructural"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2026,
+   "valor": -2.3997093508778793,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C II.4.2",
+    "celda": "F10",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2026,
+   "valor": -3.6719495532531363,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C II.4.2",
+    "celda": "F11",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2027,
+   "valor": -1.736386863904658,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "C13",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2028,
+   "valor": -1.8052159056786132,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "D13",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2029,
+   "valor": -1.7501071224866636,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "E13",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_efectivo_pct_pib",
+   "anno": 2030,
+   "valor": -1.4482782849820435,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "F13",
+    "etiqueta_fila": "Balance Efectivo"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2027,
+   "valor": -2.635428943157615,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "C15",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2028,
+   "valor": -2.487689814273411,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "D15",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2029,
+   "valor": -2.2320540559292184,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "E15",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  },
+  {
+   "variable": "balance_ciclicamente_ajustado_pct_pib",
+   "anno": 2030,
+   "valor": -1.771877223353553,
+   "unidad": "% del PIB",
+   "caracter": "proyeccion",
+   "publicacion": "IFP 1T2026",
+   "nota": null,
+   "sha256_origen": "116d6af04852ec1e2d60c9bb3f3c5c33f82f7e7be712fa401aa39632db772d08",
+   "origen": {
+    "archivo": "data/raw/fiscal/2026-07-01/ifp-2026-1T-cuadros.xlsx",
+    "hoja": "C III.6.1",
+    "celda": "F15",
+    "etiqueta_fila": "Balance Cíclicamente Ajustado"
+   },
+   "derivado": false,
+   "formula": null
+  }
+ ]
+}
