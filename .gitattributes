@@ -1,0 +1,4 @@
+# Fidelidad byte a byte en TODO el repo: los SHA-256 del manifiesto se calculan
+# sobre los bytes exactos; cualquier conversion de fin de linea al clonar
+# romperia la verificacion para terceros. Ver CLAUDE.md, Bloque 1.
+* -text
