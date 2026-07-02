@@ -2,7 +2,7 @@
 
 > **Este documento es la fuente única de verdad del proyecto.** Toda sesión de Claude Code que trabaje aquí debe leerlo completo antes de tocar código. Si una instrucción de sesión contradice este documento, prima este documento salvo que Fer diga explícitamente lo contrario.
 >
-> Estado: **ESPECIFICACIÓN — sin código todavía** (creado 2026-07-01). Ver Hoja de Ruta al final.
+> Estado: **FASES 1-4 COMPLETAS Y PUBLICADAS** (especificación creada 2026-07-01; core + fiscal + legislativo + web construidos y auditados el mismo día). Ver Hoja de Ruta al final.
 
 ---
 
@@ -16,7 +16,7 @@
 
 1. **Neutralidad:** el sistema no opina, expone. Jamás produce una conclusión política. Presenta magnitudes, series y comparaciones con base explícita.
 2. **Verificabilidad:** todo dato publicado lleva **fuente + URL + fecha de captura (UTC) + hash SHA-256** del artefacto original del cual salió.
-3. **Gasto $0:** solo infraestructura gratuita — GitHub (repo + Pages + Actions) y, si hace falta cómputo programado, la VM Oracle Always Free existente. Ninguna dependencia de pago.
+3. **Gasto $0:** solo infraestructura gratuita — GitHub (repo + Pages + Actions). Ninguna dependencia de pago.
 4. **Reproducibilidad:** un tercero con el manifiesto puede re-descargar las fuentes, re-calcular los hashes y re-derivar cada cifra publicada. Si algo no es reproducible, no se publica.
 5. **Simetría:** las reglas se aplican igual a todo gobierno, coalición, parlamentario o período. El sistema no conoce "oficialismo" ni "oposición" — solo instituciones, fechas y números.
 
@@ -184,7 +184,7 @@ Cada fase termina con algo verificable. No saltar fases.
 - **Fase 2 — Módulo Fiscal:** conector Dipres datos abiertos (CSV/API) + extractor de tablas del IFP y CFA (PDF) → `data/derived/fiscal/`. **Criterio de salida:** serie de balance estructural proyectado vs. efectivo con ≥3 IFPs, cada cifra con hash y página de origen.
 - **Fase 3 — Módulo Legislativo:** conector opendata.camara.cl + Senado (XML) → registros por boletín + votaciones nominales; submódulo AC con al menos las AC del período en curso. **Criterio de salida:** ficha completa de 1 AC real, 100% literal y con fuentes.
 - **Fase 4 — Web:** GitHub Pages con las páginas por módulo + `/verificar`. **Criterio de salida:** una persona externa verifica un hash de punta a punta sin ayuda.
-- **Fase 5 — Automatización (opcional):** cron en GitHub Actions o en la VM Oracle para ingesta periódica + commit automático.
+- **Fase 5 — Automatización (opcional):** cron en GitHub Actions para ingesta periódica + commit automático.
 
 ### Convenciones del repo
 

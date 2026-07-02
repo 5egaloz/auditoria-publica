@@ -47,6 +47,12 @@ Descarga el original, calcula su SHA-256, lo guarda intacto en `data/raw/<modulo
 - 🛡️ **Core:** manifiesto append-only con hash-chain SHA-256; Git público como timestamping.
 - 🌐 **Salida:** web estática en GitHub Pages con página de verificación client-side. Gasto $0.
 
+## Licencia y datos
+
+- **Código** (`ingesta.py`, `verificar.py`, extractores, web): licencia [MIT](LICENSE) — úsalo, cópialo, adáptalo.
+- **Datos crudos** (`data/raw/`): documentos públicos del Estado de Chile (Dipres / Cámara de Diputadas y Diputados), citados con URL de origen y hash en el manifiesto. No son obra de este proyecto.
+- **Datos derivados** (`data/derived/`) **y manifiesto**: de libre uso con atribución a este repositorio y a las fuentes oficiales.
+
 ## Bitácora
 
 - **2026-07-01 (2)** — Fase 1 completa: `ingesta.py` + `verificar.py` (stdlib pura) + génesis del manifiesto con 2 artefactos reales (Ejecución Presupuestaria a mayo 2026 nivel Partida, Dipres vía datos.gob.cl; Votaciones Cámara 2026, opendata.camara.cl). Verificado: `CADENA OK (2 entradas)`; detección de alteración probada en archivo y en manifiesto (ambas reportan el seq exacto); anti-duplicado probado.
