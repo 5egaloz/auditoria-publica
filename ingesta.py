@@ -64,7 +64,8 @@ def nombre_desde_respuesta(url: str, respuesta, nombre_cli: str | None) -> str:
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("url", help="URL del artefacto original en la fuente oficial")
-    p.add_argument("--modulo", required=True, choices=["fiscal", "legislativo"])
+    p.add_argument("--modulo", required=True,
+                   choices=["fiscal", "legislativo", "medios", "gasto", "economia"])
     p.add_argument("--desc", required=True, help="Descripcion factual del artefacto (sin adjetivos)")
     p.add_argument("--nombre", help="Nombre de archivo a usar (opcional)")
     p.add_argument("--forzar", action="store_true",

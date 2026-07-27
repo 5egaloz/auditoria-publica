@@ -1,0 +1,4 @@
+# Artefactos de ejecucion de Python. El corpus (data/raw, data/derived,
+# manifest.jsonl) SI se versiona: es lo que permite que un tercero verifique.
+__pycache__/
+*.pyc
