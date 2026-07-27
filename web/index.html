@@ -70,6 +70,8 @@ svg text{font-family:var(--mono);font-size:11px;fill:var(--tinta2)}
   <button data-sec="fiscal" class="activo">💰 Fiscal</button>
   <button data-sec="ac">📜 Acusaciones Constitucionales</button>
   <button data-sec="votaciones">🗳️ Votaciones 2026</button>
+  <button data-sec="tendencia">📊 Tendencia</button>
+  <button data-sec="concentracion">⚖️ Concentración</button>
   <button data-sec="manifiesto">🛡️ Manifiesto</button>
   <button data-sec="verificar">🔎 Verificar</button>
   <button data-sec="metodo">📖 Método</button>
@@ -107,6 +109,24 @@ svg text{font-family:var(--mono);font-size:11px;fill:var(--tinta2)}
 </section>
 
 <!-- ============================ MANIFIESTO ============================ -->
+<!-- ============================ TENDENCIA ============================ -->
+<section id="sec-tendencia">
+  <h2>Tendencia: coincidencia de voto medida</h2>
+  <p class="nota">Tres mediciones distintas sobre las mismas votaciones nominales. No hay ninguna
+     clasificación ideológica: nadie aquí es etiquetado. Se mide con qué frecuencia dos personas
+     votaron lo mismo, qué tan parejo vota cada partido, y en qué orden quedan las personas cuando
+     se las ordena por cercanía de voto.</p>
+  <div id="tend-contenido" class="cargando">Cargando datos…</div>
+</section>
+
+<!-- ============================ CONCENTRACIÓN ============================ -->
+<section id="sec-concentracion">
+  <h2>Concentración medida</h2>
+  <p class="nota">Índices estándar de concentración aplicados a datos públicos. El sistema mide y
+     publica; no dice si el nivel es alto o bajo, ni propone qué hacer al respecto.</p>
+  <div id="conc-contenido" class="cargando">Cargando datos…</div>
+</section>
+
 <section id="sec-manifiesto">
   <h2>Manifiesto de artefactos</h2>
   <p class="nota">Registro append-only de cada archivo descargado de una fuente oficial:
@@ -225,6 +245,120 @@ async function cargar(){
     const vot = await (await fetch(RUTA_BASE + "/data/derived/legislativo/votaciones-2026.json")).json();
     pintarVotaciones(vot);
   }catch(e){ $("#vot-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar las votaciones: " + esc(e) + "</p>"; }
+  try{
+    const [coh, eje] = await Promise.all([
+      (await fetch(RUTA_BASE + "/data/derived/tendencia/cohesion-partidos-2026.json")).json(),
+      (await fetch(RUTA_BASE + "/data/derived/tendencia/eje-empirico-2026.json")).json()
+    ]);
+    pintarTendencia(coh, eje);
+  }catch(e){ $("#tend-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la tendencia: " + esc(e) + "</p>"; }
+  try{
+    const [esc_, piv, med] = await Promise.all([
+      (await fetch(RUTA_BASE + "/data/derived/concentracion/escanos-camara-2026.json")).json(),
+      (await fetch(RUTA_BASE + "/data/derived/concentracion/pivotalidad-camara-2026.json")).json(),
+      (await fetch(RUTA_BASE + "/data/derived/concentracion/concesiones-radiodifusion-2026.json")).json()
+    ]);
+    pintarConcentracion(esc_, piv, med);
+  }catch(e){ $("#conc-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la concentración: " + esc(e) + "</p>"; }
+}
+
+/* ---------- TENDENCIA ---------- */
+function huella(d){
+  const h = d.sha256_conjunto || d.sha256_origen || "";
+  return h ? "<code>" + esc(h.slice(0, 12)) + "</code>" : "sin huella";
+}
+
+function pintarTendencia(coh, eje){
+  let h = "<h3>Cohesión por partido (índice de Rice)</h3>";
+  h += "<p class='nota'>Fórmula: <code>" + esc(coh.formula) + "</code>. " +
+       "1 significa que la bancada votó siempre en el mismo sentido; 0, que se dividió por mitades. " +
+       "Sobre " + coh.artefactos_usados + " artefactos, huella " + huella(coh) + ".</p>";
+  h += "<table><thead><tr><th>Partido</th><th>Miembros observados</th>" +
+       "<th>Votaciones</th><th>Cohesión</th></tr></thead><tbody>";
+  coh.registros.forEach(r => {
+    h += "<tr><td>" + esc(r.partido_nombre) + "</td><td>" + r.miembros_observados + "</td>" +
+         "<td>" + r.votaciones_consideradas + "</td><td>" +
+         r.cohesion_rice_promedio.toFixed(3) + "</td></tr>";
+  });
+  h += "</tbody></table>";
+
+  h += "<h3>Eje empírico de coincidencia de voto</h3>";
+  if (!eje.publicable){
+    h += "<p class='nota'>" + esc(eje.motivo || "sin dato disponible") + "</p>";
+  } else {
+    const pct = (eje.varianza_explicada * 100).toFixed(1);
+    h += "<p class='nota'><strong>Advertencia obligatoria:</strong> " + esc(eje.advertencia_signo) + "</p>";
+    h += "<p class='nota'>Este eje explica el <strong>" + pct + "%</strong> de la variación de los " +
+         "votos. Dicho de otro modo: más de la mitad de lo que ocurre en la Sala <em>no</em> se " +
+         "describe con una sola línea. Fórmula: <code>" + esc(eje.formula) + "</code>. " +
+         "Sobre " + eje.votaciones_utilizadas + " votaciones, huella " + huella(eje) + ".</p>";
+    h += "<table><thead><tr><th>Orden</th><th>Nombre</th><th>Puntaje en el eje</th></tr></thead><tbody>";
+    eje.posiciones.forEach(p => {
+      h += "<tr><td>" + p.orden + "</td><td>" + esc(p.nombre || ("id " + p.diputado_id)) +
+           "</td><td>" + p.puntaje_eje.toFixed(4) + "</td></tr>";
+    });
+    h += "</tbody></table>";
+  }
+  $("#tend-contenido").innerHTML = h;
+  $("#tend-contenido").classList.remove("cargando");
+}
+
+/* ---------- CONCENTRACIÓN ---------- */
+function pintarConcentracion(esc_, piv, med){
+  const b = esc_.lectura_independientes_como_bloque;
+  const s = esc_.lectura_independientes_por_separado;
+  let h = "<h3>Composición de la Cámara</h3>";
+  h += "<p class='nota'>" + esc(esc_.criterio_composicion) + " Votación de referencia: " +
+       esc_.votacion_de_referencia + " (" + esc(esc_.fecha_referencia) + "). Huella " + huella(esc_) + ".</p>";
+  h += "<table><thead><tr><th>Lectura</th><th>HHI (0–10.000)</th>" +
+       "<th>Partidos efectivos</th></tr></thead><tbody>";
+  h += "<tr><td>Independientes como un bloque</td><td>" + b.hhi_escala_10000 +
+       "</td><td>" + b.numero_efectivo_partidos + "</td></tr>";
+  h += "<tr><td>Independientes por separado</td><td>" + s.hhi_escala_10000 +
+       "</td><td>" + s.numero_efectivo_partidos + "</td></tr>";
+  h += "</tbody></table>";
+  h += "<p class='nota'>" + esc(esc_.nota_independientes) + "</p>";
+  h += "<table><thead><tr><th>Partido</th><th>Escaños</th><th>Cuota</th></tr></thead><tbody>";
+  esc_.registros.forEach(r => {
+    h += "<tr><td>" + esc(r.partido_nombre) + "</td><td>" + r.escanos + "</td><td>" +
+         (r.cuota * 100).toFixed(1) + "%</td></tr>";
+  });
+  h += "</tbody></table>";
+
+  h += "<h3>Poder decisorio observado</h3>";
+  h += "<p class='nota'>" + esc(piv.alcance) + " Fórmula: <code>" + esc(piv.formula) + "</code>. " +
+       "Votaciones de quórum simple: " + piv.votaciones_de_quorum_simple + "; de otro quórum, " +
+       "excluidas: " + piv.votaciones_de_otro_quorum_excluidas + ". Huella " + huella(piv) + ".</p>";
+  h += "<p class='nota'>" + esc(piv.nota_independientes) + "</p>";
+  h += "<table><thead><tr><th>Partido</th><th>Participó en</th><th>Fue pivote en</th>" +
+       "<th>%</th></tr></thead><tbody>";
+  piv.registros.forEach(r => {
+    h += "<tr><td>" + esc(r.partido_nombre || r.partido_id) +
+         (r.es_agregacion_no_comparable ? " <em>(agregación, no comparable)</em>" : "") +
+         "</td><td>" + r.votaciones_en_que_participo + "</td><td>" +
+         r.votaciones_en_que_fue_pivote + "</td><td>" + r.pivote_pct + "%</td></tr>";
+  });
+  h += "</tbody></table>";
+
+  h += "<h3>Concesiones de radiodifusión</h3>";
+  h += "<p class='nota'><strong>Límite de esta medición:</strong> " +
+       esc(med.limite_de_la_medicion) + "</p>";
+  const idx = med.indices_nacionales;
+  h += "<p class='nota'>" + med.concesiones_leidas + " concesiones vigentes de " + idx.titulares +
+       " titulares registrados. HHI " + idx.hhi_escala_10000 + " (0–10.000); titulares efectivos " +
+       idx.numero_efectivo_titulares + ". El top-10 reúne " +
+       (med.top_10.cuota * 100).toFixed(1) + "% de las concesiones. Fuente SUBTEL, huella " +
+       huella(med) + ".</p>";
+  h += "<table><thead><tr><th>#</th><th>Concesionaria</th><th>RUT</th>" +
+       "<th>Concesiones</th><th>Cuota acumulada</th></tr></thead><tbody>";
+  med.registros.slice(0, 25).forEach(r => {
+    h += "<tr><td>" + r.puesto + "</td><td>" + esc(r.concesionaria) + "</td><td>" + esc(r.rut) +
+         "</td><td>" + r.concesiones + "</td><td>" + (r.cuota_acumulada * 100).toFixed(1) +
+         "%</td></tr>";
+  });
+  h += "</tbody></table>";
+  $("#conc-contenido").innerHTML = h;
+  $("#conc-contenido").classList.remove("cargando");
 }
 
 /* ---------- FISCAL ---------- */

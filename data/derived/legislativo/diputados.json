@@ -1,0 +1,7752 @@
+{
+ "descripcion": "Padron de diputadas y diputados con su historial de militancia por partido y las fechas de cada militancia, segun opendata.camara.cl (WSDiputado). Se fusionan los padrones de todos los periodos legislativos ingeridos, porque una votacion puede ser de un periodo anterior al vigente. Campos copiados literalmente de la fuente; el partido de una persona en una fecha es el que la Camara registra para esa fecha.",
+ "generado_utc": "2026-07-27T15:36:47Z",
+ "generado_por": "extraer_nominal.py",
+ "padrones_fusionados": [
+  {
+   "sha256": "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+   "url_fuente": "https://opendata.camara.cl/camaradiputados/WServices/WSDiputado.asmx/retornarDiputadosPeriodoActual",
+   "ruta_local": "data/raw/legislativo/2026-07-27/diputados-periodo-actual.xml"
+  },
+  {
+   "sha256": "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47",
+   "url_fuente": "https://opendata.camara.cl/camaradiputados/WServices/WSDiputado.asmx/retornarDiputadosXPeriodo?prmPeriodoId=10",
+   "ruta_local": "data/raw/legislativo/2026-07-27/diputados-periodo-10.xml"
+  }
+ ],
+ "total_registros": 241,
+ "registros": [
+  {
+   "id": 1165,
+   "nombre": "Agustín Romero Leiva",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1179,
+   "nombre": "Alberto Undurraga Vicuña",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1160,
+   "nombre": "Alejandra Placencia Cabello",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1257,
+   "nombre": "Alejandra Valdebenito Torres",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1013,
+   "nombre": "Alejandro Bernales Maldonado",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "LIBERAL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "LIBERAL"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "LIBERAL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "LIBERAL"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "PL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1245,
+   "nombre": "Alejandro Riquelme Ducci",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1230,
+   "nombre": "Alex Nahuelquin Nahuelquin",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1076,
+   "nombre": "Alexis Sepúlveda Soto",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1112,
+   "nombre": "Ana María Bravo Castro",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1128,
+   "nombre": "Ana María Gazmuri Vieira",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-03-06T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-03-07T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PAH",
+     "partido_nombre": "Partido Acción Humanista",
+     "partido_alias": "PAH"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PAH",
+     "partido_nombre": "Partido Acción Humanista",
+     "partido_alias": "PAH"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1222,
+   "nombre": "Andrea Macías Palma",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1061,
+   "nombre": "Andrea Parra Sauterel",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1021,
+   "nombre": "Andrés Celis Montt",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1129,
+   "nombre": "Andrés Giordano Salazar",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1134,
+   "nombre": "Andrés Jouannet Valderrama",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-07-17T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-07-18T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "AMA",
+     "partido_nombre": "Movimiento Amarillos por Chile",
+     "partido_alias": "AMA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1046,
+   "nombre": "Andrés Longton Herrera",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1185,
+   "nombre": "Arturo Barrios Oteíza",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2025-05-06T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1221,
+   "nombre": "Benjamín Lorca Inzunza",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1150,
+   "nombre": "Benjamín Moreno Bascur",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 971,
+   "nombre": "Bernardo Berger Fett",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1250,
+   "nombre": "Bernardo Salinas Maya",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1012,
+   "nombre": "Boris Barrera Moreno",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1030,
+   "nombre": "Camila Flores Oporto",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1151,
+   "nombre": "Camila Musante Müller",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1068,
+   "nombre": "Camila Rojas Valderrama",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2018-05-30T16:21:48",
+     "partido_id": "IGUAL",
+     "partido_nombre": "Partido Igualdad",
+     "partido_alias": "IGUAL"
+    },
+    {
+     "desde": "2018-05-30T16:22:26",
+     "hasta": "2020-03-09T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2020-03-10T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "COMUNES",
+     "partido_nombre": "Partido Comunes",
+     "partido_alias": "COMUNES"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "COMUNES",
+     "partido_nombre": "Partido Comunes",
+     "partido_alias": "COMUNES"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1149,
+   "nombre": "Carla Morales Maldonado",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1187,
+   "nombre": "Carlo Arqueros Pizarro",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1110,
+   "nombre": "Carlos Bianchi Chelech",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1195,
+   "nombre": "Carlos Carvajal Gallardo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1197,
+   "nombre": "Carlos Chandía Alarcón",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1205,
+   "nombre": "Carlos Cuadrado Prats",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1035,
+   "nombre": "Carmen Hertz Cádiz",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1206,
+   "nombre": "Carolina Cucumides Calderón",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1048,
+   "nombre": "Carolina Marzán Pinto",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1177,
+   "nombre": "Carolina Tello Rojas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-05-13T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2024-05-14T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1025,
+   "nombre": "Catalina Del Real Mihovilovic",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-08-22T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2023-08-23T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1063,
+   "nombre": "Catalina Pérez Salinas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1104,
+   "nombre": "Chiara Barchiesi Chávez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1144,
+   "nombre": "Christian Matheson Villán",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1169,
+   "nombre": "Clara Sagardía Cabezas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1051,
+   "nombre": "Claudia Mix Jiménez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "COMUNES",
+     "partido_nombre": "Partido Comunes",
+     "partido_alias": "COMUNES"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "COMUNES",
+     "partido_nombre": "Partido Comunes",
+     "partido_alias": "COMUNES"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1227,
+   "nombre": "Claudia Mora Vega",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1244,
+   "nombre": "Claudia Reyes Larenas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1153,
+   "nombre": "Coca Ericka Ñanco Vásquez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1214,
+   "nombre": "Constanza Hube Portus",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1252,
+   "nombre": "Constanza Schonhaut Soto",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1180,
+   "nombre": "Consuelo Veloso Ávila",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-05-30T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-05-31T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1049,
+   "nombre": "Cosme Mellado Pino",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1053,
+   "nombre": "Cristhian Moreira Barros",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1200,
+   "nombre": "Cristian Contreras Radovic",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1094,
+   "nombre": "Cristian Labbé Martínez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2021-04-13T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2025-06-29T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2025-06-30T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1224,
+   "nombre": "Cristian Mella Andaur",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1225,
+   "nombre": "Cristian Menchaca Pinochet",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1232,
+   "nombre": "Cristian Neira Martínez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1100,
+   "nombre": "Cristián Araya Lerdo de Tejada",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1175,
+   "nombre": "Cristián Tapia Ramos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1143,
+   "nombre": "Cristóbal Martínez Ramírez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1082,
+   "nombre": "Cristóbal Urruticoechea Ríos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2021-06-13T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2021-06-14T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-10-14T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2024-10-15T00:00:00",
+     "hasta": "2025-06-17T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-06-18T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1260,
+   "nombre": "César Valenzuela Maass",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1194,
+   "nombre": "Daniel Bustos Leal",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1140,
+   "nombre": "Daniel Lilayu Vivanco",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1142,
+   "nombre": "Daniel Manouchehri Lobos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 990,
+   "nombre": "Daniel Melo Contreras",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1261,
+   "nombre": "Daniel Valenzuela Salazar",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1173,
+   "nombre": "Daniela Serrano Salazar",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 975,
+   "nombre": "Daniella Cicardini Milla",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1103,
+   "nombre": "Danisa Astudillo Peiretti",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1037,
+   "nombre": "Diego Ibáñez Cotroneo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2020-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2020-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1075,
+   "nombre": "Diego Schalper Sepúlveda",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1262,
+   "nombre": "Diego Vergara Rodríguez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1121,
+   "nombre": "Eduardo Cornejo Lagos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1202,
+   "nombre": "Eduardo Cretton Rebolledo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1028,
+   "nombre": "Eduardo Durán Salinas",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1255,
+   "nombre": "Eileen Urqueta Rojas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1056,
+   "nombre": "Emilia Nuyado Ancapichun",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1171,
+   "nombre": "Emilia Schneider Videla",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-01-17T23:59:59",
+     "partido_id": "COMUNES",
+     "partido_nombre": "Partido Comunes",
+     "partido_alias": "COMUNES"
+    },
+    {
+     "desde": "2023-01-18T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1190,
+   "nombre": "Enrique Bassaletti Riess",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1139,
+   "nombre": "Enrique Lee Flores",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-08-28T23:59:59",
+     "partido_id": "PRI",
+     "partido_nombre": "Partido Regionalista Independiente",
+     "partido_alias": "PRI"
+    },
+    {
+     "desde": "2024-08-29T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1097,
+   "nombre": "Eric Aedo Jeldres",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1212,
+   "nombre": "Erich Grohs Marín",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1057,
+   "nombre": "Erika Olivera De La Fuente",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-09-04T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-09-05T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DEM",
+     "partido_nombre": "Partido Demócratas Chile",
+     "partido_alias": "DEM"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1239,
+   "nombre": "Fabián Ossandón Briceño",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1116,
+   "nombre": "Felipe Camaño Cárdenas",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1126,
+   "nombre": "Felipe Donoso Castro",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1248,
+   "nombre": "Felipe Ross Correa",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1111,
+   "nombre": "Fernando Bórquez Montecinos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1253,
+   "nombre": "Fernando Ugarte Tejeda",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1264,
+   "nombre": "Fernando Zamorano Peralta",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1201,
+   "nombre": "Flor Contreras Vivallo",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1183,
+   "nombre": "Flor Weisse Novoa",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1054,
+   "nombre": "Francesca Muñoz González",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-12-11T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-12-12T00:00:00",
+     "hasta": "2023-05-30T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-05-31T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1204,
+   "nombre": "Francisco Crisóstomo Llanos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1237,
+   "nombre": "Francisco Orrego Gutiérrez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1161,
+   "nombre": "Francisco Pulgar Castillo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1081,
+   "nombre": "Francisco Undurraga Gazitúa",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "EVOP",
+     "partido_nombre": "Evolución Política",
+     "partido_alias": "EVOP"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "EVOP",
+     "partido_nombre": "Evolución Política",
+     "partido_alias": "EVOP"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 953,
+   "nombre": "Frank Sauerbaum Muñoz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1114,
+   "nombre": "Félix Bugueño Sotelo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-06-12T23:59:59",
+     "partido_id": "FRVS",
+     "partido_nombre": "Federación Regionalista Verde Social",
+     "partido_alias": "FRVS"
+    },
+    {
+     "desde": "2022-06-13T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1034,
+   "nombre": "Félix González Gatica",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PEV",
+     "partido_nombre": "Partido Ecologista Verde",
+     "partido_alias": "PEV"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PEV",
+     "partido_nombre": "Partido Ecologista Verde",
+     "partido_alias": "PEV"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2025-08-11T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-08-12T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PEV",
+     "partido_nombre": "Partido Ecologista Verde",
+     "partido_alias": "PEV"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1087,
+   "nombre": "Gael Yeomans Araya",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2019-04-16T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2019-04-17T00:00:00",
+     "hasta": "2020-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2020-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 948,
+   "nombre": "Gaspar Rivas Sánchez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2014-08-14T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-08-26T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2024-08-27T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 917,
+   "nombre": "Gastón Von Mühlenbrock Zamora",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2002-03-11T00:00:00",
+     "hasta": "2006-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 915,
+   "nombre": "Germán Verdugo Soto",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1152,
+   "nombre": "Gloria Naveillan Arriagada",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-09-06T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2022-09-07T00:00:00",
+     "hasta": "2025-06-29T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-06-30T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1123,
+   "nombre": "Gonzalo De la Carrera Correa",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-08-31T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2022-09-01T00:00:00",
+     "hasta": "2025-06-16T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-06-17T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1086,
+   "nombre": "Gonzalo Winter Etcheberry",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2018-04-04T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2018-04-05T00:00:00",
+     "hasta": "2020-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2020-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1065,
+   "nombre": "Guillermo Ramírez Diez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1258,
+   "nombre": "Guillermo Valdés Carmona",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1109,
+   "nombre": "Gustavo Benavente Vergara",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1210,
+   "nombre": "Gustavo Gatica Villarroel",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1223,
+   "nombre": "Hans Marowski Cuevas",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1040,
+   "nombre": "Harry Jürgensen Rundshagen",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1147,
+   "nombre": "Helia Molina Milman",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1138,
+   "nombre": "Henry Leal Bizama",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1156,
+   "nombre": "Hernán Palma Pérez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1176,
+   "nombre": "Hotuiti Teao Drago",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1067,
+   "nombre": "Hugo Rey Martínez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1105,
+   "nombre": "Héctor Barría Angulo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1178,
+   "nombre": "Héctor Ulloa Aguilera",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1186,
+   "nombre": "Ignacio Achurra Díaz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1254,
+   "nombre": "Ignacio Urcullú Clèment-Lund",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1213,
+   "nombre": "Irací Hassler Jacob",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1099,
+   "nombre": "Jaime Araya Guerrero",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1189,
+   "nombre": "Jaime Bassa Mercado",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1199,
+   "nombre": "Jaime Coloma Álamos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 872,
+   "nombre": "Jaime Mulet Martínez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "1998-03-11T00:00:00",
+     "hasta": "2002-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2002-03-11T00:00:00",
+     "hasta": "2006-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "PRI",
+     "partido_nombre": "Partido Regionalista Independiente",
+     "partido_alias": "PRI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "FRVS",
+     "partido_nombre": "Federación Regionalista Verde Social",
+     "partido_alias": "FRVS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FRVS",
+     "partido_nombre": "Federación Regionalista Verde Social",
+     "partido_alias": "FRVS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FRVS",
+     "partido_nombre": "Federación Regionalista Verde Social",
+     "partido_alias": "FRVS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 74,
+   "nombre": "Jaime Naranjo Ortiz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "1990-03-11T00:00:00",
+     "hasta": "1994-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "1994-03-11T00:00:00",
+     "hasta": "1998-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "1998-03-11T00:00:00",
+     "hasta": "2002-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2025-07-02T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2025-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1167,
+   "nombre": "Jaime Sáez Quiroz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1229,
+   "nombre": "Javier Muñoz Riquelme",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1235,
+   "nombre": "Javier Olivares Avendaño",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1148,
+   "nombre": "Javiera Morales Alvarado",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-04-11T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-04-12T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1247,
+   "nombre": "Javiera Rodríguez Pascual",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1062,
+   "nombre": "Joanna Pérez Olea",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-12-11T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2022-12-12T00:00:00",
+     "hasta": "2023-09-04T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-09-05T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DEM",
+     "partido_nombre": "Partido Demócratas Chile",
+     "partido_alias": "DEM"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DEM",
+     "partido_nombre": "Partido Demócratas Chile",
+     "partido_alias": "DEM"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 989,
+   "nombre": "Joaquín Lavín León",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1135,
+   "nombre": "Johannes Kaiser Barents-Von Hohenhagen",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-01-09T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2024-01-10T00:00:00",
+     "hasta": "2025-06-15T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-06-16T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1009,
+   "nombre": "Jorge Alessandri Vergara",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1015,
+   "nombre": "Jorge Brito Hasbún",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1027,
+   "nombre": "Jorge Durán Espinoza",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1208,
+   "nombre": "Jorge Díaz Ibarra",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1132,
+   "nombre": "Jorge Guzmán Zepeda",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "EVOP",
+     "partido_nombre": "Evolución Política",
+     "partido_alias": "EVOP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "EVOP",
+     "partido_nombre": "Evolución Política",
+     "partido_alias": "EVOP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 999,
+   "nombre": "Jorge Rathgeb Schifferli",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1168,
+   "nombre": "Jorge Saffirio Espinoza",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-12-11T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2022-12-12T00:00:00",
+     "hasta": "2023-09-04T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-09-05T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DEM",
+     "partido_nombre": "Partido Demócratas Chile",
+     "partido_alias": "DEM"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1218,
+   "nombre": "José Antonio Kast Adriasola",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1246,
+   "nombre": "José Antonio Rivas Villalobos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1146,
+   "nombre": "José Carlos Meza Pereira",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1019,
+   "nombre": "José Miguel Castro Bascuñán",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1226,
+   "nombre": "José Montalva Feuerhake",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 976,
+   "nombre": "Juan Antonio Coloma Álamos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1108,
+   "nombre": "Juan Carlos Beltrán Silva",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1031,
+   "nombre": "Juan Fuenzalida Cobo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1133,
+   "nombre": "Juan Irarrázaval Rossel",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1259,
+   "nombre": "Juan Marcelo Valenzuela Henríquez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1073,
+   "nombre": "Juan Santana Castillo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1145,
+   "nombre": "Karen Medina Vásquez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-08-06T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2024-08-07T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 973,
+   "nombre": "Karol Cariola Oliva",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1220,
+   "nombre": "Leandro Kunstmann Collado",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1002,
+   "nombre": "Leonardo Soto Ferrada",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1069,
+   "nombre": "Leonidas Romero Sáez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2022-09-12T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-09-13T00:00:00",
+     "hasta": "2025-06-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-06-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1192,
+   "nombre": "Lilian Betancurt Delgado",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1127,
+   "nombre": "Lorena Fries Monleón",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-03-27T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-03-28T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1159,
+   "nombre": "Lorena Pizarro Sierra",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1122,
+   "nombre": "Luis Alberto Cuello Peña y Lillo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1141,
+   "nombre": "Luis Malla Valenzuela",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "LIBERAL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "LIBERAL"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "PL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1060,
+   "nombre": "Luis Pardo Sáinz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1170,
+   "nombre": "Luis Sánchez Ossa",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1251,
+   "nombre": "Macarena Santelices Cañas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1058,
+   "nombre": "Maite Orsini Pascal",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "RD",
+     "partido_nombre": "Revolución Democrática",
+     "partido_alias": "RD"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 986,
+   "nombre": "Marcela Hernando Pérez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PR",
+     "partido_nombre": "Partido Radical de Chile",
+     "partido_alias": "PR"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1164,
+   "nombre": "Marcela Riquelme Aliaga",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2025-06-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2025-06-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1163,
+   "nombre": "Marcia Raphael Mora",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1174,
+   "nombre": "Marco Antonio Sulantay Olivares",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1188,
+   "nombre": "Marcos Barraza Gómez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1038,
+   "nombre": "Marcos Ilabaca Cerda",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1234,
+   "nombre": "Mario Olavarría Rodríguez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1074,
+   "nombre": "Marisela Santibáñez Novoa",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2019-04-16T23:59:59",
+     "partido_id": "PRO",
+     "partido_nombre": "Partido Progresista",
+     "partido_alias": "PRO"
+    },
+    {
+     "desde": "2019-04-17T00:00:00",
+     "hasta": "2019-09-26T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2019-09-27T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-01-16T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2024-01-17T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1157,
+   "nombre": "Marlene Pérez Cartes",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1113,
+   "nombre": "Marta Bravo Salinas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1130,
+   "nombre": "Marta González Olea",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1096,
+   "nombre": "María Candelaria Acevedo Sáez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1107,
+   "nombre": "María Francisca Bello Campos",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "PCS",
+     "partido_nombre": "Partido Convergencia Social",
+     "partido_alias": "PCS"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1120,
+   "nombre": "María Luisa Cordero Velásquez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1209,
+   "nombre": "Matías Fernández Hartwig",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1162,
+   "nombre": "Matías Ramírez Pascal",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1154,
+   "nombre": "Mauricio Ojeda Rebolledo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1131,
+   "nombre": "Mauro González Villarroel",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1115,
+   "nombre": "Mercedes Bulnes Núñez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2024-11-22T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1050,
+   "nombre": "Miguel Mellado Suazo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1106,
+   "nombre": "Miguel Ángel Becker Alvear",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1016,
+   "nombre": "Miguel Ángel Calisto Águila",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-03-08T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2023-03-09T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1101,
+   "nombre": "Mónica Arce Castro",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1166,
+   "nombre": "Natalia Romero Talguia",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1117,
+   "nombre": "Nathalie Castillo Rojas",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1181,
+   "nombre": "Nelson Venegas Salazar",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1249,
+   "nombre": "Omar Sabat Guzmán",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1039,
+   "nombre": "Pamela Jiles Moreno",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PH",
+     "partido_nombre": "Partido Humanista",
+     "partido_alias": "PH"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PH",
+     "partido_nombre": "Partido Humanista",
+     "partido_alias": "PH"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1193,
+   "nombre": "Patricio Briones Moller",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1241,
+   "nombre": "Patricio Pinilla Valencia",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1070,
+   "nombre": "Patricio Rosas Barrientos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2019-06-18T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2019-06-19T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-07-02T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-07-03T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1136,
+   "nombre": "Paula Labra Besserer",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1236,
+   "nombre": "Paula Olmos Contreras",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1228,
+   "nombre": "Paulina Muñoz Minte",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1198,
+   "nombre": "Paz Charpentier Rajcevich",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1217,
+   "nombre": "Pier Karlezi Hazleby",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1196,
+   "nombre": "Priscilla Castillo Gerli",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1044,
+   "nombre": "Raúl Leiva Carvajal",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1077,
+   "nombre": "Raúl Soto Mardones",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2019-08-25T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    },
+    {
+     "desde": "2019-08-26T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1003,
+   "nombre": "Renzo Trisotti Martínez",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-04-16T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2024-04-17T00:00:00",
+     "hasta": "2025-07-08T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-07-09T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 803,
+   "nombre": "René Alinco Bustos",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "PPD",
+     "partido_nombre": "Partido Por la Democracia",
+     "partido_alias": "PPD"
+    },
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 843,
+   "nombre": "René Manuel García García",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "1990-03-11T00:00:00",
+     "hasta": "1994-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "1994-03-11T00:00:00",
+     "hasta": "1998-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "1998-03-11T00:00:00",
+     "hasta": "2002-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2002-03-11T00:00:00",
+     "hasta": "2006-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1118,
+   "nombre": "Ricardo Cifuentes Lillo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1233,
+   "nombre": "Ricardo Neumann Bertín",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1102,
+   "nombre": "Roberto Arroyo Muñoz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-11-07T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2023-11-08T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1184,
+   "nombre": "Roberto Celedón Fernández",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2025-01-08T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1242,
+   "nombre": "Rodrigo Ramírez Parra",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1155,
+   "nombre": "Rubén Darío Oyarzo Figueroa",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-04-15T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2024-04-16T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1119,
+   "nombre": "Sara Concha Smith",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-03-21T23:59:59",
+     "partido_id": "PCC",
+     "partido_nombre": "Partido Conservador Cristiano",
+     "partido_alias": "PCC"
+    },
+    {
+     "desde": "2023-03-22T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1203,
+   "nombre": "Sebastián Cristoffanini Jaraquemada",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1182,
+   "nombre": "Sebastián Videla Castillo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1263,
+   "nombre": "Sebastián Zamora Soto",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 815,
+   "nombre": "Sergio Bobadilla Muñoz",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2006-03-11T00:00:00",
+     "hasta": "2010-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2010-03-11T00:00:00",
+     "hasta": "2014-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1022,
+   "nombre": "Sofía Cid Versalovic",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2024-08-05T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2024-08-06T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1211,
+   "nombre": "Sofía González Cortés",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PC",
+     "partido_nombre": "Partido Comunista",
+     "partido_alias": "PC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1172,
+   "nombre": "Stephan Schubert Rubio",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2025-08-03T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-08-04T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1216,
+   "nombre": "Stephanie Jéldrez Ortiz",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1243,
+   "nombre": "Tamara Ramírez Ramírez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1256,
+   "nombre": "Tatiana Urrutia Herrera",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "FA",
+     "partido_nombre": "Frente Amplio",
+     "partido_alias": "FA"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1124,
+   "nombre": "Tomás De Rementería Venegas",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2025-05-05T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2025-05-05T23:59:59",
+     "partido_id": "PS",
+     "partido_nombre": "Partido Socialista",
+     "partido_alias": "PS"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1036,
+   "nombre": "Tomás Hirsch Goldschmidt",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2020-05-05T23:59:59",
+     "partido_id": "PH",
+     "partido_nombre": "Partido Humanista",
+     "partido_alias": "PH"
+    },
+    {
+     "desde": "2020-05-06T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-03-06T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2023-03-07T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PAH",
+     "partido_nombre": "Partido Acción Humanista",
+     "partido_alias": "PAH"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1219,
+   "nombre": "Tomás Kast Sommerhoff",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "EVOP",
+     "partido_nombre": "Evolución Política",
+     "partido_alias": "EVOP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1137,
+   "nombre": "Tomás Lagomarsino Guzmán",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1191,
+   "nombre": "Valentina Becerra Peña",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1207,
+   "nombre": "Valentina Cáceres Monsálvez",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1125,
+   "nombre": "Viviana Delgado Riquelme",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-04-03T23:59:59",
+     "partido_id": "PEV",
+     "partido_nombre": "Partido Ecologista Verde",
+     "partido_alias": "PEV"
+    },
+    {
+     "desde": "2023-04-04T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 991,
+   "nombre": "Vlado Mirosevic Verdugo",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2014-03-11T00:00:00",
+     "hasta": "2018-03-10T23:59:59",
+     "partido_id": "PL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "PL"
+    },
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "LIBERAL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "LIBERAL"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "LIBERAL",
+     "partido_nombre": "Partido Liberal de Chile",
+     "partido_alias": "LIBERAL"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1158,
+   "nombre": "Víctor Alejandro Pino Fuentes",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-04-13T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2023-04-14T00:00:00",
+     "hasta": "2024-05-14T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2024-05-15T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "DEM",
+     "partido_nombre": "Partido Demócratas Chile",
+     "partido_alias": "DEM"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1231,
+   "nombre": "Ximena Naranjo Pinto",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1059,
+   "nombre": "Ximena Ossandón Irarrázabal",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "RN",
+     "partido_nombre": "Renovación Nacional",
+     "partido_alias": "RN"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1098,
+   "nombre": "Yovana Ahumada Palma",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2023-04-18T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    },
+    {
+     "desde": "2023-04-19T00:00:00",
+     "hasta": "2025-03-16T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2025-03-17T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "PSC",
+     "partido_nombre": "Partido Social Cristiano",
+     "partido_alias": "PSC"
+    }
+   ],
+   "sha256_origen": [
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1240,
+   "nombre": "Zandra Parisi Fernández",
+   "sexo": "Femenino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PDG",
+     "partido_nombre": "Partido de la Gente",
+     "partido_alias": "PDG"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1017,
+   "nombre": "Álvaro Carter Fernández",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2026-03-10T23:59:59",
+     "hasta": null
+    },
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2018-03-11T00:00:00",
+     "hasta": "2025-03-18T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2020-09-29T00:00:00",
+     "hasta": "2022-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2022-03-11T00:00:00",
+     "hasta": "2025-03-18T23:59:59",
+     "partido_id": "UDI",
+     "partido_nombre": "Unión Demócrata Independiente",
+     "partido_alias": "UDI"
+    },
+    {
+     "desde": "2025-03-19T00:00:00",
+     "hasta": "2026-03-10T23:59:59",
+     "partido_id": "IND",
+     "partido_nombre": "Independientes",
+     "partido_alias": "IND"
+    },
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PREP",
+     "partido_nombre": "Partido Republicano",
+     "partido_alias": "PREP"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+    "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+   ]
+  },
+  {
+   "id": 1215,
+   "nombre": "Álvaro Jofré Cáceres",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "PNL",
+     "partido_nombre": "Partido Nacional Libertario",
+     "partido_alias": "PNL"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  },
+  {
+   "id": 1238,
+   "nombre": "Álvaro Ortiz Vera",
+   "sexo": "Masculino",
+   "periodos": [
+    {
+     "desde": "2030-03-10T00:00:00",
+     "hasta": null
+    }
+   ],
+   "militancias": [
+    {
+     "desde": "2026-03-11T00:00:00",
+     "hasta": "2030-03-10T23:59:59",
+     "partido_id": "DC",
+     "partido_nombre": "Partido Demócrata Cristiano",
+     "partido_alias": "DC"
+    }
+   ],
+   "sha256_origen": [
+    "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48"
+   ]
+  }
+ ]
+}

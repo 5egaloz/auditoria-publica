@@ -16,6 +16,7 @@ Sin dependencias: solo stdlib.
 
 import json
 import sys
+import unicodedata
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
@@ -34,6 +35,21 @@ def entradas_manifiesto() -> list[dict]:
 def texto(nodo, ruta):
     hijo = nodo.find(ruta, NS)
     return hijo.text if hijo is not None else None
+
+
+def plano(cadena: str | None) -> str:
+    """Minusculas sin acentos, para comparar la descripcion literal de la fuente."""
+    d = unicodedata.normalize("NFD", cadena or "")
+    return "".join(c for c in d if unicodedata.category(c) != "Mn").lower()
+
+
+def es_acusacion_constitucional(ficha: dict) -> bool:
+    """Criterio unico y literal: lo dice la descripcion de la propia fuente.
+
+    Necesario desde que se ingiere el detalle nominal de TODAS las votaciones:
+    sin este filtro, cualquier votacion con detalle entraria al modulo AC.
+    """
+    return "acusacion constitucional" in plano(ficha.get("descripcion_literal"))
 
 
 def votacion_a_dict(nodo) -> dict:
@@ -89,6 +105,8 @@ def main() -> int:
             continue
         raiz_xml = ET.parse(RAIZ / e["ruta_local"]).getroot()
         ficha = votacion_a_dict(raiz_xml)
+        if not es_acusacion_constitucional(ficha):
+            continue
         votos, conteo = [], {}
         for voto in raiz_xml.findall("v:Votos/v:Voto", NS):
             dip = voto.find("v:Diputado", NS)

@@ -1,0 +1,120 @@
+{
+ "descripcion": "Indice de Rice de cohesion por partido en las votaciones de Sala de la Camara con voto nominal publicado. Rice = |a favor - en contra| / (a favor + en contra) entre los miembros del partido en cada votacion; se informa el promedio del periodo. El partido de cada persona es el que la Camara registra para la fecha de la votacion.",
+ "generado_utc": "2026-07-27T15:36:48Z",
+ "generado_por": "extraer_tendencia.py",
+ "derivado": true,
+ "artefactos_usados": 669,
+ "sha256_conjunto": "2dbc70aeed8d7ef5b9b67f050752f0c0b102fbd2ab4642faa86e8e75a733122b",
+ "sha256_conjunto_formula": "sha256 de los sha256 de cada artefacto usado, ordenados alfabeticamente y unidos por salto de linea",
+ "sha256_padrones": [
+  "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+  "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+ ],
+ "criterio_posicion": "solo votaciones con posicion sustantiva (a favor, en contra o abstencion); las ausencias no cuentan como posicion",
+ "formula": "cohesion_rice_promedio = promedio por votacion de |a_favor - en_contra| / (a_favor + en_contra) entre miembros del partido",
+ "umbrales": {
+  "min_miembros_por_votacion": 3,
+  "min_votaciones_por_partido": 30
+ },
+ "total_registros": 14,
+ "registros": [
+  {
+   "partido_id": "PREP",
+   "partido_nombre": "Partido Republicano",
+   "miembros_observados": 29,
+   "votaciones_consideradas": 645,
+   "cohesion_rice_promedio": 0.9975
+  },
+  {
+   "partido_id": "PC",
+   "partido_nombre": "Partido Comunista",
+   "miembros_observados": 13,
+   "votaciones_consideradas": 655,
+   "cohesion_rice_promedio": 0.9939
+  },
+  {
+   "partido_id": "LIBERAL",
+   "partido_nombre": "Partido Liberal de Chile",
+   "miembros_observados": 3,
+   "votaciones_consideradas": 240,
+   "cohesion_rice_promedio": 0.9917
+  },
+  {
+   "partido_id": "PNL",
+   "partido_nombre": "Partido Nacional Libertario",
+   "miembros_observados": 12,
+   "votaciones_consideradas": 619,
+   "cohesion_rice_promedio": 0.9879
+  },
+  {
+   "partido_id": "FA",
+   "partido_nombre": "Frente Amplio",
+   "miembros_observados": 25,
+   "votaciones_consideradas": 662,
+   "cohesion_rice_promedio": 0.9687
+  },
+  {
+   "partido_id": "PPD",
+   "partido_nombre": "Partido Por la Democracia",
+   "miembros_observados": 6,
+   "votaciones_consideradas": 368,
+   "cohesion_rice_promedio": 0.9629
+  },
+  {
+   "partido_id": "PS",
+   "partido_nombre": "Partido Socialista",
+   "miembros_observados": 16,
+   "votaciones_consideradas": 657,
+   "cohesion_rice_promedio": 0.9622
+  },
+  {
+   "partido_id": "PSC",
+   "partido_nombre": "Partido Social Cristiano",
+   "miembros_observados": 4,
+   "votaciones_consideradas": 504,
+   "cohesion_rice_promedio": 0.9577
+  },
+  {
+   "partido_id": "UDI",
+   "partido_nombre": "Unión Demócrata Independiente",
+   "miembros_observados": 24,
+   "votaciones_consideradas": 665,
+   "cohesion_rice_promedio": 0.9459
+  },
+  {
+   "partido_id": "DC",
+   "partido_nombre": "Partido Demócrata Cristiano",
+   "miembros_observados": 10,
+   "votaciones_consideradas": 557,
+   "cohesion_rice_promedio": 0.9408
+  },
+  {
+   "partido_id": "RN",
+   "partido_nombre": "Renovación Nacional",
+   "miembros_observados": 22,
+   "votaciones_consideradas": 655,
+   "cohesion_rice_promedio": 0.9304
+  },
+  {
+   "partido_id": "DEM",
+   "partido_nombre": "Partido Demócratas Chile",
+   "miembros_observados": 4,
+   "votaciones_consideradas": 239,
+   "cohesion_rice_promedio": 0.9156
+  },
+  {
+   "partido_id": "PDG",
+   "partido_nombre": "Partido de la Gente",
+   "miembros_observados": 14,
+   "votaciones_consideradas": 339,
+   "cohesion_rice_promedio": 0.8235
+  },
+  {
+   "partido_id": "IND",
+   "partido_nombre": "Independientes",
+   "miembros_observados": 49,
+   "votaciones_consideradas": 669,
+   "cohesion_rice_promedio": 0.4935
+  }
+ ]
+}

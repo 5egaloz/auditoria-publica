@@ -1,6 +1,6 @@
 {
  "descripcion": "Votaciones en Sala de la Camara de Diputadas y Diputados (2026) cuya descripcion literal en la fuente es de Acusacion Constitucional, con el voto nominal de cada una (opendata.camara.cl, retornarVotacionDetalle). Sin clasificacion ni valoracion: datos copiados de la fuente.",
- "generado_utc": "2026-07-01T21:30:40Z",
+ "generado_utc": "2026-07-27T15:36:46Z",
  "generado_por": "extraer_legislativo.py",
  "total_registros": 13,
  "registros": [

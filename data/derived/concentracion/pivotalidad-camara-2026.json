@@ -1,0 +1,196 @@
+{
+ "descripcion": "Veces en que cada partido fue pivote en votaciones de Sala de quorum simple: su bloque de votos es al menos tan grande como el margen entre a favor y en contra, de modo que votando al reves el resultado cambiaba de signo. Es una medicion de poder decisorio observado, no una evaluacion de conducta.",
+ "generado_utc": "2026-07-27T15:36:50Z",
+ "generado_por": "extraer_concentracion.py",
+ "derivado": true,
+ "artefactos_usados": 669,
+ "sha256_conjunto": "2dbc70aeed8d7ef5b9b67f050752f0c0b102fbd2ab4642faa86e8e75a733122b",
+ "sha256_conjunto_formula": "sha256 de los sha256 de cada artefacto usado, ordenados alfabeticamente y unidos por salto de linea",
+ "sha256_padrones": [
+  "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+  "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+ ],
+ "formula": "pivote si votos_del_partido >= |a_favor - en_contra| en la votacion; pivote_pct = 100 * votaciones_en_que_fue_pivote / votaciones_en_que_participo",
+ "alcance": "Solo votaciones de quorum simple, donde el resultado depende del signo del margen. Las de quorum calificado siguen otra regla y quedan fuera.",
+ "nota_independientes": "La fila de independientes agrupa a personas que no forman un bloque y no deciden en conjunto: su cifra no es comparable con la de un partido y va marcada con es_agregacion_no_comparable.",
+ "votaciones_de_quorum_simple": 602,
+ "votaciones_de_otro_quorum_excluidas": 67,
+ "votaciones_con_al_menos_un_pivote": 233,
+ "concentracion_del_poder_decisorio": {
+  "total": 1286,
+  "hhi": 0.093827,
+  "hhi_escala_10000": 938.3,
+  "numero_efectivo_partidos": 10.658
+ },
+ "total_registros": 21,
+ "registros": [
+  {
+   "partido_id": "IND",
+   "partido_nombre": "Independientes",
+   "votaciones_en_que_participo": 602,
+   "votaciones_en_que_fue_pivote": 211,
+   "pivote_pct": 35.05,
+   "es_agregacion_no_comparable": true
+  },
+  {
+   "partido_id": "PREP",
+   "partido_nombre": "Partido Republicano",
+   "votaciones_en_que_participo": 583,
+   "votaciones_en_que_fue_pivote": 160,
+   "pivote_pct": 27.44,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "FA",
+   "partido_nombre": "Frente Amplio",
+   "votaciones_en_que_participo": 601,
+   "votaciones_en_que_fue_pivote": 153,
+   "pivote_pct": 25.46,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "UDI",
+   "partido_nombre": "Unión Demócrata Independiente",
+   "votaciones_en_que_participo": 601,
+   "votaciones_en_que_fue_pivote": 137,
+   "pivote_pct": 22.8,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "RN",
+   "partido_nombre": "Renovación Nacional",
+   "votaciones_en_que_participo": 600,
+   "votaciones_en_que_fue_pivote": 116,
+   "pivote_pct": 19.33,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PS",
+   "partido_nombre": "Partido Socialista",
+   "votaciones_en_que_participo": 600,
+   "votaciones_en_que_fue_pivote": 100,
+   "pivote_pct": 16.67,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PC",
+   "partido_nombre": "Partido Comunista",
+   "votaciones_en_que_participo": 595,
+   "votaciones_en_que_fue_pivote": 79,
+   "pivote_pct": 13.28,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PDG",
+   "partido_nombre": "Partido de la Gente",
+   "votaciones_en_que_participo": 335,
+   "votaciones_en_que_fue_pivote": 70,
+   "pivote_pct": 20.9,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PNL",
+   "partido_nombre": "Partido Nacional Libertario",
+   "votaciones_en_que_participo": 581,
+   "votaciones_en_que_fue_pivote": 52,
+   "pivote_pct": 8.95,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "DC",
+   "partido_nombre": "Partido Demócrata Cristiano",
+   "votaciones_en_que_participo": 594,
+   "votaciones_en_que_fue_pivote": 49,
+   "pivote_pct": 8.25,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PPD",
+   "partido_nombre": "Partido Por la Democracia",
+   "votaciones_en_que_participo": 511,
+   "votaciones_en_que_fue_pivote": 30,
+   "pivote_pct": 5.87,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PSC",
+   "partido_nombre": "Partido Social Cristiano",
+   "votaciones_en_que_participo": 582,
+   "votaciones_en_que_fue_pivote": 28,
+   "pivote_pct": 4.81,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "EVOP",
+   "partido_nombre": "Evolución Política",
+   "votaciones_en_que_participo": 555,
+   "votaciones_en_que_fue_pivote": 23,
+   "pivote_pct": 4.14,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PAH",
+   "partido_nombre": "Partido Acción Humanista",
+   "votaciones_en_que_participo": 549,
+   "votaciones_en_que_fue_pivote": 16,
+   "pivote_pct": 2.91,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "DEM",
+   "partido_nombre": "Partido Demócratas Chile",
+   "votaciones_en_que_participo": 468,
+   "votaciones_en_que_fue_pivote": 15,
+   "pivote_pct": 3.21,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PR",
+   "partido_nombre": "Partido Radical de Chile",
+   "votaciones_en_que_participo": 524,
+   "votaciones_en_que_fue_pivote": 13,
+   "pivote_pct": 2.48,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PL",
+   "partido_nombre": "Partido Liberal de Chile",
+   "votaciones_en_que_participo": 290,
+   "votaciones_en_que_fue_pivote": 12,
+   "pivote_pct": 4.14,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "FRVS",
+   "partido_nombre": "Federación Regionalista Verde Social",
+   "votaciones_en_que_participo": 448,
+   "votaciones_en_que_fue_pivote": 9,
+   "pivote_pct": 2.01,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "LIBERAL",
+   "partido_nombre": null,
+   "votaciones_en_que_participo": 249,
+   "votaciones_en_que_fue_pivote": 8,
+   "pivote_pct": 3.21,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PEV",
+   "partido_nombre": null,
+   "votaciones_en_que_participo": 255,
+   "votaciones_en_que_fue_pivote": 4,
+   "pivote_pct": 1.57,
+   "es_agregacion_no_comparable": false
+  },
+  {
+   "partido_id": "PH",
+   "partido_nombre": null,
+   "votaciones_en_que_participo": 210,
+   "votaciones_en_que_fue_pivote": 1,
+   "pivote_pct": 0.48,
+   "es_agregacion_no_comparable": false
+  }
+ ]
+}

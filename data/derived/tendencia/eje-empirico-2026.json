@@ -1,0 +1,1455 @@
+{
+ "descripcion": "Ordenamiento de diputadas y diputados por cercania de voto (primer componente principal de la matriz de votaciones). NO es una escala ideologica y su signo es arbitrario.",
+ "generado_utc": "2026-07-27T15:36:48Z",
+ "generado_por": "extraer_tendencia.py",
+ "derivado": true,
+ "artefactos_usados": 669,
+ "sha256_conjunto": "2dbc70aeed8d7ef5b9b67f050752f0c0b102fbd2ab4642faa86e8e75a733122b",
+ "sha256_conjunto_formula": "sha256 de los sha256 de cada artefacto usado, ordenados alfabeticamente y unidos por salto de linea",
+ "sha256_padrones": [
+  "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+  "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+ ],
+ "criterio_posicion": "solo votaciones con posicion sustantiva (a favor, en contra o abstencion); las ausencias no cuentan como posicion",
+ "publicable": true,
+ "varianza_explicada": 0.4247,
+ "votaciones_utilizadas": 669,
+ "advertencia_signo": "El signo del eje es arbitrario: invertirlo describe el mismo orden. El eje mide cercania de voto, no ideologia, y no corresponde a ninguna etiqueta politica.",
+ "formula": "primer componente principal de la matriz diputado x votacion (+1 a favor, -1 en contra, 0 sin posicion), centrada por votacion; obtenido por iteracion de potencia con semilla fija 0",
+ "posiciones": [
+  {
+   "diputado_id": 1170,
+   "nombre": "Luis Sánchez Ossa",
+   "puntaje_eje": -0.115946,
+   "orden": 1
+  },
+  {
+   "diputado_id": 1165,
+   "nombre": "Agustín Romero Leiva",
+   "puntaje_eje": -0.113577,
+   "orden": 2
+  },
+  {
+   "diputado_id": 1104,
+   "nombre": "Chiara Barchiesi Chávez",
+   "puntaje_eje": -0.111677,
+   "orden": 3
+  },
+  {
+   "diputado_id": 1017,
+   "nombre": "Álvaro Carter Fernández",
+   "puntaje_eje": -0.111072,
+   "orden": 4
+  },
+  {
+   "diputado_id": 1146,
+   "nombre": "José Carlos Meza Pereira",
+   "puntaje_eje": -0.110003,
+   "orden": 5
+  },
+  {
+   "diputado_id": 1100,
+   "nombre": "Cristián Araya Lerdo de Tejada",
+   "puntaje_eje": -0.108104,
+   "orden": 6
+  },
+  {
+   "diputado_id": 1150,
+   "nombre": "Benjamín Moreno Bascur",
+   "puntaje_eje": -0.106834,
+   "orden": 7
+  },
+  {
+   "diputado_id": 1133,
+   "nombre": "Juan Irarrázaval Rossel",
+   "puntaje_eje": -0.106779,
+   "orden": 8
+  },
+  {
+   "diputado_id": 1025,
+   "nombre": "Catalina Del Real Mihovilovic",
+   "puntaje_eje": -0.093934,
+   "orden": 9
+  },
+  {
+   "diputado_id": 1119,
+   "nombre": "Sara Concha Smith",
+   "puntaje_eje": -0.092524,
+   "orden": 10
+  },
+  {
+   "diputado_id": 1174,
+   "nombre": "Marco Antonio Sulantay Olivares",
+   "puntaje_eje": -0.091789,
+   "orden": 11
+  },
+  {
+   "diputado_id": 1082,
+   "nombre": "Cristóbal Urruticoechea Ríos",
+   "puntaje_eje": -0.091317,
+   "orden": 12
+  },
+  {
+   "diputado_id": 1140,
+   "nombre": "Daniel Lilayu Vivanco",
+   "puntaje_eje": -0.089995,
+   "orden": 13
+  },
+  {
+   "diputado_id": 1172,
+   "nombre": "Stephan Schubert Rubio",
+   "puntaje_eje": -0.087889,
+   "orden": 14
+  },
+  {
+   "diputado_id": 1009,
+   "nombre": "Jorge Alessandri Vergara",
+   "puntaje_eje": -0.086916,
+   "orden": 15
+  },
+  {
+   "diputado_id": 1028,
+   "nombre": "Eduardo Durán Salinas",
+   "puntaje_eje": -0.08584,
+   "orden": 16
+  },
+  {
+   "diputado_id": 815,
+   "nombre": "Sergio Bobadilla Muñoz",
+   "puntaje_eje": -0.085366,
+   "orden": 17
+  },
+  {
+   "diputado_id": 1054,
+   "nombre": "Francesca Muñoz González",
+   "puntaje_eje": -0.084164,
+   "orden": 18
+  },
+  {
+   "diputado_id": 1176,
+   "nombre": "Hotuiti Teao Drago",
+   "puntaje_eje": -0.083867,
+   "orden": 19
+  },
+  {
+   "diputado_id": 1065,
+   "nombre": "Guillermo Ramírez Diez",
+   "puntaje_eje": -0.082767,
+   "orden": 20
+  },
+  {
+   "diputado_id": 1143,
+   "nombre": "Cristóbal Martínez Ramírez",
+   "puntaje_eje": -0.080452,
+   "orden": 21
+  },
+  {
+   "diputado_id": 1152,
+   "nombre": "Gloria Naveillan Arriagada",
+   "puntaje_eje": -0.080023,
+   "orden": 22
+  },
+  {
+   "diputado_id": 1245,
+   "nombre": "Alejandro Riquelme Ducci",
+   "puntaje_eje": -0.078991,
+   "orden": 23
+  },
+  {
+   "diputado_id": 1262,
+   "nombre": "Diego Vergara Rodríguez",
+   "puntaje_eje": -0.078733,
+   "orden": 24
+  },
+  {
+   "diputado_id": 1253,
+   "nombre": "Fernando Ugarte Tejeda",
+   "puntaje_eje": -0.078613,
+   "orden": 25
+  },
+  {
+   "diputado_id": 1187,
+   "nombre": "Carlo Arqueros Pizarro",
+   "puntaje_eje": -0.078569,
+   "orden": 26
+  },
+  {
+   "diputado_id": 1263,
+   "nombre": "Sebastián Zamora Soto",
+   "puntaje_eje": -0.078466,
+   "orden": 27
+  },
+  {
+   "diputado_id": 1190,
+   "nombre": "Enrique Bassaletti Riess",
+   "puntaje_eje": -0.078404,
+   "orden": 28
+  },
+  {
+   "diputado_id": 1247,
+   "nombre": "Javiera Rodríguez Pascual",
+   "puntaje_eje": -0.078401,
+   "orden": 29
+  },
+  {
+   "diputado_id": 1254,
+   "nombre": "Ignacio Urcullú Clèment-Lund",
+   "puntaje_eje": -0.078337,
+   "orden": 30
+  },
+  {
+   "diputado_id": 1218,
+   "nombre": "José Antonio Kast Adriasola",
+   "puntaje_eje": -0.078218,
+   "orden": 31
+  },
+  {
+   "diputado_id": 1203,
+   "nombre": "Sebastián Cristoffanini Jaraquemada",
+   "puntaje_eje": -0.078076,
+   "orden": 32
+  },
+  {
+   "diputado_id": 1131,
+   "nombre": "Mauro González Villarroel",
+   "puntaje_eje": -0.077958,
+   "orden": 33
+  },
+  {
+   "diputado_id": 1225,
+   "nombre": "Cristian Menchaca Pinochet",
+   "puntaje_eje": -0.07763,
+   "orden": 34
+  },
+  {
+   "diputado_id": 1232,
+   "nombre": "Cristian Neira Martínez",
+   "puntaje_eje": -0.077511,
+   "orden": 35
+  },
+  {
+   "diputado_id": 1198,
+   "nombre": "Paz Charpentier Rajcevich",
+   "puntaje_eje": -0.077372,
+   "orden": 36
+  },
+  {
+   "diputado_id": 1221,
+   "nombre": "Benjamín Lorca Inzunza",
+   "puntaje_eje": -0.077116,
+   "orden": 37
+  },
+  {
+   "diputado_id": 1194,
+   "nombre": "Daniel Bustos Leal",
+   "puntaje_eje": -0.076932,
+   "orden": 38
+  },
+  {
+   "diputado_id": 1244,
+   "nombre": "Claudia Reyes Larenas",
+   "puntaje_eje": -0.07675,
+   "orden": 39
+  },
+  {
+   "diputado_id": 1220,
+   "nombre": "Leandro Kunstmann Collado",
+   "puntaje_eje": -0.076552,
+   "orden": 40
+  },
+  {
+   "diputado_id": 1216,
+   "nombre": "Stephanie Jéldrez Ortiz",
+   "puntaje_eje": -0.07592,
+   "orden": 41
+  },
+  {
+   "diputado_id": 1248,
+   "nombre": "Felipe Ross Correa",
+   "puntaje_eje": -0.075841,
+   "orden": 42
+  },
+  {
+   "diputado_id": 1021,
+   "nombre": "Andrés Celis Montt",
+   "puntaje_eje": -0.07528,
+   "orden": 43
+  },
+  {
+   "diputado_id": 915,
+   "nombre": "Germán Verdugo Soto",
+   "puntaje_eje": -0.075049,
+   "orden": 44
+  },
+  {
+   "diputado_id": 1228,
+   "nombre": "Paulina Muñoz Minte",
+   "puntaje_eje": -0.074535,
+   "orden": 45
+  },
+  {
+   "diputado_id": 1215,
+   "nombre": "Álvaro Jofré Cáceres",
+   "puntaje_eje": -0.074304,
+   "orden": 46
+  },
+  {
+   "diputado_id": 1191,
+   "nombre": "Valentina Becerra Peña",
+   "puntaje_eje": -0.074298,
+   "orden": 47
+  },
+  {
+   "diputado_id": 1251,
+   "nombre": "Macarena Santelices Cañas",
+   "puntaje_eje": -0.074182,
+   "orden": 48
+  },
+  {
+   "diputado_id": 1202,
+   "nombre": "Eduardo Cretton Rebolledo",
+   "puntaje_eje": -0.073865,
+   "orden": 49
+  },
+  {
+   "diputado_id": 1214,
+   "nombre": "Constanza Hube Portus",
+   "puntaje_eje": -0.073467,
+   "orden": 50
+  },
+  {
+   "diputado_id": 1157,
+   "nombre": "Marlene Pérez Cartes",
+   "puntaje_eje": -0.073042,
+   "orden": 51
+  },
+  {
+   "diputado_id": 1223,
+   "nombre": "Hans Marowski Cuevas",
+   "puntaje_eje": -0.072808,
+   "orden": 52
+  },
+  {
+   "diputado_id": 1199,
+   "nombre": "Jaime Coloma Álamos",
+   "puntaje_eje": -0.072297,
+   "orden": 53
+  },
+  {
+   "diputado_id": 1059,
+   "nombre": "Ximena Ossandón Irarrázabal",
+   "puntaje_eje": -0.072265,
+   "orden": 54
+  },
+  {
+   "diputado_id": 1075,
+   "nombre": "Diego Schalper Sepúlveda",
+   "puntaje_eje": -0.072114,
+   "orden": 55
+  },
+  {
+   "diputado_id": 1242,
+   "nombre": "Rodrigo Ramírez Parra",
+   "puntaje_eje": -0.071103,
+   "orden": 56
+  },
+  {
+   "diputado_id": 1212,
+   "nombre": "Erich Grohs Marín",
+   "puntaje_eje": -0.071086,
+   "orden": 57
+  },
+  {
+   "diputado_id": 1237,
+   "nombre": "Francisco Orrego Gutiérrez",
+   "puntaje_eje": -0.070313,
+   "orden": 58
+  },
+  {
+   "diputado_id": 1102,
+   "nombre": "Roberto Arroyo Muñoz",
+   "puntaje_eje": -0.070266,
+   "orden": 59
+  },
+  {
+   "diputado_id": 1217,
+   "nombre": "Pier Karlezi Hazleby",
+   "puntaje_eje": -0.070142,
+   "orden": 60
+  },
+  {
+   "diputado_id": 1060,
+   "nombre": "Luis Pardo Sáinz",
+   "puntaje_eje": -0.069523,
+   "orden": 61
+  },
+  {
+   "diputado_id": 1233,
+   "nombre": "Ricardo Neumann Bertín",
+   "puntaje_eje": -0.069068,
+   "orden": 62
+  },
+  {
+   "diputado_id": 1231,
+   "nombre": "Ximena Naranjo Pinto",
+   "puntaje_eje": -0.069022,
+   "orden": 63
+  },
+  {
+   "diputado_id": 1227,
+   "nombre": "Claudia Mora Vega",
+   "puntaje_eje": -0.068446,
+   "orden": 64
+  },
+  {
+   "diputado_id": 1261,
+   "nombre": "Daniel Valenzuela Salazar",
+   "puntaje_eje": -0.068328,
+   "orden": 65
+  },
+  {
+   "diputado_id": 1234,
+   "nombre": "Mario Olavarría Rodríguez",
+   "puntaje_eje": -0.067862,
+   "orden": 66
+  },
+  {
+   "diputado_id": 1249,
+   "nombre": "Omar Sabat Guzmán",
+   "puntaje_eje": -0.067776,
+   "orden": 67
+  },
+  {
+   "diputado_id": 1197,
+   "nombre": "Carlos Chandía Alarcón",
+   "puntaje_eje": -0.065395,
+   "orden": 68
+  },
+  {
+   "diputado_id": 1166,
+   "nombre": "Natalia Romero Talguia",
+   "puntaje_eje": -0.065217,
+   "orden": 69
+  },
+  {
+   "diputado_id": 1257,
+   "nombre": "Alejandra Valdebenito Torres",
+   "puntaje_eje": -0.064225,
+   "orden": 70
+  },
+  {
+   "diputado_id": 1219,
+   "nombre": "Tomás Kast Sommerhoff",
+   "puntaje_eje": -0.063806,
+   "orden": 71
+  },
+  {
+   "diputado_id": 1108,
+   "nombre": "Juan Carlos Beltrán Silva",
+   "puntaje_eje": -0.063529,
+   "orden": 72
+  },
+  {
+   "diputado_id": 1132,
+   "nombre": "Jorge Guzmán Zepeda",
+   "puntaje_eje": -0.06315,
+   "orden": 73
+  },
+  {
+   "diputado_id": 1183,
+   "nombre": "Flor Weisse Novoa",
+   "puntaje_eje": -0.060396,
+   "orden": 74
+  },
+  {
+   "diputado_id": 843,
+   "nombre": "René Manuel García García",
+   "puntaje_eje": -0.055603,
+   "orden": 75
+  },
+  {
+   "diputado_id": 1200,
+   "nombre": "Cristian Contreras Radovic",
+   "puntaje_eje": -0.041009,
+   "orden": 76
+  },
+  {
+   "diputado_id": 1062,
+   "nombre": "Joanna Pérez Olea",
+   "puntaje_eje": -0.0373,
+   "orden": 77
+  },
+  {
+   "diputado_id": 1040,
+   "nombre": "Harry Jürgensen Rundshagen",
+   "puntaje_eje": -0.036716,
+   "orden": 78
+  },
+  {
+   "diputado_id": 1235,
+   "nombre": "Javier Olivares Avendaño",
+   "puntaje_eje": -0.036065,
+   "orden": 79
+  },
+  {
+   "diputado_id": 1003,
+   "nombre": "Renzo Trisotti Martínez",
+   "puntaje_eje": -0.033403,
+   "orden": 80
+  },
+  {
+   "diputado_id": 1135,
+   "nombre": "Johannes Kaiser Barents-Von Hohenhagen",
+   "puntaje_eje": -0.031984,
+   "orden": 81
+  },
+  {
+   "diputado_id": 1069,
+   "nombre": "Leonidas Romero Sáez",
+   "puntaje_eje": -0.026889,
+   "orden": 82
+  },
+  {
+   "diputado_id": 1144,
+   "nombre": "Christian Matheson Villán",
+   "puntaje_eje": -0.022548,
+   "orden": 83
+  },
+  {
+   "diputado_id": 1136,
+   "nombre": "Paula Labra Besserer",
+   "puntaje_eje": -0.022307,
+   "orden": 84
+  },
+  {
+   "diputado_id": 1163,
+   "nombre": "Marcia Raphael Mora",
+   "puntaje_eje": -0.020211,
+   "orden": 85
+  },
+  {
+   "diputado_id": 917,
+   "nombre": "Gastón Von Mühlenbrock Zamora",
+   "puntaje_eje": -0.020185,
+   "orden": 86
+  },
+  {
+   "diputado_id": 1022,
+   "nombre": "Sofía Cid Versalovic",
+   "puntaje_eje": -0.019847,
+   "orden": 87
+  },
+  {
+   "diputado_id": 1121,
+   "nombre": "Eduardo Cornejo Lagos",
+   "puntaje_eje": -0.019715,
+   "orden": 88
+  },
+  {
+   "diputado_id": 999,
+   "nombre": "Jorge Rathgeb Schifferli",
+   "puntaje_eje": -0.01906,
+   "orden": 89
+  },
+  {
+   "diputado_id": 1113,
+   "nombre": "Marta Bravo Salinas",
+   "puntaje_eje": -0.018959,
+   "orden": 90
+  },
+  {
+   "diputado_id": 1111,
+   "nombre": "Fernando Bórquez Montecinos",
+   "puntaje_eje": -0.018771,
+   "orden": 91
+  },
+  {
+   "diputado_id": 1050,
+   "nombre": "Miguel Mellado Suazo",
+   "puntaje_eje": -0.018699,
+   "orden": 92
+  },
+  {
+   "diputado_id": 971,
+   "nombre": "Bernardo Berger Fett",
+   "puntaje_eje": -0.018582,
+   "orden": 93
+  },
+  {
+   "diputado_id": 1109,
+   "nombre": "Gustavo Benavente Vergara",
+   "puntaje_eje": -0.018182,
+   "orden": 94
+  },
+  {
+   "diputado_id": 953,
+   "nombre": "Frank Sauerbaum Muñoz",
+   "puntaje_eje": -0.017895,
+   "orden": 95
+  },
+  {
+   "diputado_id": 1053,
+   "nombre": "Cristhian Moreira Barros",
+   "puntaje_eje": -0.017541,
+   "orden": 96
+  },
+  {
+   "diputado_id": 1259,
+   "nombre": "Juan Marcelo Valenzuela Henríquez",
+   "puntaje_eje": -0.01732,
+   "orden": 97
+  },
+  {
+   "diputado_id": 1106,
+   "nombre": "Miguel Ángel Becker Alvear",
+   "puntaje_eje": -0.016957,
+   "orden": 98
+  },
+  {
+   "diputado_id": 1031,
+   "nombre": "Juan Fuenzalida Cobo",
+   "puntaje_eje": -0.016814,
+   "orden": 99
+  },
+  {
+   "diputado_id": 1149,
+   "nombre": "Carla Morales Maldonado",
+   "puntaje_eje": -0.016762,
+   "orden": 100
+  },
+  {
+   "diputado_id": 1094,
+   "nombre": "Cristian Labbé Martínez",
+   "puntaje_eje": -0.015956,
+   "orden": 101
+  },
+  {
+   "diputado_id": 1138,
+   "nombre": "Henry Leal Bizama",
+   "puntaje_eje": -0.015919,
+   "orden": 102
+  },
+  {
+   "diputado_id": 1126,
+   "nombre": "Felipe Donoso Castro",
+   "puntaje_eje": -0.013846,
+   "orden": 103
+  },
+  {
+   "diputado_id": 1123,
+   "nombre": "Gonzalo De la Carrera Correa",
+   "puntaje_eje": -0.012507,
+   "orden": 104
+  },
+  {
+   "diputado_id": 1067,
+   "nombre": "Hugo Rey Martínez",
+   "puntaje_eje": -0.01215,
+   "orden": 105
+  },
+  {
+   "diputado_id": 1046,
+   "nombre": "Andrés Longton Herrera",
+   "puntaje_eje": -0.011095,
+   "orden": 106
+  },
+  {
+   "diputado_id": 1030,
+   "nombre": "Camila Flores Oporto",
+   "puntaje_eje": -0.010715,
+   "orden": 107
+  },
+  {
+   "diputado_id": 1098,
+   "nombre": "Yovana Ahumada Palma",
+   "puntaje_eje": -0.010491,
+   "orden": 108
+  },
+  {
+   "diputado_id": 989,
+   "nombre": "Joaquín Lavín León",
+   "puntaje_eje": -0.00951,
+   "orden": 109
+  },
+  {
+   "diputado_id": 976,
+   "nombre": "Juan Antonio Coloma Álamos",
+   "puntaje_eje": -0.009449,
+   "orden": 110
+  },
+  {
+   "diputado_id": 1081,
+   "nombre": "Francisco Undurraga Gazitúa",
+   "puntaje_eje": -0.009191,
+   "orden": 111
+  },
+  {
+   "diputado_id": 1027,
+   "nombre": "Jorge Durán Espinoza",
+   "puntaje_eje": -0.008136,
+   "orden": 112
+  },
+  {
+   "diputado_id": 1201,
+   "nombre": "Flor Contreras Vivallo",
+   "puntaje_eje": -0.007376,
+   "orden": 113
+  },
+  {
+   "diputado_id": 1120,
+   "nombre": "María Luisa Cordero Velásquez",
+   "puntaje_eje": -0.005712,
+   "orden": 114
+  },
+  {
+   "diputado_id": 1158,
+   "nombre": "Víctor Alejandro Pino Fuentes",
+   "puntaje_eje": -0.004889,
+   "orden": 115
+  },
+  {
+   "diputado_id": 1019,
+   "nombre": "José Miguel Castro Bascuñán",
+   "puntaje_eje": -0.004846,
+   "orden": 116
+  },
+  {
+   "diputado_id": 1192,
+   "nombre": "Lilian Betancurt Delgado",
+   "puntaje_eje": -0.003871,
+   "orden": 117
+  },
+  {
+   "diputado_id": 1193,
+   "nombre": "Patricio Briones Moller",
+   "puntaje_eje": -0.003306,
+   "orden": 118
+  },
+  {
+   "diputado_id": 1240,
+   "nombre": "Zandra Parisi Fernández",
+   "puntaje_eje": -0.003182,
+   "orden": 119
+  },
+  {
+   "diputado_id": 948,
+   "nombre": "Gaspar Rivas Sánchez",
+   "puntaje_eje": -0.003046,
+   "orden": 120
+  },
+  {
+   "diputado_id": 1230,
+   "nombre": "Alex Nahuelquin Nahuelquin",
+   "puntaje_eje": -0.00266,
+   "orden": 121
+  },
+  {
+   "diputado_id": 1134,
+   "nombre": "Andrés Jouannet Valderrama",
+   "puntaje_eje": 0.001075,
+   "orden": 122
+  },
+  {
+   "diputado_id": 1016,
+   "nombre": "Miguel Ángel Calisto Águila",
+   "puntaje_eje": 0.001892,
+   "orden": 123
+  },
+  {
+   "diputado_id": 1063,
+   "nombre": "Catalina Pérez Salinas",
+   "puntaje_eje": 0.001892,
+   "orden": 124
+  },
+  {
+   "diputado_id": 1107,
+   "nombre": "María Francisca Bello Campos",
+   "puntaje_eje": 0.001892,
+   "orden": 125
+  },
+  {
+   "diputado_id": 1154,
+   "nombre": "Mauricio Ojeda Rebolledo",
+   "puntaje_eje": 0.001892,
+   "orden": 126
+  },
+  {
+   "diputado_id": 1161,
+   "nombre": "Francisco Pulgar Castillo",
+   "puntaje_eje": 0.001892,
+   "orden": 127
+  },
+  {
+   "diputado_id": 1236,
+   "nombre": "Paula Olmos Contreras",
+   "puntaje_eje": 0.004034,
+   "orden": 128
+  },
+  {
+   "diputado_id": 1139,
+   "nombre": "Enrique Lee Flores",
+   "puntaje_eje": 0.005166,
+   "orden": 129
+  },
+  {
+   "diputado_id": 1258,
+   "nombre": "Guillermo Valdés Carmona",
+   "puntaje_eje": 0.005413,
+   "orden": 130
+  },
+  {
+   "diputado_id": 1057,
+   "nombre": "Erika Olivera De La Fuente",
+   "puntaje_eje": 0.012482,
+   "orden": 131
+  },
+  {
+   "diputado_id": 1168,
+   "nombre": "Jorge Saffirio Espinoza",
+   "puntaje_eje": 0.01552,
+   "orden": 132
+  },
+  {
+   "diputado_id": 1151,
+   "nombre": "Camila Musante Müller",
+   "puntaje_eje": 0.01663,
+   "orden": 133
+  },
+  {
+   "diputado_id": 1255,
+   "nombre": "Eileen Urqueta Rojas",
+   "puntaje_eje": 0.02058,
+   "orden": 134
+  },
+  {
+   "diputado_id": 1243,
+   "nombre": "Tamara Ramírez Ramírez",
+   "puntaje_eje": 0.02317,
+   "orden": 135
+  },
+  {
+   "diputado_id": 1035,
+   "nombre": "Carmen Hertz Cádiz",
+   "puntaje_eje": 0.023497,
+   "orden": 136
+  },
+  {
+   "diputado_id": 1239,
+   "nombre": "Fabián Ossandón Briceño",
+   "puntaje_eje": 0.024091,
+   "orden": 137
+  },
+  {
+   "diputado_id": 1070,
+   "nombre": "Patricio Rosas Barrientos",
+   "puntaje_eje": 0.024243,
+   "orden": 138
+  },
+  {
+   "diputado_id": 1097,
+   "nombre": "Eric Aedo Jeldres",
+   "puntaje_eje": 0.025111,
+   "orden": 139
+  },
+  {
+   "diputado_id": 1147,
+   "nombre": "Helia Molina Milman",
+   "puntaje_eje": 0.026702,
+   "orden": 140
+  },
+  {
+   "diputado_id": 1048,
+   "nombre": "Carolina Marzán Pinto",
+   "puntaje_eje": 0.026792,
+   "orden": 141
+  },
+  {
+   "diputado_id": 1224,
+   "nombre": "Cristian Mella Andaur",
+   "puntaje_eje": 0.030782,
+   "orden": 142
+  },
+  {
+   "diputado_id": 1196,
+   "nombre": "Priscilla Castillo Gerli",
+   "puntaje_eje": 0.031005,
+   "orden": 143
+  },
+  {
+   "diputado_id": 1229,
+   "nombre": "Javier Muñoz Riquelme",
+   "puntaje_eje": 0.033232,
+   "orden": 144
+  },
+  {
+   "diputado_id": 1145,
+   "nombre": "Karen Medina Vásquez",
+   "puntaje_eje": 0.033429,
+   "orden": 145
+  },
+  {
+   "diputado_id": 1103,
+   "nombre": "Danisa Astudillo Peiretti",
+   "puntaje_eje": 0.034141,
+   "orden": 146
+  },
+  {
+   "diputado_id": 1169,
+   "nombre": "Clara Sagardía Cabezas",
+   "puntaje_eje": 0.036161,
+   "orden": 147
+  },
+  {
+   "diputado_id": 1125,
+   "nombre": "Viviana Delgado Riquelme",
+   "puntaje_eje": 0.036625,
+   "orden": 148
+  },
+  {
+   "diputado_id": 1208,
+   "nombre": "Jorge Díaz Ibarra",
+   "puntaje_eje": 0.037389,
+   "orden": 149
+  },
+  {
+   "diputado_id": 1137,
+   "nombre": "Tomás Lagomarsino Guzmán",
+   "puntaje_eje": 0.038426,
+   "orden": 150
+  },
+  {
+   "diputado_id": 1130,
+   "nombre": "Marta González Olea",
+   "puntaje_eje": 0.038446,
+   "orden": 151
+  },
+  {
+   "diputado_id": 1118,
+   "nombre": "Ricardo Cifuentes Lillo",
+   "puntaje_eje": 0.039295,
+   "orden": 152
+  },
+  {
+   "diputado_id": 74,
+   "nombre": "Jaime Naranjo Ortiz",
+   "puntaje_eje": 0.040667,
+   "orden": 153
+  },
+  {
+   "diputado_id": 1155,
+   "nombre": "Rubén Darío Oyarzo Figueroa",
+   "puntaje_eje": 0.040679,
+   "orden": 154
+  },
+  {
+   "diputado_id": 1101,
+   "nombre": "Mónica Arce Castro",
+   "puntaje_eje": 0.04087,
+   "orden": 155
+  },
+  {
+   "diputado_id": 1116,
+   "nombre": "Felipe Camaño Cárdenas",
+   "puntaje_eje": 0.040935,
+   "orden": 156
+  },
+  {
+   "diputado_id": 1179,
+   "nombre": "Alberto Undurraga Vicuña",
+   "puntaje_eje": 0.041191,
+   "orden": 157
+  },
+  {
+   "diputado_id": 1076,
+   "nombre": "Alexis Sepúlveda Soto",
+   "puntaje_eje": 0.041452,
+   "orden": 158
+  },
+  {
+   "diputado_id": 1036,
+   "nombre": "Tomás Hirsch Goldschmidt",
+   "puntaje_eje": 0.041598,
+   "orden": 159
+  },
+  {
+   "diputado_id": 1037,
+   "nombre": "Diego Ibáñez Cotroneo",
+   "puntaje_eje": 0.041664,
+   "orden": 160
+  },
+  {
+   "diputado_id": 1238,
+   "nombre": "Álvaro Ortiz Vera",
+   "puntaje_eje": 0.041758,
+   "orden": 161
+  },
+  {
+   "diputado_id": 1002,
+   "nombre": "Leonardo Soto Ferrada",
+   "puntaje_eje": 0.04206,
+   "orden": 162
+  },
+  {
+   "diputado_id": 991,
+   "nombre": "Vlado Mirosevic Verdugo",
+   "puntaje_eje": 0.042105,
+   "orden": 163
+  },
+  {
+   "diputado_id": 1156,
+   "nombre": "Hernán Palma Pérez",
+   "puntaje_eje": 0.04277,
+   "orden": 164
+  },
+  {
+   "diputado_id": 1049,
+   "nombre": "Cosme Mellado Pino",
+   "puntaje_eje": 0.043038,
+   "orden": 165
+  },
+  {
+   "diputado_id": 1164,
+   "nombre": "Marcela Riquelme Aliaga",
+   "puntaje_eje": 0.04327,
+   "orden": 166
+  },
+  {
+   "diputado_id": 973,
+   "nombre": "Karol Cariola Oliva",
+   "puntaje_eje": 0.043322,
+   "orden": 167
+  },
+  {
+   "diputado_id": 1058,
+   "nombre": "Maite Orsini Pascal",
+   "puntaje_eje": 0.043581,
+   "orden": 168
+  },
+  {
+   "diputado_id": 975,
+   "nombre": "Daniella Cicardini Milla",
+   "puntaje_eje": 0.043739,
+   "orden": 169
+  },
+  {
+   "diputado_id": 1034,
+   "nombre": "Félix González Gatica",
+   "puntaje_eje": 0.043883,
+   "orden": 170
+  },
+  {
+   "diputado_id": 1167,
+   "nombre": "Jaime Sáez Quiroz",
+   "puntaje_eje": 0.043926,
+   "orden": 171
+  },
+  {
+   "diputado_id": 1112,
+   "nombre": "Ana María Bravo Castro",
+   "puntaje_eje": 0.043993,
+   "orden": 172
+  },
+  {
+   "diputado_id": 1241,
+   "nombre": "Patricio Pinilla Valencia",
+   "puntaje_eje": 0.044381,
+   "orden": 173
+  },
+  {
+   "diputado_id": 1129,
+   "nombre": "Andrés Giordano Salazar",
+   "puntaje_eje": 0.044408,
+   "orden": 174
+  },
+  {
+   "diputado_id": 1160,
+   "nombre": "Alejandra Placencia Cabello",
+   "puntaje_eje": 0.044623,
+   "orden": 175
+  },
+  {
+   "diputado_id": 990,
+   "nombre": "Daniel Melo Contreras",
+   "puntaje_eje": 0.044695,
+   "orden": 176
+  },
+  {
+   "diputado_id": 1068,
+   "nombre": "Camila Rojas Valderrama",
+   "puntaje_eje": 0.04485,
+   "orden": 177
+  },
+  {
+   "diputado_id": 1051,
+   "nombre": "Claudia Mix Jiménez",
+   "puntaje_eje": 0.044914,
+   "orden": 178
+  },
+  {
+   "diputado_id": 986,
+   "nombre": "Marcela Hernando Pérez",
+   "puntaje_eje": 0.044988,
+   "orden": 179
+  },
+  {
+   "diputado_id": 1185,
+   "nombre": "Arturo Barrios Oteíza",
+   "puntaje_eje": 0.045246,
+   "orden": 180
+  },
+  {
+   "diputado_id": 1096,
+   "nombre": "María Candelaria Acevedo Sáez",
+   "puntaje_eje": 0.045797,
+   "orden": 181
+  },
+  {
+   "diputado_id": 1162,
+   "nombre": "Matías Ramírez Pascal",
+   "puntaje_eje": 0.046308,
+   "orden": 182
+  },
+  {
+   "diputado_id": 872,
+   "nombre": "Jaime Mulet Martínez",
+   "puntaje_eje": 0.049061,
+   "orden": 183
+  },
+  {
+   "diputado_id": 1195,
+   "nombre": "Carlos Carvajal Gallardo",
+   "puntaje_eje": 0.051664,
+   "orden": 184
+  },
+  {
+   "diputado_id": 1039,
+   "nombre": "Pamela Jiles Moreno",
+   "puntaje_eje": 0.052249,
+   "orden": 185
+  },
+  {
+   "diputado_id": 1226,
+   "nombre": "José Montalva Feuerhake",
+   "puntaje_eje": 0.053404,
+   "orden": 186
+  },
+  {
+   "diputado_id": 1061,
+   "nombre": "Andrea Parra Sauterel",
+   "puntaje_eje": 0.054674,
+   "orden": 187
+  },
+  {
+   "diputado_id": 1264,
+   "nombre": "Fernando Zamorano Peralta",
+   "puntaje_eje": 0.057957,
+   "orden": 188
+  },
+  {
+   "diputado_id": 1205,
+   "nombre": "Carlos Cuadrado Prats",
+   "puntaje_eje": 0.058527,
+   "orden": 189
+  },
+  {
+   "diputado_id": 1246,
+   "nombre": "José Antonio Rivas Villalobos",
+   "puntaje_eje": 0.061149,
+   "orden": 190
+  },
+  {
+   "diputado_id": 1077,
+   "nombre": "Raúl Soto Mardones",
+   "puntaje_eje": 0.062926,
+   "orden": 191
+  },
+  {
+   "diputado_id": 1182,
+   "nombre": "Sebastián Videla Castillo",
+   "puntaje_eje": 0.063628,
+   "orden": 192
+  },
+  {
+   "diputado_id": 1207,
+   "nombre": "Valentina Cáceres Monsálvez",
+   "puntaje_eje": 0.06434,
+   "orden": 193
+  },
+  {
+   "diputado_id": 1105,
+   "nombre": "Héctor Barría Angulo",
+   "puntaje_eje": 0.06442,
+   "orden": 194
+  },
+  {
+   "diputado_id": 1260,
+   "nombre": "César Valenzuela Maass",
+   "puntaje_eje": 0.066461,
+   "orden": 195
+  },
+  {
+   "diputado_id": 1204,
+   "nombre": "Francisco Crisóstomo Llanos",
+   "puntaje_eje": 0.066466,
+   "orden": 196
+  },
+  {
+   "diputado_id": 1222,
+   "nombre": "Andrea Macías Palma",
+   "puntaje_eje": 0.066472,
+   "orden": 197
+  },
+  {
+   "diputado_id": 1148,
+   "nombre": "Javiera Morales Alvarado",
+   "puntaje_eje": 0.067419,
+   "orden": 198
+  },
+  {
+   "diputado_id": 1013,
+   "nombre": "Alejandro Bernales Maldonado",
+   "puntaje_eje": 0.067722,
+   "orden": 199
+  },
+  {
+   "diputado_id": 1074,
+   "nombre": "Marisela Santibáñez Novoa",
+   "puntaje_eje": 0.068761,
+   "orden": 200
+  },
+  {
+   "diputado_id": 1206,
+   "nombre": "Carolina Cucumides Calderón",
+   "puntaje_eje": 0.069027,
+   "orden": 201
+  },
+  {
+   "diputado_id": 803,
+   "nombre": "René Alinco Bustos",
+   "puntaje_eje": 0.069451,
+   "orden": 202
+  },
+  {
+   "diputado_id": 1186,
+   "nombre": "Ignacio Achurra Díaz",
+   "puntaje_eje": 0.070262,
+   "orden": 203
+  },
+  {
+   "diputado_id": 1189,
+   "nombre": "Jaime Bassa Mercado",
+   "puntaje_eje": 0.071326,
+   "orden": 204
+  },
+  {
+   "diputado_id": 1256,
+   "nombre": "Tatiana Urrutia Herrera",
+   "puntaje_eje": 0.071497,
+   "orden": 205
+  },
+  {
+   "diputado_id": 1252,
+   "nombre": "Constanza Schonhaut Soto",
+   "puntaje_eje": 0.072289,
+   "orden": 206
+  },
+  {
+   "diputado_id": 1209,
+   "nombre": "Matías Fernández Hartwig",
+   "puntaje_eje": 0.073986,
+   "orden": 207
+  },
+  {
+   "diputado_id": 1210,
+   "nombre": "Gustavo Gatica Villarroel",
+   "puntaje_eje": 0.074324,
+   "orden": 208
+  },
+  {
+   "diputado_id": 1213,
+   "nombre": "Irací Hassler Jacob",
+   "puntaje_eje": 0.075407,
+   "orden": 209
+  },
+  {
+   "diputado_id": 1250,
+   "nombre": "Bernardo Salinas Maya",
+   "puntaje_eje": 0.076698,
+   "orden": 210
+  },
+  {
+   "diputado_id": 1188,
+   "nombre": "Marcos Barraza Gómez",
+   "puntaje_eje": 0.077381,
+   "orden": 211
+  },
+  {
+   "diputado_id": 1211,
+   "nombre": "Sofía González Cortés",
+   "puntaje_eje": 0.077603,
+   "orden": 212
+  },
+  {
+   "diputado_id": 1099,
+   "nombre": "Jaime Araya Guerrero",
+   "puntaje_eje": 0.077821,
+   "orden": 213
+  },
+  {
+   "diputado_id": 1141,
+   "nombre": "Luis Malla Valenzuela",
+   "puntaje_eje": 0.079019,
+   "orden": 214
+  },
+  {
+   "diputado_id": 1110,
+   "nombre": "Carlos Bianchi Chelech",
+   "puntaje_eje": 0.081252,
+   "orden": 215
+  },
+  {
+   "diputado_id": 1178,
+   "nombre": "Héctor Ulloa Aguilera",
+   "puntaje_eje": 0.084515,
+   "orden": 216
+  },
+  {
+   "diputado_id": 1175,
+   "nombre": "Cristián Tapia Ramos",
+   "puntaje_eje": 0.084971,
+   "orden": 217
+  },
+  {
+   "diputado_id": 1117,
+   "nombre": "Nathalie Castillo Rojas",
+   "puntaje_eje": 0.093464,
+   "orden": 218
+  },
+  {
+   "diputado_id": 1038,
+   "nombre": "Marcos Ilabaca Cerda",
+   "puntaje_eje": 0.09396,
+   "orden": 219
+  },
+  {
+   "diputado_id": 1086,
+   "nombre": "Gonzalo Winter Etcheberry",
+   "puntaje_eje": 0.097846,
+   "orden": 220
+  },
+  {
+   "diputado_id": 1181,
+   "nombre": "Nelson Venegas Salazar",
+   "puntaje_eje": 0.099679,
+   "orden": 221
+  },
+  {
+   "diputado_id": 1159,
+   "nombre": "Lorena Pizarro Sierra",
+   "puntaje_eje": 0.100378,
+   "orden": 222
+  },
+  {
+   "diputado_id": 1142,
+   "nombre": "Daniel Manouchehri Lobos",
+   "puntaje_eje": 0.100747,
+   "orden": 223
+  },
+  {
+   "diputado_id": 1153,
+   "nombre": "Coca Ericka Ñanco Vásquez",
+   "puntaje_eje": 0.102807,
+   "orden": 224
+  },
+  {
+   "diputado_id": 1044,
+   "nombre": "Raúl Leiva Carvajal",
+   "puntaje_eje": 0.103382,
+   "orden": 225
+  },
+  {
+   "diputado_id": 1073,
+   "nombre": "Juan Santana Castillo",
+   "puntaje_eje": 0.106447,
+   "orden": 226
+  },
+  {
+   "diputado_id": 1015,
+   "nombre": "Jorge Brito Hasbún",
+   "puntaje_eje": 0.107228,
+   "orden": 227
+  },
+  {
+   "diputado_id": 1114,
+   "nombre": "Félix Bugueño Sotelo",
+   "puntaje_eje": 0.107286,
+   "orden": 228
+  },
+  {
+   "diputado_id": 1180,
+   "nombre": "Consuelo Veloso Ávila",
+   "puntaje_eje": 0.110072,
+   "orden": 229
+  },
+  {
+   "diputado_id": 1177,
+   "nombre": "Carolina Tello Rojas",
+   "puntaje_eje": 0.110875,
+   "orden": 230
+  },
+  {
+   "diputado_id": 1127,
+   "nombre": "Lorena Fries Monleón",
+   "puntaje_eje": 0.111132,
+   "orden": 231
+  },
+  {
+   "diputado_id": 1087,
+   "nombre": "Gael Yeomans Araya",
+   "puntaje_eje": 0.111942,
+   "orden": 232
+  },
+  {
+   "diputado_id": 1056,
+   "nombre": "Emilia Nuyado Ancapichun",
+   "puntaje_eje": 0.113116,
+   "orden": 233
+  },
+  {
+   "diputado_id": 1184,
+   "nombre": "Roberto Celedón Fernández",
+   "puntaje_eje": 0.113482,
+   "orden": 234
+  },
+  {
+   "diputado_id": 1171,
+   "nombre": "Emilia Schneider Videla",
+   "puntaje_eje": 0.114139,
+   "orden": 235
+  },
+  {
+   "diputado_id": 1128,
+   "nombre": "Ana María Gazmuri Vieira",
+   "puntaje_eje": 0.11618,
+   "orden": 236
+  },
+  {
+   "diputado_id": 1012,
+   "nombre": "Boris Barrera Moreno",
+   "puntaje_eje": 0.117967,
+   "orden": 237
+  },
+  {
+   "diputado_id": 1122,
+   "nombre": "Luis Alberto Cuello Peña y Lillo",
+   "puntaje_eje": 0.120654,
+   "orden": 238
+  },
+  {
+   "diputado_id": 1173,
+   "nombre": "Daniela Serrano Salazar",
+   "puntaje_eje": 0.122044,
+   "orden": 239
+  }
+ ]
+}
