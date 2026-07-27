@@ -1,6 +1,6 @@
 {
  "descripcion": "Balance del Gobierno Central Total (% del PIB) segun cada publicacion IFP de Dipres. Cifras extraidas celda por celda de los cuadros Excel oficiales; cada registro apunta al sha256 de su artefacto en el manifiesto.",
- "generado_utc": "2026-07-27T15:36:45Z",
+ "generado_utc": "2026-07-27T15:57:04Z",
  "generado_por": "extraer_fiscal.py",
  "total_registros": 36,
  "registros": [

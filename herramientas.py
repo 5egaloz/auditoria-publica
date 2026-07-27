@@ -70,6 +70,7 @@ _PARES = _cargar("tendencia/coincidencia-pares-2026.json")
 _ESCANOS = _cargar("concentracion/escanos-camara-2026.json")
 _PIVOTE = _cargar("concentracion/pivotalidad-camara-2026.json")
 _MEDIOS = _cargar("concentracion/concesiones-radiodifusion-2026.json")
+_GASTO = _cargar("concentracion/adjudicaciones-licitaciones-2026-06.json")
 
 _OPCIONES = _NOMINAL.get("codigos_opcion", {})
 _NOMBRES = {str(r["id"]): r["nombre"] for r in _PADRON.get("registros", [])}
@@ -158,6 +159,11 @@ COBERTURA_CONCENTRACION = (
     "Diputadas y Diputados en 2026. NO incluye: Senado, gasto del Estado ni "
     "concentracion economica."
 )
+COBERTURA_GASTO = (
+    "Adjudicaciones de licitaciones publicadas en Mercado Publico en junio de 2026, "
+    "por proveedor. NO incluye: Convenio Marco, Compra Agil, trato directo, otros "
+    "meses, ni las lineas en moneda distinta del peso chileno."
+)
 COBERTURA_MEDIOS = (
     "Concesiones vigentes de radiodifusion sonora (AM, FM, minima cobertura y onda "
     "corta) segun el listado de SUBTEL, agrupadas por titular registrado. NO incluye: "
@@ -168,19 +174,29 @@ COBERTURA_MEDIOS = (
 
 def resumen_corpus() -> dict:
     """Que contiene el sistema y que no. Base para responder 'sin dato disponible'."""
-    ids_nominales = [r["id"] for r in _AC.get("registros", [])]
     resultados = [{
         "artefactos_en_manifiesto": len(_MANIFIESTO),
         "registros_fiscales": len(_FISCAL.get("registros", [])),
         "votaciones_2026_con_totales": len(_VOTACIONES.get("registros", [])),
-        "votaciones_con_voto_nominal": len(ids_nominales),
-        "ids_con_voto_nominal": ids_nominales,
-        "hay_partido_o_bancada": False,
+        "votaciones_con_voto_nominal": len(_NOMINAL.get("registros", [])),
+        "acusaciones_constitucionales": len(_AC.get("registros", [])),
+        "parlamentarios_en_el_padron": len(_PADRON.get("registros", [])),
+        "hay_partido_o_bancada": bool(_PADRON.get("registros")),
+        "partidos_con_cohesion_medida": len(_COHESION.get("registros", [])),
+        "eje_empirico_publicable": bool(_EJE.get("publicable")),
+        "concesiones_de_radiodifusion": _MEDIOS.get("concesiones_leidas", 0),
+        "lineas_de_adjudicacion": _GASTO.get("lineas_usadas", 0),
         "fuera_de_cobertura": [
             "Senado", "annos anteriores a 2026 en lo legislativo",
+            "comisiones de la Camara",
             "ejecucion presupuestaria por partida", "deuda bruta",
-            "informes del CFA", "partido o bancada de cada parlamentario",
-            "voto nominal de las votaciones que no son de Acusacion Constitucional",
+            "informes del CFA",
+            "gasto del Estado fuera de licitaciones (Convenio Marco, Compra Agil, "
+            "trato directo) y meses distintos de junio de 2026",
+            "television, prensa escrita y medios digitales",
+            "propiedad final detras de cada sociedad concesionaria",
+            "concentracion economica (CMF y FNE)",
+            "clasificacion ideologica de partidos o parlamentarios",
         ],
         "cita": None,
     }]
@@ -543,6 +559,46 @@ def concentracion_medios(titular: str | None = None) -> dict:
                   formula=json.dumps(_MEDIOS.get("formulas", {}), ensure_ascii=False))
 
 
+def concentracion_gasto(proveedor: str | None = None) -> dict:
+    """Concentracion de las adjudicaciones de licitaciones por proveedor.
+
+    Los indices declarados estan dominados por unas pocas lineas cuya magnitud
+    excede cualquier rango plausible y que la fuente publica asi. Por eso cada
+    resultado viaja con la advertencia y con la seccion de sensibilidad: sin
+    ellas, la cifra no significa nada.
+    """
+    args = {"proveedor": proveedor}
+    if not _GASTO.get("registros"):
+        return _sobre("concentracion_gasto", args, [], cobertura=COBERTURA_GASTO,
+                      derivado=True)
+    comun = {
+        "periodo": _GASTO.get("periodo"),
+        "limite_de_la_medicion": _GASTO.get("limite_de_la_medicion"),
+        "advertencia_valores_atipicos": _GASTO.get("advertencia_valores_atipicos"),
+        "cita": _cita(_GASTO.get("sha256_origen")),
+    }
+    formula = json.dumps(_GASTO.get("formulas", {}), ensure_ascii=False)
+    if proveedor:
+        aguja = _plano(proveedor)
+        resultados = [{**r, **comun} for r in _GASTO["registros"]
+                      if aguja in _plano(r["razon_social"]) or aguja == _plano(r["rut"])]
+        return _sobre("concentracion_gasto", args, resultados[:25],
+                      cobertura=COBERTURA_GASTO, derivado=True, formula=formula)
+    resultados = [{
+        **comun,
+        "lineas_usadas": _GASTO.get("lineas_usadas"),
+        "monto_total_adjudicado_clp": _GASTO.get("monto_total_adjudicado_clp"),
+        "mediana_monto_por_linea_clp": _GASTO.get("mediana_monto_por_linea_clp"),
+        "indices_declarados": _GASTO.get("indices_nacionales"),
+        "sensibilidad": _GASTO.get("sensibilidad"),
+        "mayores_lineas": _GASTO.get("mayores_lineas", [])[:5],
+        "top_10": _GASTO.get("top_10"), "top_100": _GASTO.get("top_100"),
+        "mayores_proveedores": _GASTO["registros"][:10],
+    }]
+    return _sobre("concentracion_gasto", args, resultados,
+                  cobertura=COBERTURA_GASTO, derivado=True, formula=formula)
+
+
 def pivotalidad(partido: str | None = None) -> dict:
     """Veces en que un partido pudo cambiar el signo del resultado de una votacion."""
     args = {"partido": partido}
@@ -576,6 +632,7 @@ CATALOGO = {
     "concentracion_camara": concentracion_camara,
     "pivotalidad": pivotalidad,
     "concentracion_medios": concentracion_medios,
+    "concentracion_gasto": concentracion_gasto,
 }
 
 

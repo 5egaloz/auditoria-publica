@@ -253,12 +253,13 @@ async function cargar(){
     pintarTendencia(coh, eje);
   }catch(e){ $("#tend-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la tendencia: " + esc(e) + "</p>"; }
   try{
-    const [esc_, piv, med] = await Promise.all([
+    const [esc_, piv, med, gas] = await Promise.all([
       (await fetch(RUTA_BASE + "/data/derived/concentracion/escanos-camara-2026.json")).json(),
       (await fetch(RUTA_BASE + "/data/derived/concentracion/pivotalidad-camara-2026.json")).json(),
-      (await fetch(RUTA_BASE + "/data/derived/concentracion/concesiones-radiodifusion-2026.json")).json()
+      (await fetch(RUTA_BASE + "/data/derived/concentracion/concesiones-radiodifusion-2026.json")).json(),
+      (await fetch(RUTA_BASE + "/data/derived/concentracion/adjudicaciones-licitaciones-2026-06.json")).json()
     ]);
-    pintarConcentracion(esc_, piv, med);
+    pintarConcentracion(esc_, piv, med, gas);
   }catch(e){ $("#conc-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la concentración: " + esc(e) + "</p>"; }
 }
 
@@ -304,7 +305,7 @@ function pintarTendencia(coh, eje){
 }
 
 /* ---------- CONCENTRACIÓN ---------- */
-function pintarConcentracion(esc_, piv, med){
+function pintarConcentracion(esc_, piv, med, gas){
   const b = esc_.lectura_independientes_como_bloque;
   const s = esc_.lectura_independientes_por_separado;
   let h = "<h3>Composición de la Cámara</h3>";
@@ -357,6 +358,36 @@ function pintarConcentracion(esc_, piv, med){
          "%</td></tr>";
   });
   h += "</tbody></table>";
+  h += "<h3>Adjudicaciones de licitaciones del Estado</h3>";
+  h += "<p class='nota'><strong>Límite de esta medición:</strong> " +
+       esc(gas.limite_de_la_medicion) + "</p>";
+  h += "<p class='nota' style='border-left:3px solid var(--acento2);padding-left:10px'>" +
+       "<strong>Advertencia:</strong> " + esc(gas.advertencia_valores_atipicos) + "</p>";
+  const clp = n => "$" + Math.round(n).toLocaleString("es-CL");
+  h += "<p class='nota'>Período " + esc(gas.periodo) + ": " + gas.lineas_usadas +
+       " líneas adjudicadas de " + gas.indices_nacionales.actores + " proveedores. " +
+       "Mediana por línea: " + clp(gas.mediana_monto_por_linea_clp) + ". " +
+       "Fuente ChileCompra, hash <code>" + esc(gas.sha256_origen.slice(0,12)) + "</code>.</p>";
+  h += "<table><thead><tr><th>Cálculo</th><th>Líneas excluidas</th>" +
+       "<th>HHI (0–10.000)</th><th>Proveedores efectivos</th></tr></thead><tbody>";
+  h += "<tr><td>Tal como lo declara la fuente</td><td>0</td><td>" +
+       gas.indices_nacionales.hhi_escala_10000 + "</td><td>" +
+       gas.indices_nacionales.numero_efectivo + "</td></tr>";
+  Object.entries(gas.sensibilidad).forEach(([etiqueta, v]) => {
+    h += "<tr><td>" + esc(etiqueta) + "</td><td>" + v.lineas_excluidas + "</td><td>" +
+         v.hhi_escala_10000 + "</td><td>" + v.numero_efectivo + "</td></tr>";
+  });
+  h += "</tbody></table>";
+  h += "<p class='nota'>Las líneas de mayor monto, para verificarlas una por una en la fuente:</p>";
+  h += "<table><thead><tr><th>Monto</th><th>Licitación</th><th>Proveedor</th>" +
+       "<th>Organismo</th></tr></thead><tbody>";
+  gas.mayores_lineas.slice(0, 10).forEach(l => {
+    h += "<tr><td>" + clp(l.monto_clp) + "</td><td><a href='" + esc(l.enlace_fuente) +
+         "' target='_blank' rel='noopener'>" + esc(l.codigo_externo) + "</a></td><td>" +
+         esc(l.razon_social) + "</td><td>" + esc(l.organismo) + "</td></tr>";
+  });
+  h += "</tbody></table>";
+
   $("#conc-contenido").innerHTML = h;
   $("#conc-contenido").classList.remove("cargando");
 }

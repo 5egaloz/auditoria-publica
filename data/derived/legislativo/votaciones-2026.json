@@ -1,6 +1,6 @@
 {
  "descripcion": "Votaciones en Sala de la Camara de Diputadas y Diputados, anno 2026, segun opendata.camara.cl (WSLegislativo.retornarVotacionesXAnno). Campos textuales copiados literalmente de la fuente.",
- "generado_utc": "2026-07-27T15:36:46Z",
+ "generado_utc": "2026-07-27T15:57:04Z",
  "generado_por": "extraer_legislativo.py",
  "sha256_origen": "2ecb64a8ad168a4ac6f75b9934653f07ea6a753551260182d9502c4cf2bbec11",
  "url_fuente": "https://opendata.camara.cl/camaradiputados/WServices/WSLegislativo.asmx/retornarVotacionesXAnno?prmAnno=2026",

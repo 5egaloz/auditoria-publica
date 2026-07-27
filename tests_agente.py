@@ -43,6 +43,7 @@ class TestSobres(unittest.TestCase):
             "concentracion_camara": {},
             "pivotalidad": {},
             "concentracion_medios": {},
+            "concentracion_gasto": {},
         }
         self.assertEqual(set(muestras), set(h.CATALOGO), "el catalogo cambio sin tests")
         for nombre, args in muestras.items():
@@ -230,6 +231,38 @@ class TestTendenciaYConcentracion(unittest.TestCase):
         for anterior, siguiente in zip(mayores, mayores[1:]):
             self.assertGreaterEqual(anterior["concesiones"], siguiente["concesiones"])
             self.assertGreater(siguiente["cuota_acumulada"], anterior["cuota_acumulada"])
+
+    def test_gasto_publica_sensibilidad_y_advertencia(self):
+        """Los indices estan dominados por pocas lineas; sin sensibilidad, enganan."""
+        sobre = h.concentracion_gasto()
+        self.assertTrue(sobre["hay_dato"])
+        r = sobre["resultados"][0]
+        self.assertIn("no deben citarse solos",
+                      r["advertencia_valores_atipicos"].replace("NO", "no"))
+        self.assertGreaterEqual(len(r["sensibilidad"]), 2)
+        declarado = r["indices_declarados"]["hhi"]
+        recortes = [v["hhi"] for v in r["sensibilidad"].values()]
+        self.assertTrue(any(x < declarado for x in recortes),
+                        "excluir lineas atipicas debe bajar la concentracion medida")
+        for linea in r["mayores_lineas"]:
+            self.assertTrue(linea["enlace_fuente"].startswith("https://"))
+            self.assertTrue(linea["codigo_externo"])
+
+    def test_gasto_no_convierte_monedas(self):
+        """Convertir exige un tipo de cambio que no esta en la fuente."""
+        sobre = h.concentracion_gasto()
+        limite = sobre["resultados"][0]["limite_de_la_medicion"].lower()
+        self.assertIn("no se convierten", limite)
+        self.assertIn("licitaciones", limite)
+
+    def test_resumen_corpus_refleja_el_estado_real(self):
+        """Si el inventario miente, el agente respondera 'sin dato' teniendo dato."""
+        r = h.resumen_corpus()["resultados"][0]
+        self.assertEqual(len(h._NOMINAL["registros"]), r["votaciones_con_voto_nominal"])
+        self.assertTrue(r["hay_partido_o_bancada"])
+        self.assertGreater(r["parlamentarios_en_el_padron"], 0)
+        self.assertGreater(r["concesiones_de_radiodifusion"], 0)
+        self.assertGreater(r["lineas_de_adjudicacion"], 0)
 
     def test_indicadores_agregados_citan_la_huella_del_conjunto(self):
         """Sin seq unico, el ancla es el sha256 del conjunto de artefactos."""

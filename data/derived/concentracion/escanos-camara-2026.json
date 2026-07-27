@@ -1,6 +1,6 @@
 {
  "descripcion": "Composicion de la Camara de Diputadas y Diputados por partido, contando a quienes registran voto en las votaciones de Sala del corpus, con la militancia que la Camara registra para la fecha de referencia. Se acompanan dos indices de concentracion de uso estandar. El sistema no califica el nivel resultante.",
- "generado_utc": "2026-07-27T15:36:50Z",
+ "generado_utc": "2026-07-27T15:57:08Z",
  "generado_por": "extraer_concentracion.py",
  "derivado": true,
  "artefactos_usados": 669,
@@ -121,26 +121,26 @@
    "cuota": 0.012903
   },
   {
-   "partido_id": "DEM",
-   "partido_nombre": "Partido Demócratas Chile",
-   "escanos": 1,
-   "cuota": 0.006452
-  },
-  {
-   "partido_id": "PR",
-   "partido_nombre": "Partido Radical de Chile",
-   "escanos": 1,
-   "cuota": 0.006452
-  },
-  {
    "partido_id": "PAH",
    "partido_nombre": "Partido Acción Humanista",
    "escanos": 1,
    "cuota": 0.006452
   },
   {
+   "partido_id": "DEM",
+   "partido_nombre": "Partido Demócratas Chile",
+   "escanos": 1,
+   "cuota": 0.006452
+  },
+  {
    "partido_id": "FRVS",
    "partido_nombre": "Federación Regionalista Verde Social",
+   "escanos": 1,
+   "cuota": 0.006452
+  },
+  {
+   "partido_id": "PR",
+   "partido_nombre": "Partido Radical de Chile",
    "escanos": 1,
    "cuota": 0.006452
   }

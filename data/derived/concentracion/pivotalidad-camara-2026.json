@@ -1,6 +1,6 @@
 {
  "descripcion": "Veces en que cada partido fue pivote en votaciones de Sala de quorum simple: su bloque de votos es al menos tan grande como el margen entre a favor y en contra, de modo que votando al reves el resultado cambiaba de signo. Es una medicion de poder decisorio observado, no una evaluacion de conducta.",
- "generado_utc": "2026-07-27T15:36:50Z",
+ "generado_utc": "2026-07-27T15:57:08Z",
  "generado_por": "extraer_concentracion.py",
  "derivado": true,
  "artefactos_usados": 669,

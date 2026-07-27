@@ -1,6 +1,6 @@
 {
  "descripcion": "Ordenamiento de diputadas y diputados por cercania de voto (primer componente principal de la matriz de votaciones). NO es una escala ideologica y su signo es arbitrario.",
- "generado_utc": "2026-07-27T15:36:48Z",
+ "generado_utc": "2026-07-27T15:57:07Z",
  "generado_por": "extraer_tendencia.py",
  "derivado": true,
  "artefactos_usados": 669,

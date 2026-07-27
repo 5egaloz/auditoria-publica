@@ -1,6 +1,6 @@
 {
  "descripcion": "Concentracion de las concesiones vigentes de radiodifusion sonora por titular registrado, segun el listado publicado por SUBTEL. Cada concesion se atribuye al RUT que la fuente declara como concesionaria. El sistema no califica el nivel de concentracion.",
- "generado_utc": "2026-07-27T15:36:51Z",
+ "generado_utc": "2026-07-27T15:57:09Z",
  "generado_por": "extraer_medios.py",
  "derivado": true,
  "sha256_origen": "cc7e6ea26efce6729ec1b669570d380afcb410568659a0c2b48bb4283b8b1e4e",

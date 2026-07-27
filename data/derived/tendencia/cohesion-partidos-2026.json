@@ -1,6 +1,6 @@
 {
  "descripcion": "Indice de Rice de cohesion por partido en las votaciones de Sala de la Camara con voto nominal publicado. Rice = |a favor - en contra| / (a favor + en contra) entre los miembros del partido en cada votacion; se informa el promedio del periodo. El partido de cada persona es el que la Camara registra para la fecha de la votacion.",
- "generado_utc": "2026-07-27T15:36:48Z",
+ "generado_utc": "2026-07-27T15:57:07Z",
  "generado_por": "extraer_tendencia.py",
  "derivado": true,
  "artefactos_usados": 669,

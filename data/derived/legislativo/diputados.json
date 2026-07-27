@@ -1,6 +1,6 @@
 {
  "descripcion": "Padron de diputadas y diputados con su historial de militancia por partido y las fechas de cada militancia, segun opendata.camara.cl (WSDiputado). Se fusionan los padrones de todos los periodos legislativos ingeridos, porque una votacion puede ser de un periodo anterior al vigente. Campos copiados literalmente de la fuente; el partido de una persona en una fecha es el que la Camara registra para esa fecha.",
- "generado_utc": "2026-07-27T15:36:47Z",
+ "generado_utc": "2026-07-27T15:57:05Z",
  "generado_por": "extraer_nominal.py",
  "padrones_fusionados": [
   {
