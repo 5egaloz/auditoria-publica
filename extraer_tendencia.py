@@ -34,6 +34,24 @@ RAIZ = Path(__file__).resolve().parent
 DERIVED = RAIZ / "data" / "derived" / "legislativo"
 SALIDA = RAIZ / "data" / "derived" / "tendencia"
 
+
+def escribir_resumen(ruta: Path) -> Path:
+    """Escribe <nombre>-resumen.json: el mismo sobre del derivado, sin los registros.
+
+    La web solo necesita total_registros y la procedencia para el KPI y la nota de
+    formula, pero tenia que descargar el derivado completo para leerlos (3,4 MB en
+    el caso de coincidencia-pares). El resumen declara el sha256 del archivo
+    completo y su nombre, para que quede claro que NO es el dato autoritativo y se
+    pueda comprobar que corresponde al derivado real.
+    """
+    completo = json.loads(ruta.read_text(encoding="utf-8"))
+    resumen = {k: v for k, v in completo.items() if k != "registros"}
+    resumen["resumen_de"] = ruta.name
+    resumen["sha256_archivo_completo"] = hashlib.sha256(ruta.read_bytes()).hexdigest()
+    destino = ruta.with_name(f"{ruta.stem}-resumen.json")
+    destino.write_text(json.dumps(resumen, ensure_ascii=False, indent=1), encoding="utf-8")
+    return destino
+
 # Opciones que expresan una posicion. "No Vota", "Dispensado" y "Pareo" quedan
 # fuera: son ausencia o acuerdo de no votar, no una postura.
 POSICIONES = {"A", "C", "B"}
@@ -286,7 +304,10 @@ def main() -> int:
         "total_registros": len(pares),
         "registros": pares,
     }, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"OK: {len(pares)} pares de coincidencia")
+    # Sobre liviano para la web: el derivado completo pesa megas y el sitio solo
+    # necesita el total y la procedencia.
+    resumen = escribir_resumen(SALIDA / "coincidencia-pares-2026.json")
+    print(f"OK: {len(pares)} pares de coincidencia (+ {resumen.name})")
 
     eje = eje_empirico(votaciones, ids, nombres)
     (SALIDA / "eje-empirico-2026.json").write_text(json.dumps({

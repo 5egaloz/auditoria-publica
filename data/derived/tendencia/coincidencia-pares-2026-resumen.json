@@ -1,0 +1,21 @@
+{
+ "descripcion": "Porcentaje de votaciones en que cada par de diputadas y diputados registro la misma opcion, sobre las votaciones en que ambos fijaron posicion. Es una medicion de coincidencia de voto: no clasifica ni ordena ideologicamente a nadie.",
+ "generado_utc": "2026-07-27T15:57:07Z",
+ "generado_por": "extraer_tendencia.py",
+ "derivado": true,
+ "artefactos_usados": 669,
+ "sha256_conjunto": "2dbc70aeed8d7ef5b9b67f050752f0c0b102fbd2ab4642faa86e8e75a733122b",
+ "sha256_conjunto_formula": "sha256 de los sha256 de cada artefacto usado, ordenados alfabeticamente y unidos por salto de linea",
+ "sha256_padrones": [
+  "618477f1fb29057eec08d81a0621a4d4d95a943f0c0bc7107d0f8f2010495a48",
+  "7e7545f151ebc285593f0db22f8b78d005a9e0b6fc765a44d374c9c9360d2e47"
+ ],
+ "criterio_posicion": "solo votaciones con posicion sustantiva (a favor, en contra o abstencion); las ausencias no cuentan como posicion",
+ "formula": "coincidencia_pct = 100 * votaciones_iguales / votaciones_comunes",
+ "umbrales": {
+  "min_votaciones_comunes": 20
+ },
+ "total_registros": 20485,
+ "resumen_de": "coincidencia-pares-2026.json",
+ "sha256_archivo_completo": "ac2726ccae113a87523a42ba85ea425a416dcee465085a7bea474aaeb9c047d2"
+}

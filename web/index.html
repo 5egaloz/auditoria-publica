@@ -362,10 +362,14 @@ async function initLegislativo(){
 
 // ═══════════ TENDENCIA ═══════════
 async function initTendencia(){
-  const[cohesion,coin,eje,dipData]=await Promise.all([f('../data/derived/tendencia/cohesion-partidos-2026.json'),f('../data/derived/tendencia/coincidencia-pares-2026.json'),f('../data/derived/tendencia/eje-empirico-2026.json'),f('../data/derived/legislativo/diputados.json')]);
+  // De coincidencia-pares solo se necesita el total, y el derivado completo pesa 3,4 MB:
+  // se pide el sobre liviano (1,2 KB) que emite extraer_tendencia.py. El dataset completo
+  // sigue publicado y se enlaza desde el KPI.
+  const PARES_COMPLETO='../data/derived/tendencia/coincidencia-pares-2026.json';
+  const[cohesion,coin,eje,dipData]=await Promise.all([f('../data/derived/tendencia/cohesion-partidos-2026.json'),f('../data/derived/tendencia/coincidencia-pares-2026-resumen.json'),f('../data/derived/tendencia/eje-empirico-2026.json'),f('../data/derived/legislativo/diputados.json')]);
   $('kpi-tendencia').innerHTML=`
     <div class="kpi"><div class="label">Partidos analizados</div><div class="value azul">${cohesion?.registros?.length ?? 'sin dato'}</div><div class="sub">con militancia observada</div></div>
-    <div class="kpi"><div class="label">Pares de diputados</div><div class="value azul">${coin?.total_registros?.toLocaleString('es-CL') ?? 'sin dato'}</div><div class="sub">comparaciones de voto</div></div>
+    <div class="kpi"><div class="label">Pares de diputados</div><div class="value azul">${coin?.total_registros?.toLocaleString('es-CL') ?? 'sin dato'}</div><div class="sub">comparaciones de voto · <a href="${PARES_COMPLETO}" style="color:var(--blue)">dataset completo (3,4 MB)</a></div></div>
     <div class="kpi"><div class="label">Diputados en el eje</div><div class="value azul">${eje?.posiciones?.length ?? 'sin dato'}</div><div class="sub">${eje?.votaciones_utilizadas ? esc(eje.votaciones_utilizadas)+' votaciones' : ''}</div></div>`;
   if(cohesion?.registros?.length){
     const rs=[...cohesion.registros].sort((a,b)=>(b.cohesion_rice_promedio||0)-(a.cohesion_rice_promedio||0));
