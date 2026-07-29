@@ -3,617 +3,498 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auditoría Cívica de Datos Abiertos — Chile</title>
-<meta name="description" content="Datos fiscales y legislativos de Chile con trazabilidad criptográfica: cada cifra con fuente oficial, fecha de captura y hash SHA-256 verificable en su navegador.">
+<title>Auditoría Cívica — Chile</title>
+<meta name="description" content="Datos públicos chilenos con fuente y hash verificable. Cada cifra explicada al pasar el cursor.">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --tinta:#1a2332; --tinta2:#4a5568; --fondo:#f7f8fa; --panel:#ffffff;
-  --linea:#e2e8f0; --acento:#0f4c81; --acento2:#1a6fb5; --ok:#1e7d46; --error:#b3261e;
-  --mono:"Consolas","Courier New",monospace;
+  --bg:#0b0f19; --card:#131a2b; --card2:#1a2338; --line:#243044;
+  --txt:#e1e6f0; --dim:#7b8daa; --blue:#4da6ff; --green:#3dd68c;
+  --orange:#f0a050; --red:#f05050; --purple:#a78bfa; --cyan:#22d3ee; --yellow:#facc15;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Georgia,"Times New Roman",serif;background:var(--fondo);color:var(--tinta);line-height:1.55}
-header{background:var(--tinta);color:#fff;padding:28px 16px 22px;text-align:center}
-header h1{font-size:1.5rem;font-weight:normal;letter-spacing:.5px}
-header p{color:#b8c4d4;font-size:.95rem;max-width:760px;margin:8px auto 0}
-nav{background:var(--panel);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:5;
-    display:flex;flex-wrap:wrap;justify-content:center;gap:2px;padding:0 8px}
-nav button{font-family:inherit;font-size:.95rem;background:none;border:none;border-bottom:3px solid transparent;
-    padding:12px 14px;cursor:pointer;color:var(--tinta2)}
-nav button.activo{color:var(--acento);border-bottom-color:var(--acento);font-weight:bold}
-main{max-width:1080px;margin:0 auto;padding:20px 14px 60px}
-section{display:none}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
+header{background:linear-gradient(135deg,#0d1525,#152040);padding:40px 20px 32px;text-align:center;border-bottom:1px solid var(--line)}
+header h1{font-size:2rem;font-weight:800;margin-bottom:6px;animation:fadeIn .8s}
+header h1 span{color:var(--blue)}
+header p{color:var(--dim);max-width:650px;margin:0 auto;font-size:.95rem}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes count{from{opacity:0}to{opacity:1}}
+nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);
+    display:flex;overflow-x:auto;gap:0;padding:0 12px;scrollbar-width:none}
+nav button{background:none;border:none;color:var(--dim);padding:14px 12px;font-size:.82rem;
+    cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-weight:500;transition:color .2s,border-color .2s}
+nav button:hover,nav button.activo{color:var(--txt);border-bottom-color:var(--blue)}
+main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
+section{display:none;animation:slideUp .5s}
 section.activa{display:block}
-h2{font-size:1.25rem;margin:18px 0 6px;color:var(--acento)}
-h3{font-size:1.05rem;margin:16px 0 4px}
-.nota{color:var(--tinta2);font-size:.9rem;margin:4px 0 12px}
-.panel{background:var(--panel);border:1px solid var(--linea);border-radius:8px;padding:16px;margin:12px 0}
-table{border-collapse:collapse;width:100%;font-size:.9rem;background:var(--panel)}
-th,td{border:1px solid var(--linea);padding:6px 9px;text-align:left;vertical-align:top}
-th{background:#eef2f7;font-family:inherit}
-td.num,th.num{text-align:right;font-family:var(--mono);font-size:.85rem}
-.hash{font-family:var(--mono);font-size:.75rem;color:var(--tinta2);word-break:break-all}
-.hash a{color:var(--acento2);text-decoration:none}
-.tag{display:inline-block;font-size:.72rem;font-family:var(--mono);padding:1px 7px;border-radius:9px;
-     background:#eef2f7;color:var(--tinta2);border:1px solid var(--linea)}
-.tag.ok{background:#e8f5ee;color:var(--ok);border-color:#bfe3cf}
-.tag.no{background:#fdecea;color:var(--error);border-color:#f5c6c0}
-.scroll{overflow-x:auto}
-.scroll-y{max-height:430px;overflow-y:auto}
-details{margin:6px 0}
-summary{cursor:pointer;color:var(--acento2)}
-input[type=text]{font-family:inherit;font-size:.95rem;padding:8px 10px;border:1px solid var(--linea);
-     border-radius:6px;width:100%;max-width:420px}
-.boton{font-family:inherit;font-size:.95rem;background:var(--acento);color:#fff;border:none;
-     border-radius:6px;padding:10px 18px;cursor:pointer}
-.boton:hover{background:var(--acento2)}
-.drop{border:2px dashed var(--linea);border-radius:8px;padding:26px;text-align:center;color:var(--tinta2)}
-.drop.sobre{border-color:var(--acento2);background:#eef6fd}
-.resultado-ok{color:var(--ok);font-weight:bold}
-.resultado-error{color:var(--error);font-weight:bold}
-footer{border-top:1px solid var(--linea);color:var(--tinta2);font-size:.85rem;text-align:center;
-     padding:22px 14px;max-width:1080px;margin:0 auto}
-svg text{font-family:var(--mono);font-size:11px;fill:var(--tinta2)}
-.leyenda span{margin-right:16px;font-size:.85rem}
-.cargando{color:var(--tinta2);font-style:italic}
-@media (max-width:600px){ th,td{padding:4px 6px;font-size:.82rem} }
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:12px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.kpi .label{font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+.kpi .value{font-size:1.9rem;font-weight:800;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:.78rem;color:var(--dim)}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;transition:box-shadow .2s}
+.chart-box:hover{box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.chart-box h3{font-size:.88rem;color:var(--dim);margin-bottom:6px;font-weight:600}
+/* El canvas se dimensiona por su contenedor: Chart.js corre con maintainAspectRatio:false.
+   Sin altura explicita aqui, un canvas creado dentro de una seccion recien mostrada mide 0. */
+.canvas-wrap{position:relative;height:300px;width:100%}
+.canvas-wrap canvas{display:block}
+.sin-dato{color:var(--dim);text-align:center;padding:24px;font-size:.85rem}
+.nota{font-size:.82rem;color:var(--dim);margin:6px 0}
+table{border-collapse:collapse;width:100%}
+th,td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;font-variant-numeric:tabular-nums}
+th{color:var(--dim);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.4px}
+.explain{background:var(--card2);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:12px 16px;margin:8px 0;font-size:.85rem;color:var(--dim)}
+.explain b{color:var(--txt)}
+h2{font-size:1.3rem;margin:20px 0 6px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:10px 0}
+.verde{color:var(--green)} .rojo{color:var(--red)} .azul{color:var(--blue)} .naranja{color:var(--orange)} .amarillo{color:var(--yellow)}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:30px;text-align:center;color:var(--dim);cursor:pointer;transition:border-color .3s,background .3s}
+.drop.sobre{border-color:var(--blue);background:rgba(77,166,255,.06)}
+.boton{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:.92rem;font-weight:600;cursor:pointer;transition:opacity .2s,transform .15s}
+.boton:hover{opacity:.9;transform:scale(1.02)}
+.cargando{color:var(--dim);text-align:center;padding:30px}
+/* ── TOOLTIP GLOSSARY ── */
+.gloss-term{border-bottom:1px dotted var(--blue);cursor:help;position:relative;display:inline}
+.gloss-term:hover,.gloss-term:focus-visible{z-index:100}
+.gloss-term:focus-visible{outline:1px solid var(--blue);outline-offset:2px}
+.gloss-term::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) scale(.9);
+  background:#1e293b;color:var(--txt);font-size:.78rem;font-weight:400;line-height:1.45;text-transform:none;letter-spacing:normal;
+  padding:8px 12px;border-radius:8px;border:1px solid var(--line);white-space:normal;width:260px;
+  pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.gloss-term:hover::after,.gloss-term:focus-visible::after{opacity:1;transform:translateX(-50%) scale(1)}
+/* Terminos en la primera linea de una seccion: el globo se abre hacia abajo para no
+   quedar tapado por el nav sticky. */
+.gloss-term.tip-abajo::after{bottom:auto;top:calc(100% + 8px)}
+/* Un ancestro con overflow recortaria el globo. */
+.gloss-term:hover,.gloss-term:focus-visible{overflow:visible}
+/* ── GLOSARIO PAGE ── */
+.glosario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin:12px 0}
+.glosario-item{background:var(--card2);border-radius:10px;padding:14px;transition:transform .15s}
+.glosario-item:hover{transform:translateY(-1px)}
+.glosario-item b{color:var(--blue)}
+.glosario-item p{font-size:.84rem;color:var(--dim);margin-top:4px}
+summary{cursor:pointer;color:var(--blue);font-weight:500}
+footer{text-align:center;padding:30px;color:var(--dim);font-size:.82rem;border-top:1px solid var(--line)}
+@media(max-width:600px){header h1{font-size:1.4rem}.kpis{grid-template-columns:1fr 1fr}.glosario-grid{grid-template-columns:1fr}.gloss-term::after{width:200px;left:0;transform:none}.gloss-term:hover::after{transform:none}}
 </style>
 </head>
 <body>
+
 <header>
-  <h1>Auditoría Cívica de Datos Abiertos — Chile</h1>
-  <p>Datos fiscales y legislativos tomados de las fuentes oficiales del Estado, publicados con su
-     magnitud, su fuente y su hash SHA-256. Este sitio no opina: expone. Las conclusiones las saca usted.</p>
+  <h1>Auditoría <span>Cívica</span></h1>
+  <p><span class="gloss-term" data-tip="Registro de datos públicos del Estado (Dipres, Cámara, Senado) con trazabilidad criptográfica. Cada cifra puede verificarse contra la fuente original.">Datos públicos</span> de Chile con <span class="gloss-term" data-tip="Secure Hash Algorithm de 256 bits. Huella digital única. Si una coma cambia, el hash es totalmente distinto. Cualquier persona puede comprobar que un archivo no fue alterado.">SHA-256</span> verificable. Sin opinión: exponemos números, usted saca sus conclusiones.</p>
 </header>
 
 <nav id="nav">
-  <button data-sec="fiscal" class="activo">💰 Fiscal</button>
-  <button data-sec="ac">📜 Acusaciones Constitucionales</button>
-  <button data-sec="votaciones">🗳️ Votaciones 2026</button>
-  <button data-sec="tendencia">📊 Tendencia</button>
-  <button data-sec="concentracion">⚖️ Concentración</button>
-  <button data-sec="manifiesto">🛡️ Manifiesto</button>
-  <button data-sec="verificar">🔎 Verificar</button>
-  <button data-sec="metodo">📖 Método</button>
+  <button data-s="fiscal" class="activo">💰 Fiscal</button>
+  <button data-s="legislativo">📜 Congreso</button>
+  <button data-s="tendencia">📊 Tendencia</button>
+  <button data-s="concentracion">⚖️ Concentración</button>
+  <button data-s="glosario">📖 Glosario</button>
+  <button data-s="verificar">🔎 Verificar</button>
 </nav>
 
 <main>
 
-<!-- ============================ FISCAL ============================ -->
-<section id="sec-fiscal" class="activa">
-  <h2>Balance del Gobierno Central (% del PIB)</h2>
-  <p class="nota">Cifras extraídas celda por celda de los cuadros Excel oficiales de los
-  Informes de Finanzas Públicas (IFP) de Dipres. Cada columna es lo que proyectó una publicación;
-  leer una fila de izquierda a derecha muestra cómo cambió la proyección del mismo año entre
-  publicaciones. Pase el cursor sobre una cifra para ver su celda de origen.</p>
-  <div id="fiscal-contenido" class="cargando">Cargando datos…</div>
+<!-- ============ FISCAL ============ -->
+<section id="s-fiscal" class="activa">
+  <h2>💰 Fiscal — <span class="gloss-term" data-tip="Ingresos reales menos gastos reales del Gobierno Central en un año. Si es negativo, hubo déficit (gastó más de lo que recaudó). Se expresa en % del PIB para poder comparar años distintos.">Balance del Gobierno Central</span></h2>
+  <div class="explain"><b>¿Qué estás viendo?</b> Cada línea coloreada es una publicación del <span class="gloss-term" data-tip="Informe de Finanzas Públicas. Documento trimestral de la Dirección de Presupuestos (Dipres) que proyecta ingresos, gastos, deuda y crecimiento económico.">IFP</span> de <span class="gloss-term" data-tip="Dirección de Presupuestos del Ministerio de Hacienda. El organismo técnico que elabora el presupuesto nacional y las proyecciones fiscales.">Dipres</span>. Leer de izquierda a derecha muestra cómo cambió la proyección del mismo año entre informes. Valores bajo cero = <span class="gloss-term" data-tip="Situación donde el Gobierno gasta más de lo que recauda en un período. Lo opuesto a superávit.">déficit</span>.</div>
+  <div class="kpis" id="kpi-fiscal"></div>
+  <div class="chart-box"><h3>📈 Proyecciones del <span class="gloss-term" data-tip="Balance del Gobierno Central expresado como porcentaje del Producto Interno Bruto. Permite comparar el tamaño del déficit o superávit entre años distintos, eliminando el efecto de la inflación.">balance fiscal (% del PIB)</span></h3><div class="canvas-wrap"><canvas id="chart-balance"></canvas></div></div>
+  <div class="explain"><b>🔍 Lectura:</b> Si las líneas bajan hacia la derecha, las proyecciones oficiales se volvieron más pesimistas con el tiempo. La separación entre líneas muestra la incertidumbre de las proyecciones.</div>
+  <details class="panel"><summary style="cursor:pointer;color:var(--blue)">📋 Tabla completa</summary><div id="tabla-fiscal" style="overflow-x:auto"></div></details>
 </section>
 
-<!-- ============================ AC ============================ -->
-<section id="sec-ac">
-  <h2>Acusaciones Constitucionales — votaciones en Sala (Cámara, 2026)</h2>
-  <p class="nota">Votaciones cuya descripción literal en opendata.camara.cl es de Acusación
-  Constitucional, con el voto nominal (diputado por diputado). El web service de la fuente no
-  publica el nombre del acusado ni la causal; aquí figura exactamente lo que la fuente entrega.
-  El conteo nominal de cada votación fue comparado con los totales que declara la fuente.</p>
-  <input type="text" id="ac-filtro" placeholder="Filtrar por nombre de diputado/a…">
-  <div id="ac-contenido" class="cargando">Cargando datos…</div>
+<!-- ============ LEGISLATIVO ============ -->
+<section id="s-legislativo">
+  <h2>📜 Congreso — Cámara de Diputados 2026</h2>
+  <div class="explain"><b>¿Qué estás viendo?</b> Las <span class="gloss-term" data-tip="Mecanismo constitucional de la Cámara de Diputados para hacer efectiva la responsabilidad política de autoridades (Presidente, Ministros, jueces). La Cámara vota si admite o rechaza cada AC. Se requiere mayoría simple.">Acusaciones Constitucionales</span> presentadas en 2026. Cada barra muestra los votos a favor y en contra. El <span class="gloss-term" data-tip="Votación donde queda registro individual de cómo votó cada diputado. Permite análisis detallados como los de este sitio.">voto nominal</span> permite saber exactamente quién votó qué.</div>
+  <div class="kpis" id="kpi-legislativo"></div>
+  <div class="chart-box"><h3>🗳️ Votos por <span class="gloss-term" data-tip="Acusación Constitucional: procedimiento para exigir responsabilidad política a altas autoridades del Estado.">AC</span> — a favor (verde) y en contra (rojo)</h3><div class="canvas-wrap"><canvas id="chart-ac"></canvas></div></div>
+  <div class="chart-box"><h3>🏛️ Votos emitidos por partido en Sala 2026</h3><div class="canvas-wrap"><canvas id="chart-votos-dist"></canvas></div><p class="nota" id="nota-votos-dist"></p></div>
+  <div class="explain"><b>🔍 Lectura:</b> Un partido con muchas votaciones nominales indica alta participación en Sala. Esto no mide calidad ni posición — solo frecuencia de voto registrado.</div>
 </section>
 
-<!-- ============================ VOTACIONES ============================ -->
-<section id="sec-votaciones">
-  <h2>Votaciones en Sala — Cámara de Diputadas y Diputados, 2026</h2>
-  <p class="nota">Todas las votaciones en Sala del año 2026 según opendata.camara.cl.
-  Los campos de texto se copian literalmente de la fuente.</p>
-  <div id="vot-contenido" class="cargando">Cargando datos…</div>
+<!-- ============ TENDENCIA ============ -->
+<section id="s-tendencia">
+  <h2>📊 Tendencia — Coincidencia de voto</h2>
+  <div class="explain"><b>¿Qué estás viendo?</b> Se mide con qué frecuencia dos diputados votaron lo mismo en 2026. La <span class="gloss-term" data-tip="Índice Rice: mide qué tan unido vota un partido. 1.0 (100%) = todos los miembros votaron igual. 0.0 = votaron divididos por la mitad. No mide ideología, solo disciplina de voto.">cohesión</span> muestra qué tan parejo vota cada partido como bloque. Sin etiquetas de izquierda/derecha: solo patrones.</div>
+  <div class="kpis" id="kpi-tendencia"></div>
+  <div class="chart-box"><h3>🏛️ <span class="gloss-term" data-tip="Índice Rice de cohesión: mide qué tan unido vota cada partido. 100% = siempre votan igual como bloque.">Cohesión por partido</span></h3><div class="canvas-wrap"><canvas id="chart-cohesion"></canvas></div><p class="nota" id="nota-cohesion"></p></div>
+  <div class="chart-box"><h3>🧭 Eje empírico — ordenados por cercanía de voto</h3><div class="explain">Los diputados se ordenan según con quién votan parecido. Quienes votan igual quedan juntos. No es un espectro ideológico: es un reflejo matemático de patrones de voto reales. Sin interpretación.</div><div id="eje-empirico" style="max-height:350px;overflow-y:auto"></div></div>
 </section>
 
-<!-- ============================ MANIFIESTO ============================ -->
-<!-- ============================ TENDENCIA ============================ -->
-<section id="sec-tendencia">
-  <h2>Tendencia: coincidencia de voto medida</h2>
-  <p class="nota">Tres mediciones distintas sobre las mismas votaciones nominales. No hay ninguna
-     clasificación ideológica: nadie aquí es etiquetado. Se mide con qué frecuencia dos personas
-     votaron lo mismo, qué tan parejo vota cada partido, y en qué orden quedan las personas cuando
-     se las ordena por cercanía de voto.</p>
-  <div id="tend-contenido" class="cargando">Cargando datos…</div>
+<!-- ============ CONCENTRACIÓN ============ -->
+<section id="s-concentracion">
+  <h2>⚖️ <span class="gloss-term" data-tip="Medida de cuán repartido está algo (escaños, licitaciones, concesiones) entre distintos actores. Mide y compara, sin calificar si es 'mucho' o 'poco'.">Concentración</span> — Escaños en la Cámara</h2>
+  <div class="explain"><b>¿Qué estás viendo?</b> Distribución de <span class="gloss-term" data-tip="Un puesto en la Cámara de Diputados. Chile tiene 155 escaños en total, uno por cada diputado en ejercicio.">escaños</span> por partido. Mide cuántos representantes tiene cada partido, no cuántos votos obtuvieron en la elección.</div>
+  <div class="chart-box"><h3>Escaños por partido</h3><div class="canvas-wrap" style="height:340px"><canvas id="chart-escanos"></canvas></div><p class="nota" id="nota-escanos"></p></div>
+  <details class="panel"><summary style="cursor:pointer;color:var(--blue)">📋 Tabla completa</summary><div id="tabla-concentracion"></div></details>
 </section>
 
-<!-- ============================ CONCENTRACIÓN ============================ -->
-<section id="sec-concentracion">
-  <h2>Concentración medida</h2>
-  <p class="nota">Índices estándar de concentración aplicados a datos públicos. El sistema mide y
-     publica; no dice si el nivel es alto o bajo, ni propone qué hacer al respecto.</p>
-  <div id="conc-contenido" class="cargando">Cargando datos…</div>
+<!-- ============ GLOSARIO ============ -->
+<section id="s-glosario">
+  <h2>📖 Glosario completo</h2>
+  <div class="explain"><b>Sin jerga.</b> Cada término técnico de la página, explicado en español simple.</div>
+  <div class="glosario-grid" id="glosario-lista"></div>
 </section>
 
-<section id="sec-manifiesto">
-  <h2>Manifiesto de artefactos</h2>
-  <p class="nota">Registro append-only de cada archivo descargado de una fuente oficial:
-  URL, fecha de captura (UTC), tamaño y SHA-256. Cada entrada incluye el hash de la entrada
-  anterior (cadena): alterar el pasado rompe la cadena. El archivo original queda guardado
-  intacto en <span class="hash">data/raw/</span> del repositorio.</p>
-  <div id="man-contenido" class="cargando">Cargando manifiesto…</div>
-</section>
-
-<!-- ============================ VERIFICAR ============================ -->
-<section id="sec-verificar">
-  <h2>Verificar</h2>
-  <p class="nota">Las dos verificaciones corren completas en su navegador (Web Crypto API).
-  Nada se envía a ningún servidor.</p>
-
+<!-- ============ VERIFICAR ============ -->
+<section id="s-verificar">
+  <h2>🔎 Verificar</h2>
+  <div class="explain"><b>¿Por qué verificar?</b> Porque no deberías confiar en nosotros. Cada archivo descargado de una fuente oficial tiene un <span class="gloss-term" data-tip="Secure Hash Algorithm 256 bits. Huella digital criptográfica. El navegador puede recalcularlo: si coincide con nuestro manifiesto, el archivo no fue alterado.">hash SHA-256</span>. Si alguien modificó un dato —aunque sea una coma— el hash cambia y la verificación falla.</div>
   <div class="panel">
-    <h3>1 · Verificar la cadena del manifiesto</h3>
-    <p class="nota">Re-calcula el hash de cada entrada del manifiesto y valida el encadenamiento
-    (<span class="hash">sha256_prev</span>). Detecta cualquier entrada alterada, borrada o reordenada.</p>
-    <button class="boton" id="btn-cadena">Verificar cadena ahora</button>
-    <div id="cadena-resultado" style="margin-top:10px"></div>
+    <h3>1 · Verificar la cadena del <span class="gloss-term" data-tip="Registro de todos los archivos descargados de fuentes oficiales. Es append-only: solo se agregan entradas, nunca se borran ni editan. Cada entrada incluye el hash de la anterior (cadena).">manifiesto</span></h3>
+    <p class="nota">Valida todas las entradas y el encadenamiento criptográfico.</p>
+    <button class="boton" id="btn-cadena">Verificar cadena</button>
+    <div id="cadena-resultado" style="margin-top:12px"></div>
   </div>
-
   <div class="panel">
     <h3>2 · Verificar un archivo contra el manifiesto</h3>
-    <p class="nota">Descargue un artefacto desde su fuente oficial (columna URL del manifiesto) o
-    desde <span class="hash">data/raw/</span> del repositorio, y suéltelo aquí: su SHA-256 se calcula
-    localmente y se busca en el manifiesto.</p>
-    <div class="drop" id="drop">Arrastre un archivo aquí, o <label style="color:var(--acento2);cursor:pointer;text-decoration:underline">elíjalo<input type="file" id="file" hidden></label>.</div>
-    <div id="file-resultado" style="margin-top:10px"></div>
+    <p class="nota">Descargue un archivo de la fuente oficial y suéltelo aquí.</p>
+    <div class="drop" id="drop">Arrastre un archivo aquí o <span style="color:var(--blue);cursor:pointer;text-decoration:underline">elíjalo</span><input type="file" id="file" hidden></div>
+    <div id="file-resultado" style="margin-top:12px"></div>
   </div>
-</section>
-
-<!-- ============================ MÉTODO ============================ -->
-<section id="sec-metodo">
-  <h2>Método</h2>
-  <div class="panel">
-  <h3>Principios</h3>
-  <ol style="margin-left:22px">
-    <li><b>Neutralidad:</b> el sistema no concluye "quién tiene razón"; publica magnitudes con base de comparación explícita, sin adjetivos valorativos.</li>
-    <li><b>Verificabilidad:</b> toda cifra apunta al hash SHA-256 del artefacto oficial del que salió, con hoja y celda (o campo XML) de origen.</li>
-    <li><b>Reproducibilidad:</b> cualquier persona puede re-descargar las fuentes, re-calcular los hashes y re-derivar cada cifra. El repositorio incluye los scripts.</li>
-    <li><b>Simetría:</b> las mismas reglas para todo gobierno, coalición o período.</li>
-    <li><b>Si no hay dato, se dice "sin dato disponible".</b> Nunca se estima ni se rellena.</li>
-  </ol>
-  <h3 style="margin-top:14px">Flujo</h3>
-  <p style="font-family:var(--mono);font-size:.82rem;background:#eef2f7;padding:10px;border-radius:6px;margin-top:6px">
-  descarga del original → SHA-256 → data/raw/ (intacto, jamás editado) → manifiesto append-only con hash-chain → extracción a JSON (cada cifra con origen) → esta página</p>
-  <h3 style="margin-top:14px">Fuentes</h3>
-  <ul style="margin-left:22px">
-    <li>Dipres — Informes de Finanzas Públicas y datos abiertos presupuestarios (dipres.gob.cl, datos.gob.cl)</li>
-    <li>Cámara de Diputadas y Diputados — web services de datos abiertos (opendata.camara.cl)</li>
-  </ul>
-  <h3 style="margin-top:14px">Sin rastreo</h3>
-  <p>Este sitio no usa cookies, analytics ni publicidad. Un sistema que audita no puede a la vez rastrear.</p>
-  <h3 style="margin-top:14px">Repositorio</h3>
-  <p>Código, datos originales y manifiesto: <a id="link-repo" href="https://github.com/5egaloz/auditoria-publica">github.com/5egaloz/auditoria-publica</a></p>
-  </div>
+  <details class="panel" id="manifiesto-info"><summary style="cursor:pointer;color:var(--blue)">🛡️ Manifiesto completo</summary><div id="man-resumen"></div></details>
 </section>
 
 </main>
 
-<footer>
-  Auditoría Cívica de Datos Abiertos · Los textos de la fuente se citan literalmente ·
-  Cifras con redondeo a 2 decimales en pantalla (el JSON conserva la precisión completa) ·
-  Sin cookies, sin analytics.
-</footer>
+<footer>Código abierto · Licencia MIT · Datos: Estado de Chile · github.com/5egaloz/auditoria-publica</footer>
 
 <script>
-"use strict";
-/* ---------- utilitarios ---------- */
-const $ = s => document.querySelector(s);
-const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const f2 = v => (typeof v === "number" ? (v >= 0 ? "+" : "") + v.toFixed(2) : "—");
-const RUTA_BASE = "..";   // el sitio vive en /web/, los datos en la raíz del repo
+// ═══════════ GLOSSARY TOOLTIP SYSTEM ═══════════
+const GLOSSARY = {
+  "SHA-256":"Secure Hash Algorithm 256 bits. Huella digital única de un archivo. Si cambiás una coma, el hash cambia por completo.",
+  "hash SHA-256":"Huella digital criptográfica única. El navegador puede recalcularlo para verificar que un archivo no fue alterado.",
+  "Balance del Gobierno Central":"Ingresos reales menos gastos reales. Negativo = déficit. Se expresa en % del PIB.",
+  "balance fiscal":"Balance del Gobierno Central como % del PIB. Permite comparar años distintos.",
+  "déficit":"Cuando el Gobierno gasta más de lo que recauda en un período. Lo opuesto a superávit.",
+  "IFP":"Informe de Finanzas Públicas. Documento trimestral de Dipres que proyecta ingresos, gastos, deuda y crecimiento.",
+  "Dipres":"Dirección de Presupuestos del Ministerio de Hacienda. Elabora el presupuesto nacional.",
+  "Acusaciones Constitucionales":"Mecanismo para hacer efectiva la responsabilidad política de autoridades. Requiere mayoría simple.",
+  "AC":"Acusación Constitucional: procedimiento de la Cámara para exigir responsabilidad a altas autoridades.",
+  "voto nominal":"Votación donde queda registro de cómo votó cada diputado individualmente.",
+  "mayoría simple":"Más votos a favor que en contra. En la Cámara con 155 diputados: 78 votos si votan todos.",
+  "cohesión":"Índice Rice. Mide qué tan unido vota un partido. 100% = todos igual. 0% = divididos. No mide ideología.",
+  "Cohesión por partido":"Índice Rice de cohesión. Mide disciplina de voto, no posición política.",
+  "Concentración":"Medida de cuán repartido está algo entre actores. Mide y compara, sin calificar.",
+  "escaños":"Puestos en la Cámara de Diputados. Chile tiene 155 escaños en total.",
+  "Escaño":"Un puesto en la Cámara. Hay 155 en total. Cada partido tiene tantos como diputados electos.",
+  "manifiesto":"Registro append-only de archivos descargados de fuentes oficiales, con hash y fecha.",
+  "Datos públicos":"Datos del Estado chileno con fuente, fecha y hash verificable.",
+  "% del PIB":"Porcentaje del Producto Interno Bruto. Permite comparar magnitudes entre años distintos.",
+  "Balance Efectivo":"Ingresos menos gastos reales. Diferente del balance estructural, que ajusta por ciclo del cobre.",
+  "Balance Estructural":"Balance ajustado por el ciclo económico. Elimina el efecto del precio del cobre y el ciclo.",
+  "Índice Rice":"Mide cohesión de voto. 1.0 = todos iguales, 0.0 = mitad y mitad. No ideología, disciplina."
+};
 
-/* navegación */
-$("#nav").addEventListener("click", e => {
-  if (e.target.tagName !== "BUTTON") return;
-  document.querySelectorAll("nav button").forEach(b => b.classList.toggle("activo", b === e.target));
-  document.querySelectorAll("main section").forEach(s => s.classList.remove("activa"));
-  $("#sec-" + e.target.dataset.sec).classList.add("activa");
+// ═══════════ HELPERS ═══════════
+// Declarados ANTES de cualquier uso: como const/let tienen zona muerta temporal,
+// usarlos mas arriba lanza ReferenceError y aborta el resto del <script>.
+const $ = id => document.getElementById(id);
+const f = async u => { try { const r = await fetch(u); if(!r.ok) throw new Error(r.status); return await r.json(); } catch(e){ console.error('fetch', u, e); return null; } };
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// Build glossary page list
+$('glosario-lista').innerHTML = Object.entries(GLOSSARY).map(([term, def]) =>
+  `<div class="glosario-item"><b>${esc(term)}</b><p>${esc(def)}</p></div>`
+).join('');
+
+// Completa data-tip solo donde falte: los tips escritos en el HTML son mas
+// especificos que la entrada generica del glosario y no deben sobrescribirse.
+document.querySelectorAll('.gloss-term').forEach(el => {
+  if (!el.hasAttribute('data-tip') || !el.getAttribute('data-tip').trim()) {
+    const term = el.textContent.trim();
+    const def = GLOSSARY[term] || GLOSSARY[term.replace(/^(del|de la|los|las) /,'')];
+    if (def) el.setAttribute('data-tip', def);
+  }
+  // Accesible por teclado y en tactil (sin :hover).
+  el.setAttribute('tabindex', '0');
+  el.setAttribute('role', 'note');
 });
 
-/* JSON canónico idéntico a json.dumps(sort_keys=True, separators=(",",":")) para los tipos usados */
-function jsonCanonico(obj){
-  if (obj === null) return "null";
-  if (typeof obj === "number" || typeof obj === "boolean") return JSON.stringify(obj);
-  if (typeof obj === "string") return JSON.stringify(obj);
-  if (Array.isArray(obj)) return "[" + obj.map(jsonCanonico).join(",") + "]";
-  return "{" + Object.keys(obj).sort().map(k => JSON.stringify(k) + ":" + jsonCanonico(obj[k])).join(",") + "}";
-}
-async function sha256hex(datos){ // datos: ArrayBuffer o string
-  const buf = typeof datos === "string" ? new TextEncoder().encode(datos) : datos;
-  const h = await crypto.subtle.digest("SHA-256", buf);
-  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("");
-}
-
-let MANIFIESTO = [];
-
-async function cargar(){
-  try{
-    const txt = await (await fetch(RUTA_BASE + "/manifest.jsonl")).text();
-    MANIFIESTO = txt.split("\n").filter(l => l.trim()).map(l => JSON.parse(l));
-    pintarManifiesto();
-  }catch(e){ $("#man-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar el manifiesto: " + esc(e) + "</p>"; }
-  try{
-    const fiscal = await (await fetch(RUTA_BASE + "/data/derived/fiscal/balance-gobierno-central.json")).json();
-    pintarFiscal(fiscal);
-  }catch(e){ $("#fiscal-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar los datos fiscales: " + esc(e) + "</p>"; }
-  try{
-    const ac = await (await fetch(RUTA_BASE + "/data/derived/legislativo/acusaciones-constitucionales-2026.json")).json();
-    pintarAC(ac);
-  }catch(e){ $("#ac-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar las AC: " + esc(e) + "</p>"; }
-  try{
-    const vot = await (await fetch(RUTA_BASE + "/data/derived/legislativo/votaciones-2026.json")).json();
-    pintarVotaciones(vot);
-  }catch(e){ $("#vot-contenido").innerHTML = "<p class='resultado-error'>No se pudieron cargar las votaciones: " + esc(e) + "</p>"; }
-  try{
-    const [coh, eje] = await Promise.all([
-      (await fetch(RUTA_BASE + "/data/derived/tendencia/cohesion-partidos-2026.json")).json(),
-      (await fetch(RUTA_BASE + "/data/derived/tendencia/eje-empirico-2026.json")).json()
-    ]);
-    pintarTendencia(coh, eje);
-  }catch(e){ $("#tend-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la tendencia: " + esc(e) + "</p>"; }
-  try{
-    const [esc_, piv, med, gas] = await Promise.all([
-      (await fetch(RUTA_BASE + "/data/derived/concentracion/escanos-camara-2026.json")).json(),
-      (await fetch(RUTA_BASE + "/data/derived/concentracion/pivotalidad-camara-2026.json")).json(),
-      (await fetch(RUTA_BASE + "/data/derived/concentracion/concesiones-radiodifusion-2026.json")).json(),
-      (await fetch(RUTA_BASE + "/data/derived/concentracion/adjudicaciones-licitaciones-2026-06.json")).json()
-    ]);
-    pintarConcentracion(esc_, piv, med, gas);
-  }catch(e){ $("#conc-contenido").innerHTML = "<p class='resultado-error'>No se pudo cargar la concentración: " + esc(e) + "</p>"; }
-}
-
-/* ---------- TENDENCIA ---------- */
-function huella(d){
-  const h = d.sha256_conjunto || d.sha256_origen || "";
-  return h ? "<code>" + esc(h.slice(0, 12)) + "</code>" : "sin huella";
-}
-
-function pintarTendencia(coh, eje){
-  let h = "<h3>Cohesión por partido (índice de Rice)</h3>";
-  h += "<p class='nota'>Fórmula: <code>" + esc(coh.formula) + "</code>. " +
-       "1 significa que la bancada votó siempre en el mismo sentido; 0, que se dividió por mitades. " +
-       "Sobre " + coh.artefactos_usados + " artefactos, huella " + huella(coh) + ".</p>";
-  h += "<table><thead><tr><th>Partido</th><th>Miembros observados</th>" +
-       "<th>Votaciones</th><th>Cohesión</th></tr></thead><tbody>";
-  coh.registros.forEach(r => {
-    h += "<tr><td>" + esc(r.partido_nombre) + "</td><td>" + r.miembros_observados + "</td>" +
-         "<td>" + r.votaciones_consideradas + "</td><td>" +
-         r.cohesion_rice_promedio.toFixed(3) + "</td></tr>";
+// El globo se abre hacia abajo si arriba no hay espacio (nav sticky ≈ 48px).
+function ubicarTips(){
+  document.querySelectorAll('.gloss-term').forEach(el => {
+    el.classList.toggle('tip-abajo', el.getBoundingClientRect().top < 190);
   });
-  h += "</tbody></table>";
+}
+addEventListener('scroll', ubicarTips, {passive:true});
+addEventListener('resize', ubicarTips);
 
-  h += "<h3>Eje empírico de coincidencia de voto</h3>";
-  if (!eje.publicable){
-    h += "<p class='nota'>" + esc(eje.motivo || "sin dato disponible") + "</p>";
-  } else {
-    const pct = (eje.varianza_explicada * 100).toFixed(1);
-    h += "<p class='nota'><strong>Advertencia obligatoria:</strong> " + esc(eje.advertencia_signo) + "</p>";
-    h += "<p class='nota'>Este eje explica el <strong>" + pct + "%</strong> de la variación de los " +
-         "votos. Dicho de otro modo: más de la mitad de lo que ocurre en la Sala <em>no</em> se " +
-         "describe con una sola línea. Fórmula: <code>" + esc(eje.formula) + "</code>. " +
-         "Sobre " + eje.votaciones_utilizadas + " votaciones, huella " + huella(eje) + ".</p>";
-    h += "<table><thead><tr><th>Orden</th><th>Nombre</th><th>Puntaje en el eje</th></tr></thead><tbody>";
-    eje.posiciones.forEach(p => {
-      h += "<tr><td>" + p.orden + "</td><td>" + esc(p.nombre || ("id " + p.diputado_id)) +
-           "</td><td>" + p.puntaje_eje.toFixed(4) + "</td></tr>";
+// Animate KPI numbers
+function animateValue(el, target, suffix=''){
+  if(!target&&target!==0) return;
+  const duration=800, start=0, range=target-start, startTime=performance.now();
+  function update(now){
+    const elapsed=now-startTime, progress=Math.min(elapsed/duration,1);
+    const eased=1-Math.pow(1-progress,3);
+    const val=start+range*eased;
+    el.textContent=(suffix==='%'?val.toFixed(1):val>=10?Math.round(val):val.toFixed(1))+(suffix||'');
+    if(progress<1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// ═══════════ NAV ═══════════
+const loaded = {};   // secciones ya inicializadas
+const charts = {};   // instancias Chart por id de canvas
+
+function mostrar(s){
+  document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('activo', x.dataset.s===s));
+  document.querySelectorAll('main section').forEach(x=>x.classList.toggle('activa', x.id==='s-'+s));
+  const sec = $('s-'+s);
+  if(!sec) return;
+  sec.style.animation='none'; void sec.offsetHeight; sec.style.animation='';
+  // La seccion ya esta visible: recien aqui el canvas tiene ancho medible.
+  initSection(s);
+  // Los charts creados mientras la seccion estaba oculta quedan en 0x0.
+  Object.values(charts).forEach(c=>{ try{ c.resize(); }catch(e){} });
+  ubicarTips();
+}
+document.querySelectorAll('#nav button').forEach(b=>{
+  b.addEventListener('click',()=>mostrar(b.dataset.s));
+});
+
+// Crea un Chart destruyendo el anterior si existiera (evita canvas "en uso").
+function crearChart(canvasId, config){
+  const cv = $(canvasId);
+  if(!cv) return null;
+  if(typeof Chart === 'undefined'){
+    cv.closest('.canvas-wrap').innerHTML = '<p class="sin-dato">Sin dato disponible: no se pudo cargar la librería de gráficos.</p>';
+    return null;
+  }
+  if(charts[canvasId]) charts[canvasId].destroy();
+  config.options = Object.assign({responsive:true, maintainAspectRatio:false}, config.options);
+  charts[canvasId] = new Chart(cv, config);
+  return charts[canvasId];
+}
+function sinDato(canvasId, msg){
+  const cv = $(canvasId);
+  const w = cv && cv.closest('.canvas-wrap');
+  if(w) w.innerHTML = `<p class="sin-dato">${esc(msg)}</p>`;
+}
+
+// Ejes/leyendas comunes
+const EJE={ticks:{color:'#7b8daa'},grid:{color:'#243044'}};
+const LEYENDA={labels:{color:'#7b8daa',font:{size:11}}};
+const PALETA=['#4da6ff','#f0a050','#3dd68c','#a78bfa','#f05050','#22d3ee','#e879f9','#2dd4bf','#fbbf24','#94a3b8','#fb923c','#60a5fa','#34d399','#c084fc','#f87171','#818cf8'];
+
+// ═══════════ FISCAL ═══════════
+async function initFiscal(){
+  const data=await f('../data/derived/fiscal/balance-gobierno-central.json');
+  if(!data?.registros?.length){ $('kpi-fiscal').innerHTML='<div class="sin-dato">Sin dato disponible</div>'; return sinDato('chart-balance','Sin dato disponible'); }
+  const r=data.registros.filter(x=>x.variable==='balance_efectivo_pct_pib');
+  const anos=[...new Set(r.map(x=>x.anno))].sort((a,b)=>a-b);
+  // Orden cronologico real: "IFP 1T2026" es posterior a "IFP 4T2025".
+  const clave=p=>{const m=/(\d)T(\d{4})/.exec(p);return m?+m[2]*10+ +m[1]:0};
+  const pubs=[...new Set(r.map(x=>x.publicacion))].sort((a,b)=>clave(a)-clave(b));
+  const ultPub=pubs[pubs.length-1];
+  const dePub=r.filter(x=>x.publicacion===ultPub).sort((a,b)=>a.anno-b.anno);
+  const ult=dePub[0];
+  $('kpi-fiscal').innerHTML=`
+    <div class="kpi"><div class="label">Balance ${ult?esc(ult.anno):'—'}</div><div class="value ${ult&&ult.valor<0?'rojo':'verde'}">${ult?ult.valor.toFixed(2)+'% PIB':'sin dato'}</div><div class="sub">${esc(ult?.publicacion||'')}${ult?.caracter?' · '+esc(ult.caracter):''}</div></div>
+    <div class="kpi"><div class="label">Informes analizados</div><div class="value azul">${pubs.length}</div><div class="sub">IFP de Dipres</div></div>
+    <div class="kpi"><div class="label">Período cubierto</div><div class="value azul">${anos[0]}–${anos[anos.length-1]}</div><div class="sub">${data.registros.length} registros</div></div>`;
+  const datasets=pubs.map((pub,i)=>({label:pub,data:anos.map(a=>{const m=r.find(x=>x.publicacion===pub&&x.anno===a);return m?m.valor:null}),borderColor:PALETA[i%PALETA.length],backgroundColor:PALETA[i%PALETA.length],tension:.2,fill:false,borderWidth:2,pointRadius:4,pointHoverRadius:6,spanGaps:false}));
+  crearChart('chart-balance',{type:'line',data:{labels:anos.map(String),datasets},options:{animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:{labels:{color:'#7b8daa',font:{size:11},usePointStyle:true}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y==null?'sin dato':c.parsed.y.toFixed(2)+'% del PIB'}`}}},scales:{x:EJE,y:{ticks:{color:'#7b8daa',callback:v=>v.toFixed(1)+'%'},grid:{color:'#243044'}}}}});
+  let th='<tr><th>Año</th>'+pubs.map(p=>`<th>${esc(p)}</th>`).join('')+'</tr>';
+  anos.forEach(a=>{th+='<tr><td><b>'+a+'</b></td>'+pubs.map(p=>{const m=r.find(x=>x.publicacion===p&&x.anno===a);return`<td>${m?m.valor.toFixed(2)+'%':'sin dato'}</td>`}).join('')+'</tr>'});
+  $('tabla-fiscal').innerHTML=`<table style="font-size:.82rem">${th}</table>`;
+}
+
+// ═══════════ LEGISLATIVO ═══════════
+// Militancia vigente a la fecha de la votacion (los registros traen tramos con desde/hasta).
+function partidoEnFecha(dip, fechaISO){
+  const ms=Date.parse(fechaISO);
+  const ms2=Number.isNaN(ms)?null:ms;
+  const tramos=dip?.militancias||[];
+  if(ms2!==null){
+    for(const m of tramos){
+      const d=Date.parse(m.desde), h=m.hasta?Date.parse(m.hasta):Infinity;
+      if(ms2>=d && ms2<=h) return m.partido_nombre;
+    }
+  }
+  return tramos.length ? tramos[tramos.length-1].partido_nombre : null;
+}
+
+async function initLegislativo(){
+  const[acData,votData,dipData]=await Promise.all([f('../data/derived/legislativo/acusaciones-constitucionales-2026.json'),f('../data/derived/legislativo/votos-nominales-2026.json'),f('../data/derived/legislativo/diputados.json')]);
+  const acs=acData?.registros||[];
+  $('kpi-legislativo').innerHTML=`
+    <div class="kpi"><div class="label">Votaciones de AC 2026</div><div class="value naranja">${acs.length}</div><div class="sub">Acusaciones Constitucionales</div></div>
+    <div class="kpi"><div class="label">Votaciones nominales</div><div class="value azul">${votData?.total_registros ?? 'sin dato'}</div><div class="sub">Sala, Cámara de Diputados</div></div>`;
+  if(acs.length){
+    // Todas comparten descripcion_literal: la fecha distingue cada votacion.
+    const etiqueta=r=>[(r.fecha||'').slice(0,10), r.descripcion_literal||''].filter(Boolean).join(' · ');
+    crearChart('chart-ac',{type:'bar',data:{labels:acs.map(etiqueta),datasets:[
+      {label:'A favor',data:acs.map(r=>r.total_si||0),backgroundColor:'#3dd68c'},
+      {label:'En contra',data:acs.map(r=>r.total_no||0),backgroundColor:'#f05050'}]},
+      options:{animation:{duration:1000},plugins:{legend:LEYENDA,tooltip:{callbacks:{afterBody:c=>{const r=acs[c[0].dataIndex];return[`Abstención: ${r.total_abstencion??'sin dato'}`,`Quórum: ${r.quorum||'sin dato'}`,`Resultado: ${r.resultado||'sin dato'}`]}}}},scales:{x:{ticks:{color:'#7b8daa',maxRotation:45,minRotation:45,font:{size:9}},grid:{color:'#243044'}},y:{beginAtZero:true,...EJE}}}});
+  } else sinDato('chart-ac','Sin dato disponible');
+
+  if(votData?.registros?.length && dipData?.registros?.length){
+    const dipMap={}; dipData.registros.forEach(d=>{dipMap[String(d.id)]=d});
+    // votData.registros son VOTACIONES; los diputados estan en r.votos {id_diputado: codigo}.
+    // Se cuentan solo votos emitidos: A (afirmativo), C (en contra), B (abstencion).
+    const EMITIDOS=new Set(['A','C','B']);
+    const pCount={};
+    votData.registros.forEach(r=>{
+      Object.entries(r.votos||{}).forEach(([dipId,codigo])=>{
+        if(!EMITIDOS.has(codigo)) return;
+        const p=partidoEnFecha(dipMap[dipId], r.fecha) || 'Sin dato disponible';
+        pCount[p]=1+(pCount[p]||0);
+      });
     });
-    h += "</tbody></table>";
-  }
-  $("#tend-contenido").innerHTML = h;
-  $("#tend-contenido").classList.remove("cargando");
+    const sorted=Object.entries(pCount).sort((a,b)=>b[1]-a[1]).slice(0,12);
+    const total=Object.values(pCount).reduce((s,x)=>s+x,0);
+    crearChart('chart-votos-dist',{type:'bar',data:{labels:sorted.map(x=>x[0]),datasets:[{label:'Votos emitidos',data:sorted.map(x=>x[1]),backgroundColor:sorted.map((_,i)=>PALETA[i%PALETA.length])}]},
+      options:{animation:{duration:1000},indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.x.toLocaleString('es-CL')} votos (${(c.parsed.x/total*100).toFixed(1)}% del total)`}}},scales:{x:{beginAtZero:true,...EJE},y:{ticks:{color:'#7b8daa',font:{size:10}},grid:{color:'#243044'}}}}});
+    $('nota-votos-dist').textContent=`Derivado. Fórmula: votos_partido = conteo de códigos A, C o B en ${votData.registros.length} votaciones de Sala, atribuidos a la militancia vigente a la fecha de cada votación. Excluye N (no vota), D (dispensado) y P (pareo). Total contabilizado: ${total.toLocaleString('es-CL')} votos. Se muestran los ${sorted.length} partidos con más votos.`;
+  } else sinDato('chart-votos-dist','Sin dato disponible');
 }
 
-/* ---------- CONCENTRACIÓN ---------- */
-function pintarConcentracion(esc_, piv, med, gas){
-  const b = esc_.lectura_independientes_como_bloque;
-  const s = esc_.lectura_independientes_por_separado;
-  let h = "<h3>Composición de la Cámara</h3>";
-  h += "<p class='nota'>" + esc(esc_.criterio_composicion) + " Votación de referencia: " +
-       esc_.votacion_de_referencia + " (" + esc(esc_.fecha_referencia) + "). Huella " + huella(esc_) + ".</p>";
-  h += "<table><thead><tr><th>Lectura</th><th>HHI (0–10.000)</th>" +
-       "<th>Partidos efectivos</th></tr></thead><tbody>";
-  h += "<tr><td>Independientes como un bloque</td><td>" + b.hhi_escala_10000 +
-       "</td><td>" + b.numero_efectivo_partidos + "</td></tr>";
-  h += "<tr><td>Independientes por separado</td><td>" + s.hhi_escala_10000 +
-       "</td><td>" + s.numero_efectivo_partidos + "</td></tr>";
-  h += "</tbody></table>";
-  h += "<p class='nota'>" + esc(esc_.nota_independientes) + "</p>";
-  h += "<table><thead><tr><th>Partido</th><th>Escaños</th><th>Cuota</th></tr></thead><tbody>";
-  esc_.registros.forEach(r => {
-    h += "<tr><td>" + esc(r.partido_nombre) + "</td><td>" + r.escanos + "</td><td>" +
-         (r.cuota * 100).toFixed(1) + "%</td></tr>";
-  });
-  h += "</tbody></table>";
+// ═══════════ TENDENCIA ═══════════
+async function initTendencia(){
+  const[cohesion,coin,eje,dipData]=await Promise.all([f('../data/derived/tendencia/cohesion-partidos-2026.json'),f('../data/derived/tendencia/coincidencia-pares-2026.json'),f('../data/derived/tendencia/eje-empirico-2026.json'),f('../data/derived/legislativo/diputados.json')]);
+  $('kpi-tendencia').innerHTML=`
+    <div class="kpi"><div class="label">Partidos analizados</div><div class="value azul">${cohesion?.registros?.length ?? 'sin dato'}</div><div class="sub">con militancia observada</div></div>
+    <div class="kpi"><div class="label">Pares de diputados</div><div class="value azul">${coin?.total_registros?.toLocaleString('es-CL') ?? 'sin dato'}</div><div class="sub">comparaciones de voto</div></div>
+    <div class="kpi"><div class="label">Diputados en el eje</div><div class="value azul">${eje?.posiciones?.length ?? 'sin dato'}</div><div class="sub">${eje?.votaciones_utilizadas ? esc(eje.votaciones_utilizadas)+' votaciones' : ''}</div></div>`;
+  if(cohesion?.registros?.length){
+    const rs=[...cohesion.registros].sort((a,b)=>(b.cohesion_rice_promedio||0)-(a.cohesion_rice_promedio||0));
+    crearChart('chart-cohesion',{type:'bar',data:{labels:rs.map(r=>r.partido_nombre),datasets:[{label:'Cohesión',data:rs.map(r=>(r.cohesion_rice_promedio||0)*100),backgroundColor:rs.map((_,i)=>PALETA[i%PALETA.length])}]},
+      options:{animation:{duration:1200},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'%',afterBody:c=>{const r=rs[c[0].dataIndex];return[`Miembros observados: ${r.miembros_observados??'sin dato'}`,`Votaciones consideradas: ${r.votaciones_consideradas??'sin dato'}`]}}}},scales:{y:{min:0,max:100,ticks:{color:'#7b8daa',callback:v=>v.toFixed(0)+'%'},grid:{color:'#243044'}},x:{ticks:{color:'#7b8daa',font:{size:9},maxRotation:60,minRotation:45},grid:{color:'#243044'}}}}});
+    if(cohesion.formula) $('nota-cohesion').textContent='Derivado. Fórmula: '+cohesion.formula;
+  } else sinDato('chart-cohesion','Sin dato disponible');
 
-  h += "<h3>Poder decisorio observado</h3>";
-  h += "<p class='nota'>" + esc(piv.alcance) + " Fórmula: <code>" + esc(piv.formula) + "</code>. " +
-       "Votaciones de quórum simple: " + piv.votaciones_de_quorum_simple + "; de otro quórum, " +
-       "excluidas: " + piv.votaciones_de_otro_quorum_excluidas + ". Huella " + huella(piv) + ".</p>";
-  h += "<p class='nota'>" + esc(piv.nota_independientes) + "</p>";
-  h += "<table><thead><tr><th>Partido</th><th>Participó en</th><th>Fue pivote en</th>" +
-       "<th>%</th></tr></thead><tbody>";
-  piv.registros.forEach(r => {
-    h += "<tr><td>" + esc(r.partido_nombre || r.partido_id) +
-         (r.es_agregacion_no_comparable ? " <em>(agregación, no comparable)</em>" : "") +
-         "</td><td>" + r.votaciones_en_que_participo + "</td><td>" +
-         r.votaciones_en_que_fue_pivote + "</td><td>" + r.pivote_pct + "%</td></tr>";
-  });
-  h += "</tbody></table>";
-
-  h += "<h3>Concesiones de radiodifusión</h3>";
-  h += "<p class='nota'><strong>Límite de esta medición:</strong> " +
-       esc(med.limite_de_la_medicion) + "</p>";
-  const idx = med.indices_nacionales;
-  h += "<p class='nota'>" + med.concesiones_leidas + " concesiones vigentes de " + idx.titulares +
-       " titulares registrados. HHI " + idx.hhi_escala_10000 + " (0–10.000); titulares efectivos " +
-       idx.numero_efectivo_titulares + ". El top-10 reúne " +
-       (med.top_10.cuota * 100).toFixed(1) + "% de las concesiones. Fuente SUBTEL, huella " +
-       huella(med) + ".</p>";
-  h += "<table><thead><tr><th>#</th><th>Concesionaria</th><th>RUT</th>" +
-       "<th>Concesiones</th><th>Cuota acumulada</th></tr></thead><tbody>";
-  med.registros.slice(0, 25).forEach(r => {
-    h += "<tr><td>" + r.puesto + "</td><td>" + esc(r.concesionaria) + "</td><td>" + esc(r.rut) +
-         "</td><td>" + r.concesiones + "</td><td>" + (r.cuota_acumulada * 100).toFixed(1) +
-         "%</td></tr>";
-  });
-  h += "</tbody></table>";
-  h += "<h3>Adjudicaciones de licitaciones del Estado</h3>";
-  h += "<p class='nota'><strong>Límite de esta medición:</strong> " +
-       esc(gas.limite_de_la_medicion) + "</p>";
-  h += "<p class='nota' style='border-left:3px solid var(--acento2);padding-left:10px'>" +
-       "<strong>Advertencia:</strong> " + esc(gas.advertencia_valores_atipicos) + "</p>";
-  const clp = n => "$" + Math.round(n).toLocaleString("es-CL");
-  h += "<p class='nota'>Período " + esc(gas.periodo) + ": " + gas.lineas_usadas +
-       " líneas adjudicadas de " + gas.indices_nacionales.actores + " proveedores. " +
-       "Mediana por línea: " + clp(gas.mediana_monto_por_linea_clp) + ". " +
-       "Fuente ChileCompra, hash <code>" + esc(gas.sha256_origen.slice(0,12)) + "</code>.</p>";
-  h += "<table><thead><tr><th>Cálculo</th><th>Líneas excluidas</th>" +
-       "<th>HHI (0–10.000)</th><th>Proveedores efectivos</th></tr></thead><tbody>";
-  h += "<tr><td>Tal como lo declara la fuente</td><td>0</td><td>" +
-       gas.indices_nacionales.hhi_escala_10000 + "</td><td>" +
-       gas.indices_nacionales.numero_efectivo + "</td></tr>";
-  Object.entries(gas.sensibilidad).forEach(([etiqueta, v]) => {
-    h += "<tr><td>" + esc(etiqueta) + "</td><td>" + v.lineas_excluidas + "</td><td>" +
-         v.hhi_escala_10000 + "</td><td>" + v.numero_efectivo + "</td></tr>";
-  });
-  h += "</tbody></table>";
-  h += "<p class='nota'>Las líneas de mayor monto, para verificarlas una por una en la fuente:</p>";
-  h += "<table><thead><tr><th>Monto</th><th>Licitación</th><th>Proveedor</th>" +
-       "<th>Organismo</th></tr></thead><tbody>";
-  gas.mayores_lineas.slice(0, 10).forEach(l => {
-    h += "<tr><td>" + clp(l.monto_clp) + "</td><td><a href='" + esc(l.enlace_fuente) +
-         "' target='_blank' rel='noopener'>" + esc(l.codigo_externo) + "</a></td><td>" +
-         esc(l.razon_social) + "</td><td>" + esc(l.organismo) + "</td></tr>";
-  });
-  h += "</tbody></table>";
-
-  $("#conc-contenido").innerHTML = h;
-  $("#conc-contenido").classList.remove("cargando");
+  if(eje?.posiciones?.length){
+    // El eje trae diputado_id pero no partido: se une con el padrón de diputados.
+    const dipMap={}; (dipData?.registros||[]).forEach(d=>{dipMap[String(d.id)]=d});
+    const orden=[...eje.posiciones].sort((a,b)=>(a.orden??0)-(b.orden??0));
+    $('eje-empirico').innerHTML=orden.map((r,i)=>{
+      const dip=dipMap[String(r.diputado_id)];
+      const partido=r.partido_nombre||r.partido||(dip?partidoEnFecha(dip,'2026-06-30T00:00:00'):null)||'sin dato';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-bottom:1px solid var(--line);font-size:.83rem"><span style="color:var(--dim);min-width:28px">${i+1}.</span><span style="flex:1">${esc(r.nombre||'sin dato')}</span><span style="color:var(--dim);font-size:.78rem">${esc(partido)}</span><span style="color:var(--dim);font-size:.72rem;min-width:56px;text-align:right;font-variant-numeric:tabular-nums">${typeof r.puntaje_eje==='number'?r.puntaje_eje.toFixed(3):''}</span></div>`;
+    }).join('');
+  } else $('eje-empirico').innerHTML='<p class="sin-dato">Sin dato disponible</p>';
 }
 
-/* ---------- FISCAL ---------- */
-function pintarFiscal(d){
-  const regs = d.registros;
-  const publicaciones = [...new Set(regs.map(r => r.publicacion))]
-      .sort((a,b) => clavePub(a) - clavePub(b));
-  const variables = [
-    ["balance_ciclicamente_ajustado_pct_pib", "Balance Cíclicamente Ajustado (estructural)"],
-    ["balance_efectivo_pct_pib", "Balance Efectivo"],
-    ["meta_bca_pct_pib", "Meta de Balance Cíclicamente Ajustado (decreto de política fiscal, según IFP)"],
-  ];
-  let html = "";
-  for (const [varId, titulo] of variables){
-    const sub = regs.filter(r => r.variable === varId);
-    if (!sub.length) continue;
-    const annos = [...new Set(sub.map(r => r.anno))].sort();
-    const pubs = publicaciones.filter(p => sub.some(r => r.publicacion === p));
-    html += `<h3>${esc(titulo)}</h3><div class="scroll"><table><thead><tr><th>Año</th>`;
-    for (const p of pubs) html += `<th class="num">${esc(p)}</th>`;
-    html += "</tr></thead><tbody>";
-    for (const a of annos){
-      html += `<tr><td>${a}</td>`;
-      for (const p of pubs){
-        const r = sub.find(x => x.anno === a && x.publicacion === p);
-        if (!r){ html += "<td class='num'>—</td>"; continue; }
-        const title = `${r.origen.archivo} · hoja ${r.origen.hoja} · celda ${r.origen.celda}` +
-                      ` · ${r.caracter}` + (r.nota ? " · " + r.nota : "") +
-                      ` · sha256 ${r.sha256_origen.slice(0,16)}…`;
-        const marca = r.caracter === "cierre_estimado" ? " <span class='tag'>cierre</span>" : "";
-        html += `<td class="num" title="${esc(title)}">${f2(r.valor)}${marca}</td>`;
-      }
-      html += "</tr>";
-    }
-    html += "</tbody></table></div>";
-  }
-  html += `<p class="nota">Unidad: % del PIB (el PIB usado es el proyectado en cada informe, según nota de cada cuadro).
-    "cierre" = cifra publicada como efectiva/estructural del año ya terminado. Las cifras del IFP 1T2025 y 2T2025
-    provienen del cuadro comparativo del IFP 3T2025 e incluyen acciones correctivas, según indica ese cuadro.
-    Origen completo de cada cifra (archivo, hoja, celda, hash) en
-    <span class="hash"><a href="${RUTA_BASE}/data/derived/fiscal/balance-gobierno-central.json">balance-gobierno-central.json</a></span>.</p>`;
-  html += graficoFiscal(regs);
-  $("#fiscal-contenido").innerHTML = html;
-  $("#fiscal-contenido").classList.remove("cargando");
-}
-function clavePub(p){ // "IFP 3T2025" -> 2025*10+3
-  const m = p.match(/(\d)T(\d{4})/); return m ? (+m[2])*10 + (+m[1]) : 0;
-}
-function graficoFiscal(regs){
-  // evolución de la proyección del balance estructural para 2025 y 2026, por publicación
-  const serie = anno => regs
-    .filter(r => r.variable === "balance_ciclicamente_ajustado_pct_pib" && r.anno === anno)
-    .sort((a,b) => clavePub(a.publicacion) - clavePub(b.publicacion));
-  const s25 = serie(2025), s26 = serie(2026);
-  const pubs = [...new Set([...s25, ...s26].map(r => r.publicacion))].sort((a,b) => clavePub(a) - clavePub(b));
-  if (pubs.length < 2) return "";
-  const W = 640, H = 240, mL = 46, mR = 12, mT = 14, mB = 34;
-  const vals = [...s25, ...s26].map(r => r.valor);
-  const vMin = Math.floor(Math.min(...vals) * 2) / 2 - .25, vMax = Math.ceil(Math.max(...vals) * 2) / 2 + .25;
-  const X = p => mL + pubs.indexOf(p) * (W - mL - mR) / (pubs.length - 1);
-  const Y = v => mT + (vMax - v) * (H - mT - mB) / (vMax - vMin);
-  const linea = (s, color) => {
-    if (!s.length) return "";
-    const pts = s.map(r => `${X(r.publicacion).toFixed(1)},${Y(r.valor).toFixed(1)}`).join(" ");
-    return `<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>` +
-      s.map(r => `<circle cx="${X(r.publicacion).toFixed(1)}" cy="${Y(r.valor).toFixed(1)}" r="3.5" fill="${color}"><title>${esc(r.publicacion)}: ${f2(r.valor)}% del PIB (${esc(r.caracter)})</title></circle>`).join("");
-  };
-  let ejes = "";
-  for (let v = Math.ceil(vMin); v <= vMax; v += 1){
-    ejes += `<line x1="${mL}" y1="${Y(v)}" x2="${W-mR}" y2="${Y(v)}" stroke="#e2e8f0"/><text x="4" y="${Y(v)+4}">${v > 0 ? "+"+v : v}%</text>`;
-  }
-  const etiquetas = pubs.map(p => `<text x="${X(p)}" y="${H-10}" text-anchor="middle">${esc(p.replace("IFP ",""))}</text>`).join("");
-  return `<h3>Evolución de la proyección del balance estructural, por publicación</h3>
-  <div class="panel" style="overflow-x:auto">
-  <svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:${W}px">
-    ${ejes}${etiquetas}
-    ${linea(s25, "#0f4c81")}${linea(s26, "#c05621")}
-  </svg>
-  <div class="leyenda"><span style="color:#0f4c81">● año 2025</span><span style="color:#c05621">● año 2026</span></div>
-  <p class="nota">Derivado visual de la tabla anterior (mismos valores, sin transformación). El último punto de la
-  serie 2025 es la cifra de cierre publicada en el IFP 1T2026; los demás son proyecciones.</p></div>`;
+// ═══════════ CONCENTRACIÓN ═══════════
+async function initConcentracion(){
+  const data=await f('../data/derived/concentracion/escanos-camara-2026.json');
+  if(!data?.registros?.length){ sinDato('chart-escanos','Sin dato disponible'); return; }
+  const sorted=[...data.registros].sort((a,b)=>(b.escanos||0)-(a.escanos||0));
+  const total=sorted.reduce((s,x)=>s+(x.escanos||0),0);
+  crearChart('chart-escanos',{type:'doughnut',data:{labels:sorted.map(r=>r.partido_nombre),datasets:[{data:sorted.map(r=>r.escanos),backgroundColor:sorted.map((_,i)=>PALETA[i%PALETA.length]),borderColor:'#131a2b',borderWidth:1}]},
+    options:{animation:{animateRotate:true,duration:1500},plugins:{legend:{position:'right',labels:{color:'#7b8daa',font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} escaños (${(c.parsed/total*100).toFixed(1)}%)`}}}}});
+  $('nota-escanos').textContent=`${total} escaños en ${sorted.length} agrupaciones. ${data.criterio_composicion||''}`.trim();
+  $('tabla-concentracion').innerHTML='<table style="font-size:.82rem"><tr><th>Partido</th><th>Escaños</th><th>% del total</th></tr>'+sorted.map(r=>`<tr><td>${esc(r.partido_nombre)}</td><td>${r.escanos}</td><td>${(r.escanos/total*100).toFixed(1)}%</td></tr>`).join('')+`<tr><td><b>Total</b></td><td><b>${total}</b></td><td><b>100,0%</b></td></tr></table>`;
 }
 
-/* ---------- AC ---------- */
-let AC_DATA = null;
-function pintarAC(d){
-  AC_DATA = d;
-  renderAC("");
-  $("#ac-filtro").addEventListener("input", e => renderAC(e.target.value.trim().toLowerCase()));
-}
-function renderAC(filtro){
-  const cont = $("#ac-contenido");
-  let html = `<p class="nota">${AC_DATA.total_registros} votaciones · fuente:
-    <span class="hash"><a href="${RUTA_BASE}/data/derived/legislativo/acusaciones-constitucionales-2026.json">acusaciones-constitucionales-2026.json</a></span></p>`;
-  for (const r of AC_DATA.registros){
-    const votos = filtro ? r.votos_nominales.filter(v => v.nombre.toLowerCase().includes(filtro)) : r.votos_nominales;
-    if (filtro && !votos.length) continue;
-    const fecha = r.fecha.replace("T", " ");
-    const cls = r.resultado === "Aprobado" ? "ok" : "no";
-    html += `<div class="panel">
-      <b>${esc(fecha)}</b> — <span class="hash">id ${r.id}</span> ·
-      descripción literal: “${esc(r.descripcion_literal)}” ·
-      <span class="tag ${cls}">${esc(r.resultado)}</span>
-      <div style="margin:6px 0">A favor <b>${r.total_si}</b> · En contra <b>${r.total_no}</b> ·
-        Abstención <b>${r.total_abstencion}</b> · ${esc(r.quorum)} ·
-        <span class="tag ok" title="${esc(r.verificacion_conteo)}">conteo nominal ✓</span></div>
-      <div class="hash">artefacto sha256 ${r.sha256_origen.slice(0, 24)}… ·
-        <a href="${esc(r.url_fuente)}" rel="noopener">fuente</a></div>
-      <details ${filtro ? "open" : ""}><summary>Voto nominal (${votos.length}${filtro ? " coinciden" : ""})</summary>
-      <div class="scroll-y"><table><thead><tr><th>Diputado/a</th><th>Voto</th></tr></thead><tbody>` +
-      votos.map(v => `<tr><td>${esc(v.nombre)}</td><td>${esc(v.voto)}</td></tr>`).join("") +
-      `</tbody></table></div></details></div>`;
-  }
-  cont.innerHTML = html;
-  cont.classList.remove("cargando");
-}
+// ═══════════ VERIFICAR ═══════════
+const hex = buf => Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+const sha256Hex = async datos => hex(await crypto.subtle.digest('SHA-256', datos));
 
-/* ---------- VOTACIONES ---------- */
-function pintarVotaciones(d){
-  const regs = d.registros;
-  const porTipo = {};
-  for (const r of regs){
-    const t = r.tipo || "(sin tipo)";
-    porTipo[t] = porTipo[t] || {total: 0, aprobado: 0};
-    porTipo[t].total++;
-    if (r.resultado === "Aprobado") porTipo[t].aprobado++;
-  }
-  let html = `<h3>Resumen por tipo (derivado)</h3>
-  <div class="scroll"><table><thead><tr><th>Tipo (literal de la fuente)</th>
-  <th class="num">Votaciones</th><th class="num">Con resultado "Aprobado"</th></tr></thead><tbody>`;
-  for (const [t, v] of Object.entries(porTipo).sort((a,b) => b[1].total - a[1].total)){
-    html += `<tr><td>${esc(t)}</td><td class="num">${v.total}</td><td class="num">${v.aprobado}</td></tr>`;
-  }
-  html += `</tbody></table></div>
-  <p class="nota">Derivado: conteo simple sobre los ${regs.length} registros (fórmula: total por valor
-  del campo <span class="hash">tipo</span>; "aprobado" = registros con <span class="hash">resultado == "Aprobado"</span>).</p>
-  <h3>Todas las votaciones (${regs.length})</h3>
-  <div class="scroll-y"><table><thead><tr><th>Fecha</th><th>Descripción (literal)</th>
-  <th class="num">Sí</th><th class="num">No</th><th class="num">Abst.</th><th>Resultado</th></tr></thead><tbody>`;
-  for (const r of regs){
-    html += `<tr><td>${esc(r.fecha.replace("T"," "))}</td><td>${esc(r.descripcion_literal)}</td>
-      <td class="num">${r.total_si}</td><td class="num">${r.total_no}</td>
-      <td class="num">${r.total_abstencion}</td><td>${esc(r.resultado ?? "—")}</td></tr>`;
-  }
-  html += "</tbody></table></div>";
-  $("#vot-contenido").innerHTML = html;
-  $("#vot-contenido").classList.remove("cargando");
+// Serializacion canonica byte a byte igual a hash_canonico() de ingesta.py:
+//   json.dumps(copia, ensure_ascii=False, sort_keys=True, separators=(",",":"))
+// Equivalencias que la hacen coincidir con Python:
+//  · sort_keys=True      -> Object.keys().sort(), recursivo (las claves son ASCII,
+//                           donde el orden UTF-16 de JS y el de code point de Python coinciden)
+//  · separators sin espacios -> es ya el default de JSON.stringify
+//  · ensure_ascii=False  -> ambos emiten los acentos literales en UTF-8
+function canonJSON(v){
+  if(v===null||typeof v!=='object') return JSON.stringify(v);
+  if(Array.isArray(v)) return '['+v.map(canonJSON).join(',')+']';
+  return '{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonJSON(v[k])).join(',')+'}';
 }
+// El hash propio de la entrada se calcula con sha256_linea vaciado, no ausente.
+const hashCanonico = entrada => sha256Hex(new TextEncoder().encode(canonJSON({...entrada, sha256_linea:''})));
 
-/* ---------- MANIFIESTO ---------- */
-function pintarManifiesto(){
-  let html = `<p class="nota">${MANIFIESTO.length} entradas ·
-    <span class="hash"><a href="${RUTA_BASE}/manifest.jsonl">manifest.jsonl</a></span></p>
-  <div class="scroll"><table><thead><tr><th>#</th><th>Captura (UTC)</th><th>Módulo</th>
-  <th>Descripción</th><th class="num">Bytes</th><th>SHA-256</th><th>Fuente</th></tr></thead><tbody>`;
-  for (const e of MANIFIESTO){
-    html += `<tr><td class="num">${e.seq}</td><td>${esc(e.timestamp_utc)}</td>
-      <td><span class="tag">${esc(e.modulo)}</span></td><td>${esc(e.descripcion)}</td>
-      <td class="num">${e.bytes.toLocaleString("es-CL")}</td>
-      <td class="hash" title="${esc(e.sha256)}">${e.sha256.slice(0, 20)}…</td>
-      <td class="hash"><a href="${esc(e.url_fuente)}" rel="noopener">URL</a> ·
-        <a href="${RUTA_BASE}/${esc(e.ruta_local)}">copia</a></td></tr>`;
-  }
-  html += "</tbody></table></div>";
-  $("#man-contenido").innerHTML = html;
-  $("#man-contenido").classList.remove("cargando");
-}
-
-/* ---------- VERIFICAR: cadena ---------- */
-$("#btn-cadena").addEventListener("click", async () => {
-  const out = $("#cadena-resultado");
-  out.innerHTML = "<p class='cargando'>Verificando…</p>";
+async function initVerificar(){
+  // Se distingue "no se pudo cargar" de "cargado con N entradas": tratar los dos casos
+  // igual hacia que una lista vacia recorriera cero iteraciones y reportara CADENA OK.
+  const GENESIS='0'.repeat(64);
+  let manifiesto=[], errorCarga=null;
   try{
-    const txt = await (await fetch(RUTA_BASE + "/manifest.jsonl", {cache: "no-store"})).text();
-    const lineas = txt.split("\n").filter(l => l.trim());
-    let prev = "0".repeat(64);
-    const detalles = [];
-    for (let i = 0; i < lineas.length; i++){
-      const e = JSON.parse(lineas[i]);
-      if (e.seq !== i) throw `seq ${e.seq}: secuencia no contigua (esperado ${i})`;
-      if (e.sha256_prev !== prev) throw `seq ${e.seq}: sha256_prev no coincide con la entrada anterior`;
-      const copia = {...e, sha256_linea: ""};
-      const calc = await sha256hex(jsonCanonico(copia));
-      if (calc !== e.sha256_linea) throw `seq ${e.seq}: sha256_linea no coincide (entrada alterada)`;
-      prev = e.sha256_linea;
-      detalles.push(`seq ${e.seq} ✓ ${e.descripcion}`);
-    }
-    out.innerHTML = `<p class="resultado-ok">CADENA OK (${lineas.length} entradas)</p>
-      <details><summary>detalle</summary><div class="scroll-y"><pre style="font-size:.78rem">${esc(detalles.join("\n"))}</pre></div></details>`;
-  }catch(err){
-    out.innerHTML = `<p class="resultado-error">CADENA ROTA — ${esc(err)}</p>`;
-  }
-});
+    const t=await fetch('../manifest.jsonl');
+    if(!t.ok) throw new Error('HTTP '+t.status);
+    // El manifiesto se versiona con CRLF: separar solo por \n deja un \r por linea.
+    manifiesto=(await t.text()).trim().split(/\r?\n/).filter(Boolean).map(l=>JSON.parse(l));
+    if(!manifiesto.length) throw new Error('el archivo no tiene entradas');
+  }catch(e){ errorCarga=e.message||String(e); console.error('manifiesto', e); }
+  $('man-resumen').innerHTML=manifiesto.length?`<p>${manifiesto.length} entradas · Última: ${manifiesto[manifiesto.length-1]?.timestamp_utc?.slice(0,10)||'?'} · Hash-chain activa</p>`:`<p class="cargando">Manifiesto no disponible${errorCarga?' — '+esc(errorCarga):''}</p>`;
 
-/* ---------- VERIFICAR: archivo ---------- */
-async function verificarArchivo(file){
-  const out = $("#file-resultado");
-  out.innerHTML = "<p class='cargando'>Calculando SHA-256 de “" + esc(file.name) + "”…</p>";
-  const hash = await sha256hex(await file.arrayBuffer());
-  const hit = MANIFIESTO.find(e => e.sha256 === hash);
-  if (hit){
-    out.innerHTML = `<p class="resultado-ok">COINCIDE — el archivo es byte a byte el artefacto seq ${hit.seq} del manifiesto.</p>
-      <table><tbody>
-      <tr><th>Descripción</th><td>${esc(hit.descripcion)}</td></tr>
-      <tr><th>Capturado</th><td>${esc(hit.timestamp_utc)}</td></tr>
-      <tr><th>Fuente</th><td class="hash"><a href="${esc(hit.url_fuente)}" rel="noopener">${esc(hit.url_fuente)}</a></td></tr>
-      <tr><th>SHA-256</th><td class="hash">${hash}</td></tr></tbody></table>`;
-  }else{
-    out.innerHTML = `<p class="resultado-error">NO COINCIDE con ningún artefacto del manifiesto.</p>
-      <p class="nota">SHA-256 calculado: <span class="hash">${hash}</span><br>
-      Posibles motivos: el archivo no fue ingerido, la fuente lo modificó después de la captura,
-      o el archivo fue alterado. Compare con la columna SHA-256 del manifiesto.</p>`;
+  const noVerificable=(detalle)=>`<span class="naranja" style="font-weight:700">⚠️ NO VERIFICABLE</span><p class="nota">${detalle}</p>`;
+  $('btn-cadena').onclick=async()=>{
+    const out=$('cadena-resultado');
+    // Sin manifiesto no hay nada que validar: decirlo, nunca afirmar que esta OK.
+    if(!manifiesto.length){ out.innerHTML=noVerificable(`No se pudo leer el manifiesto${errorCarga?' ('+esc(errorCarga)+')':''}. Sin entradas no existe cadena que comprobar.`); return; }
+    // crypto.subtle solo existe en contexto seguro (https o localhost).
+    if(!crypto?.subtle){ out.innerHTML=noVerificable('El navegador no expone crypto.subtle: se necesita https o localhost para recalcular los hashes.'); return; }
+    out.innerHTML=`<span class="cargando">Recalculando ${manifiesto.length} hashes...</span>`;
+    await new Promise(r=>setTimeout(r,30));
+
+    // Se recalcula el hash de cada entrada desde su propio contenido. Sin esto solo se
+    // comprobaba que los eslabones se apuntaran entre si, pero no que el contenido de
+    // cada uno fuera el que su hash declara.
+    let recalculado;
+    try{ recalculado=await Promise.all(manifiesto.map(hashCanonico)); }
+    catch(err){ console.error('recalculo', err); out.innerHTML=noVerificable('Falló el recálculo de hashes: '+esc(err.message||String(err))); return; }
+
+    // Mismo orden de comprobaciones que verificar.py: encadenamiento y luego hash propio,
+    // para que la web y la herramienta CLI senalen la misma entrada ante la misma alteracion.
+    for(let i=0;i<manifiesto.length;i++){
+      const e=manifiesto[i], prev=i>0?manifiesto[i-1].sha256_linea:GENESIS;
+      // Una entrada sin los campos de la cadena tampoco puede darse por buena.
+      if(typeof e.sha256_prev!=='string'||typeof e.sha256_linea!=='string'){
+        out.innerHTML=noVerificable(`La entrada ${i} no trae los campos sha256_prev / sha256_linea.`); return;
+      }
+      if(e.sha256_prev!==prev){
+        out.innerHTML=`<span class="rojo" style="font-weight:700">❌ CADENA ROTA en entrada ${i}</span><p class="nota">Se esperaba el hash <span style="font-family:monospace;font-size:.7rem">${esc(prev)}</span> y la entrada declara <span style="font-family:monospace;font-size:.7rem">${esc(e.sha256_prev)}</span>.</p>`; return;
+      }
+      if(recalculado[i]!==e.sha256_linea){
+        out.innerHTML=`<span class="rojo" style="font-weight:700">❌ ENTRADA ${i} ALTERADA</span><p class="nota">Su contenido no corresponde al hash que declara (seq ${esc(e.seq)}${e.descripcion?' · '+esc(e.descripcion):''}).<br>Declara <span style="font-family:monospace;font-size:.7rem">${esc(e.sha256_linea)}</span><br>Recalculado <span style="font-family:monospace;font-size:.7rem">${esc(recalculado[i])}</span></p>`; return;
+      }
+    }
+    out.innerHTML=`<span class="verde" style="font-weight:700">✅ CADENA OK (${manifiesto.length} entradas íntegras)</span><p class="nota">Dos comprobaciones superadas: el hash de cada entrada se recalculó desde su contenido y coincide, y cada una apunta al hash de la anterior desde el génesis.</p>`;
+  };
+  const drop=$('drop'),file=$('file'),res=$('file-resultado');
+  drop.querySelector('span').onclick=()=>file.click();
+  drop.ondragover=e=>{e.preventDefault();drop.classList.add('sobre')};
+  drop.ondragleave=()=>drop.classList.remove('sobre');
+  drop.ondrop=async e=>{e.preventDefault();drop.classList.remove('sobre');if(e.dataTransfer.files[0])verificar(e.dataTransfer.files[0])};
+  file.onchange=()=>{if(file.files[0])verificar(file.files[0])};
+  async function verificar(archivo){
+    if(!crypto?.subtle){ res.innerHTML=noVerificable('El navegador no expone crypto.subtle: se necesita https o localhost.'); return; }
+    res.innerHTML='<span class="cargando">Calculando...</span>';
+    const h=await sha256Hex(await archivo.arrayBuffer());
+    const m=manifiesto.find(e=>e.sha256===h);
+    // Los campos vienen de un archivo externo: se escapan antes de inyectarlos.
+    res.innerHTML=m?`<span class="verde" style="font-weight:700">✅ ENCONTRADO — seq ${esc(m.seq)}</span><div class="nota">${esc(m.descripcion)}<br>Fuente: ${esc(m.url_fuente)}<br>Fecha captura: ${esc(m.timestamp_utc)}</div>`:`<span class="rojo" style="font-weight:700">❌ NO ENCONTRADO</span><p class="nota">El archivo no está registrado.<br><span style="font-family:monospace;font-size:.7rem">${h}</span></p>`;
   }
 }
-const drop = $("#drop");
-drop.addEventListener("dragover", e => { e.preventDefault(); drop.classList.add("sobre"); });
-drop.addEventListener("dragleave", () => drop.classList.remove("sobre"));
-drop.addEventListener("drop", e => {
-  e.preventDefault(); drop.classList.remove("sobre");
-  if (e.dataTransfer.files.length) verificarArchivo(e.dataTransfer.files[0]);
-});
-$("#file").addEventListener("change", e => { if (e.target.files.length) verificarArchivo(e.target.files[0]); });
 
-cargar();
+// ═══════════ DISPATCHER ═══════════
+const INITS = {fiscal:initFiscal, legislativo:initLegislativo, tendencia:initTendencia, concentracion:initConcentracion, verificar:initVerificar};
+
+function initSection(s){
+  if(loaded[s] || !INITS[s]) return;   // el flag se marca aqui, en un unico lugar
+  loaded[s] = true;
+  Promise.resolve()
+    .then(INITS[s])
+    .then(ubicarTips)
+    .catch(e => { console.error('initSection '+s, e); loaded[s] = false; });
+}
+
+// Arranque: la seccion fiscal ya viene con class="activa" en el HTML.
+mostrar('fiscal');
 </script>
 </body>
 </html>
