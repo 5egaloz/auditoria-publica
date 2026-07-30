@@ -1,0 +1,26 @@
+{
+ "descripcion": "Casos que sigue el modulo de Prensa. Cada caso enlaza un tema con las fuentes OFICIALES que se ingirieron para poder contrastarlo. Sin este enlace declarado, una afirmacion sobre 'la votacion' no tiene contra que compararse y el sistema responde 'sin dato disponible'.",
+ "por_que_existe": "Cuando una afirmacion cae en 'sin dato disponible', la respuesta del proyecto no es estimar ni recurrir a la memoria de nadie: es ampliar el corpus con la fuente oficial que resuelve esa afirmacion. Este archivo es el registro de esas ampliaciones.",
+ "actualizado": "2026-07-30",
+ "casos": [
+  {
+   "tema": "mega-reforma",
+   "nombre_en_la_prensa": ["megarreforma", "mega reforma", "reforma tributaria"],
+   "titulo_oficial": "Para la reconstrucción nacional y el desarrollo económico y social",
+   "boletin": "18216-05",
+   "nota_sobre_el_nombre": "Ningun medio revisado uso el titulo oficial. El sistema guarda ambos y no trata la diferencia como error de nadie.",
+   "fuentes_ingeridas": [
+    {
+     "que": "Ficha del proyecto con sus 117 votaciones en la Camara de Diputados",
+     "url": "https://opendata.camara.cl/camaradiputados/WServices/WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=18216-05",
+     "derivado": "data/derived/legislativo/proyecto-18216-05.json",
+     "ingerido": "2026-07-30"
+    }
+   ],
+   "fuera_de_alcance_hoy": [
+    "Los totales de votos del Senado: su servicio publica la tramitacion (72 tramites, 9 urgencias) pero no los totales en formato legible por maquina.",
+    "El texto articulado del proyecto: camara.cl responde 403 y bcn.cl/leychile 401 a un cliente que no es navegador, y ademas el proyecto todavia no es ley. Por eso toda afirmacion sobre tasas o plazos queda en 'sin dato disponible'."
+   ]
+  }
+ ]
+}

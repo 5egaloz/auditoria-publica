@@ -1,0 +1,94 @@
+{
+ "descripcion": "Medios cuyas notas puede leer el modulo de Prensa, con el criterio que produjo la lista. Se versiona junto con el codigo porque QUE se lee es, en si mismo, un vector de sesgo: publicar los veredictos sin publicar esta lista seria esconder la mitad del metodo.",
+ "actualizado": "2026-07-30",
+ "criterio": "Medios chilenos de alcance nacional o regional que publican la nota completa en abierto y cuyo hash es reproducible en dos descargas seguidas. La lista NO pretende representar el espectro editorial completo, y la razon esta declarada abajo en 'sesgo_conocido'. Un medio entra a la lista antes de que se ingiera ninguna de sus notas, nunca al vuelo.",
+ "reglas_de_captura": [
+  "Se guarda el hash de los bytes servidos, la URL, el medio, el titulo y la fecha. NUNCA el texto: es obra ajena y este repositorio es publico.",
+  "Antes de sellar se descarga dos veces y se exige el mismo SHA-256. Si el dominio inyecta identificadores por peticion, el hash no es reproducible por un tercero y la nota no se registra.",
+  "Un HTTP 200 no prueba acceso al contenido: si la pagina trae marcas de muro de pago se registra el hecho y no se extraen afirmaciones de ella.",
+  "Del articulo solo se publican citas literales acotadas (30 palabras, 240 caracteres) de las frases que contienen una cifra."
+ ],
+ "sesgo_conocido": [
+  "Los medios sin RSS utilizable quedan fuera de cualquier captura automatica: Emol, El Mostrador, Diario Financiero, T13, 24horas, El Dinamo, Publimetro y El Libero. Son, justamente, varios de los medios de derecha y los economicos, que son los que mas cubren la baja del Impuesto de Primera Categoria. La lista de abajo NO es un espectro amplio y no debe leerse como tal.",
+  "La ventana de un RSS chileno tiene entre 10 y 46 items y cubre entre 1 y 5 dias. No permite reconstruir hacia atras: sin captura diaria continua no hay corpus historico, y las notas de un hecho pasado solo entran por URL directa.",
+  "Filtrar por el nombre oficial de un proyecto captura cero notas: ningun medio escribio 'Ley de Reconstruccion Nacional y Desarrollo Economico y Social'. El mismo hecho aparece como 'megarreforma' junto, 'mega reforma' separado y 'reforma tributaria'. La lista de terminos decide que entra al corpus y por eso se versiona igual que la de medios."
+ ],
+ "terminos_del_caso_piloto": ["megarreforma", "mega reforma", "reforma tributaria", "boletin 18216-05", "impuesto de primera categoria"],
+ "medios": [
+  {
+   "medio": "Cooperativa",
+   "dominio": "cooperativa.cl",
+   "rss": "https://www.cooperativa.cl/noticias/site/tax/port/all/rss_1___1.xml",
+   "criterio_de_inclusion": "Radio de alcance nacional, nota completa en abierto, hash reproducible en dos descargas.",
+   "robots_txt": "Allow general; las rutas del feed y de las noticias no estan bloqueadas (verificado 2026-07-30).",
+   "terminos_de_uso": "sin dato disponible: no se encontro pagina de terminos"
+  },
+  {
+   "medio": "BioBioChile",
+   "dominio": "biobiochile.cl",
+   "rss": "https://feeds.feedburner.com/radiobiobio/NNeJ",
+   "criterio_de_inclusion": "Medio regional (Concepcion) de alcance nacional, nota completa en abierto.",
+   "robots_txt": "User-agent: * sin ninguna directiva Disallow (verificado 2026-07-30).",
+   "terminos_de_uso": "legales.biobiochile.cl: no menciona uso automatizado",
+   "advertencia": "Su unico feed declarado vive en feeds.feedburner.com, dominio de un tercero: esos bytes no los controla el medio."
+  },
+  {
+   "medio": "Diario y Radio Universidad de Chile",
+   "dominio": "radio.uchile.cl",
+   "rss": "https://radio.uchile.cl/feed/",
+   "criterio_de_inclusion": "Medio universitario, nota completa en abierto, hash reproducible en dos descargas.",
+   "robots_txt": "User-agent: * / Disallow: (sin restricciones) (verificado 2026-07-30).",
+   "terminos_de_uso": "sin dato disponible: no se encontro pagina de terminos"
+  },
+  {
+   "medio": "El Mostrador",
+   "dominio": "elmostrador.cl",
+   "rss": "sin dato disponible: no expone feed utilizable; solo sitemap_news.xml",
+   "criterio_de_inclusion": "Medio digital nacional, nota completa en abierto. Entra por URL directa, no por feed.",
+   "robots_txt": "Las rutas de noticias no estan bloqueadas (verificado 2026-07-30).",
+   "terminos_de_uso": "Politica de privacidad y condiciones de uso: no menciona acceso automatizado"
+  },
+  {
+   "medio": "The Clinic",
+   "dominio": "theclinic.cl",
+   "rss": "https://www.theclinic.cl/feed/",
+   "criterio_de_inclusion": "Medio digital nacional, hash reproducible en dos descargas.",
+   "robots_txt": "User-Agent: * / Disallow: (sin restricciones) (verificado 2026-07-30).",
+   "terminos_de_uso": "sin dato disponible: no se encontro pagina de terminos",
+   "advertencia": "Su feed entrega solo resumen, sin el cuerpo de la nota."
+  },
+  {
+   "medio": "CIPER Chile",
+   "dominio": "ciperchile.cl",
+   "rss": "https://www.ciperchile.cl/feed/",
+   "criterio_de_inclusion": "Periodismo de investigacion, nota completa en abierto.",
+   "robots_txt": "User-agent: * / Disallow: (sin restricciones) (verificado 2026-07-30).",
+   "terminos_de_uso": "sin dato disponible: no se encontro pagina de terminos"
+  },
+  {
+   "medio": "El Ciudadano",
+   "dominio": "elciudadano.com",
+   "rss": "https://www.elciudadano.com/feed/",
+   "criterio_de_inclusion": "Medio digital nacional, nota completa en abierto.",
+   "robots_txt": "Bloquea solo infraestructura de WordPress; las rutas de noticias no (verificado 2026-07-30).",
+   "terminos_de_uso": "sin dato disponible: pagina de terminos devuelve 404"
+  }
+ ],
+ "excluidos": [
+  {
+   "medio": "Diario Financiero",
+   "dominio": "df.cl",
+   "motivo": "Sus terminos y condiciones prohiben expresamente reproducir el contenido en todo o en parte y limitan el uso al personal. Aunque el sistema solo guarda hash y citas cortas, la prohibicion es expresa y se respeta."
+  },
+  {
+   "medio": "La Tercera",
+   "dominio": "latercera.com",
+   "motivo": "El hash NO es reproducible: tres descargas del mismo articulo dieron tres SHA-256 distintos porque el CDN inyecta un identificador por peticion. Un sello que un tercero no puede recalcular no cumple la regla del proyecto. Ademas sus terminos prohiben copiar o adaptar el contenido por cualquier medio."
+  },
+  {
+   "medio": "Interferencia",
+   "dominio": "interferencia.cl",
+   "motivo": "Su /robots.txt devuelve HTTP 403 para cualquier agente: no se puede leer si autoriza o prohibe el rastreo, y la ausencia de prohibicion no es autorizacion."
+  }
+ ]
+}

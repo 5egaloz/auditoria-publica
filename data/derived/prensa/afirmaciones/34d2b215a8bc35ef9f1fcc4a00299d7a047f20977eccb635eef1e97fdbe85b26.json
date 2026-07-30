@@ -1,0 +1,143 @@
+{
+ "descripcion": "Afirmaciones con cantidad extraidas de un articulo de prensa por reglas deterministas, para contrastarlas contra el corpus sellado. No se guarda el texto del articulo: solo citas literales acotadas de las frases con cifra.",
+ "generado_por": "extraer_prensa.py",
+ "derivado": true,
+ "capa": "A (determinista, sin IA)",
+ "tope_de_cita": {
+  "palabras": 30,
+  "caracteres": 240
+ },
+ "articulo": {
+  "sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
+  "seq_registro": 0,
+  "medio": "El Mostrador",
+  "titulo": "Megarreforma tropieza en la ultima valla: Gobierno retira urgencia y aplaza su despacho hasta agosto",
+  "url": "https://www.elmostrador.cl/noticias/pais/2026/07/23/megarreforma-tropieza-en-la-ultima-valla-gobierno-retira-urgencia-y-aplaza-su-despacho-hasta-agosto/",
+  "fecha_publicacion": "2026-07-23",
+  "tema": "mega-reforma"
+ },
+ "total_oraciones": 44,
+ "oraciones_con_cantidad": 9,
+ "afirmaciones": [
+  {
+   "n": 1,
+   "oracion": 0,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 2,
+   "oracion": 1,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 3,
+   "oracion": 2,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 4,
+   "oracion": 6,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 5,
+   "oracion": 9,
+   "cita": "El informe había sido aprobado previamente por la Cámara de Diputadas y Diputados por 80 votos a favor, 48 en contra y dos abstenciones.",
+   "plantilla": "votacion_totales",
+   "descripcion_plantilla": "votos a favor y en contra de una votacion",
+   "herramienta": "buscar_votaciones",
+   "parametros": {
+    "favor": 80.0,
+    "contra": 48.0
+   },
+   "fragmento_que_calzo": "80 votos a favor, 48 en contra",
+   "veredicto": "coincide",
+   "necesita": null,
+   "detalle": "El boletin 18216-05 registra 80 a favor, 48 en contra y 2 abstenciones en la votacion 89542 del 2026-07-22 (Boletín N°18216-05).",
+   "cita_manifiesto": {
+    "seq": 678,
+    "sha256": "f0530a5c94a767c1de14959ccfc36c6ae47b866def014fd2a87aebf6bfca5af8",
+    "url_fuente": "https://opendata.camara.cl/camaradiputados/WServices/WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=18216-05",
+    "ruta_local": "data/raw/legislativo/2026-07-30/proyecto-18216-05.xml",
+    "timestamp_utc": "2026-07-30T19:34:01Z"
+   },
+   "del_articulo": {
+    "a_favor": 80.0,
+    "en_contra": 48.0
+   },
+   "del_corpus": {
+    "a_favor": 80,
+    "en_contra": 48,
+    "abstencion": 2,
+    "id_votacion": 89542,
+    "fecha": "2026-07-22",
+    "boletin": "18216-05"
+   }
+  },
+  {
+   "n": 6,
+   "oracion": 23,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 7,
+   "oracion": 26,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 8,
+   "oracion": 28,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 9,
+   "oracion": 43,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  }
+ ],
+ "contraste": {
+  "generado_por": "contrastar_prensa.py",
+  "conteo": {
+   "coincide": 1,
+   "difiere": 0,
+   "sin_dato_disponible": 0,
+   "no_contrastable_con_este_corpus": 8
+  },
+  "total_afirmaciones": 9,
+  "densidad_contrastable": 0.1111,
+  "formula_densidad": "densidad_contrastable = (coincide + difiere) / total_afirmaciones",
+  "ingestas_pendientes": []
+ }
+}

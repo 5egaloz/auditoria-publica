@@ -1,0 +1,54 @@
+{
+ "descripcion": "Articulos de prensa cuyas afirmaciones con cifra fueron contrastadas contra el corpus sellado. Se publica por articulo y nunca agregado por medio: un promedio por medio convertiria esto en un marcador de sesgo de prensa, y ademas no mide lo que ese ranking sugeriria.",
+ "generado_por": "contrastar_prensa.py",
+ "veredictos": {
+  "coincide": "la cifra del articulo y la del corpus son iguales",
+  "difiere": "se publican las dos cifras y el hash; el sistema no dictamina por que",
+  "sin_dato_disponible": "cae en el alcance del sistema pero ese dato no esta ingerido",
+  "no_contrastable_con_este_corpus": "la frase no trae un dato que este corpus resuelva"
+ },
+ "limitacion_declarada": "Del articulo no se guarda el texto (obra ajena, repo publico). Si el medio lo edita o lo baja, el hash prueba que cambio, no que decia.",
+ "total_articulos": 2,
+ "articulos": [
+  {
+   "sha256": "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83",
+   "seq_registro": 1,
+   "medio": "Diario y Radio Universidad de Chile",
+   "titulo": "A las 2:40 horas el Senado aprobo megarreforma: Proyecto volvio a la Camara",
+   "url": "https://radio.uchile.cl/2026/07/16/a-las-240-horas-el-senado-aprobo-megarreforma-proyecto-volvio-a-la-camara/",
+   "fecha_publicacion": "2026-07-16",
+   "tema": "mega-reforma",
+   "archivo": "afirmaciones/68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83.json",
+   "conteo": {
+    "coincide": 0,
+    "difiere": 1,
+    "sin_dato_disponible": 3,
+    "no_contrastable_con_este_corpus": 20
+   },
+   "total_afirmaciones": 24,
+   "densidad_contrastable": 0.0417,
+   "ingestas_pendientes": [
+    "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
+   ]
+  },
+  {
+   "sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
+   "seq_registro": 0,
+   "medio": "El Mostrador",
+   "titulo": "Megarreforma tropieza en la ultima valla: Gobierno retira urgencia y aplaza su despacho hasta agosto",
+   "url": "https://www.elmostrador.cl/noticias/pais/2026/07/23/megarreforma-tropieza-en-la-ultima-valla-gobierno-retira-urgencia-y-aplaza-su-despacho-hasta-agosto/",
+   "fecha_publicacion": "2026-07-23",
+   "tema": "mega-reforma",
+   "archivo": "afirmaciones/34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26.json",
+   "conteo": {
+    "coincide": 1,
+    "difiere": 0,
+    "sin_dato_disponible": 0,
+    "no_contrastable_con_este_corpus": 8
+   },
+   "total_afirmaciones": 9,
+   "densidad_contrastable": 0.1111,
+   "ingestas_pendientes": []
+  }
+ ]
+}

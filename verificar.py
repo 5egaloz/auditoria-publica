@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
-"""Verificador de la cadena del manifiesto — Auditoria Civica de Datos Abiertos.
+"""Verificador de las cadenas del repositorio — Auditoria Civica de Datos Abiertos.
 
-Valida (ver CLAUDE.md, Bloque 1):
+CADENA PRINCIPAL (manifest.jsonl). Valida (ver CLAUDE.md, Bloque 1):
   1. seq contiguos desde 0.
   2. hash-chain: sha256_prev de cada entrada == sha256_linea de la anterior
      (genesis: 64 ceros).
   3. sha256_linea de cada entrada (serializacion canonica con sha256_linea vacio).
   4. cada archivo de data/raw/ existe, pesa lo declarado y su SHA-256 coincide.
+
+CADENA DE PRENSA (prensa/registro.jsonl), si existe. Valida 1, 2 y 3, y NO valida
+el punto 4 por una razon que hay que decir en voz alta: de los articulos no se
+guarda el texto —es obra ajena y el repo es publico— asi que no hay archivo local
+que rehashear. El sha256 registrado prueba QUE bytes sirvio esa URL en ese
+instante; si el medio edita o baja la nota, el hash prueba que cambio, no que
+decia. Es una limitacion real del diseno y se declara en vez de disimularse.
 
 Salida: "CADENA OK (N entradas)" o el seq exacto donde se rompe (exit 1).
 Sin dependencias: solo stdlib. Cualquier tercero puede correrlo.
@@ -81,6 +88,59 @@ def main() -> int:
         print("Manifiesto vacio: 0 entradas.")
         return 1
     print(f"CADENA OK ({total} entradas)")
+    return verificar_prensa()
+
+
+def verificar_prensa() -> int:
+    """Cadena propia de los articulos de prensa. Sin archivos locales que rehashear."""
+    registro = RAIZ / "prensa" / "registro.jsonl"
+    if not registro.exists():
+        return 0   # el modulo de prensa es opcional: sin registro no hay nada que validar
+
+    campos = {"seq", "sha256", "sha256_prev", "sha256_linea", "url", "medio",
+              "titulo", "fecha_publicacion", "timestamp_utc", "bytes"}
+    prev = GENESIS_PREV
+    total = 0
+    with registro.open(encoding="utf-8") as f:
+        for num, linea in enumerate(f):
+            linea = linea.strip()
+            if not linea:
+                continue
+            try:
+                e = json.loads(linea)
+            except json.JSONDecodeError as err:
+                print(f"CADENA DE PRENSA ROTA en la linea {num + 1}: JSON invalido: {err}")
+                return 1
+            faltan = campos - set(e)
+            if faltan:
+                print(f"CADENA DE PRENSA ROTA en seq {e.get('seq', num)}: "
+                      f"faltan campos {sorted(faltan)}")
+                return 1
+            if e["seq"] != total:
+                print(f"CADENA DE PRENSA ROTA en seq {e['seq']}: no contiguo (esperado {total})")
+                return 1
+            if e["sha256_prev"] != prev:
+                print(f"CADENA DE PRENSA ROTA en seq {e['seq']}: "
+                      "sha256_prev no coincide con la entrada anterior")
+                return 1
+            if e["sha256_linea"] != hash_canonico(e):
+                print(f"CADENA DE PRENSA ROTA en seq {e['seq']}: entrada alterada")
+                return 1
+            if e.get("texto_guardado"):
+                # Invariante del diseno: si algun dia esto es True, alguien
+                # empezo a republicar obra ajena desde un repo publico.
+                print(f"CADENA DE PRENSA: seq {e['seq']} declara texto_guardado=true, "
+                      "que este diseno no permite.")
+                return 1
+            print(f"  prensa seq {e['seq']} OK  [{e['medio']}] {e['url']}")
+            prev = e["sha256_linea"]
+            total += 1
+
+    if total == 0:
+        print("Cadena de prensa vacia: 0 entradas.")
+        return 0
+    print(f"CADENA DE PRENSA OK ({total} entradas) — sin archivos locales: "
+          "de los articulos solo se sella el hash de lo que sirvio la URL.")
     return 0
 
 

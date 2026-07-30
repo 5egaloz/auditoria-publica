@@ -1,0 +1,293 @@
+{
+ "descripcion": "Afirmaciones con cantidad extraidas de un articulo de prensa por reglas deterministas, para contrastarlas contra el corpus sellado. No se guarda el texto del articulo: solo citas literales acotadas de las frases con cifra.",
+ "generado_por": "extraer_prensa.py",
+ "derivado": true,
+ "capa": "A (determinista, sin IA)",
+ "tope_de_cita": {
+  "palabras": 30,
+  "caracteres": 240
+ },
+ "articulo": {
+  "sha256": "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83",
+  "seq_registro": 1,
+  "medio": "Diario y Radio Universidad de Chile",
+  "titulo": "A las 2:40 horas el Senado aprobo megarreforma: Proyecto volvio a la Camara",
+  "url": "https://radio.uchile.cl/2026/07/16/a-las-240-horas-el-senado-aprobo-megarreforma-proyecto-volvio-a-la-camara/",
+  "fecha_publicacion": "2026-07-16",
+  "tema": "mega-reforma"
+ },
+ "total_oraciones": 52,
+ "oraciones_con_cantidad": 23,
+ "afirmaciones": [
+  {
+   "n": 1,
+   "oracion": 0,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 2,
+   "oracion": 1,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 3,
+   "oracion": 3,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 4,
+   "oracion": 4,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 5,
+   "oracion": 6,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 6,
+   "oracion": 7,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 7,
+   "oracion": 10,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 8,
+   "oracion": 11,
+   "cita": "Habrá una tasa corporativa de un 1,5% a las empresas que se acojan a la invariabilidad.",
+   "plantilla": "tasa_impuesto",
+   "descripcion_plantilla": "tasa de un impuesto establecida por un proyecto o ley",
+   "herramienta": null,
+   "parametros": {
+    "valor": 1.5
+   },
+   "fragmento_que_calzo": "tasa corporativa de un 1,5%",
+   "veredicto": "sin_dato_disponible",
+   "necesita": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido",
+   "detalle": "La afirmacion es del tipo que el sistema sabe contrastar, pero la fuente que la resuelve no esta ingerida todavia.",
+   "ingesta_pendiente": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
+  },
+  {
+   "n": 9,
+   "oracion": 12,
+   "cita": "La disposición fue respaldada por 26 votos a favor, la abstención de Araya y 23 en contra, incluidos los senadores PPD Loreto Carvajal y Ricardo Celis, que habían llegado a…",
+   "plantilla": "votacion_totales",
+   "descripcion_plantilla": "votos a favor y en contra de una votacion",
+   "herramienta": "buscar_votaciones",
+   "parametros": {
+    "favor": 26.0,
+    "contra": 23.0
+   },
+   "fragmento_que_calzo": "26 votos a favor, la abstención de Araya y 23 en contra",
+   "veredicto": "difiere",
+   "necesita": null,
+   "detalle": "El articulo dice 26 a favor y 23 en contra. Ninguna de las 117 votaciones registradas del boletin 18216-05 en la Camara tiene esos dos totales. Puede tratarse de una votacion del Senado, que no esta en el corpus: el sistema no dictamina a que se debe la diferencia.",
+   "cita_manifiesto": {
+    "seq": 678,
+    "sha256": "f0530a5c94a767c1de14959ccfc36c6ae47b866def014fd2a87aebf6bfca5af8",
+    "url_fuente": "https://opendata.camara.cl/camaradiputados/WServices/WSLegislativo.asmx/retornarProyectoLey?prmNumeroBoletin=18216-05",
+    "ruta_local": "data/raw/legislativo/2026-07-30/proyecto-18216-05.xml",
+    "timestamp_utc": "2026-07-30T19:34:01Z"
+   },
+   "del_articulo": {
+    "a_favor": 26.0,
+    "en_contra": 23.0
+   }
+  },
+  {
+   "n": 10,
+   "oracion": 12,
+   "cita": "La disposición fue respaldada por 26 votos a favor, la abstención de Araya y 23 en contra, incluidos los senadores PPD Loreto Carvajal y Ricardo Celis, que habían llegado a…",
+   "plantilla": "tasa_impuesto",
+   "descripcion_plantilla": "tasa de un impuesto establecida por un proyecto o ley",
+   "herramienta": null,
+   "parametros": {
+    "valor": 22.0
+   },
+   "fragmento_que_calzo": "impuesto corporativo al 22%",
+   "veredicto": "sin_dato_disponible",
+   "necesita": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido",
+   "detalle": "La afirmacion es del tipo que el sistema sabe contrastar, pero la fuente que la resuelve no esta ingerida todavia.",
+   "ingesta_pendiente": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
+  },
+  {
+   "n": 11,
+   "oracion": 15,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 12,
+   "oracion": 17,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 13,
+   "oracion": 18,
+   "cita": "El cronograma establece una reducción en 25,5% para el año 2027, 24% para 2028 y la tasa permanente de 23% desde el año comercial 2029 en adelante.",
+   "plantilla": "tasa_impuesto",
+   "descripcion_plantilla": "tasa de un impuesto establecida por un proyecto o ley",
+   "herramienta": null,
+   "parametros": {
+    "valor": 23.0
+   },
+   "fragmento_que_calzo": "tasa permanente de 23%",
+   "veredicto": "sin_dato_disponible",
+   "necesita": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido",
+   "detalle": "La afirmacion es del tipo que el sistema sabe contrastar, pero la fuente que la resuelve no esta ingerida todavia.",
+   "ingesta_pendiente": "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
+  },
+  {
+   "n": 14,
+   "oracion": 20,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 15,
+   "oracion": 21,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 16,
+   "oracion": 22,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 17,
+   "oracion": 24,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 18,
+   "oracion": 25,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 19,
+   "oracion": 26,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 20,
+   "oracion": 37,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 21,
+   "oracion": 38,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 22,
+   "oracion": 49,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 23,
+   "oracion": 50,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 24,
+   "oracion": 51,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  }
+ ],
+ "contraste": {
+  "generado_por": "contrastar_prensa.py",
+  "conteo": {
+   "coincide": 0,
+   "difiere": 1,
+   "sin_dato_disponible": 3,
+   "no_contrastable_con_este_corpus": 20
+  },
+  "total_afirmaciones": 24,
+  "densidad_contrastable": 0.0417,
+  "formula_densidad": "densidad_contrastable = (coincide + difiere) / total_afirmaciones",
+  "ingestas_pendientes": [
+   "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
+  ]
+ }
+}

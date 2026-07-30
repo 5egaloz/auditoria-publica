@@ -2,3 +2,10 @@
 # manifest.jsonl) SI se versiona: es lo que permite que un tercero verifique.
 __pycache__/
 *.pyc
+
+# Copias de trabajo del texto de articulos de prensa. NUNCA se versionan: el repo
+# es publico y el texto de un medio es obra ajena. Del articulo solo se versiona
+# su entrada sellada en prensa/registro.jsonl (URL, medio, fecha, hash de los
+# bytes servidos) y las citas cortas de las frases con cifra que quedan en
+# data/derived/prensa/. Ver ingesta_prensa.py.
+prensa/textos/
