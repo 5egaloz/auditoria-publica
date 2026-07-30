@@ -6,164 +6,706 @@
 <title>Auditoría Cívica — Chile</title>
 <meta name="description" content="Datos públicos chilenos con fuente y hash verificable. Cada cifra explicada al pasar el cursor.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- Las dos fuentes que la pagina usa de inmediato: se precargan para que el texto
+     no parpadee del sistema a Plex. El resto se descarga solo si hace falta. -->
+<link rel="preload" href="fonts/ibm-plex-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+/* ── TIPOGRAFIAS, SERVIDAS DESDE ESTE REPOSITORIO ──
+   IBM Plex: voz institucional, disenada como tipografia de registro publico.
+   Sans para la interfaz, Mono para todo lo verificable (hashes, seq, ejes).
+
+   Van locales y no desde un CDN a proposito: el sitio se sostiene en "no confies
+   en nosotros, recalcula los hashes", y pedirle las fuentes a fonts.gstatic.com
+   metia una dependencia de terceros —y le revelaba la visita— en la pagina que
+   justamente propone no depender de nadie. Ademas ya no se rompe si ese CDN cae.
+
+   Plex Sans es fuente VARIABLE: un solo archivo por subset cubre 400-600, y el
+   navegador interpola el peso. Plex Mono si necesita un archivo por peso.
+   El unicode-range es lo que hace que latin-ext solo se baje si aparece un
+   caracter que lo necesite: el espanol se cubre entero con el subset latin.
+   font-display:swap + pila de sistema en --sans: si una fuente no llega, la
+   pagina se lee igual y nunca queda en blanco.
+   Licencia SIL OFL 1.1 — ver fonts/LICENSE.txt */
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/ibm-plex-sans-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Sans';font-style:normal;font-weight:400 600;font-display:swap;
+  src:url(fonts/ibm-plex-sans-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;
+  src:url(fonts/ibm-plex-mono-400-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;
+  src:url(fonts/ibm-plex-mono-400-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;
+  src:url(fonts/ibm-plex-mono-500-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;
+  src:url(fonts/ibm-plex-mono-500-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* ═══════════════════════════════════════════════════════════════════════
+   AUDITORÍA CÍVICA — sistema visual "registro público"
+   ───────────────────────────────────────────────────────────────────────
+   La decision de fondo: esto no es un dashboard, es un registro sellado.
+   De ahi sale todo lo demas.
+   · Ground grafito CALIDO, no azul marino: el azul marino con acento azul
+     es el admin template por defecto de la ultima decada. El neutro lleva
+     sesgo calido a proposito — un gris puro se lee como "no elegido".
+   · Mono para lo que es dato verificable: hashes, seq, cifras de tabla,
+     ejes. El mono es el vernaculo del tema (manifest.jsonl, sha256).
+   · Reglas finas en vez de tarjetas flotantes con riel de acento.
+   · Sin emoji: los pictogramas son propios (sprite SVG de este archivo) y
+     SIEMPRE acompanan a un rotulo de texto, nunca lo reemplazan.
+   · Giro didactico: neutral no es lo mismo que gris. El color entra como
+     identidad de modulo y como ayuda de lectura; lo que NO entra nunca es
+     color que emita un juicio sobre una cifra de politica publica.
+     La regla que manda sobre todo lo de abajo:
+       el color, el icono y la palabra simple cambian COMO se ve y COMO se
+       explica una cifra; nunca CUAL es, de donde salio ni su hash.
+   · Series: paleta validada con el validador de la skill de dataviz.
+     Las 5 comprobaciones pasan sobre la superficie #1a1a19 (peor par
+     adyacente CVD ΔE 8.4, vision normal 19.3). Orden fijo, NUNCA ciclada.
+   ═══════════════════════════════════════════════════════════════════════ */
 :root{
-  --bg:#0b0f19; --card:#131a2b; --card2:#1a2338; --line:#243044;
-  --txt:#e1e6f0; --dim:#7b8daa; --blue:#4da6ff; --green:#3dd68c;
-  --orange:#f0a050; --red:#f05050; --purple:#a78bfa; --cyan:#22d3ee; --yellow:#facc15;
+  /* Ground */
+  --plano:#12110f; --sup:#1a1a19; --sup-2:#232321;
+  /* Tinta */
+  --tinta:#ffffff; --tinta-2:#c3c2b7; --tinta-3:#898781;
+  /* Cromo de graficos */
+  --malla:#2c2c2a; --regla:#383835; --filo:rgba(255,255,255,.10);
+  /* Series categoricas — 8 ranuras, orden fijo */
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500;
+  --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767;
+  /* Acento de modulo: dice DE QUE registro habla la seccion. Identidad, no
+     valor. Cada seccion lo sobreescribe; ver el bloque COLOR DE MODULO. */
+  --acento:var(--s1);
+  /* Estado — reservado. Un color de estado nunca hace de serie. */
+  --bien:#0ca30c; --alerta:#fab219; --grave:#ec835a; --critico:#d03b3b;
+  --critico-txt:#e05252;  /* el critico puro da 3.62:1, no alcanza en texto chico */
+  --enlace:#3987e5;       /* 4.79:1 sobre la superficie */
+  /* Tipo */
+  --sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'Cascadia Mono',Consolas,monospace;
+  --t-xs:.72rem; --t-s:.8rem; --t-m:.875rem; --t-b:1rem;
+  --t-l:1.2rem; --t-xl:1.7rem; --t-hero:3.4rem;
+  --r:3px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6}
-header{background:linear-gradient(135deg,#0d1525,#152040);padding:40px 20px 32px;text-align:center;border-bottom:1px solid var(--line)}
-header h1{font-size:2rem;font-weight:800;margin-bottom:6px;animation:fadeIn .8s}
-header h1 span{color:var(--blue)}
-header p{color:var(--dim);max-width:650px;margin:0 auto;font-size:.95rem}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes count{from{opacity:0}to{opacity:1}}
-nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line);
-    display:flex;overflow-x:auto;gap:0;padding:0 12px;scrollbar-width:none}
-nav button{background:none;border:none;color:var(--dim);padding:14px 12px;font-size:.82rem;
-    cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-weight:500;transition:color .2s,border-color .2s}
-nav button:hover,nav button.activo{color:var(--txt);border-bottom-color:var(--blue)}
-main{max-width:1100px;margin:0 auto;padding:24px 16px 60px}
-section{display:none;animation:slideUp .5s}
+body{font-family:var(--sans);background:var(--plano);color:var(--tinta-2);line-height:1.6;
+  font-size:var(--t-b);-webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono);font-variant-ligatures:none}
+:focus-visible{outline:2px solid var(--enlace);outline-offset:2px}
+
+/* ── Aparicion escalonada (la controla el JS) ── */
+.js-fade{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.js-fade.visible{opacity:1;transform:translateY(0)}
+@keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MASTHEAD: la tesis del sitio, no un banner ──
+   El heroe es el estado de la cadena. Es la propuesta completa del sitio y
+   estaba enterrada en la 6a pestana. Alineado a la izquierda: "todo
+   centrado" es una de las marcas del diseno generico. */
+header{background:var(--plano);border-bottom:1px solid var(--regla);padding:34px 20px 26px}
+.masthead{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:32px;align-items:end}
+header h1{font-family:var(--sans);font-size:var(--t-xl);font-weight:600;letter-spacing:-.02em;
+  color:var(--tinta);margin-bottom:8px;text-wrap:balance}
+/* :not(.l) excluye los spans de una letra que crea el reveal del JS; si no, la
+   regla los alcanza a todos y el titulo entero sale azul. Las letras heredan. */
+header h1 span:not(.l){color:var(--enlace)}
+.bajada{color:var(--tinta-3);font-size:var(--t-m);max-width:52ch}
+/* El sello: cifra heroe + estado. Regla vertical a la izquierda en vez de
+   tarjeta — el registro se lee como columna de libro, no como widget. */
+.sello{border-left:1px solid var(--regla);padding-left:24px;text-align:left}
+.hero-etiqueta{font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.12em;color:var(--tinta-3)}
+/* Cifras proporcionales, no tabular-nums: a este tamano tabular se ve suelto. */
+.hero-cifra{font-size:var(--t-hero);font-weight:600;line-height:1.05;color:var(--tinta);letter-spacing:-.03em}
+.hero-pie{font-size:var(--t-xs);color:var(--tinta-3);margin-top:2px}
+/* Estado en forma, no solo en color: punto + etiqueta. */
+.chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-size:var(--t-xs);
+  font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px 5px 9px;
+  border:1px solid var(--regla);border-radius:100px;background:var(--sup);color:var(--tinta-2);
+  cursor:pointer;transition:border-color .2s,color .2s;margin-bottom:12px}
+.chip:hover{border-color:var(--tinta-3);color:var(--tinta)}
+.chip::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--tinta-3);flex:none}
+.chip[data-estado="ok"]{color:var(--bien);border-color:color-mix(in srgb,var(--bien) 45%,transparent)}
+.chip[data-estado="ok"]::before{background:var(--bien)}
+.chip[data-estado="roto"]{color:var(--critico-txt);border-color:color-mix(in srgb,var(--critico) 55%,transparent)}
+.chip[data-estado="roto"]::before{background:var(--critico)}
+.chip[data-estado="aviso"]{color:var(--alerta);border-color:color-mix(in srgb,var(--alerta) 45%,transparent)}
+.chip[data-estado="aviso"]::before{background:var(--alerta)}
+.chip[data-estado="trabajando"]::before{background:var(--enlace)}
+
+/* ── NAV: pestanas de registro, sin emoji ── */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--plano) 92%,transparent);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--regla);
+  display:flex;overflow-x:auto;padding:0 16px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{background:none;border:none;color:var(--tinta-3);padding:13px 14px;font-family:var(--sans);
+  font-size:var(--t-s);font-weight:500;letter-spacing:.03em;cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav button:hover{color:var(--tinta-2)}
+nav button.activo{color:var(--tinta);border-bottom-color:var(--acento)}
+
+/* ── COLOR DE MODULO ──
+   El acento identifica el registro del que sale la seccion: Fiscal azul,
+   Congreso naranjo, Tendencia verde, Escanos ambar. Son las mismas ranuras
+   categoricas ya validadas, usadas aqui como identidad.
+   Lo que este color NO hace: calificar. Los colores de estado
+   (--bien/--alerta/--critico) quedan reservados a hechos comprobables —cadena
+   integra o rota, archivo encontrado o no— y no se usan en ninguna cifra de
+   politica publica. "Rojo = malo" es una opinion, y este sitio no emite. */
+/* La ficha toma el acento del modulo de la cifra que la abrio. */
+dialog.ficha[data-modulo="fiscal"]{--acento:var(--s1)}
+dialog.ficha[data-modulo="legislativo"]{--acento:var(--s2)}
+dialog.ficha[data-modulo="tendencia"]{--acento:var(--s3)}
+dialog.ficha[data-modulo="concentracion"]{--acento:var(--s4)}
+section[data-modulo="fiscal"],       nav button[data-s="fiscal"]{--acento:var(--s1)}
+section[data-modulo="legislativo"],  nav button[data-s="legislativo"]{--acento:var(--s2)}
+section[data-modulo="tendencia"],    nav button[data-s="tendencia"]{--acento:var(--s3)}
+section[data-modulo="concentracion"],nav button[data-s="concentracion"]{--acento:var(--s4)}
+section[data-modulo="prensa"],       nav button[data-s="prensa"]{--acento:var(--s5)}
+section[data-modulo="glosario"],     nav button[data-s="glosario"]{--acento:var(--s7)}
+section[data-modulo="verificar"],    nav button[data-s="verificar"]{--acento:var(--tinta-2)}
+
+/* ── NIVEL DE LECTURA: mismas cifras, otras palabras ──
+   El interruptor cambia la redaccion, jamas un numero. Los dos textos existen
+   en el documento (buscables y copiables) y el CSS muestra uno: si el JS
+   fallara, "simple" es el estado por defecto del HTML y la pagina se lee igual. */
+.lectura{display:flex;gap:0;margin-left:auto;align-self:center;padding-left:12px;flex:none}
+.lectura button{border:1px solid var(--regla);padding:5px 11px;font-size:var(--t-xs);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-3);background:none;
+  font-family:var(--sans);font-weight:500;cursor:pointer;transition:color .2s,background .2s,border-color .2s}
+.lectura button:first-child{border-radius:100px 0 0 100px}
+.lectura button:last-child{border-radius:0 100px 100px 0;border-left:none}
+.lectura button[aria-pressed="true"]{color:var(--plano);background:var(--tinta-2);border-color:var(--tinta-2)}
+.lectura button:not([aria-pressed="true"]):hover{color:var(--tinta)}
+html[data-lectura="tecnico"] .t-simple{display:none}
+html:not([data-lectura="tecnico"]) .t-tecnico{display:none}
+
+main{max-width:1100px;margin:0 auto;padding:28px 16px 72px}
+section{display:none;animation:slideUp .45s}
 section.activa{display:block}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:12px 0}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;transition:transform .2s,box-shadow .2s}
-.kpi:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.kpi .label{font-size:.75rem;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
-.kpi .value{font-size:1.9rem;font-weight:800;margin:6px 0 2px;font-variant-numeric:tabular-nums}
-.kpi .sub{font-size:.78rem;color:var(--dim)}
-.chart-box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:12px 0;transition:box-shadow .2s}
-.chart-box:hover{box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.chart-box h3{font-size:.88rem;color:var(--dim);margin-bottom:6px;font-weight:600}
+/* Eyebrow + titulo: el eyebrow dice de que registro sale la seccion. */
+h2{font-size:var(--t-l);font-weight:600;color:var(--tinta);letter-spacing:-.01em;margin:0 0 4px;text-wrap:balance}
+.eyebrow{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;letter-spacing:.14em;
+  color:var(--tinta-3);margin-top:8px}
+/* La regla de cierre de la cabecera va en el color del modulo: es el bloque de
+   color mas grande de la seccion y solo dice "esto es Fiscal". */
+.cabecera-sec{padding-bottom:14px;margin-bottom:18px;border-bottom:2px solid var(--acento)}
+/* Pictograma propio. Hereda el acento y va aria-hidden: el rotulo lo lleva el texto. */
+.ico{width:20px;height:20px;flex:none;color:var(--acento);vertical-align:-4px;margin-right:9px}
+.ico-s{width:15px;height:15px;vertical-align:-2px;margin:0 0 0 6px;color:var(--tinta-3)}
+
+/* ── Nota de lectura: regla fina + tinta atenuada.
+   Antes era una tarjeta con riel de acento azul a la izquierda, que es
+   literalmente uno de los patrones de diseno generado por IA. ── */
+.explain{border-top:1px solid var(--malla);padding:11px 0 0;margin:14px 0;
+  font-size:var(--t-m);color:var(--tinta-3);max-width:78ch}
+.explain b{display:block;font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.12em;color:var(--tinta-2);font-weight:500;margin-bottom:5px}
+
+/* ── KPI: la primera pieza manda, las otras acompanan ──
+   La superficie lleva el acento del modulo, pero mezclado sobre una base MAS
+   OSCURA que --sup, no sobre --sup. Motivo medido: teniendo directamente sobre
+   #1a1a19 la superficie se aclara y --tinta-3 cae a 4,42:1 y la etiqueta de
+   categoria a 4,18:1 — las dos bajo el piso de 4,5:1 para texto chico. Con la
+   base a #141413 el tinte se ve igual y todo vuelve a pasar: tinta-3 4,65-4,76,
+   blanco ~17, la etiqueta 4,66 (azul) y 5,42 (violeta). */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;margin:18px 0;
+  background:var(--regla);border:1px solid var(--regla)}
+.kpi{background:color-mix(in srgb,var(--acento) 8%,#141413);padding:16px 18px 17px}
+.kpi .label{font-size:var(--t-xs);color:var(--tinta-3);text-transform:uppercase;letter-spacing:.1em}
+/* Proporcionales: tabular-nums en una cifra grande suelta los digitos. */
+.kpi .value{font-size:var(--t-xl);font-weight:600;color:var(--tinta);letter-spacing:-.02em;
+  line-height:1.15;margin:7px 0 3px}
+.kpi:first-child .value{font-size:2.1rem}
+/* Solo para conteos y rangos (cuantos informes, que periodo). La cifra de
+   politica publica —el balance— se queda en tinta: ver .cifra. */
+.kpi .value.acento{color:var(--acento)}
+.kpi .sub{font-size:var(--t-xs);color:var(--tinta-3);line-height:1.5}
+/* Sin esta regla el unico enlace suelto de un KPI se pinta con el azul por
+   defecto del navegador (#0000EE): 1,80:1 sobre el fondo tenido, o sea texto
+   invisible. Con el token del sitio da 4,65:1. */
+.kpi .sub a{color:var(--enlace)}
+.kpi .u{font-size:.55em;font-weight:500;color:var(--tinta-3);letter-spacing:0;margin-left:3px}
+
+/* ── Etiqueta de categoria: la palabra hace el trabajo que hacia el color ──
+   Deficit y superavit son dos categorias, no una buena y una mala. Se nombran
+   con texto y se distinguen con dos colores de identidad (azul / violeta),
+   nunca con verde/rojo. */
+.etiqueta-cat{display:inline-block;font-family:var(--mono);font-size:var(--t-xs);font-weight:500;
+  text-transform:uppercase;letter-spacing:.1em;padding:0 7px;border-radius:100px;
+  border:1px solid currentColor}
+.etiqueta-cat[data-cat="deficit"]{color:var(--s1)}
+.etiqueta-cat[data-cat="superavit"]{color:var(--s7)}
+
+/* ── La cifra como boton: abre su ficha de origen ──
+   Es un <button> de verdad (teclado y lector de pantalla), pintado como cifra.
+   El subrayado punteado avisa que hay algo detras, igual que en el glosario. */
+.cifra{font:inherit;color:inherit;letter-spacing:inherit;background:none;border:none;padding:0;
+  cursor:pointer;text-align:left;display:inline-flex;align-items:baseline;
+  border-bottom:1px dashed color-mix(in srgb,var(--acento) 55%,transparent);transition:border-color .2s}
+.cifra:hover,.cifra:focus-visible{border-bottom-color:var(--acento)}
+.cifra:hover .ico-s{color:var(--acento)}
+.cifra .u{margin-left:2px;color:var(--tinta-3)}
+
+/* ── "Cuanto es eso": la misma cifra dicha en otra unidad ──
+   No es una estimacion ni una analogia: es aritmetica sobre el dato sellado. */
+.equivale{border-left:2px solid color-mix(in srgb,var(--acento) 55%,transparent);
+  padding:2px 0 2px 12px;margin:14px 0;font-size:var(--t-m);color:var(--tinta-2);max-width:70ch}
+.equivale b{display:block;font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.12em;color:var(--acento);font-weight:500;margin-bottom:4px}
+.equivale p+p{margin-top:8px}
+.equivale strong{color:var(--tinta);font-weight:600}
+
+/* ── PRENSA: veredictos ──
+   Los cuatro estados son el resultado de una comprobacion, no una nota al medio.
+   Por eso "coincide" si lleva el verde de estado —es una comprobacion superada,
+   igual que "cadena integra"— pero "difiere" NO lleva rojo: pintarlo de rojo le
+   diria al lector "el medio mintio", que es justo lo que el sistema declara no
+   dictaminar (puede ser otro ano, otra definicion, otra fuente o un error). Va
+   en un color de identidad. Y los cuatro llevan SIEMPRE etiqueta de texto: el
+   color nunca es el unico portador del estado. */
+.veredicto{display:inline-block;font-family:var(--mono);font-size:var(--t-xs);font-weight:500;
+  text-transform:uppercase;letter-spacing:.09em;padding:1px 8px;border-radius:100px;
+  border:1px solid currentColor;white-space:nowrap}
+.veredicto[data-v="coincide"]{color:var(--bien)}
+.veredicto[data-v="difiere"]{color:var(--s1)}
+.veredicto[data-v="sin_dato_disponible"]{color:var(--tinta-2)}
+.veredicto[data-v="no_contrastable_con_este_corpus"]{color:var(--tinta-3)}
+.articulo{background:color-mix(in srgb,var(--acento) 6%,#141413);border:1px solid var(--regla);
+  border-radius:var(--r);padding:16px 18px;margin:14px 0}
+.articulo h3{font-size:var(--t-m);color:var(--tinta);font-weight:600;margin-bottom:3px}
+.articulo .meta{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);margin-bottom:12px}
+.articulo .meta a{color:var(--enlace)}
+/* La cita ajena se marca como ajena: sangrada, entre comillas y en otra voz. */
+.cita-prensa{border-left:2px solid var(--regla);padding-left:11px;color:var(--tinta-2);
+  font-size:var(--t-s);max-width:76ch}
+.afirmacion{padding:12px 0;border-bottom:1px solid var(--malla)}
+.afirmacion:last-child{border-bottom:none}
+.afirmacion .contra{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);
+  margin-top:7px;line-height:1.6}
+.barra-densidad{display:flex;height:6px;border-radius:100px;overflow:hidden;background:var(--malla);margin:10px 0 4px}
+.barra-densidad span{display:block}
+
+/* ── Ficha de origen ── */
+/* El margin:auto es explicito: al fijarle un width propio al dialogo, el
+   centrado que trae el navegador de fabrica deja de aplicarse y la ficha
+   aparecia pegada arriba a la izquierda. */
+dialog.ficha{background:var(--sup);color:var(--tinta-2);border:1px solid var(--regla);
+  border-radius:var(--r);padding:0;max-width:640px;width:calc(100% - 32px);margin:auto;
+  max-height:86vh;overflow:auto;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+dialog.ficha::backdrop{background:rgba(8,8,7,.72)}
+.ficha-cab{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  padding:16px 18px 14px;border-bottom:2px solid var(--acento)}
+.ficha-cab h3{font-size:var(--t-m);color:var(--tinta);font-weight:600}
+.ficha-cab p{font-size:var(--t-xs);color:var(--tinta-3);margin-top:3px}
+.ficha-cerrar{background:none;border:1px solid var(--regla);border-radius:var(--r);color:var(--tinta-3);
+  font-family:var(--mono);font-size:var(--t-xs);padding:4px 9px;cursor:pointer;flex:none}
+.ficha-cerrar:hover{color:var(--tinta);border-color:var(--tinta-3)}
+.ficha-cuerpo{padding:16px 18px 18px}
+.ficha-cifra{font-size:var(--t-xl);font-weight:600;color:var(--tinta);letter-spacing:-.02em;margin-bottom:2px}
+/* Leida o calculada: la distincion se declara arriba de todo, no en letra chica.
+   Los dos son estados legitimos; lo ilegitimo seria no decir cual es cual. */
+.sello-tipo{display:inline-block;margin-top:10px;font-family:var(--mono);font-size:var(--t-xs);
+  text-transform:uppercase;letter-spacing:.11em;padding:2px 9px;border-radius:100px;border:1px solid currentColor}
+/* El texto va en tinta y el acento queda en el borde: con el naranjo de Congreso
+   como color de texto chico el par daba 4,48:1, bajo el piso de 4,5. */
+.sello-tipo[data-tipo="leida"]{color:var(--tinta-2);border-color:var(--acento)}
+.sello-tipo[data-tipo="calculada"]{color:var(--tinta-2);border-color:var(--tinta-3)}
+.ficha-campos{width:100%;font-family:var(--mono);font-size:var(--t-xs);border-collapse:collapse;margin-top:14px}
+.ficha-campos th{width:34%;color:var(--tinta-3);font-weight:400;text-transform:none;letter-spacing:.02em;
+  vertical-align:top;padding:5px 12px 5px 0;border-bottom:1px solid var(--malla)}
+.ficha-campos td{color:var(--tinta-2);word-break:break-word;padding:5px 0;border-bottom:1px solid var(--malla)}
+.ficha-acciones{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.boton-fino{background:none;border:1px solid var(--regla);border-radius:var(--r);color:var(--tinta-2);
+  font-family:var(--sans);font-size:var(--t-s);font-weight:500;padding:8px 14px;cursor:pointer;
+  transition:border-color .2s,color .2s;text-decoration:none;display:inline-block}
+.boton-fino:hover{color:var(--tinta);border-color:var(--tinta-3)}
+
+/* ── Grafico: superficie plana, sin sombra ni hover que levante ── */
+/* Mismo criterio de base oscura que .kpi: aca la nota al pie queda en 4,79-4,86. */
+.chart-box{background:color-mix(in srgb,var(--acento) 6%,#141413);border:1px solid var(--regla);
+  border-radius:var(--r);padding:18px 18px 14px;margin:18px 0}
+.chart-box h3{font-size:var(--t-m);color:var(--tinta);margin-bottom:14px;font-weight:600;letter-spacing:-.005em}
 /* El canvas se dimensiona por su contenedor: Chart.js corre con maintainAspectRatio:false.
-   Sin altura explicita aqui, un canvas creado dentro de una seccion recien mostrada mide 0. */
-.canvas-wrap{position:relative;height:300px;width:100%}
+   Sin altura explicita aqui, un canvas creado dentro de una seccion recien mostrada mide 0.
+   La altura incluye la banda de etiquetas del eje x — si no, la tarjeta genera
+   un scroll vertical propio y las etiquetas quedan cortadas. */
+.canvas-wrap{position:relative;height:320px;width:100%}
 .canvas-wrap canvas{display:block}
-.sin-dato{color:var(--dim);text-align:center;padding:24px;font-size:.85rem}
-.nota{font-size:.82rem;color:var(--dim);margin:6px 0}
-table{border-collapse:collapse;width:100%}
-th,td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;font-variant-numeric:tabular-nums}
-th{color:var(--dim);font-weight:600;font-size:.78rem;text-transform:uppercase;letter-spacing:.4px}
-.explain{background:var(--card2);border-left:3px solid var(--blue);border-radius:0 10px 10px 0;padding:12px 16px;margin:8px 0;font-size:.85rem;color:var(--dim)}
-.explain b{color:var(--txt)}
-h2{font-size:1.3rem;margin:20px 0 6px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;margin:10px 0}
-.verde{color:var(--green)} .rojo{color:var(--red)} .azul{color:var(--blue)} .naranja{color:var(--orange)} .amarillo{color:var(--yellow)}
-.drop{border:2px dashed var(--line);border-radius:12px;padding:30px;text-align:center;color:var(--dim);cursor:pointer;transition:border-color .3s,background .3s}
-.drop.sobre{border-color:var(--blue);background:rgba(77,166,255,.06)}
-.boton{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:.92rem;font-weight:600;cursor:pointer;transition:opacity .2s,transform .15s}
-.boton:hover{opacity:.9;transform:scale(1.02)}
-.cargando{color:var(--dim);text-align:center;padding:30px}
-/* ── TOOLTIP GLOSSARY ── */
-.gloss-term{border-bottom:1px dotted var(--blue);cursor:help;position:relative;display:inline}
-.gloss-term:hover,.gloss-term:focus-visible{z-index:100}
-.gloss-term:focus-visible{outline:1px solid var(--blue);outline-offset:2px}
-.gloss-term::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%) scale(.9);
-  background:#1e293b;color:var(--txt);font-size:.78rem;font-weight:400;line-height:1.45;text-transform:none;letter-spacing:normal;
-  padding:8px 12px;border-radius:8px;border:1px solid var(--line);white-space:normal;width:260px;
-  pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.sin-dato{color:var(--tinta-3);text-align:center;padding:28px;font-size:var(--t-m)}
+.nota{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);margin:10px 0 0;line-height:1.6}
+
+/* ── Tabla de registro: mono, tabular, reglas finas ── */
+.tabla-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:var(--t-xs)}
+th,td{border-bottom:1px solid var(--malla);padding:7px 12px 7px 0;text-align:left;
+  font-variant-numeric:tabular-nums}
+td{color:var(--tinta-2)}
+th{color:var(--tinta-3);font-weight:500;text-transform:uppercase;letter-spacing:.1em;
+  border-bottom-color:var(--regla)}
+tr:last-child td{border-bottom:none}
+
+.panel{background:var(--sup);border:1px solid var(--regla);border-radius:var(--r);padding:18px;margin:14px 0}
+.panel h3{font-size:var(--t-m);color:var(--tinta);font-weight:600;margin-bottom:4px}
+.verde{color:var(--bien)} .rojo{color:var(--critico-txt)} .azul{color:var(--enlace)}
+.naranja{color:var(--alerta)} .amarillo{color:var(--alerta)}
+.drop{border:1px dashed var(--regla);border-radius:var(--r);padding:30px;text-align:center;
+  color:var(--tinta-3);cursor:pointer;font-size:var(--t-m);transition:border-color .25s,background .25s}
+.drop.sobre{border-color:var(--enlace);background:color-mix(in srgb,var(--enlace) 7%,transparent)}
+.boton{background:var(--tinta);color:var(--plano);border:none;border-radius:var(--r);padding:11px 20px;
+  font-family:var(--sans);font-size:var(--t-m);font-weight:600;cursor:pointer;transition:opacity .2s}
+.boton:hover{opacity:.86}
+.cargando{color:var(--tinta-3);font-size:var(--t-m)}
+.hash{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);word-break:break-all}
+
+/* ── Glosario emergente ── */
+.gloss-term{border-bottom:1px dotted var(--tinta-3);cursor:help;position:relative;display:inline}
+.gloss-term:hover,.gloss-term:focus-visible{z-index:100;overflow:visible;color:var(--tinta-2)}
+.gloss-term::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) scale(.97);
+  background:var(--sup-2);color:var(--tinta-2);font-family:var(--sans);font-size:var(--t-s);
+  font-weight:400;line-height:1.5;text-transform:none;letter-spacing:normal;
+  padding:9px 13px;border-radius:var(--r);border:1px solid var(--regla);white-space:normal;
+  width:min(268px,calc(100vw - 24px));
+  pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+/* El globo se ancla por la derecha cuando centrado se saldria de la pantalla.
+   Sin esto, en un telefono el globo empujaba el ancho del documento (424px de
+   scroll en una pantalla de 345) y TODA la pagina se movia en horizontal. */
+.gloss-term.tip-der::after,
+.gloss-term.tip-der:hover::after,
+.gloss-term.tip-der:focus-visible::after{left:auto;right:0;transform:none}
 .gloss-term:hover::after,.gloss-term:focus-visible::after{opacity:1;transform:translateX(-50%) scale(1)}
 /* Terminos en la primera linea de una seccion: el globo se abre hacia abajo para no
    quedar tapado por el nav sticky. */
 .gloss-term.tip-abajo::after{bottom:auto;top:calc(100% + 8px)}
-/* Un ancestro con overflow recortaria el globo. */
-.gloss-term:hover,.gloss-term:focus-visible{overflow:visible}
-/* ── GLOSARIO PAGE ── */
-.glosario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px;margin:12px 0}
-.glosario-item{background:var(--card2);border-radius:10px;padding:14px;transition:transform .15s}
-.glosario-item:hover{transform:translateY(-1px)}
-.glosario-item b{color:var(--blue)}
-.glosario-item p{font-size:.84rem;color:var(--dim);margin-top:4px}
-summary{cursor:pointer;color:var(--blue);font-weight:500}
-footer{text-align:center;padding:30px;color:var(--dim);font-size:.82rem;border-top:1px solid var(--line)}
-@media(max-width:600px){header h1{font-size:1.4rem}.kpis{grid-template-columns:1fr 1fr}.glosario-grid{grid-template-columns:1fr}.gloss-term::after{width:200px;left:0;transform:none}.gloss-term:hover::after{transform:none}}
+
+/* ── Pagina de glosario ── */
+.glosario-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:1px;
+  margin:18px 0;background:var(--regla);border:1px solid var(--regla)}
+.glosario-item{background:var(--sup);padding:14px 16px}
+.glosario-item b{color:var(--tinta);font-weight:600;font-size:var(--t-m)}
+.glosario-item p{font-size:var(--t-s);color:var(--tinta-3);margin-top:3px}
+summary{cursor:pointer;color:var(--tinta-2);font-family:var(--mono);font-size:var(--t-xs);
+  text-transform:uppercase;letter-spacing:.1em;font-weight:500}
+summary:hover{color:var(--tinta)}
+details[open] summary{margin-bottom:12px}
+footer{padding:26px 16px 40px;color:var(--tinta-3);font-size:var(--t-xs);border-top:1px solid var(--regla);
+  max-width:1100px;margin:0 auto}
+/* "Reducir movimiento" apaga el movimiento, no la pagina: se van los
+   desplazamientos (el slideUp de seccion, el translateY del fade y el magnet, que
+   el JS desactiva leyendo la misma senal) y se quedan los cambios de opacidad,
+   que no son lo que produce mareo. */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important}
+  .js-fade{transform:none}
+}
+@media(max-width:760px){
+  /* El sello pasa de columna lateral a bloque bajo la marca: la regla vertical
+     se vuelve horizontal para que siga leyendose como separacion de registro. */
+  .masthead{grid-template-columns:1fr;gap:22px}
+  .sello{border-left:none;border-top:1px solid var(--regla);padding-left:0;padding-top:16px}
+}
+@media(max-width:600px){
+  :root{--t-hero:2.6rem;--t-xl:1.35rem}
+  .kpis{grid-template-columns:1fr 1fr}
+  .kpi:first-child .value{font-size:var(--t-xl)}
+  /* El interruptor de lectura no se encoge ni se parte: es la puerta al modo
+     simple, que es justamente el que sirve en un telefono. */
+  .lectura button{padding:5px 9px;letter-spacing:.03em}
+  dialog.ficha{width:calc(100% - 16px);max-height:88vh;overflow-y:auto}
+  .ficha-campos th{width:42%}
+  .glosario-grid{grid-template-columns:1fr}
+  /* El ancho ya lo acota el min() de arriba; aca solo deja de centrarse. */
+  .gloss-term::after{left:0;transform:none}
+  .gloss-term:hover::after,.gloss-term:focus-visible::after{transform:none}
+}
 </style>
+<script>
+// El nivel de lectura se aplica ANTES del primer pintado: si se dejara para el
+// script del final, quien eligio "tecnico" veria un parpadeo de texto simple.
+// Sin JS y sin eleccion previa manda el HTML tal cual, que es el modo simple.
+try{ if(localStorage.getItem('lectura')==='tecnico') document.documentElement.dataset.lectura='tecnico'; }catch(e){}
+</script>
 </head>
 <body>
 
+<!-- ── PICTOGRAMAS PROPIOS ──
+     Dibujados aqui, no traidos de ninguna libreria ni CDN: el sitio se sostiene
+     en no depender de terceros, y eso vale igual para 4 iconos que para las
+     fuentes. Trazo de 1.5 y currentColor, asi cada uno toma el acento de su
+     modulo solo. Van siempre con aria-hidden: el rotulo lo pone el texto. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-fiscal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Serie en el tiempo: eje y linea quebrada. No es una flecha, y ademas
+         empieza y TERMINA a la misma altura: una linea que remata en su punto
+         mas alto ya insinua una direccion, que es una lectura del dato. -->
+    <path d="M3 4v16h18"/><path d="M6 13.5l3-3.5 3 5 3-5 3 3.5"/>
+  </symbol>
+  <symbol id="i-sello" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Documento sellado: la hoja y su marca. -->
+    <path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><circle cx="12" cy="14" r="2.6"/>
+  </symbol>
+  <symbol id="i-cadena" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 13.5a3.5 3.5 0 0 0 5 0l2.5-2.5a3.5 3.5 0 0 0-5-5L11 7.5"/>
+    <path d="M14 10.5a3.5 3.5 0 0 0-5 0L6.5 13a3.5 3.5 0 0 0 5 5l1.5-1.5"/>
+  </symbol>
+  <symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+          stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l4.5 4.5"/>
+  </symbol>
+  <symbol id="i-congreso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Sala de votacion: la testera y dos filas de asientos. Deliberadamente NO
+         una balanza: una balanza sugiere que alguien pesa lo justo y lo injusto. -->
+    <path d="M3 20h18"/><path d="M5 20v-4h14v4"/><path d="M8 16v-3h8v3"/><path d="M10.5 13V9.5h3V13"/>
+  </symbol>
+  <symbol id="i-tendencia" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cercania: dos grupos de puntos, unos juntos y otros aparte. Sin flecha ni
+         eje izquierda-derecha, que se leeria como espectro politico. -->
+    <circle cx="7" cy="8" r="1.6"/><circle cx="10.5" cy="11" r="1.6"/><circle cx="6.5" cy="13.5" r="1.6"/>
+    <circle cx="17" cy="9.5" r="1.6"/><circle cx="16.5" cy="15" r="1.6"/>
+    <path d="M7 8l3.5 3M10.5 11l-4 2.5"/>
+  </symbol>
+  <symbol id="i-escanos" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Reparto: una barra dividida en tramos desiguales. -->
+    <rect x="3" y="9" width="18" height="6" rx="1"/><path d="M11 9v6M15 9v6M18 9v6"/>
+  </symbol>
+  <symbol id="i-lexico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H19v16H5.5A1.5 1.5 0 0 1 4 18.5z"/>
+    <path d="M4 16.5h15M8 8h7M8 11h5"/>
+  </symbol>
+  <symbol id="i-prensa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
+    <!-- Una hoja con lineas de texto y una columna aparte: la nota y el dato
+         puestos al lado. Sin megafono ni signos de exclamacion, que ya serian
+         una opinion sobre la prensa. -->
+    <path d="M4 5h13v14H5.5A1.5 1.5 0 0 1 4 17.5z"/><path d="M17 8h3v9.5a1.5 1.5 0 0 1-3 0z"/>
+    <path d="M7 8.5h7M7 11.5h7M7 14.5h4"/>
+  </symbol>
+</svg>
+
 <header>
-  <h1>Auditoría <span>Cívica</span></h1>
-  <p><span class="gloss-term" data-tip="Registro de datos públicos del Estado (Dipres, Cámara, Senado) con trazabilidad criptográfica. Cada cifra puede verificarse contra la fuente original.">Datos públicos</span> de Chile con <span class="gloss-term" data-tip="Secure Hash Algorithm de 256 bits. Huella digital única. Si una coma cambia, el hash es totalmente distinto. Cualquier persona puede comprobar que un archivo no fue alterado.">SHA-256</span> verificable. Sin opinión: exponemos números, usted saca sus conclusiones.</p>
+  <div class="masthead">
+    <div class="marca">
+      <h1>Auditoría <span>Cívica</span></h1>
+      <p class="bajada"><span class="gloss-term" data-tip="Registro de datos públicos del Estado (Dipres, Cámara, Senado) con trazabilidad criptográfica. Cada cifra puede verificarse contra la fuente original.">Datos públicos</span> de Chile con <span class="gloss-term" data-tip="Secure Hash Algorithm de 256 bits. Huella digital única. Si una coma cambia, el hash es totalmente distinto. Cualquier persona puede comprobar que un archivo no fue alterado.">SHA-256</span> verificable. Sin opinión: exponemos números, usted saca sus conclusiones.</p>
+    </div>
+    <!-- El sello. El estado arranca en "sin comprobar" a proposito: el sitio dice
+         que no deberias confiar en el, asi que no declara la cadena intacta hasta
+         que se recalcula en TU navegador. El chip es el boton que lo hace. -->
+    <div class="sello">
+      <button class="chip" id="sello-chip" data-estado="pendiente">cadena sin comprobar</button>
+      <p class="hero-etiqueta">entradas selladas</p>
+      <p class="hero-cifra" id="sello-cifra">—</p>
+      <p class="hero-pie mono" id="sello-pie">leyendo manifiesto…</p>
+    </div>
+  </div>
 </header>
 
 <nav id="nav">
-  <button data-s="fiscal" class="activo">💰 Fiscal</button>
-  <button data-s="legislativo">📜 Congreso</button>
-  <button data-s="tendencia">📊 Tendencia</button>
-  <button data-s="concentracion">⚖️ Concentración</button>
-  <button data-s="glosario">📖 Glosario</button>
-  <button data-s="verificar">🔎 Verificar</button>
+  <button data-s="fiscal" class="activo">Fiscal</button>
+  <button data-s="legislativo">Congreso</button>
+  <button data-s="tendencia">Tendencia</button>
+  <button data-s="concentracion">Escaños</button>
+  <button data-s="prensa">Prensa</button>
+  <button data-s="glosario">Léxico</button>
+  <button data-s="verificar">Verificar</button>
+  <!-- Cambia la redaccion, nunca la cifra. Ver el bloque NIVEL DE LECTURA. -->
+  <div class="lectura" role="group" aria-label="Nivel de lectura">
+    <button type="button" data-lectura="simple" aria-pressed="true">Simple</button>
+    <button type="button" data-lectura="tecnico" aria-pressed="false">Técnico</button>
+  </div>
 </nav>
 
 <main>
 
 <!-- ============ FISCAL ============ -->
-<section id="s-fiscal" class="activa">
-  <h2>💰 Fiscal — <span class="gloss-term" data-tip="Ingresos reales menos gastos reales del Gobierno Central en un año. Si es negativo, hubo déficit (gastó más de lo que recaudó). Se expresa en % del PIB para poder comparar años distintos.">Balance del Gobierno Central</span></h2>
-  <div class="explain"><b>¿Qué estás viendo?</b> Cada línea coloreada es una publicación del <span class="gloss-term" data-tip="Informe de Finanzas Públicas. Documento trimestral de la Dirección de Presupuestos (Dipres) que proyecta ingresos, gastos, deuda y crecimiento económico.">IFP</span> de <span class="gloss-term" data-tip="Dirección de Presupuestos del Ministerio de Hacienda. El organismo técnico que elabora el presupuesto nacional y las proyecciones fiscales.">Dipres</span>. Leer de izquierda a derecha muestra cómo cambió la proyección del mismo año entre informes. Valores bajo cero = <span class="gloss-term" data-tip="Situación donde el Gobierno gasta más de lo que recauda en un período. Lo opuesto a superávit.">déficit</span>.</div>
-  <div class="kpis" id="kpi-fiscal"></div>
-  <div class="chart-box"><h3>📈 Proyecciones del <span class="gloss-term" data-tip="Balance del Gobierno Central expresado como porcentaje del Producto Interno Bruto. Permite comparar el tamaño del déficit o superávit entre años distintos, eliminando el efecto de la inflación.">balance fiscal (% del PIB)</span></h3><div class="canvas-wrap"><canvas id="chart-balance"></canvas></div></div>
-  <div class="explain"><b>🔍 Lectura:</b> Si las líneas bajan hacia la derecha, las proyecciones oficiales se volvieron más pesimistas con el tiempo. La separación entre líneas muestra la incertidumbre de las proyecciones.</div>
-  <details class="panel"><summary style="cursor:pointer;color:var(--blue)">📋 Tabla completa</summary><div id="tabla-fiscal" style="overflow-x:auto"></div></details>
+<section id="s-fiscal" data-modulo="fiscal" class="activa">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-fiscal"></use></svg><span
+      class="t-simple">Cuánto le faltó o le sobró al Estado</span><span
+      class="t-tecnico"><span class="gloss-term" data-tip="Ingresos reales menos gastos reales del Gobierno Central en un año. Si es negativo, hubo déficit (gastó más de lo que recaudó). Se expresa en % del PIB para poder comparar años distintos.">Balance del Gobierno Central</span></span></h2>
+    <p class="eyebrow"><span class="t-simple">Fiscal · lo que publica Hacienda cada tres meses</span><span
+      class="t-tecnico">Fiscal · Dipres · informes de finanzas públicas</span></p>
+  </div>
+  <div class="explain"><b>Qué estás viendo</b><span
+    class="t-simple">Cuatro veces al año, Hacienda publica un informe con sus cuentas: cuánto cree que va a recaudar y cuánto va a gastar. Acá está cada uno de esos informes, uno por línea. Siguiendo una línea de izquierda a derecha se ve qué esperaba ese informe para cada año. Bajo cero significa que el Estado gastó más de lo que recaudó: eso se llama <span class="gloss-term" data-tip="Situación donde el Gobierno gasta más de lo que recauda en un período. Lo opuesto a superávit.">déficit</span>.</span><span
+    class="t-tecnico">Cada línea es una publicación del <span class="gloss-term" data-tip="Informe de Finanzas Públicas. Documento trimestral de la Dirección de Presupuestos (Dipres) que proyecta ingresos, gastos, deuda y crecimiento económico.">IFP</span> de <span class="gloss-term" data-tip="Dirección de Presupuestos del Ministerio de Hacienda. El organismo técnico que elabora el presupuesto nacional y las proyecciones fiscales.">Dipres</span>. Leer de izquierda a derecha muestra cómo cambió la proyección del mismo año entre informes. Valores bajo cero = <span class="gloss-term" data-tip="Situación donde el Gobierno gasta más de lo que recauda en un período. Lo opuesto a superávit.">déficit</span>.</span></div>
+  <div class="kpis js-fade" id="kpi-fiscal"></div>
+  <!-- La misma cifra dicha en otra unidad. La escribe initFiscal desde el dato
+       sellado: aritmetica, no estimacion. -->
+  <div class="equivale" id="equivale-fiscal" hidden></div>
+  <div class="chart-box js-fade"><h3><span class="t-simple">Cada informe, año por año</span><span
+    class="t-tecnico">Proyecciones del <span class="gloss-term" data-tip="Balance del Gobierno Central expresado como porcentaje del Producto Interno Bruto. Permite comparar el tamaño del déficit o superávit entre años distintos, eliminando el efecto de la inflación.">balance fiscal (% del PIB)</span></span></h3><div class="canvas-wrap"><canvas id="chart-balance"></canvas></div><p class="nota" id="nota-fiscal"></p></div>
+  <!-- "Se volvieron mas pesimistas" era un adjetivo valorativo, justo lo que el
+       Bloque 4 del proyecto prohibe: describe el movimiento, no lo califica. -->
+  <div class="explain"><b>Cómo se lee</b><span
+    class="t-simple">Si una línea va bajando hacia la derecha, ese informe esperaba un déficit cada vez más grande. Si dos líneas del mismo año quedan separadas, quiere decir que entre un informe y otro la cifra esperada cambió: comparar esa distancia es el punto de esta página.</span><span
+    class="t-tecnico">Una línea que desciende hacia la derecha corrige el balance a la baja para los años siguientes. La distancia vertical entre dos líneas en el mismo año es cuánto cambió la proyección de ese año entre una publicación y otra.</span></div>
+  <details class="panel"><summary>Tabla completa</summary><div class="tabla-wrap" id="tabla-fiscal"></div></details>
 </section>
 
 <!-- ============ LEGISLATIVO ============ -->
-<section id="s-legislativo">
-  <h2>📜 Congreso — Cámara de Diputados 2026</h2>
-  <div class="explain"><b>¿Qué estás viendo?</b> Las <span class="gloss-term" data-tip="Mecanismo constitucional de la Cámara de Diputados para hacer efectiva la responsabilidad política de autoridades (Presidente, Ministros, jueces). La Cámara vota si admite o rechaza cada AC. Se requiere mayoría simple.">Acusaciones Constitucionales</span> presentadas en 2026. Cada barra muestra los votos a favor y en contra. El <span class="gloss-term" data-tip="Votación donde queda registro individual de cómo votó cada diputado. Permite análisis detallados como los de este sitio.">voto nominal</span> permite saber exactamente quién votó qué.</div>
-  <div class="kpis" id="kpi-legislativo"></div>
-  <div class="chart-box"><h3>🗳️ Votos por <span class="gloss-term" data-tip="Acusación Constitucional: procedimiento para exigir responsabilidad política a altas autoridades del Estado.">AC</span> — a favor (verde) y en contra (rojo)</h3><div class="canvas-wrap"><canvas id="chart-ac"></canvas></div></div>
-  <div class="chart-box"><h3>🏛️ Votos emitidos por partido en Sala 2026</h3><div class="canvas-wrap"><canvas id="chart-votos-dist"></canvas></div><p class="nota" id="nota-votos-dist"></p></div>
-  <div class="explain"><b>🔍 Lectura:</b> Un partido con muchas votaciones nominales indica alta participación en Sala. Esto no mide calidad ni posición — solo frecuencia de voto registrado.</div>
+<section id="s-legislativo" data-modulo="legislativo">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-congreso"></use></svg><span
+      class="t-simple">Quién votó qué en la Cámara</span><span
+      class="t-tecnico">Cámara de Diputados 2026</span></h2>
+    <p class="eyebrow"><span class="t-simple">Congreso · cada votación con nombre y apellido</span><span
+      class="t-tecnico">Congreso · votaciones nominales de Sala</span></p>
+  </div>
+  <div class="explain"><b>Qué estás viendo</b><span
+    class="t-simple">Cuando la Cámara vota, queda registrado cómo votó cada diputado, uno por uno. Acá están las <span class="gloss-term" data-tip="Mecanismo constitucional de la Cámara de Diputados para hacer efectiva la responsabilidad política de autoridades (Presidente, Ministros, jueces). La Cámara vota si admite o rechaza cada AC. Se requiere mayoría simple.">Acusaciones Constitucionales</span> del año 2026: cada barra es una votación, con cuántos estuvieron a favor y cuántos en contra.</span><span
+    class="t-tecnico">Las <span class="gloss-term" data-tip="Mecanismo constitucional de la Cámara de Diputados para hacer efectiva la responsabilidad política de autoridades (Presidente, Ministros, jueces). La Cámara vota si admite o rechaza cada AC. Se requiere mayoría simple.">Acusaciones Constitucionales</span> presentadas en 2026. Cada barra muestra los votos a favor y en contra. El <span class="gloss-term" data-tip="Votación donde queda registro individual de cómo votó cada diputado. Permite análisis detallados como los de este sitio.">voto nominal</span> permite saber exactamente quién votó qué.</span></div>
+  <div class="kpis js-fade" id="kpi-legislativo"></div>
+  <div class="equivale" id="equivale-legislativo" hidden></div>
+  <!-- El titulo ya no nombra colores. Antes decia "a favor (verde) y en contra
+       (rojo)": verde=bueno / rojo=malo le pone valor a un voto, y el sitio
+       declara no tener opinion. Ahora son dos colores de identidad, sin carga. -->
+  <div class="chart-box js-fade"><h3><span class="t-simple">Cada acusación, votación por votación</span><span
+    class="t-tecnico">Votos por <span class="gloss-term" data-tip="Acusación Constitucional: procedimiento para exigir responsabilidad política a altas autoridades del Estado.">AC</span></span></h3><div class="canvas-wrap"><canvas id="chart-ac"></canvas></div>
+    <details><summary>Tabla completa</summary><div class="tabla-wrap" id="tabla-ac"></div></details></div>
+  <div class="chart-box js-fade"><h3><span class="t-simple">Cuántas veces votó cada partido</span><span
+    class="t-tecnico">Votos emitidos por partido en Sala</span></h3><div class="canvas-wrap"><canvas id="chart-votos-dist"></canvas></div><p class="nota" id="nota-votos-dist"></p>
+    <details><summary>Tabla completa</summary><div class="tabla-wrap" id="tabla-votos-dist"></div></details></div>
+  <div class="explain"><b>Cómo se lee</b><span
+    class="t-simple">Una barra larga significa que ese partido votó muchas veces, nada más. No dice si votó bien o mal, ni a favor de qué: solo cuántas veces quedó registrado su voto.</span><span
+    class="t-tecnico">Un partido con muchas votaciones nominales registra alta participación en Sala. Esto no mide calidad ni posición — solo frecuencia de voto registrado.</span></div>
 </section>
 
 <!-- ============ TENDENCIA ============ -->
-<section id="s-tendencia">
-  <h2>📊 Tendencia — Coincidencia de voto</h2>
-  <div class="explain"><b>¿Qué estás viendo?</b> Se mide con qué frecuencia dos diputados votaron lo mismo en 2026. La <span class="gloss-term" data-tip="Índice Rice: mide qué tan unido vota un partido. 1.0 (100%) = todos los miembros votaron igual. 0.0 = votaron divididos por la mitad. No mide ideología, solo disciplina de voto.">cohesión</span> muestra qué tan parejo vota cada partido como bloque. Sin etiquetas de izquierda/derecha: solo patrones.</div>
-  <div class="kpis" id="kpi-tendencia"></div>
-  <div class="chart-box"><h3>🏛️ <span class="gloss-term" data-tip="Índice Rice de cohesión: mide qué tan unido vota cada partido. 100% = siempre votan igual como bloque.">Cohesión por partido</span></h3><div class="canvas-wrap"><canvas id="chart-cohesion"></canvas></div><p class="nota" id="nota-cohesion"></p></div>
-  <div class="chart-box"><h3>🧭 Eje empírico — ordenados por cercanía de voto</h3><div class="explain">Los diputados se ordenan según con quién votan parecido. Quienes votan igual quedan juntos. No es un espectro ideológico: es un reflejo matemático de patrones de voto reales. Sin interpretación.</div><div id="eje-empirico" style="max-height:350px;overflow-y:auto"></div></div>
+<section id="s-tendencia" data-modulo="tendencia">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tendencia"></use></svg><span
+      class="t-simple">Quiénes votan parecido</span><span
+      class="t-tecnico">Coincidencia de voto</span></h2>
+    <p class="eyebrow"><span class="t-simple">Tendencia · calculado a partir de los votos, no declarado por nadie</span><span
+      class="t-tecnico">Tendencia · derivado de votaciones nominales</span></p>
+  </div>
+  <div class="explain"><b>Qué estás viendo</b><span
+    class="t-simple">Tomando todas las votaciones del año, se cuenta cuántas veces dos diputados marcaron lo mismo. Con eso se ve qué tan parejo vota cada partido: si sus miembros votan siempre igual o se dividen. Acá no hay etiquetas de izquierda ni derecha — solo lo que muestran los votos.</span><span
+    class="t-tecnico">Se mide con qué frecuencia dos diputados votaron lo mismo en 2026. La <span class="gloss-term" data-tip="Índice Rice: mide qué tan unido vota un partido. 1.0 (100%) = todos los miembros votaron igual. 0.0 = votaron divididos por la mitad. No mide ideología, solo disciplina de voto.">cohesión</span> muestra qué tan parejo vota cada partido como bloque. Sin etiquetas de izquierda/derecha: solo patrones.</span></div>
+  <div class="kpis js-fade" id="kpi-tendencia"></div>
+  <div class="equivale" id="equivale-tendencia" hidden></div>
+  <div class="chart-box js-fade"><h3><span class="t-simple">Qué tan unido vota cada partido</span><span
+    class="t-tecnico"><span class="gloss-term" data-tip="Índice Rice de cohesión: mide qué tan unido vota cada partido. 100% = siempre votan igual como bloque.">Cohesión por partido</span></span></h3><div class="canvas-wrap" style="height:380px"><canvas id="chart-cohesion"></canvas></div><p class="nota" id="nota-cohesion"></p>
+    <details><summary>Tabla completa</summary><div class="tabla-wrap" id="tabla-cohesion"></div></details></div>
+  <div class="chart-box js-fade"><h3><span class="t-simple">Ordenados por con quién votan parecido</span><span
+    class="t-tecnico">Eje empírico — ordenados por cercanía de voto</span></h3><div class="explain"><b>Sin interpretación</b><span
+    class="t-simple">La lista pone cerca a quienes votan parecido entre sí. Eso es todo lo que dice. No es una escala de izquierda a derecha, y estar arriba o abajo no significa nada: dar vuelta la lista describiría exactamente lo mismo.</span><span
+    class="t-tecnico">Los diputados se ordenan según con quién votan parecido. Quienes votan igual quedan juntos. No es un espectro ideológico: es el primer componente principal de la matriz de votaciones, y su signo es arbitrario.</span></div><div id="eje-empirico" style="max-height:350px;overflow-y:auto"></div></div>
 </section>
 
 <!-- ============ CONCENTRACIÓN ============ -->
-<section id="s-concentracion">
-  <h2>⚖️ <span class="gloss-term" data-tip="Medida de cuán repartido está algo (escaños, licitaciones, concesiones) entre distintos actores. Mide y compara, sin calificar si es 'mucho' o 'poco'.">Concentración</span> — Escaños en la Cámara</h2>
-  <div class="explain"><b>¿Qué estás viendo?</b> Distribución de <span class="gloss-term" data-tip="Un puesto en la Cámara de Diputados. Chile tiene 155 escaños en total, uno por cada diputado en ejercicio.">escaños</span> por partido. Mide cuántos representantes tiene cada partido, no cuántos votos obtuvieron en la elección.</div>
-  <div class="chart-box"><h3>Escaños por partido</h3><div class="canvas-wrap" style="height:340px"><canvas id="chart-escanos"></canvas></div><p class="nota" id="nota-escanos"></p></div>
-  <details class="panel"><summary style="cursor:pointer;color:var(--blue)">📋 Tabla completa</summary><div id="tabla-concentracion"></div></details>
+<section id="s-concentracion" data-modulo="concentracion">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-escanos"></use></svg><span
+      class="t-simple">Cómo están repartidos los asientos</span><span
+      class="t-tecnico">Escaños en la Cámara</span></h2>
+    <p class="eyebrow"><span class="t-simple">Concentración · cuánto se junta y cuánto se reparte</span><span
+      class="t-tecnico">Concentración · <span class="gloss-term" data-tip="Medida de cuán repartido está algo (escaños, licitaciones, concesiones) entre distintos actores. Mide y compara, sin calificar si es 'mucho' o 'poco'.">cuán repartido está el poder</span></span></p>
+  </div>
+  <div class="explain"><b>Qué estás viendo</b><span
+    class="t-simple">Cuántos asientos de la Cámara tiene hoy cada partido. Ojo con una confusión común: esto cuenta asientos, no votos de la elección — un partido puede tener muchos votos repartidos y pocos asientos.</span><span
+    class="t-tecnico">Distribución de <span class="gloss-term" data-tip="Un puesto en la Cámara de Diputados. Chile tiene 155 escaños en total, uno por cada diputado en ejercicio.">escaños</span> por partido. Mide cuántos representantes tiene cada partido, no cuántos votos obtuvieron en la elección.</span></div>
+  <div class="kpis js-fade" id="kpi-concentracion"></div>
+  <div class="equivale" id="equivale-concentracion" hidden></div>
+  <div class="chart-box js-fade"><h3><span class="t-simple">Asientos por partido, de mayor a menor</span><span
+    class="t-tecnico">Escaños por partido</span></h3><div class="canvas-wrap" style="height:360px"><canvas id="chart-escanos"></canvas></div><p class="nota" id="nota-escanos"></p></div>
+  <details class="panel"><summary>Tabla completa</summary><div class="tabla-wrap" id="tabla-concentracion"></div></details>
+</section>
+
+<!-- ============ PRENSA ============ -->
+<section id="s-prensa" data-modulo="prensa">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-prensa"></use></svg><span
+      class="t-simple">Qué de lo que se dice tiene un dato detrás</span><span
+      class="t-tecnico">Prensa · afirmaciones contrastadas</span></h2>
+    <p class="eyebrow"><span class="t-simple">Prensa · la nota se compara con el registro, no con una opinión</span><span
+      class="t-tecnico">Prensa · capa determinista sobre el corpus sellado</span></p>
+  </div>
+  <div class="explain"><b>Qué estás viendo</b><span
+    class="t-simple">De cada nota se toman las frases que contienen una cifra y se comparan, una por una, con lo que dicen los archivos oficiales que este sitio tiene sellados. No se juzga la nota ni al medio: se dice cuáles de sus afirmaciones se pueden comprobar acá, cuáles coinciden, cuáles no, y cuáles se quedan sin dato detrás.</span><span
+    class="t-tecnico">Extracción determinista por reglas de las frases con una cantidad resoluble, y contraste de cada una contra los datasets sellados. La capa que produce estos veredictos no usa IA: misma entrada, misma salida byte a byte.</span></div>
+  <div class="kpis js-fade" id="kpi-prensa"></div>
+  <div class="equivale" id="equivale-prensa" hidden></div>
+  <div class="explain"><b>Lo que este método no puede hacer</b><span
+    class="t-simple">Una frase sin números no se puede comprobar acá, y eso no la hace falsa ni verdadera: queda marcada como lo que es, una afirmación sin dato detrás en este corpus. Y como no guardamos el texto de las notas —son de sus autores—, si un medio edita o baja una nota, el sello prueba que cambió, no lo que decía antes.</span><span
+    class="t-tecnico">Una afirmación sin cantidad resoluble se marca no_contrastable_con_este_corpus, que es el estado esperado para la mayoría de las frases. No se conserva el texto del artículo: el hash prueba qué bytes sirvió esa URL en ese instante, no el contenido pasado.</span></div>
+  <div id="lista-prensa"></div>
+  <details class="panel"><summary>Cómo se eligen los medios y las notas</summary><div id="criterio-prensa"></div></details>
 </section>
 
 <!-- ============ GLOSARIO ============ -->
-<section id="s-glosario">
-  <h2>📖 Glosario completo</h2>
-  <div class="explain"><b>Sin jerga.</b> Cada término técnico de la página, explicado en español simple.</div>
+<section id="s-glosario" data-modulo="glosario">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lexico"></use></svg><span
+      class="t-simple">Las palabras raras, explicadas</span><span
+      class="t-tecnico">Léxico completo</span></h2>
+    <p class="eyebrow"><span class="t-simple">Sin jerga · si algo no se entiende, es culpa de la página</span><span
+      class="t-tecnico">Sin jerga · cada término de la página</span></p>
+  </div>
+  <div class="explain"><b>Sin jerga</b><span
+    class="t-simple">Cada palabra técnica que aparece en el sitio, dicha en castellano simple. En el resto de la página estos términos van subrayados con puntitos: pasando el cursor (o tocándolos) sale la misma explicación sin salir de donde estás.</span><span
+    class="t-tecnico">Cada término técnico de la página, explicado en español simple. En el cuerpo del sitio los mismos términos llevan glosa emergente.</span></div>
   <div class="glosario-grid" id="glosario-lista"></div>
 </section>
 
 <!-- ============ VERIFICAR ============ -->
-<section id="s-verificar">
-  <h2>🔎 Verificar</h2>
-  <div class="explain"><b>¿Por qué verificar?</b> Porque no deberías confiar en nosotros. Cada archivo descargado de una fuente oficial tiene un <span class="gloss-term" data-tip="Secure Hash Algorithm 256 bits. Huella digital criptográfica. El navegador puede recalcularlo: si coincide con nuestro manifiesto, el archivo no fue alterado.">hash SHA-256</span>. Si alguien modificó un dato —aunque sea una coma— el hash cambia y la verificación falla.</div>
+<section id="s-verificar" data-modulo="verificar">
+  <div class="cabecera-sec">
+    <h2><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-cadena"></use></svg><span
+      class="t-simple">Compruébalo vos mismo</span><span
+      class="t-tecnico">Verificar</span></h2>
+    <p class="eyebrow"><span class="t-simple">Manifiesto · el registro sellado de todo lo que se descargó</span><span
+      class="t-tecnico">Manifiesto · hash-chain SHA-256</span></p>
+  </div>
+  <div class="explain"><b>Por qué verificar</b><span
+    class="t-simple">Porque no deberías confiar en nosotros. A cada archivo bajado de una fuente oficial se le sacó una huella digital: un código largo que cambia por completo si alguien toca aunque sea una coma. Los botones de acá abajo rehacen esas huellas en tu propio computador, sin preguntarnos nada a nosotros.</span><span
+    class="t-tecnico">Porque no deberías confiar en nosotros. Cada archivo descargado de una fuente oficial tiene un <span class="gloss-term" data-tip="Secure Hash Algorithm 256 bits. Huella digital criptográfica. El navegador puede recalcularlo: si coincide con nuestro manifiesto, el archivo no fue alterado.">hash SHA-256</span>. Si alguien modificó un dato —aunque sea una coma— el hash cambia y la verificación falla.</span></div>
   <div class="panel">
-    <h3>1 · Verificar la cadena del <span class="gloss-term" data-tip="Registro de todos los archivos descargados de fuentes oficiales. Es append-only: solo se agregan entradas, nunca se borran ni editan. Cada entrada incluye el hash de la anterior (cadena).">manifiesto</span></h3>
-    <p class="nota">Valida todas las entradas y el encadenamiento criptográfico.</p>
+    <h3>1 · <span class="t-simple">Revisar el registro completo</span><span class="t-tecnico">Verificar la cadena del <span class="gloss-term" data-tip="Registro de todos los archivos descargados de fuentes oficiales. Es append-only: solo se agregan entradas, nunca se borran ni editan. Cada entrada incluye el hash de la anterior (cadena).">manifiesto</span></span></h3>
+    <p class="nota"><span class="t-simple">Rehace la huella de cada anotación del registro y comprueba que cada una apunte a la anterior, como los eslabones de una cadena. Si alguien borró o cambió una, salta acá.</span><span
+      class="t-tecnico">Valida todas las entradas y el encadenamiento criptográfico.</span></p>
     <button class="boton" id="btn-cadena">Verificar cadena</button>
     <div id="cadena-resultado" style="margin-top:12px"></div>
   </div>
   <div class="panel">
-    <h3>2 · Verificar un archivo contra el manifiesto</h3>
-    <p class="nota">Descargue un archivo de la fuente oficial y suéltelo aquí.</p>
-    <div class="drop" id="drop">Arrastre un archivo aquí o <span style="color:var(--blue);cursor:pointer;text-decoration:underline">elíjalo</span><input type="file" id="file" hidden></div>
+    <h3>2 · <span class="t-simple">Probar con un archivo tuyo</span><span class="t-tecnico">Verificar un archivo contra el manifiesto</span></h3>
+    <p class="nota"><span class="t-simple">Bajá el archivo directamente del sitio del Estado y soltalo acá: te decimos si es exactamente el mismo que usamos nosotros.</span><span
+      class="t-tecnico">Descargue un archivo de la fuente oficial y suéltelo aquí.</span></p>
+    <div class="drop" id="drop">Arrastre un archivo aquí o <span class="azul" style="cursor:pointer;text-decoration:underline">elíjalo</span><input type="file" id="file" hidden></div>
     <div id="file-resultado" style="margin-top:12px"></div>
   </div>
-  <details class="panel" id="manifiesto-info"><summary style="cursor:pointer;color:var(--blue)">🛡️ Manifiesto completo</summary><div id="man-resumen"></div></details>
+  <details class="panel" id="manifiesto-info"><summary>Manifiesto completo</summary><div id="man-resumen"></div></details>
 </section>
 
 </main>
+
+<!-- ── FICHA DE ORIGEN ──
+     <dialog> nativo: el foco atrapado, Esc y el fondo inerte vienen de fabrica.
+     La llena abrirFicha() con el registro sellado + su entrada del manifiesto. -->
+<dialog class="ficha" id="ficha" aria-labelledby="ficha-titulo">
+  <div class="ficha-cab">
+    <div>
+      <h3 id="ficha-titulo">Ficha de origen</h3>
+      <p>De dónde salió esta cifra exactamente, y cómo comprobarla sin creernos nada.</p>
+    </div>
+    <button type="button" class="ficha-cerrar" id="ficha-cerrar" aria-label="Cerrar la ficha">Cerrar</button>
+  </div>
+  <div class="ficha-cuerpo" id="ficha-cuerpo"></div>
+</dialog>
 
 <footer>Código abierto · Licencia MIT · Datos: Estado de Chile · github.com/5egaloz/auditoria-publica</footer>
 
@@ -208,21 +750,40 @@ $('glosario-lista').innerHTML = Object.entries(GLOSSARY).map(([term, def]) =>
 
 // Completa data-tip solo donde falte: los tips escritos en el HTML son mas
 // especificos que la entrada generica del glosario y no deben sobrescribirse.
-document.querySelectorAll('.gloss-term').forEach(el => {
-  if (!el.hasAttribute('data-tip') || !el.getAttribute('data-tip').trim()) {
-    const term = el.textContent.trim();
-    const def = GLOSSARY[term] || GLOSSARY[term.replace(/^(del|de la|los|las) /,'')];
-    if (def) el.setAttribute('data-tip', def);
-  }
-  // Accesible por teclado y en tactil (sin :hover).
-  el.setAttribute('tabindex', '0');
-  el.setAttribute('role', 'note');
-});
+// Corre tambien despues de pintar cada seccion: hay terminos que nacen del JS
+// (el "Partidos efectivos" del KPI de Escanos, por ejemplo) y si esto pasaba una
+// sola vez al cargar, esos quedaban sin tabindex — su explicacion era
+// inalcanzable por teclado y en pantalla tactil, que es justo donde no hay hover.
+function prepararTips(){
+  document.querySelectorAll('.gloss-term:not([data-preparado])').forEach(el => {
+    if (!el.hasAttribute('data-tip') || !el.getAttribute('data-tip').trim()) {
+      const term = el.textContent.trim();
+      const def = GLOSSARY[term] || GLOSSARY[term.replace(/^(del|de la|los|las) /,'')];
+      if (def) el.setAttribute('data-tip', def);
+    }
+    // Accesible por teclado y en tactil (sin :hover).
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('role', 'note');
+    el.setAttribute('data-preparado', '');
+  });
+}
+prepararTips();
 
-// El globo se abre hacia abajo si arriba no hay espacio (nav sticky ≈ 48px).
+// El globo se abre hacia abajo si arriba no hay espacio (nav sticky ≈ 48px), y
+// se ancla por la derecha si centrado se saldria de la pantalla. Lo segundo no
+// es cosmetico: un globo que sobresale ensancha el documento y hace que la
+// pagina entera se pueda mover en horizontal en un telefono.
 function ubicarTips(){
+  const W = innerWidth;
+  // El mismo ancho que declara el CSS (min(268px, 100vw - 24px)), sin medir el
+  // ::after de cada termino: ubicarTips corre en cada scroll.
+  const ancho = Math.min(268, W - 24);
+  const centrado = W > 600;   // bajo 600px el CSS lo ancla a la izquierda
   document.querySelectorAll('.gloss-term').forEach(el => {
-    el.classList.toggle('tip-abajo', el.getBoundingClientRect().top < 190);
+    const r = el.getBoundingClientRect();
+    el.classList.toggle('tip-abajo', r.top < 190);
+    const izq = centrado ? r.left + r.width/2 - ancho/2 : r.left;
+    el.classList.toggle('tip-der', izq + ancho > W - 12);
   });
 }
 addEventListener('scroll', ubicarTips, {passive:true});
@@ -258,9 +819,34 @@ function mostrar(s){
   Object.values(charts).forEach(c=>{ try{ c.resize(); }catch(e){} });
   ubicarTips();
 }
-document.querySelectorAll('#nav button').forEach(b=>{
+// Solo las pestanas: el interruptor de lectura tambien es un <button> dentro de
+// #nav, y sin el [data-s] entraba aqui con dataset.s undefined — eso apagaba
+// todas las secciones y dejaba la pagina en blanco.
+document.querySelectorAll('#nav > button[data-s]').forEach(b=>{
   b.addEventListener('click',()=>mostrar(b.dataset.s));
 });
+
+// ═══════════ NIVEL DE LECTURA ═══════════
+// Simple <-> Tecnico cambia PALABRAS, nunca numeros: los dos textos ya estan en
+// el HTML y esto solo decide cual se muestra. Ningun valor pasa por aca.
+(function(){
+  const botones=[...document.querySelectorAll('.lectura button')];
+  if(!botones.length) return;
+  const aplicar=modo=>{
+    document.documentElement.dataset.lectura=modo;
+    botones.forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.lectura===modo)));
+    // Los globos del glosario se reubican: al cambiar el largo del texto, un
+    // termino puede pasar a la primera linea y quedar tapado por el nav.
+    ubicarTips();
+  };
+  let inicial='simple';
+  try{ if(localStorage.getItem('lectura')==='tecnico') inicial='tecnico'; }catch(e){}
+  aplicar(inicial);
+  botones.forEach(b=>b.addEventListener('click',()=>{
+    aplicar(b.dataset.lectura);
+    try{ localStorage.setItem('lectura', b.dataset.lectura); }catch(e){}
+  }));
+})();
 
 // Crea un Chart destruyendo el anterior si existiera (evita canvas "en uso").
 function crearChart(canvasId, config){
@@ -282,9 +868,278 @@ function sinDato(canvasId, msg){
 }
 
 // Ejes/leyendas comunes
-const EJE={ticks:{color:'#7b8daa'},grid:{color:'#243044'}};
-const LEYENDA={labels:{color:'#7b8daa',font:{size:11}}};
-const PALETA=['#4da6ff','#f0a050','#3dd68c','#a78bfa','#f05050','#22d3ee','#e879f9','#2dd4bf','#fbbf24','#94a3b8','#fb923c','#60a5fa','#34d399','#c084fc','#f87171','#818cf8'];
+// ═══════════ CROMO DE GRAFICOS ═══════════
+// Los mismos valores que los tokens CSS: si cambia la superficie hay que
+// revalidar la paleta contra ella, asi que viven juntos y documentados.
+const SUP='#1a1a19', SUP_2='#232321', TINTA='#ffffff', TINTA_2='#c3c2b7',
+      TINTA_3='#898781', MALLA='#2c2c2a', REGLA='#383835';
+const SANS_FF="'IBM Plex Sans',system-ui,-apple-system,sans-serif";
+const MONO_FF="'IBM Plex Mono',ui-monospace,Consolas,monospace";
+
+// Paleta categorica VALIDADA con el validador de la skill de dataviz, modo
+// oscuro sobre la superficie #1a1a19: pasan las 5 comprobaciones (banda de
+// luminosidad, piso de croma, separacion CVD peor par adyacente ΔE 8.4,
+// piso de vision normal 19.3, contraste >=3:1).
+// Orden FIJO — el orden es el mecanismo de seguridad para daltonismo, no
+// decoracion. NUNCA se cicla: pasadas las 8 ranuras se recorta la cola.
+const SERIES=['#3987e5','#d95926','#199e70','#c98500','#d55181','#008300','#9085e9','#e66767'];
+const S1=SERIES[0], TOPE_SERIES=SERIES.length;
+// Estado: reservado. Un color de estado nunca hace de serie ni al reves.
+const ESTADO={bien:'#0ca30c',alerta:'#fab219',grave:'#ec835a',critico:'#d03b3b'};
+
+// Ejes y malla recesivos: hairline solido de un paso sobre la superficie.
+// Nunca punteado — el punteado se lee como "proyeccion" o "umbral".
+const EJE={ticks:{color:TINTA_3,font:{family:MONO_FF,size:10}},grid:{color:MALLA},border:{color:REGLA}};
+const LEYENDA={labels:{color:TINTA_2,font:{family:SANS_FF,size:11},usePointStyle:true,pointStyle:'circle',boxWidth:8,boxHeight:8,padding:14}};
+// Especificacion de marca para barras: tope de 24px (que la barra no llene la
+// banda, el sobrante es aire), extremo de dato redondeado 4px y cuadrado en la
+// linea base, y separacion por hueco de superficie en vez de borde dibujado.
+const BARRA={maxBarThickness:24,borderRadius:4,borderSkipped:'start'};
+const BANDA={categoryPercentage:.74,barPercentage:.9};
+
+if(typeof Chart!=='undefined'){
+  Chart.defaults.font.family=SANS_FF;
+  Chart.defaults.font.size=11;
+  Chart.defaults.color=TINTA_3;
+  Object.assign(Chart.defaults.plugins.tooltip,{
+    backgroundColor:SUP_2,borderColor:REGLA,borderWidth:1,cornerRadius:3,padding:10,
+    titleColor:TINTA,bodyColor:TINTA_2,usePointStyle:true,boxWidth:8,boxHeight:8,boxPadding:4,
+    titleFont:{family:SANS_FF,size:11,weight:'600'},bodyFont:{family:MONO_FF,size:11}
+  });
+}
+
+// ═══════════ FORMATO DE CIFRA ═══════════
+// es-CL: coma decimal y punto de miles. Antes salia el punto decimal crudo de
+// toFixed ("-2.80"), que en Chile se lee como miles. El signo va con el menos
+// tipografico (U+2212), que no se confunde con un guion de rango.
+// Esto cambia COMO se escribe el numero, nunca cual es.
+function fmtCL(v, dec=2){
+  if(v===null||v===undefined||!isFinite(v)) return 'sin dato';
+  return v.toLocaleString('es-CL',{minimumFractionDigits:dec,maximumFractionDigits:dec}).replace('-','−');
+}
+// El anillo del punto tiene que ser del color REAL de la tarjeta: con las
+// superficies tenidas por modulo, la constante SUP ya no es ese color.
+function supDe(canvasId){
+  const box=$(canvasId)?.closest('.chart-box');
+  return box?getComputedStyle(box).backgroundColor:SUP;
+}
+
+// ═══════════ FICHA DE ORIGEN ═══════════
+// Cualquier cifra que salga de un archivo sellado puede abrir su ficha: archivo,
+// hoja, celda, etiqueta de la fila, hash, y la entrada del manifiesto que lo
+// respalda. Con dos comprobaciones que corren en ESTE navegador, en vivo.
+// No hay criptografia nueva: usa cargarManifiesto(), hashCanonico() y
+// sha256Hex(), los mismos tres que usa la pestana Verificar.
+const FICHAS=new Map();
+let _fichaN=0;
+
+// Hay dos clases de cifra en este sitio y la ficha las distingue en vez de
+// disimularlo:
+//  · LEIDA — sale de una celda de un archivo oficial (Fiscal) o de un artefacto
+//    completo (cada votacion es un XML). Se comprueba byte a byte.
+//  · CALCULADA — no existe en ningun archivo: la produce un script sobre un
+//    conjunto de artefactos sellados (cohesion, escanos, votos por partido).
+//    Se comprueba recalculando el hash del CONJUNTO, que el extractor declara
+//    junto con su formula.
+// Presentar una calculada como si fuera leida seria la mentira mas facil de
+// este sitio, asi que la ficha dice cual es cual con todas sus letras.
+function cifraConFicha(num, unidad, ficha){
+  const cuerpo=`<span class="num">${num}</span>`+(unidad?`<span class="u">${unidad}</span>`:'');
+  if(!ficha || !(ficha.reg?.sha256_origen || ficha.calculo)) return cuerpo;
+  const id='f'+(++_fichaN);
+  FICHAS.set(id,ficha);
+  // El aria-label EMPIEZA por la cifra, no la reemplaza. En un <button> el
+  // aria-label gana sobre el contenido y ademas el rol descarta los hijos como
+  // nodos propios: poner solo "ver de donde salio esta cifra" dejaba a los 104
+  // botones con el mismo nombre y sin numero — un lector de pantalla recorria la
+  // tabla entera sin oir una sola cifra. En un sitio cuyo eje es "toda
+  // afirmacion = numero + fuente", perder el numero es perderlo todo.
+  const rotulo=`${num}${unidad?' '+unidad:''}`;
+  return `<button type="button" class="cifra" data-ficha="${id}" `+
+         `aria-label="${rotulo} — ver de dónde salió esta cifra">${cuerpo}`+
+         `<svg class="ico-s" aria-hidden="true" focusable="false"><use href="#i-lupa"></use></svg></button>`;
+}
+
+// Delegado: los botones se crean despues de que corre este script.
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('.cifra[data-ficha]');
+  if(b) abrirFicha(FICHAS.get(b.dataset.ficha));
+});
+
+function abrirFicha(ficha){
+  const dlg=$('ficha'), cuerpo=$('ficha-cuerpo');
+  if(!dlg||!cuerpo||!ficha) return;
+  const reg=ficha.reg||{}, c=ficha.calculo;
+  const o=reg.origen||{};
+  dlg.dataset.modulo=ficha.modulo||'fiscal';
+  const leida=!!reg.sha256_origen;
+  const filas=(leida?[
+    ['Qué es', ficha.que],
+    ['Cómo se obtuvo', o.celda?'leída de una celda de un archivo oficial':'leída de un artefacto oficial completo'],
+    ...(ficha.campos||[]),
+    ['Valor exacto', reg.valor],
+    ['Unidad', reg.unidad],
+    ['Año', reg.anno],
+    ['Fecha', (reg.fecha||'').slice(0,10)],
+    ['Carácter', reg.caracter==='cierre_estimado'?'cierre estimado':reg.caracter],
+    ['Publicación', reg.publicacion],
+    ['Descripción en la fuente', reg.descripcion_literal],
+    ['Archivo de origen', o.archivo],
+    ['Hoja', o.hoja],
+    ['Celda', o.celda],
+    ['Fila del cuadro', o.etiqueta_fila],
+    ['Nota del extractor', reg.nota],
+    ['SHA-256 del archivo', reg.sha256_origen]
+  ]:[
+    ['Qué es', ficha.que],
+    ['Cómo se obtuvo', 'calculada: no existe en ningún archivo, la produce un script sobre artefactos sellados'],
+    ['Fórmula', c?.formula],
+    ['Criterio', c?.criterio],
+    ['Umbrales', c?.umbrales],
+    ['Script que la genera', c?.script],
+    ['Artefactos usados', c?.artefactos],
+    ['SHA-256 del conjunto', c?.sha256_conjunto],
+    ['Cómo se arma ese hash', c?.sha256_conjunto_formula],
+    ['Advertencia del extractor', c?.advertencia]
+  ]).filter(([,v])=>v!==null&&v!==undefined&&v!=='');
+
+  cuerpo.innerHTML=
+    `<p class="ficha-cifra">${esc(ficha.valorTexto)}</p>`+
+    `<p class="nota">${esc(ficha.titulo)}</p>`+
+    `<p class="sello-tipo" data-tipo="${leida?'leida':'calculada'}">${leida?'cifra leída de la fuente':'cifra calculada'}</p>`+
+    `<table class="ficha-campos"><tbody>${filas.map(([k,v])=>
+      `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join('')}</tbody></table>`+
+    `<div class="ficha-acciones">
+       ${leida||c?.fuente_hashes
+         ? `<button type="button" class="boton-fino" id="ficha-comprobar">${leida?'Comprobar esta cifra ahora':'Comprobar el conjunto ahora'}</button>`
+         : ''}
+       <a class="boton-fino" id="ficha-fuente" href="#" target="_blank" rel="noopener">Ir a la fuente oficial</a>
+     </div>
+     <!-- Region viva: el veredicto se inyecta despues de un calculo asincrono,
+          asi que sin esto un lector de pantalla no anuncia nada y la
+          comprobacion "no pasa" para quien no ve el cambio en pantalla. -->
+     <div id="ficha-veredicto" role="status" aria-live="polite" style="margin-top:12px"></div>
+     <p class="nota" style="margin-top:14px">${leida
+       ? 'La comprobación corre en tu navegador: descarga el archivo original de este repositorio, le recalcula el SHA-256 y lo compara con el que declara el manifiesto.'
+       : 'La comprobación corre en tu navegador: rehace el hash del conjunto de artefactos con la fórmula declarada arriba y lo compara con el que declara el extractor. Comprueba de qué datos salió la cifra, no el cálculo en sí — ese lo reproduce cualquiera corriendo el script.'}</p>`;
+
+  // El enlace a la fuente sale del dato o del manifiesto, nunca de un texto
+  // escrito a mano en la pagina.
+  const enlace=$('ficha-fuente');
+  enlace.style.display='none';
+  if(reg.url_fuente){ enlace.href=reg.url_fuente; enlace.style.display=''; }
+  else if(leida) cargarManifiesto().then(({entradas})=>{
+    const ent=entradas.find(x=>x.sha256===reg.sha256_origen);
+    if(ent?.url_fuente){ enlace.href=ent.url_fuente; enlace.style.display=''; }
+  });
+  const btn=$('ficha-comprobar');
+  if(btn) btn.onclick=()=> leida
+    ? comprobarCifra(reg,$('ficha-veredicto'))
+    : comprobarConjunto(c,$('ficha-veredicto'));
+  if(typeof dlg.showModal==='function') dlg.showModal(); else dlg.setAttribute('open','');
+}
+
+// Comprobacion de una cifra CALCULADA: se rehace el hash del conjunto de
+// artefactos con la formula que el propio extractor declara
+// ("sha256 de los sha256 de cada artefacto usado, ordenados alfabeticamente y
+// unidos por salto de linea") y se compara con el que publica.
+async function comprobarConjunto(c,out){
+  if(!out||!c) return;
+  if(!crypto?.subtle){
+    out.innerHTML='<p class="naranja" style="font-weight:600">No verificable acá</p>'+
+      '<p class="nota">El navegador solo expone crypto.subtle en https o localhost.</p>';
+    return;
+  }
+  out.innerHTML='<span class="cargando">Rehaciendo el hash del conjunto…</span>';
+  const lineas=[];
+  try{
+    const datos=await f(c.fuente_hashes);
+    const hs=[...new Set((datos?.registros||[]).map(r=>r.sha256_origen).filter(Boolean))].sort();
+    if(!hs.length) throw new Error('no se pudieron leer los hashes de los artefactos');
+    // 1. Todo artefacto que alimenta el calculo tiene que estar sellado. Sin
+    //    esto, el hash del conjunto podria ser el hash de cualquier cosa.
+    const {entradas}=await cargarManifiesto();
+    const sellados=new Set(entradas.map(e=>e.sha256));
+    const faltan=hs.filter(x=>!sellados.has(x));
+    lineas.push(faltan.length
+      ? `<p class="rojo">✗ ${faltan.length} de los ${hs.length} artefactos usados no están en el manifiesto.</p>`
+      : `<p class="verde">✓ Los ${hs.length} artefactos que alimentan este cálculo están sellados en el manifiesto.</p>`);
+    // 2. Y si el extractor declaro el hash del conjunto, se rehace con su formula.
+    const h=await sha256Hex(new TextEncoder().encode(hs.join('\n')));
+    if(c.sha256_conjunto){
+      lineas.push(h===c.sha256_conjunto
+        ? `<p class="verde">✓ El conjunto es exactamente el declarado: <span class="hash">${esc(h)}</span></p>`
+        : `<p class="rojo">✗ El conjunto no coincide con el declarado.</p><p class="nota">Declarado <span class="hash">${esc(c.sha256_conjunto)}</span><br>Recalculado <span class="hash">${esc(h)}</span></p>`);
+    } else {
+      lineas.push(`<p class="nota">El extractor de este cálculo no publica un hash del conjunto. El de los ${hs.length} artefactos usados, calculado acá con la misma fórmula del resto del sitio, es <span class="hash">${esc(h)}</span></p>`);
+    }
+  }catch(err){
+    lineas.push(`<p class="naranja">No se pudo rehacer el conjunto (${esc(err.message||String(err))}).</p>`);
+  }
+  // Los padrones son el otro insumo: se comprueba que esten sellados.
+  if(c.padrones?.length){
+    const {entradas}=await cargarManifiesto();
+    const faltan=c.padrones.filter(p=>!entradas.some(e=>e.sha256===p));
+    lineas.push(faltan.length
+      ? `<p class="rojo">✗ ${faltan.length} de ${c.padrones.length} padrones no están en el manifiesto.</p>`
+      : `<p class="verde">✓ Los ${c.padrones.length} padrones de diputados usados están sellados en el manifiesto.</p>`);
+  }
+  out.innerHTML=lineas.join('');
+}
+
+// Las dos comprobaciones, en orden: primero que la entrada del manifiesto no
+// haya sido tocada (es el eslabon de la cadena), despues que el archivo servido
+// sea byte a byte el que esa entrada declara.
+async function comprobarCifra(reg,out){
+  if(!out) return;
+  if(!crypto?.subtle){
+    out.innerHTML='<p class="naranja" style="font-weight:600">No verificable acá</p>'+
+      '<p class="nota">El navegador solo expone crypto.subtle en https o localhost.</p>';
+    return;
+  }
+  out.innerHTML='<span class="cargando">Comprobando…</span>';
+  const {entradas,error}=await cargarManifiesto();
+  const ent=entradas.find(x=>x.sha256===reg.sha256_origen);
+  if(!ent){
+    out.innerHTML='<p class="rojo" style="font-weight:600">Sin respaldo en el manifiesto</p>'+
+      `<p class="nota">Ningún artefacto sellado declara el hash <span class="hash">${esc(reg.sha256_origen||'—')}</span>`+
+      `${error?' · '+esc(error):''}</p>`;
+    return;
+  }
+  const lineas=[];
+  const propio=await hashCanonico(ent);
+  const okEntrada=propio===ent.sha256_linea;
+  lineas.push(okEntrada
+    ? `<p class="verde">✓ La entrada seq ${esc(ent.seq)} del manifiesto es íntegra: su contenido recalcula el hash que declara.</p>`
+    : `<p class="rojo">✗ La entrada seq ${esc(ent.seq)} no coincide con su propio hash.</p><p class="nota">Declara <span class="hash">${esc(ent.sha256_linea)}</span><br>Recalculado <span class="hash">${esc(propio)}</span></p>`);
+  try{
+    const r=await fetch('../'+ent.ruta_local);
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const hArch=await sha256Hex(await r.arrayBuffer());
+    lineas.push(hArch===ent.sha256
+      ? `<p class="verde">✓ El archivo servido es el mismo que se descargó de la fuente: <span class="hash">${esc(hArch)}</span></p>`
+      : `<p class="rojo">✗ El archivo servido NO coincide con el hash sellado.</p><p class="nota">Sellado <span class="hash">${esc(ent.sha256)}</span><br>Servido <span class="hash">${esc(hArch)}</span></p>`);
+  }catch(err){
+    lineas.push(`<p class="naranja">El archivo de origen no se pudo leer para comprobarlo (${esc(err.message||String(err))}).</p>`);
+  }
+  lineas.push(`<p class="nota">Esto comprueba el archivo y su sello, no la lectura ${
+    reg.origen?.celda ? 'de la celda '+esc(reg.origen.celda) : 'del dato dentro del archivo'}: `+
+    `esa la reproduce cualquiera corriendo el extractor del módulo sobre el mismo archivo.</p>`);
+  out.innerHTML=lineas.join('');
+}
+
+(function(){
+  const dlg=$('ficha'), cerrar=$('ficha-cerrar');
+  if(!dlg) return;
+  cerrar?.addEventListener('click',()=>dlg.close());
+  // Clic en el fondo = cerrar. El <dialog> recibe el clic del ::backdrop, asi
+  // que se distingue mirando si el punto cae fuera de la caja.
+  dlg.addEventListener('click',e=>{
+    if(e.target!==dlg) return;
+    const c=dlg.getBoundingClientRect();
+    if(e.clientX<c.left||e.clientX>c.right||e.clientY<c.top||e.clientY>c.bottom) dlg.close();
+  });
+})();
 
 // ═══════════ FISCAL ═══════════
 async function initFiscal(){
@@ -298,14 +1153,78 @@ async function initFiscal(){
   const ultPub=pubs[pubs.length-1];
   const dePub=r.filter(x=>x.publicacion===ultPub).sort((a,b)=>a.anno-b.anno);
   const ult=dePub[0];
+  // ── La cifra del balance ya NO se pinta de rojo o de verde ──
+  // Rojo=malo / verde=bueno es una opinion sobre una politica publica, y este
+  // sitio declara no tener ninguna. Deficit y superavit son dos categorias: se
+  // nombran con la palabra y se distinguen con dos colores de identidad. El
+  // signo menos queda explicito en la cifra, que es el dato de verdad.
+  const cat=ult?(ult.valor<0?'deficit':'superavit'):null;
+  const valorTexto=ult?fmtCL(ult.valor,2):'sin dato';
   $('kpi-fiscal').innerHTML=`
-    <div class="kpi"><div class="label">Balance ${ult?esc(ult.anno):'—'}</div><div class="value ${ult&&ult.valor<0?'rojo':'verde'}">${ult?ult.valor.toFixed(2)+'% PIB':'sin dato'}</div><div class="sub">${esc(ult?.publicacion||'')}${ult?.caracter?' · '+esc(ult.caracter):''}</div></div>
-    <div class="kpi"><div class="label">Informes analizados</div><div class="value azul">${pubs.length}</div><div class="sub">IFP de Dipres</div></div>
-    <div class="kpi"><div class="label">Período cubierto</div><div class="value azul">${anos[0]}–${anos[anos.length-1]}</div><div class="sub">${data.registros.length} registros</div></div>`;
-  const datasets=pubs.map((pub,i)=>({label:pub,data:anos.map(a=>{const m=r.find(x=>x.publicacion===pub&&x.anno===a);return m?m.valor:null}),borderColor:PALETA[i%PALETA.length],backgroundColor:PALETA[i%PALETA.length],tension:.2,fill:false,borderWidth:2,pointRadius:4,pointHoverRadius:6,spanGaps:false}));
-  crearChart('chart-balance',{type:'line',data:{labels:anos.map(String),datasets},options:{animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:{labels:{color:'#7b8daa',font:{size:11},usePointStyle:true}},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y==null?'sin dato':c.parsed.y.toFixed(2)+'% del PIB'}`}}},scales:{x:EJE,y:{ticks:{color:'#7b8daa',callback:v=>v.toFixed(1)+'%'},grid:{color:'#243044'}}}}});
+    <div class="kpi"><div class="label">Balance ${ult?esc(ult.anno):'—'}</div><div class="value compuesta">${
+      ult?cifraConFicha(esc(valorTexto),'% PIB',{
+        modulo:'fiscal', reg:ult, valorTexto:valorTexto+' % del PIB',
+        titulo:`Balance efectivo del Gobierno Central ${ult.anno}, según ${ult.publicacion}`,
+        que:'Balance efectivo del Gobierno Central, en % del PIB'
+      }):'sin dato'}</div><div class="sub">${
+      cat?`<span class="etiqueta-cat" data-cat="${cat}">${cat==='deficit'?'déficit':'superávit'}</span> · `:''
+      }${esc(ult?.publicacion||'')}${ult?.caracter?' · '+esc(ult.caracter==='cierre_estimado'?'cierre estimado':ult.caracter):''}</div></div>
+    <div class="kpi"><div class="label">Informes analizados</div><div class="value acento">${pubs.length}</div><div class="sub">IFP de Dipres</div></div>
+    <div class="kpi"><div class="label">Período cubierto</div><div class="value acento">${anos[0]}–${anos[anos.length-1]}</div><div class="sub">${data.registros.length} registros</div></div>`;
+
+  // ── "¿Cuánto es eso?" — la misma cifra en otra unidad ──
+  // Las dos frases son aritmetica sobre el dato sellado, no estimaciones:
+  // un porcentaje del PIB dicho por cada $100, y la resta entre dos informes.
+  // Lo que NO se hace: convertir a pesos o a plata por persona. Eso exigiria
+  // PIB nominal y poblacion, que hoy no estan en el manifiesto, y ponerlos a
+  // ojo rompe la regla del sitio.
+  const eq=$('equivale-fiscal');
+  if(eq&&ult){
+    const bloques=[];
+    const abs=Math.abs(ult.valor);
+    bloques.push(ult.valor<0
+      ? `De cada $100 que produce Chile en un año, el Estado gastó <strong>$${esc(fmtCL(abs,2))} más</strong> de lo que recaudó (${esc(ult.publicacion)}, ${esc(ult.anno)}).`
+      : `De cada $100 que produce Chile en un año, al Estado le sobraron <strong>$${esc(fmtCL(abs,2))}</strong> (${esc(ult.publicacion)}, ${esc(ult.anno)}).`);
+    // Mismo ano visto por el informe mas viejo y por el mas nuevo que lo traen.
+    const mismoAno=r.filter(x=>x.anno===ult.anno).sort((a,b)=>clave(a.publicacion)-clave(b.publicacion));
+    if(mismoAno.length>1){
+      const pri=mismoAno[0], ultm=mismoAno[mismoAno.length-1];
+      const d=ultm.valor-pri.valor;
+      bloques.push(`Para el año ${esc(ult.anno)}, la cifra pasó de ${esc(fmtCL(pri.valor,2))} % en ${esc(pri.publicacion)} `+
+        `a ${esc(fmtCL(ultm.valor,2))} % en ${esc(ultm.publicacion)}: se movió ${esc(fmtCL(Math.abs(d),2))} puntos del PIB `+
+        `${d<0?'hacia abajo':'hacia arriba'} entre un informe y otro.`);
+    }
+    eq.innerHTML='<b>¿Cuánto es eso?</b>'+bloques.map(t=>`<p>${t}</p>`).join('');
+    eq.hidden=false;
+  }
+  // Nunca se ciclan colores. Si algun dia hay mas de 8 publicaciones se grafican
+  // las 8 mas recientes y se dice cuantas quedaron fuera: un recorte silencioso
+  // se leeria como "aqui esta todo". La tabla completa sigue trayendo todas.
+  const fuera=Math.max(0,pubs.length-TOPE_SERIES);
+  const pubsVis=fuera?pubs.slice(-TOPE_SERIES):pubs;
+  $('nota-fiscal').textContent=fuera
+    ? `Se grafican las ${TOPE_SERIES} publicaciones más recientes; ${fuera} quedaron fuera del gráfico y están en la tabla completa.`
+    : `${pubsVis.length} publicaciones graficadas · una línea por informe.`;
+  // Punto de 8px con anillo de 2px en el color de la superficie: es lo que los
+  // mantiene legibles donde se cruzan las lineas.
+  const anilloPunto=supDe('chart-balance');
+  const datasets=pubsVis.map((pub,i)=>({label:pub,data:anos.map(a=>{const m=r.find(x=>x.publicacion===pub&&x.anno===a);return m?m.valor:null}),
+    borderColor:SERIES[i],backgroundColor:SERIES[i],pointBackgroundColor:SERIES[i],
+    pointBorderColor:anilloPunto,pointBorderWidth:2,tension:.2,fill:false,borderWidth:2,
+    pointRadius:4,pointHoverRadius:6,spanGaps:false}));
+  crearChart('chart-balance',{type:'line',data:{labels:anos.map(String),datasets},options:{animation:{duration:1200,easing:'easeOutQuart'},plugins:{legend:LEYENDA,tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y==null?'sin dato':fmtCL(c.parsed.y,2)+' % del PIB'}`}}},scales:{x:EJE,y:{ticks:{color:TINTA_3,font:{family:MONO_FF,size:10},callback:v=>fmtCL(v,1)+'%'},grid:{color:MALLA},border:{color:REGLA}}}}});
+  // Tabla completa: cada celda con origen tambien abre su ficha. Es la vista que
+  // garantiza que ningun valor quede accesible solo por el tooltip.
   let th='<tr><th>Año</th>'+pubs.map(p=>`<th>${esc(p)}</th>`).join('')+'</tr>';
-  anos.forEach(a=>{th+='<tr><td><b>'+a+'</b></td>'+pubs.map(p=>{const m=r.find(x=>x.publicacion===p&&x.anno===a);return`<td>${m?m.valor.toFixed(2)+'%':'sin dato'}</td>`}).join('')+'</tr>'});
+  anos.forEach(a=>{th+='<tr><td><b>'+a+'</b></td>'+pubs.map(p=>{
+    const m=r.find(x=>x.publicacion===p&&x.anno===a);
+    if(!m) return '<td>sin dato</td>';
+    const txt=fmtCL(m.valor,2);
+    return `<td>${cifraConFicha(esc(txt),'%',{
+      modulo:'fiscal', reg:m, valorTexto:txt+' % del PIB',
+      titulo:`Balance efectivo del Gobierno Central ${m.anno}, según ${m.publicacion}`,
+      que:'Balance efectivo del Gobierno Central, en % del PIB'})}</td>`;
+  }).join('')+'</tr>'});
   $('tabla-fiscal').innerHTML=`<table style="font-size:.82rem">${th}</table>`;
 }
 
@@ -327,16 +1246,76 @@ function partidoEnFecha(dip, fechaISO){
 async function initLegislativo(){
   const[acData,votData,dipData]=await Promise.all([f('../data/derived/legislativo/acusaciones-constitucionales-2026.json'),f('../data/derived/legislativo/votos-nominales-2026.json'),f('../data/derived/legislativo/diputados.json')]);
   const acs=acData?.registros||[];
+  const ESCANOS_CAMARA=155;   // se usa solo como base de comparacion declarada
+  // El padron (241) y quienes efectivamente aparecen votando (239) NO son lo
+  // mismo: decir "241 con voto registrado" afirmaba de 2 personas algo que el
+  // dato no dice. Se cuentan aparte y el KPI declara los dos numeros.
+  const idsConVoto=new Set();
+  (votData?.registros||[]).forEach(r=>Object.keys(r.votos||{}).forEach(id=>idsConVoto.add(String(id))));
+  const votantes=idsConVoto.size||null;
   $('kpi-legislativo').innerHTML=`
-    <div class="kpi"><div class="label">Votaciones de AC 2026</div><div class="value naranja">${acs.length}</div><div class="sub">Acusaciones Constitucionales</div></div>
-    <div class="kpi"><div class="label">Votaciones nominales</div><div class="value azul">${votData?.total_registros ?? 'sin dato'}</div><div class="sub">Sala, Cámara de Diputados</div></div>`;
+    <div class="kpi"><div class="label">Votaciones de AC 2026</div><div class="value acento">${acs.length}</div><div class="sub">Acusaciones Constitucionales</div></div>
+    <div class="kpi"><div class="label">Votaciones nominales</div><div class="value acento">${votData?.total_registros ?? 'sin dato'}</div><div class="sub">Sala, Cámara de Diputados</div></div>
+    <div class="kpi"><div class="label">Diputados en el padrón</div><div class="value acento">${dipData?.registros?.length ?? 'sin dato'}</div><div class="sub">${
+      votantes!=null&&dipData?.registros?.length
+        ? `${votantes} de ellos registran voto en el corpus`
+        : 'padrón de la Cámara'}</div></div>`;
+
+  // ── "¿Cuánto es eso?" del Congreso ──
+  // Un conteo de votos solo, no dice nada; contra el total de escanos, si. La
+  // base (155) va declarada en el texto, no escondida en el calculo.
+  const eqL=$('equivale-legislativo');
+  if(eqL&&acs.length){
+    const conMayoria=acs.filter(r=>(r.total_si||0)>(r.total_no||0)).length;
+    const masVotada=[...acs].sort((a,b)=>(b.total_si||0)-(a.total_si||0))[0];
+    const bloques=[
+      `La Cámara tiene <strong>${ESCANOS_CAMARA}</strong> escaños. En la votación con más apoyo de este grupo, `+
+      `<strong>${esc(fmtCL(masVotada.total_si||0,0))} de ${ESCANOS_CAMARA}</strong> votaron a favor `+
+      `(${esc(fmtCL((masVotada.total_si||0)/ESCANOS_CAMARA*100,1))} % de los escaños), el ${esc((masVotada.fecha||'').slice(0,10))}.`,
+      `De las ${acs.length} votaciones, en <strong>${conMayoria}</strong> hubo más votos a favor que en contra. `+
+      `El resto de los escaños no se reparte entre las dos columnas: quien se abstiene, se ausenta o queda dispensado no aparece en ninguna.`
+    ];
+    eqL.innerHTML='<b>¿Cuánto es eso?</b>'+bloques.map(t=>`<p>${t}</p>`).join('');
+    eqL.hidden=false;
+  }
   if(acs.length){
-    // Todas comparten descripcion_literal: la fecha distingue cada votacion.
-    const etiqueta=r=>[(r.fecha||'').slice(0,10), r.descripcion_literal||''].filter(Boolean).join(' · ');
+    // Todas comparten descripcion_literal ("2-Acusacion Constitucional"), asi que
+    // repetirla en cada etiqueta del eje no distingue nada y obligaba a rotar un
+    // texto largo que se comia media tarjeta y quedaba ilegible. En el eje va solo
+    // la fecha, que es lo que separa una votacion de otra; la descripcion pasa al
+    // titulo del tooltip, donde se lee entera.
+    const etiqueta=r=>(r.fecha||'').slice(0,10)||'sin fecha';
+    // Verde/rojo aqui era editorializar: verde=bueno, rojo=malo le pone valor a
+    // un voto, y el sitio declara no tener opinion. Un color de estado solo se
+    // usa cuando el dato SIGNIFICA bueno/malo; "a favor" no significa eso.
+    // Van las dos primeras ranuras categoricas, que solo dicen identidad.
     crearChart('chart-ac',{type:'bar',data:{labels:acs.map(etiqueta),datasets:[
-      {label:'A favor',data:acs.map(r=>r.total_si||0),backgroundColor:'#3dd68c'},
-      {label:'En contra',data:acs.map(r=>r.total_no||0),backgroundColor:'#f05050'}]},
-      options:{animation:{duration:1000},plugins:{legend:LEYENDA,tooltip:{callbacks:{afterBody:c=>{const r=acs[c[0].dataIndex];return[`Abstención: ${r.total_abstencion??'sin dato'}`,`Quórum: ${r.quorum||'sin dato'}`,`Resultado: ${r.resultado||'sin dato'}`]}}}},scales:{x:{ticks:{color:'#7b8daa',maxRotation:45,minRotation:45,font:{size:9}},grid:{color:'#243044'}},y:{beginAtZero:true,...EJE}}}});
+      {label:'A favor',data:acs.map(r=>r.total_si||0),backgroundColor:SERIES[0],...BARRA,...BANDA},
+      {label:'En contra',data:acs.map(r=>r.total_no||0),backgroundColor:SERIES[1],...BARRA,...BANDA}]},
+      options:{animation:{duration:1000},plugins:{legend:LEYENDA,tooltip:{callbacks:{
+        title:c=>{const r=acs[c[0].dataIndex];return[(r.fecha||'').slice(0,10),r.descripcion_literal||''].filter(Boolean).join(' · ')},
+        afterBody:c=>{const r=acs[c[0].dataIndex];return[`Abstención: ${r.total_abstencion??'sin dato'}`,`Quórum: ${r.quorum||'sin dato'}`,`Resultado: ${r.resultado||'sin dato'}`]}}}},
+        scales:{x:{ticks:{color:TINTA_3,maxRotation:45,minRotation:0,autoSkip:true,font:{family:MONO_FF,size:9}},grid:{display:false},border:{color:REGLA}},y:{beginAtZero:true,...EJE}}}});
+    // Vista de tabla: ningun valor queda accesible solo por el tooltip. Cada
+    // conteo abre la ficha de SU votacion — el XML del web service de la Camara,
+    // sellado en el manifiesto y comprobable byte a byte desde el navegador.
+    const fichaAC=(r,que,n)=>({
+      modulo:'legislativo', reg:r, valorTexto:`${fmtCL(n||0,0)} · ${que}`,
+      titulo:`Votación ${r.id} · ${(r.fecha||'').slice(0,10)}`,
+      que, campos:[
+        ['Votación', r.id],
+        ['A favor', r.total_si], ['En contra', r.total_no],
+        ['Abstención', r.total_abstencion], ['Dispensados', r.total_dispensado],
+        ['Quórum', r.quorum], ['Resultado', r.resultado],
+        ['Control del extractor', r.verificacion_conteo],
+        ['Acusado', r.acusado]
+      ]});
+    const celdaAC=(r,que,n)=>`<td>${cifraConFicha(esc(fmtCL(n||0,0)),'',fichaAC(r,que,n))}</td>`;
+    $('tabla-ac').innerHTML='<table><tr><th>Fecha</th><th>A favor</th><th>En contra</th><th>Abstención</th><th>Resultado</th></tr>'+
+      acs.map(r=>`<tr><td>${esc((r.fecha||'').slice(0,10))}</td>`+
+        celdaAC(r,'votos a favor',r.total_si)+celdaAC(r,'votos en contra',r.total_no)+
+        celdaAC(r,'abstenciones',r.total_abstencion)+
+        `<td>${esc(r.resultado||'sin dato')}</td></tr>`).join('')+'</table>';
   } else sinDato('chart-ac','Sin dato disponible');
 
   if(votData?.registros?.length && dipData?.registros?.length){
@@ -354,9 +1333,33 @@ async function initLegislativo(){
     });
     const sorted=Object.entries(pCount).sort((a,b)=>b[1]-a[1]).slice(0,12);
     const total=Object.values(pCount).reduce((s,x)=>s+x,0);
-    crearChart('chart-votos-dist',{type:'bar',data:{labels:sorted.map(x=>x[0]),datasets:[{label:'Votos emitidos',data:sorted.map(x=>x[1]),backgroundColor:sorted.map((_,i)=>PALETA[i%PALETA.length])}]},
-      options:{animation:{duration:1000},indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.x.toLocaleString('es-CL')} votos (${(c.parsed.x/total*100).toFixed(1)}% del total)`}}},scales:{x:{beginAtZero:true,...EJE},y:{ticks:{color:'#7b8daa',font:{size:10}},grid:{color:'#243044'}}}}});
-    $('nota-votos-dist').textContent=`Derivado. Fórmula: votos_partido = conteo de códigos A, C o B en ${votData.registros.length} votaciones de Sala, atribuidos a la militancia vigente a la fecha de cada votación. Excluye N (no vota), D (dispensado) y P (pareo). Total contabilizado: ${total.toLocaleString('es-CL')} votos. Se muestran los ${sorted.length} partidos con más votos.`;
+    // UNA serie: un solo color. Antes cada partido llevaba un tono distinto, lo
+    // que re-codifica en color lo que el largo de la barra ya dice y gasta el
+    // unico canal libre. Sin leyenda: hay un color, el titulo ya lo nombra.
+    // Una serie, un color: el del modulo. El largo de la barra ya dice el valor;
+    // el color solo dice de que registro sale esta vista.
+    crearChart('chart-votos-dist',{type:'bar',data:{labels:sorted.map(x=>x[0]),datasets:[{label:'Votos emitidos',data:sorted.map(x=>x[1]),backgroundColor:SERIES[1],...BARRA,...BANDA}]},
+      options:{animation:{duration:1000},indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${fmtCL(c.parsed.x,0)} votos (${fmtCL(c.parsed.x/total*100,1)}% del total)`}}},scales:{x:{beginAtZero:true,...EJE},y:{ticks:{color:TINTA_2,font:{family:SANS_FF,size:10}},grid:{display:false},border:{color:REGLA}}}}});
+    // Estas cifras NO estan en ningun archivo: las cuenta esta pagina. La ficha
+    // lo dice con todas sus letras y ofrece comprobar que los 669 artefactos que
+    // alimentan el conteo esten sellados.
+    const calculoVotos={
+      formula:`votos_partido = conteo de códigos A (a favor), C (en contra) o B (abstención) en ${votData.registros.length} votaciones de Sala, atribuidos a la militancia vigente a la fecha de cada votación`,
+      criterio:'excluye N (no vota), D (dispensado) y P (pareo); la militancia se toma del padrón de la Cámara vigente a la fecha de cada votación',
+      script:'extraer_nominal.py (corpus) + conteo hecho en esta página',
+      artefactos:`${votData.registros.length} votaciones`,
+      // La formula depende TAMBIEN del padron de militancias: si no se
+      // comprobara, la ficha diria "comprobado" sobre la mitad del insumo.
+      padrones:[...new Set((dipData.registros||[]).map(d=>d.sha256_origen).filter(Boolean))],
+      fuente_hashes:'../data/derived/legislativo/votos-nominales-2026.json'
+    };
+    $('tabla-votos-dist').innerHTML='<table><tr><th>Partido</th><th>Votos emitidos</th><th>% del total</th></tr>'+
+      sorted.map(x=>`<tr><td>${esc(x[0])}</td><td>${cifraConFicha(esc(fmtCL(x[1],0)),'',{
+        modulo:'legislativo', calculo:calculoVotos, valorTexto:`${fmtCL(x[1],0)} votos emitidos`,
+        titulo:`${x[0]} · votos emitidos en Sala`,
+        que:`Cuántas veces un miembro de ${x[0]} registró un voto (a favor, en contra o abstención)`
+      })}</td><td>${esc(fmtCL(x[1]/total*100,1))}%</td></tr>`).join('')+'</table>';
+    $('nota-votos-dist').textContent=`Derivado. Fórmula: ${calculoVotos.formula}. Excluye N (no vota), D (dispensado) y P (pareo). Total contabilizado: ${fmtCL(total,0)} votos. Se muestran los ${sorted.length} partidos con más votos.`;
   } else sinDato('chart-votos-dist','Sin dato disponible');
 }
 
@@ -367,15 +1370,71 @@ async function initTendencia(){
   // sigue publicado y se enlaza desde el KPI.
   const PARES_COMPLETO='../data/derived/tendencia/coincidencia-pares-2026.json';
   const[cohesion,coin,eje,dipData]=await Promise.all([f('../data/derived/tendencia/cohesion-partidos-2026.json'),f('../data/derived/tendencia/coincidencia-pares-2026-resumen.json'),f('../data/derived/tendencia/eje-empirico-2026.json'),f('../data/derived/legislativo/diputados.json')]);
+  // Toda cifra de esta pestaña es CALCULADA: no existe en ningún archivo del
+  // Estado. La ficha lo declara y permite comprobar el conjunto de artefactos
+  // del que salió, que es lo que sí se puede verificar.
+  const calculoDe=(fuente,extra={})=>({
+    script:fuente?.generado_por, artefactos:fuente?.artefactos_usados&&`${fuente.artefactos_usados} votaciones`,
+    criterio:fuente?.criterio_posicion, formula:fuente?.formula,
+    // umbrales viene como objeto ({min_votaciones_comunes:20}); String() lo
+    // convertia en "[object Object]" y la ficha publicaba eso justo en la fila
+    // que declara QUE cifras existen y cuales quedaron fuera.
+    umbrales:fuente?.umbrales&&(typeof fuente.umbrales==='object'
+      ? Object.entries(fuente.umbrales).map(([k,v])=>`${k.replace(/_/g,' ')}: ${v}`).join(' · ')
+      : String(fuente.umbrales).replace(/\s+/g,' ').trim()),
+    sha256_conjunto:fuente?.sha256_conjunto, sha256_conjunto_formula:fuente?.sha256_conjunto_formula,
+    padrones:fuente?.sha256_padrones,
+    fuente_hashes:'../data/derived/legislativo/votos-nominales-2026.json', ...extra});
+  const nPartidos=cohesion?.registros?.length, nPares=coin?.total_registros, nEje=eje?.posiciones?.length;
   $('kpi-tendencia').innerHTML=`
-    <div class="kpi"><div class="label">Partidos analizados</div><div class="value azul">${cohesion?.registros?.length ?? 'sin dato'}</div><div class="sub">con militancia observada</div></div>
-    <div class="kpi"><div class="label">Pares de diputados</div><div class="value azul">${coin?.total_registros?.toLocaleString('es-CL') ?? 'sin dato'}</div><div class="sub">comparaciones de voto · <a href="${PARES_COMPLETO}" style="color:var(--blue)">dataset completo (3,4 MB)</a></div></div>
-    <div class="kpi"><div class="label">Diputados en el eje</div><div class="value azul">${eje?.posiciones?.length ?? 'sin dato'}</div><div class="sub">${eje?.votaciones_utilizadas ? esc(eje.votaciones_utilizadas)+' votaciones' : ''}</div></div>`;
+    <div class="kpi"><div class="label">Partidos analizados</div><div class="value acento compuesta">${
+      nPartidos!=null?cifraConFicha(esc(fmtCL(nPartidos,0)),'',{
+        modulo:'tendencia', calculo:calculoDe(cohesion), valorTexto:`${nPartidos} partidos`,
+        titulo:'Partidos con cohesión medible', que:'Partidos que superan los umbrales mínimos para medirles cohesión'}):'sin dato'}</div><div class="sub">con militancia observada</div></div>
+    <div class="kpi"><div class="label">Pares de diputados</div><div class="value acento compuesta">${
+      nPares!=null?cifraConFicha(esc(fmtCL(nPares,0)),'',{
+        modulo:'tendencia', calculo:calculoDe(coin), valorTexto:`${fmtCL(nPares,0)} pares`,
+        titulo:'Pares de diputados comparados', que:'Cada combinación de dos diputados que fijaron posición en al menos 20 votaciones comunes'}):'sin dato'}</div><div class="sub">comparaciones de voto · <a href="${PARES_COMPLETO}">dataset completo (3,4 MB)</a></div></div>
+    <div class="kpi"><div class="label">Diputados en el eje</div><div class="value acento compuesta">${
+      nEje!=null?cifraConFicha(esc(fmtCL(nEje,0)),'',{
+        modulo:'tendencia', calculo:calculoDe(eje,{advertencia:eje?.advertencia_signo}), valorTexto:`${nEje} diputados`,
+        titulo:'Diputados ubicados en el eje empírico', que:'Diputados con votos suficientes para entrar en el ordenamiento por cercanía de voto'}):'sin dato'}</div><div class="sub">${eje?.votaciones_utilizadas ? esc(eje.votaciones_utilizadas)+' votaciones' : ''}</div></div>`;
+
+  // ── "¿Cuánto es eso?" de Tendencia ──
+  // La varianza explicada es el dato honesto que casi nunca se publica: dice
+  // cuanto del comportamiento NO queda capturado por el orden que se muestra.
+  const eqT=$('equivale-tendencia');
+  if(eqT&&(eje?.varianza_explicada!=null||nPares!=null)){
+    const bloques=[];
+    if(eje?.varianza_explicada!=null){
+      const v=eje.varianza_explicada*100;
+      bloques.push(`El orden del eje resume <strong>${esc(fmtCL(v,1))} %</strong> de la variación de los votos. `+
+        `El <strong>${esc(fmtCL(100-v,1))} %</strong> restante son diferencias que ese orden no captura: por eso una sola línea nunca describe entera a una persona.`);
+    }
+    if(nPares!=null&&nEje) bloques.push(`Los ${esc(fmtCL(nPares,0))} pares salen de comparar a cada diputado con cada otro: `+
+      `con ${nEje} personas hay ${esc(fmtCL(nEje*(nEje-1)/2,0))} combinaciones posibles, y quedan las que compartieron al menos 20 votaciones.`);
+    eqT.innerHTML='<b>¿Cuánto es eso?</b>'+bloques.map(t=>`<p>${t}</p>`).join('');
+    eqT.hidden=false;
+  }
   if(cohesion?.registros?.length){
     const rs=[...cohesion.registros].sort((a,b)=>(b.cohesion_rice_promedio||0)-(a.cohesion_rice_promedio||0));
-    crearChart('chart-cohesion',{type:'bar',data:{labels:rs.map(r=>r.partido_nombre),datasets:[{label:'Cohesión',data:rs.map(r=>(r.cohesion_rice_promedio||0)*100),backgroundColor:rs.map((_,i)=>PALETA[i%PALETA.length])}]},
-      options:{animation:{duration:1200},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(2)+'%',afterBody:c=>{const r=rs[c[0].dataIndex];return[`Miembros observados: ${r.miembros_observados??'sin dato'}`,`Votaciones consideradas: ${r.votaciones_consideradas??'sin dato'}`]}}}},scales:{y:{min:0,max:100,ticks:{color:'#7b8daa',callback:v=>v.toFixed(0)+'%'},grid:{color:'#243044'}},x:{ticks:{color:'#7b8daa',font:{size:9},maxRotation:60,minRotation:45},grid:{color:'#243044'}}}}});
+    // Partidos son categorias nominales: una serie, un color (ranura 1).
+    crearChart('chart-cohesion',{type:'bar',data:{labels:rs.map(r=>r.partido_nombre),datasets:[{label:'Cohesión',data:rs.map(r=>(r.cohesion_rice_promedio||0)*100),backgroundColor:SERIES[2],...BARRA,...BANDA}]},
+      // Horizontal como escanos: 14 nombres de partido largos rotados a 45 grados
+      // cuestan de leer y se comen 110px de la tarjeta. Acostado se leen de
+      // corrido, y las dos vistas de "por partido" quedan con la misma forma.
+      // Escala cada 20%: 11 lineas de malla eran ruido, no informacion.
+      options:{animation:{duration:1200},indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmtCL(c.parsed.x,2)+'%',afterBody:c=>{const r=rs[c[0].dataIndex];return[`Miembros observados: ${r.miembros_observados??'sin dato'}`,`Votaciones consideradas: ${r.votaciones_consideradas??'sin dato'}`]}}}},scales:{x:{min:0,max:100,ticks:{color:TINTA_3,stepSize:20,font:{family:MONO_FF,size:10},callback:v=>fmtCL(v,0)+'%'},grid:{color:MALLA},border:{color:REGLA}},y:{ticks:{color:TINTA_2,font:{family:SANS_FF,size:10}},grid:{display:false},border:{color:REGLA}}}}});
     if(cohesion.formula) $('nota-cohesion').textContent='Derivado. Fórmula: '+cohesion.formula;
+    $('tabla-cohesion').innerHTML='<table><tr><th>Partido</th><th>Cohesión</th><th>Miembros</th><th>Votaciones</th></tr>'+
+      rs.map(r=>{
+        const pct=(r.cohesion_rice_promedio||0)*100;
+        return `<tr><td>${esc(r.partido_nombre)}</td><td>${cifraConFicha(esc(fmtCL(pct,2)),'%',{
+          modulo:'tendencia', calculo:calculoDe(cohesion), valorTexto:`${fmtCL(pct,2)} % de cohesión`,
+          titulo:`${r.partido_nombre} · índice de Rice promedio`,
+          que:'Qué tan parejo vota el partido como bloque: 100 % es que sus miembros votaron siempre igual, 0 % que se dividieron por la mitad'
+        })}</td><td>${r.miembros_observados??'—'}</td><td>${r.votaciones_consideradas??'—'}</td></tr>`;
+      }).join('')+'</table>';
   } else sinDato('chart-cohesion','Sin dato disponible');
 
   if(eje?.posiciones?.length){
@@ -385,7 +1444,8 @@ async function initTendencia(){
     $('eje-empirico').innerHTML=orden.map((r,i)=>{
       const dip=dipMap[String(r.diputado_id)];
       const partido=r.partido_nombre||r.partido||(dip?partidoEnFecha(dip,'2026-06-30T00:00:00'):null)||'sin dato';
-      return `<div style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-bottom:1px solid var(--line);font-size:.83rem"><span style="color:var(--dim);min-width:28px">${i+1}.</span><span style="flex:1">${esc(r.nombre||'sin dato')}</span><span style="color:var(--dim);font-size:.78rem">${esc(partido)}</span><span style="color:var(--dim);font-size:.72rem;min-width:56px;text-align:right;font-variant-numeric:tabular-nums">${typeof r.puntaje_eje==='number'?r.puntaje_eje.toFixed(3):''}</span></div>`;
+      // Fila de registro: el orden y el puntaje en mono tabular, el nombre en sans.
+      return `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--malla);font-size:var(--t-s)"><span class="mono" style="color:var(--tinta-3);min-width:30px;font-size:var(--t-xs);font-variant-numeric:tabular-nums">${String(i+1).padStart(3,'0')}</span><span style="flex:1;color:var(--tinta-2)">${esc(r.nombre||'sin dato')}</span><span style="color:var(--tinta-3);font-size:var(--t-xs)">${esc(partido)}</span><span class="mono" style="color:var(--tinta-3);font-size:var(--t-xs);min-width:56px;text-align:right;font-variant-numeric:tabular-nums">${typeof r.puntaje_eje==='number'?esc(fmtCL(r.puntaje_eje,3)):''}</span></div>`;
     }).join('');
   } else $('eje-empirico').innerHTML='<p class="sin-dato">Sin dato disponible</p>';
 }
@@ -396,10 +1456,157 @@ async function initConcentracion(){
   if(!data?.registros?.length){ sinDato('chart-escanos','Sin dato disponible'); return; }
   const sorted=[...data.registros].sort((a,b)=>(b.escanos||0)-(a.escanos||0));
   const total=sorted.reduce((s,x)=>s+(x.escanos||0),0);
-  crearChart('chart-escanos',{type:'doughnut',data:{labels:sorted.map(r=>r.partido_nombre),datasets:[{data:sorted.map(r=>r.escanos),backgroundColor:sorted.map((_,i)=>PALETA[i%PALETA.length]),borderColor:'#131a2b',borderWidth:1}]},
-    options:{animation:{animateRotate:true,duration:1500},plugins:{legend:{position:'right',labels:{color:'#7b8daa',font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>`${c.label}: ${c.parsed} escaños (${(c.parsed/total*100).toFixed(1)}%)`}}}}});
+  const mayor=sorted[0];
+  const bloque=data.lectura_independientes_como_bloque, aparte=data.lectura_independientes_por_separado;
+  const calculoEsc={
+    formula:data.formulas?.hhi&&`HHI = ${data.formulas.hhi}. Número efectivo de partidos = ${data.formulas.numero_efectivo_partidos}`,
+    criterio:data.criterio_composicion, script:data.generado_por,
+    artefactos:data.artefactos_usados&&`${data.artefactos_usados} votaciones`,
+    sha256_conjunto:data.sha256_conjunto, sha256_conjunto_formula:data.sha256_conjunto_formula,
+    padrones:data.sha256_padrones, advertencia:data.nota_independientes,
+    fuente_hashes:'../data/derived/legislativo/votos-nominales-2026.json'};
+  $('kpi-concentracion').innerHTML=`
+    <div class="kpi"><div class="label">Escaños contados</div><div class="value acento">${total}</div><div class="sub">en ${sorted.length} agrupaciones</div></div>
+    <div class="kpi"><div class="label">Agrupación mayor</div><div class="value acento">${mayor?mayor.escanos:'—'}</div><div class="sub">${esc(mayor?.partido_nombre||'')} · ${mayor?esc(fmtCL(mayor.escanos/total*100,1)):'—'} % de los escaños</div></div>
+    ${bloque?`<div class="kpi"><div class="label"><span class="gloss-term" data-tip="Número efectivo de partidos (Laakso-Taagepera): cuántos partidos del mismo tamaño producirían el mismo grado de reparto que el observado. No es un conteo de partidos: es una medida de cuán repartido está.">Partidos efectivos</span></div><div class="value acento compuesta">${
+      cifraConFicha(esc(fmtCL(bloque.numero_efectivo_partidos,2)),'',{
+        modulo:'concentracion', calculo:calculoEsc, valorTexto:`${fmtCL(bloque.numero_efectivo_partidos,2)} partidos efectivos`,
+        titulo:'Número efectivo de partidos · independientes contados como un bloque',
+        que:'Cuántos partidos del mismo tamaño producirían el mismo reparto que el observado (1 / HHI)'})
+      }</div><div class="sub">independientes como bloque</div></div>`:''}`;
+
+  // ── "¿Cuánto es eso?" de Escaños ──
+  // Las dos lecturas van JUNTAS porque el propio dato declara que cambian el
+  // resultado y que la fuente no dice cuál corresponde. Publicar solo una seria
+  // elegir por el lector.
+  const eqC=$('equivale-concentracion');
+  if(eqC&&bloque){
+    const bloques=[
+      `Los <strong>${total}</strong> escaños están repartidos entre <strong>${sorted.length}</strong> agrupaciones, `+
+      `pero no pesan igual: el reparto equivale al de <strong>${esc(fmtCL(bloque.numero_efectivo_partidos,2))}</strong> partidos del mismo tamaño.`
+    ];
+    if(aparte) bloques.push(`Contar a los independientes como un solo bloque o como personas separadas cambia el resultado: `+
+      `<strong>${esc(fmtCL(bloque.numero_efectivo_partidos,2))}</strong> partidos efectivos en un caso, `+
+      `<strong>${esc(fmtCL(aparte.numero_efectivo_partidos,2))}</strong> en el otro. `+
+      `Las dos se publican acá porque la fuente no declara cuál corresponde.`);
+    eqC.innerHTML='<b>¿Cuánto es eso?</b>'+bloques.map(t=>`<p>${t}</p>`).join('');
+    eqC.hidden=false;
+  }
+  // Era una dona de 14 porciones con 14 colores ciclados. Una dona sirve para
+  // parte-del-todo a simple vista y con 6 segmentos como maximo; con 14 clases de
+  // color las porciones vecinas se confunden y comparar dos partidos parecidos es
+  // imposible. Barra horizontal (los nombres de partido son largos), una serie,
+  // un color, ordenada de mayor a menor: comparar vuelve a ser trivial.
+  crearChart('chart-escanos',{type:'bar',data:{labels:sorted.map(r=>r.partido_nombre),datasets:[{label:'Escaños',data:sorted.map(r=>r.escanos),backgroundColor:SERIES[3],...BARRA,...BANDA}]},
+    options:{animation:{duration:1200},indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.x} escaños (${fmtCL(c.parsed.x/total*100,1)}% de ${total})`}}},scales:{x:{beginAtZero:true,...EJE},y:{ticks:{color:TINTA_2,font:{family:SANS_FF,size:10}},grid:{display:false},border:{color:REGLA}}}}});
   $('nota-escanos').textContent=`${total} escaños en ${sorted.length} agrupaciones. ${data.criterio_composicion||''}`.trim();
-  $('tabla-concentracion').innerHTML='<table style="font-size:.82rem"><tr><th>Partido</th><th>Escaños</th><th>% del total</th></tr>'+sorted.map(r=>`<tr><td>${esc(r.partido_nombre)}</td><td>${r.escanos}</td><td>${(r.escanos/total*100).toFixed(1)}%</td></tr>`).join('')+`<tr><td><b>Total</b></td><td><b>${total}</b></td><td><b>100,0%</b></td></tr></table>`;
+  $('tabla-concentracion').innerHTML='<table><tr><th>Partido</th><th>Escaños</th><th>% del total</th></tr>'+
+    sorted.map(r=>`<tr><td>${esc(r.partido_nombre)}</td><td>${cifraConFicha(esc(String(r.escanos)),'',{
+      modulo:'concentracion', calculo:calculoEsc, valorTexto:`${r.escanos} escaños`,
+      titulo:`${r.partido_nombre} · escaños en la Cámara`,
+      que:'Cuántas personas de esa agrupación registran voto en la votación de referencia'
+    })}</td><td>${esc(fmtCL(r.escanos/total*100,1))}%</td></tr>`).join('')+
+    `<tr><td><b>Total</b></td><td><b>${total}</b></td><td><b>100,0%</b></td></tr></table>`;
+}
+
+// ═══════════ PRENSA ═══════════
+// Una nota de prensa NO entra al manifiesto: ese registro esta reservado a
+// originales del Estado, que se guardan intactos y se pueden redistribuir. Los
+// articulos tienen su propia cadena (prensa/registro.jsonl) y de ellos no se
+// guarda el texto. Aca solo se pintan los veredictos que produjo la capa
+// determinista; esta pagina no contrasta nada por su cuenta.
+const ETIQUETA_VEREDICTO={
+  coincide:'coincide',
+  difiere:'difiere',
+  sin_dato_disponible:'sin dato disponible',
+  no_contrastable_con_este_corpus:'sin dato detrás'
+};
+const COLOR_VEREDICTO={coincide:'var(--bien)',difiere:'var(--s1)',
+  sin_dato_disponible:'var(--tinta-2)',no_contrastable_con_este_corpus:'var(--malla)'};
+
+async function initPrensa(){
+  const indice=await f('../data/derived/prensa/indice.json');
+  const lista=$('lista-prensa'), kpi=$('kpi-prensa');
+  // Cero articulos es un estado legitimo y frecuente (el modulo es nuevo): se
+  // dice, no se disimula con una tarjeta vacia.
+  if(!indice?.articulos?.length){
+    kpi.innerHTML='<div class="kpi"><div class="label">Artículos contrastados</div><div class="value acento">0</div><div class="sub">todavía no se ingiere ninguno</div></div>';
+    lista.innerHTML='<p class="sin-dato">Sin dato disponible: todavía no hay artículos contrastados. '+
+      'El módulo existe y su cadena está vacía.</p>';
+    await pintarCriterioPrensa();
+    return;
+  }
+  const arts=indice.articulos;
+  const suma=k=>arts.reduce((s,a)=>s+(a.conteo?.[k]||0),0);
+  const totalAf=arts.reduce((s,a)=>s+(a.total_afirmaciones||0),0);
+  const contrastadas=suma('coincide')+suma('difiere');
+  const pendientes=[...new Set(arts.flatMap(a=>a.ingestas_pendientes||[]))];
+  kpi.innerHTML=`
+    <div class="kpi"><div class="label">Artículos contrastados</div><div class="value acento">${arts.length}</div><div class="sub">${esc([...new Set(arts.map(a=>a.medio))].length)} medios</div></div>
+    <div class="kpi"><div class="label">Afirmaciones con cifra</div><div class="value acento">${esc(fmtCL(totalAf,0))}</div><div class="sub">${esc(fmtCL(contrastadas,0))} se pudieron contrastar</div></div>
+    <div class="kpi"><div class="label">Ingestas pendientes</div><div class="value acento">${pendientes.length}</div><div class="sub">fuentes que harían contrastable lo que hoy no lo es</div></div>`;
+
+  const eq=$('equivale-prensa');
+  if(eq){
+    const bloques=[`De las <strong>${esc(fmtCL(totalAf,0))}</strong> afirmaciones con cifra de estos ${arts.length} artículos, `+
+      `<strong>${esc(fmtCL(contrastadas,0))}</strong> se pudieron comparar contra un archivo sellado `+
+      `(${esc(fmtCL(suma('coincide'),0))} coinciden y ${esc(fmtCL(suma('difiere'),0))} difieren). `+
+      `Las otras <strong>${esc(fmtCL(totalAf-contrastadas,0))}</strong> no tienen, hoy, un dato público en este corpus contra el cual compararlas.`];
+    if(pendientes.length) bloques.push('Para contrastar esas faltantes hay que ingerir: '+
+      pendientes.map(p=>esc(p)).join(' · ')+'.');
+    eq.innerHTML='<b>¿Cuánto es eso?</b>'+bloques.map(t=>`<p>${t}</p>`).join('');
+    eq.hidden=false;
+  }
+
+  // Cada articulo se pide aparte: el indice trae los conteos, el detalle vive
+  // en su propio archivo y solo se baja el de los articulos que se muestran.
+  const detalles=await Promise.all(arts.map(a=>f('../data/derived/prensa/'+a.archivo)));
+  lista.innerHTML=arts.map((a,i)=>{
+    const d=detalles[i];
+    const c=a.conteo||{};
+    const total=a.total_afirmaciones||0;
+    const tramo=(k)=>total?`<span style="width:${(c[k]||0)/total*100}%;background:${COLOR_VEREDICTO[k]}" title="${esc(ETIQUETA_VEREDICTO[k])}: ${c[k]||0}"></span>`:'';
+    const afs=(d?.afirmaciones||[]).map(af=>{
+      const v=af.veredicto||'no_contrastable_con_este_corpus';
+      const corpus=af.del_corpus?`<br>Corpus: ${esc(JSON.stringify(af.del_corpus))}`:'';
+      // af.cita es la frase LITERAL del medio; af.cita_manifiesto es la entrada
+      // sellada contra la que se comprobo. Son cosas distintas y se muestran distinto.
+      const m=af.cita_manifiesto;
+      const cita=m?.seq!=null?`<br>Comprobado contra el manifiesto seq ${esc(m.seq)} · <span class="hash">${esc(String(m.sha256||'').slice(0,16))}…</span>`:'';
+      // Solo se reproduce la frase del medio cuando hubo algo que contrastar.
+      // Si no, se dice que no se cita y por que: republicar texto ajeno que el
+      // sistema no puede comprobar no aporta nada y si tiene un costo.
+      const frase=af.cita
+        ? `<p class="cita-prensa">«${esc(af.cita)}»</p>`
+        : `<p class="cita-prensa" style="color:var(--tinta-3)">${esc(af.cita_no_publicada||'Frase no reproducida.')}</p>`;
+      return `<div class="afirmacion">
+        ${frase}
+        <p class="contra"><span class="veredicto" data-v="${esc(v)}">${esc(ETIQUETA_VEREDICTO[v]||v)}</span>
+          ${esc(af.detalle||'')}${corpus}${cita}</p></div>`;
+    }).join('');
+    return `<div class="articulo">
+      <h3>${esc(a.titulo)}</h3>
+      <p class="meta">${esc(a.medio)} · ${esc(a.fecha_publicacion)} · <a href="${esc(a.url)}" target="_blank" rel="noopener">ver la nota original</a></p>
+      <div class="barra-densidad">${['coincide','difiere','sin_dato_disponible','no_contrastable_con_este_corpus'].map(tramo).join('')}</div>
+      <p class="nota">${esc(fmtCL(total,0))} afirmaciones con cifra · ${esc(fmtCL(c.coincide||0,0))} coinciden · ${esc(fmtCL(c.difiere||0,0))} difieren · ${esc(fmtCL(c.sin_dato_disponible||0,0))} sin dato disponible · ${esc(fmtCL(c.no_contrastable_con_este_corpus||0,0))} sin dato detrás</p>
+      ${afs||'<p class="sin-dato">Sin afirmaciones con cifra en esta nota.</p>'}</div>`;
+  }).join('');
+  await pintarCriterioPrensa(indice);
+}
+
+// El criterio de seleccion es, en si mismo, un vector de sesgo: se publica junto
+// con la lista, no aparte.
+async function pintarCriterioPrensa(indice){
+  const caja=$('criterio-prensa');
+  if(!caja) return;
+  const medios=await f('../prensa/medios.json');
+  const filas=(medios?.medios||[]).map(m=>
+    `<tr><td>${esc(m.medio)}</td><td>${esc(m.dominio||'')}</td><td>${esc(m.criterio_de_inclusion||'')}</td></tr>`).join('');
+  caja.innerHTML=
+    (medios?.criterio?`<p class="nota">${esc(medios.criterio)}</p>`:'')+
+    (filas?`<div class="tabla-wrap"><table><tr><th>Medio</th><th>Dominio</th><th>Por qué está en la lista</th></tr>${filas}</table></div>`
+          :'<p class="nota">Sin dato disponible: la lista de medios no se pudo leer.</p>')+
+    (indice?.limitacion_declarada?`<p class="nota">${esc(indice.limitacion_declarada)}</p>`:'');
 }
 
 // ═══════════ VERIFICAR ═══════════
@@ -421,53 +1628,122 @@ function canonJSON(v){
 // El hash propio de la entrada se calcula con sha256_linea vaciado, no ausente.
 const hashCanonico = entrada => sha256Hex(new TextEncoder().encode(canonJSON({...entrada, sha256_linea:''})));
 
-async function initVerificar(){
-  // Se distingue "no se pudo cargar" de "cargado con N entradas": tratar los dos casos
-  // igual hacia que una lista vacia recorriera cero iteraciones y reportara CADENA OK.
-  const GENESIS='0'.repeat(64);
-  let manifiesto=[], errorCarga=null;
-  try{
-    const t=await fetch('../manifest.jsonl');
-    if(!t.ok) throw new Error('HTTP '+t.status);
-    // El manifiesto se versiona con CRLF: separar solo por \n deja un \r por linea.
-    manifiesto=(await t.text()).trim().split(/\r?\n/).filter(Boolean).map(l=>JSON.parse(l));
-    if(!manifiesto.length) throw new Error('el archivo no tiene entradas');
-  }catch(e){ errorCarga=e.message||String(e); console.error('manifiesto', e); }
-  $('man-resumen').innerHTML=manifiesto.length?`<p>${manifiesto.length} entradas · Última: ${manifiesto[manifiesto.length-1]?.timestamp_utc?.slice(0,10)||'?'} · Hash-chain activa</p>`:`<p class="cargando">Manifiesto no disponible${errorCarga?' — '+esc(errorCarga):''}</p>`;
+// El manifiesto lo necesitan dos cosas: el sello del encabezado y la pestana
+// Verificar. Se carga una sola vez y se memoiza — son 450 KB, no se piden dos veces.
+// Se distingue "no se pudo cargar" de "cargado con N entradas": tratar los dos casos
+// igual hacia que una lista vacia recorriera cero iteraciones y reportara CADENA OK.
+let _manifiesto=null;
+function cargarManifiesto(){
+  if(_manifiesto) return _manifiesto;
+  _manifiesto=(async()=>{
+    try{
+      const t=await fetch('../manifest.jsonl');
+      if(!t.ok) throw new Error('HTTP '+t.status);
+      // El manifiesto se versiona con CRLF: separar solo por \n deja un \r por linea.
+      const entradas=(await t.text()).trim().split(/\r?\n/).filter(Boolean).map(l=>JSON.parse(l));
+      if(!entradas.length) throw new Error('el archivo no tiene entradas');
+      return {entradas, error:null};
+    }catch(e){ console.error('manifiesto', e); return {entradas:[], error:e.message||String(e)}; }
+  })();
+  return _manifiesto;
+}
 
-  const noVerificable=(detalle)=>`<span class="naranja" style="font-weight:700">⚠️ NO VERIFICABLE</span><p class="nota">${detalle}</p>`;
+// Comprobacion de la cadena, compartida por el sello y por el boton de la pestana
+// Verificar. Devuelve un veredicto estructurado en vez de HTML para que cada
+// consumidor lo presente a su manera sin duplicar la criptografia.
+async function comprobarCadena(){
+  const GENESIS='0'.repeat(64);
+  const {entradas, error}=await cargarManifiesto();
+  if(!entradas.length) return {estado:'no-verificable', detalle:`No se pudo leer el manifiesto${error?' ('+esc(error)+')':''}. Sin entradas no existe cadena que comprobar.`};
+  // crypto.subtle solo existe en contexto seguro (https o localhost).
+  if(!crypto?.subtle) return {estado:'no-verificable', detalle:'El navegador no expone crypto.subtle: se necesita https o localhost para recalcular los hashes.'};
+
+  // Se recalcula el hash de cada entrada desde su propio contenido. Sin esto solo se
+  // comprobaba que los eslabones se apuntaran entre si, pero no que el contenido de
+  // cada uno fuera el que su hash declara.
+  let recalculado;
+  try{ recalculado=await Promise.all(entradas.map(hashCanonico)); }
+  catch(err){ console.error('recalculo', err); return {estado:'no-verificable', detalle:'Falló el recálculo de hashes: '+esc(err.message||String(err))}; }
+
+  // Mismo orden de comprobaciones que verificar.py: encadenamiento y luego hash propio,
+  // para que la web y la herramienta CLI senalen la misma entrada ante la misma alteracion.
+  for(let i=0;i<entradas.length;i++){
+    const e=entradas[i], prev=i>0?entradas[i-1].sha256_linea:GENESIS;
+    // Una entrada sin los campos de la cadena tampoco puede darse por buena.
+    if(typeof e.sha256_prev!=='string'||typeof e.sha256_linea!=='string')
+      return {estado:'no-verificable', detalle:`La entrada ${i} no trae los campos sha256_prev / sha256_linea.`};
+    if(e.sha256_prev!==prev)
+      return {estado:'rota', i, titulo:`Cadena rota en la entrada ${i}`,
+        detalle:`Se esperaba el hash <span class="hash">${esc(prev)}</span> y la entrada declara <span class="hash">${esc(e.sha256_prev)}</span>.`};
+    if(recalculado[i]!==e.sha256_linea)
+      return {estado:'alterada', i, titulo:`Entrada ${i} alterada`,
+        detalle:`Su contenido no corresponde al hash que declara (seq ${esc(e.seq)}${e.descripcion?' · '+esc(e.descripcion):''}).<br>Declara <span class="hash">${esc(e.sha256_linea)}</span><br>Recalculado <span class="hash">${esc(recalculado[i])}</span>`};
+  }
+  return {estado:'ok', n:entradas.length, titulo:`Cadena íntegra · ${entradas.length} entradas`,
+    detalle:'Dos comprobaciones superadas: el hash de cada entrada se recalculó desde su contenido y coincide, y cada una apunta al hash de la anterior desde el génesis.'};
+}
+
+// ── EL SELLO DEL ENCABEZADO ──
+// La tesis del sitio, arriba y visible. Arranca en "sin comprobar" a proposito:
+// el sitio dice que no deberias confiar en el, asi que no declara la cadena
+// intacta hasta que se recalcula en el navegador de quien lee.
+async function initSello(){
+  const chip=$('sello-chip'), cifra=$('sello-cifra'), pie=$('sello-pie');
+  const {entradas, error}=await cargarManifiesto();
+  if(!entradas.length){
+    chip.textContent='manifiesto no disponible'; chip.dataset.estado='aviso'; chip.disabled=true;
+    cifra.textContent='—'; pie.textContent=error?esc(error):'sin manifiesto';
+    return;
+  }
+  const ult=entradas[entradas.length-1];
+  cifra.textContent=entradas.length.toLocaleString('es-CL');
+  pie.innerHTML=`última ${esc(ult.timestamp_utc?.slice(0,10)||'?')} · sha256 ${esc((ult.sha256_linea||'').slice(0,8))}…${esc((ult.sha256_linea||'').slice(-4))}`;
+  activarContadores();
+
+  chip.onclick=async()=>{
+    if(chip.dataset.estado==='trabajando') return;
+    chip.dataset.estado='trabajando'; chip.textContent=`recalculando ${entradas.length} hashes…`;
+    const v=await comprobarCadena();
+    if(v.estado==='ok'){ chip.dataset.estado='ok'; chip.textContent='cadena íntegra'; }
+    else if(v.estado==='no-verificable'){ chip.dataset.estado='aviso'; chip.textContent='no verificable'; }
+    else { chip.dataset.estado='roto'; chip.textContent='cadena rota'; }
+    // El detalle completo vive en la pestana Verificar: se pinta ahi y se lleva
+    // al lector, en vez de repetir el informe en el encabezado.
+    pintarVeredicto(v);
+    mostrar('verificar');
+    $('cadena-resultado')?.scrollIntoView({block:'center',behavior:SIN_MOVIMIENTO?'auto':'smooth'});
+  };
+}
+
+// Presenta un veredicto de comprobarCadena() en la pestana Verificar.
+function pintarVeredicto(v){
+  const out=$('cadena-resultado');
+  if(!out) return;
+  if(v.estado==='no-verificable'){
+    out.innerHTML=`<p><span class="naranja" style="font-weight:600">No verificable</span></p><p class="nota">${v.detalle}</p>`;
+  } else if(v.estado==='ok'){
+    out.innerHTML=`<p><span class="verde" style="font-weight:600">${v.titulo}</span></p><p class="nota">${v.detalle}</p>`;
+  } else {
+    out.innerHTML=`<p><span class="rojo" style="font-weight:600">${v.titulo}</span></p><p class="nota">${v.detalle}</p>`;
+  }
+}
+
+async function initVerificar(){
+  const {entradas, error}=await cargarManifiesto();
+  $('man-resumen').innerHTML=entradas.length?`<p class="nota">${entradas.length} entradas · última ${esc(entradas[entradas.length-1]?.timestamp_utc?.slice(0,10)||'?')} · hash-chain activa</p>`:`<p class="cargando">Manifiesto no disponible${error?' — '+esc(error):''}</p>`;
+
   $('btn-cadena').onclick=async()=>{
     const out=$('cadena-resultado');
-    // Sin manifiesto no hay nada que validar: decirlo, nunca afirmar que esta OK.
-    if(!manifiesto.length){ out.innerHTML=noVerificable(`No se pudo leer el manifiesto${errorCarga?' ('+esc(errorCarga)+')':''}. Sin entradas no existe cadena que comprobar.`); return; }
-    // crypto.subtle solo existe en contexto seguro (https o localhost).
-    if(!crypto?.subtle){ out.innerHTML=noVerificable('El navegador no expone crypto.subtle: se necesita https o localhost para recalcular los hashes.'); return; }
-    out.innerHTML=`<span class="cargando">Recalculando ${manifiesto.length} hashes...</span>`;
+    out.innerHTML=`<span class="cargando">Recalculando ${entradas.length||''} hashes…</span>`;
     await new Promise(r=>setTimeout(r,30));
-
-    // Se recalcula el hash de cada entrada desde su propio contenido. Sin esto solo se
-    // comprobaba que los eslabones se apuntaran entre si, pero no que el contenido de
-    // cada uno fuera el que su hash declara.
-    let recalculado;
-    try{ recalculado=await Promise.all(manifiesto.map(hashCanonico)); }
-    catch(err){ console.error('recalculo', err); out.innerHTML=noVerificable('Falló el recálculo de hashes: '+esc(err.message||String(err))); return; }
-
-    // Mismo orden de comprobaciones que verificar.py: encadenamiento y luego hash propio,
-    // para que la web y la herramienta CLI senalen la misma entrada ante la misma alteracion.
-    for(let i=0;i<manifiesto.length;i++){
-      const e=manifiesto[i], prev=i>0?manifiesto[i-1].sha256_linea:GENESIS;
-      // Una entrada sin los campos de la cadena tampoco puede darse por buena.
-      if(typeof e.sha256_prev!=='string'||typeof e.sha256_linea!=='string'){
-        out.innerHTML=noVerificable(`La entrada ${i} no trae los campos sha256_prev / sha256_linea.`); return;
-      }
-      if(e.sha256_prev!==prev){
-        out.innerHTML=`<span class="rojo" style="font-weight:700">❌ CADENA ROTA en entrada ${i}</span><p class="nota">Se esperaba el hash <span style="font-family:monospace;font-size:.7rem">${esc(prev)}</span> y la entrada declara <span style="font-family:monospace;font-size:.7rem">${esc(e.sha256_prev)}</span>.</p>`; return;
-      }
-      if(recalculado[i]!==e.sha256_linea){
-        out.innerHTML=`<span class="rojo" style="font-weight:700">❌ ENTRADA ${i} ALTERADA</span><p class="nota">Su contenido no corresponde al hash que declara (seq ${esc(e.seq)}${e.descripcion?' · '+esc(e.descripcion):''}).<br>Declara <span style="font-family:monospace;font-size:.7rem">${esc(e.sha256_linea)}</span><br>Recalculado <span style="font-family:monospace;font-size:.7rem">${esc(recalculado[i])}</span></p>`; return;
-      }
+    const v=await comprobarCadena();
+    pintarVeredicto(v);
+    // El sello de arriba refleja el mismo resultado: un solo estado en la pagina.
+    const chip=$('sello-chip');
+    if(chip && !chip.disabled){
+      chip.dataset.estado=v.estado==='ok'?'ok':v.estado==='no-verificable'?'aviso':'roto';
+      chip.textContent=v.estado==='ok'?'cadena íntegra':v.estado==='no-verificable'?'no verificable':'cadena rota';
     }
-    out.innerHTML=`<span class="verde" style="font-weight:700">✅ CADENA OK (${manifiesto.length} entradas íntegras)</span><p class="nota">Dos comprobaciones superadas: el hash de cada entrada se recalculó desde su contenido y coincide, y cada una apunta al hash de la anterior desde el génesis.</p>`;
   };
   const drop=$('drop'),file=$('file'),res=$('file-resultado');
   drop.querySelector('span').onclick=()=>file.click();
@@ -476,29 +1752,250 @@ async function initVerificar(){
   drop.ondrop=async e=>{e.preventDefault();drop.classList.remove('sobre');if(e.dataTransfer.files[0])verificar(e.dataTransfer.files[0])};
   file.onchange=()=>{if(file.files[0])verificar(file.files[0])};
   async function verificar(archivo){
-    if(!crypto?.subtle){ res.innerHTML=noVerificable('El navegador no expone crypto.subtle: se necesita https o localhost.'); return; }
-    res.innerHTML='<span class="cargando">Calculando...</span>';
+    if(!crypto?.subtle){ res.innerHTML=`<p><span class="naranja" style="font-weight:600">No verificable</span></p><p class="nota">El navegador no expone crypto.subtle: se necesita https o localhost.</p>`; return; }
+    res.innerHTML='<span class="cargando">Calculando…</span>';
     const h=await sha256Hex(await archivo.arrayBuffer());
-    const m=manifiesto.find(e=>e.sha256===h);
+    const m=entradas.find(e=>e.sha256===h);
     // Los campos vienen de un archivo externo: se escapan antes de inyectarlos.
-    res.innerHTML=m?`<span class="verde" style="font-weight:700">✅ ENCONTRADO — seq ${esc(m.seq)}</span><div class="nota">${esc(m.descripcion)}<br>Fuente: ${esc(m.url_fuente)}<br>Fecha captura: ${esc(m.timestamp_utc)}</div>`:`<span class="rojo" style="font-weight:700">❌ NO ENCONTRADO</span><p class="nota">El archivo no está registrado.<br><span style="font-family:monospace;font-size:.7rem">${h}</span></p>`;
+    res.innerHTML=m
+      ?`<p><span class="verde" style="font-weight:600">Encontrado en el manifiesto · seq ${esc(m.seq)}</span></p><div class="nota">${esc(m.descripcion)}<br>Fuente: ${esc(m.url_fuente)}<br>Fecha de captura: ${esc(m.timestamp_utc)}</div>`
+      :`<p><span class="rojo" style="font-weight:600">No está registrado</span></p><p class="nota">Este archivo no aparece en el manifiesto.<br><span class="hash">${h}</span></p>`;
   }
 }
 
 // ═══════════ DISPATCHER ═══════════
-const INITS = {fiscal:initFiscal, legislativo:initLegislativo, tendencia:initTendencia, concentracion:initConcentracion, verificar:initVerificar};
+const INITS = {fiscal:initFiscal, legislativo:initLegislativo, tendencia:initTendencia, concentracion:initConcentracion, prensa:initPrensa, verificar:initVerificar};
 
 function initSection(s){
   if(loaded[s] || !INITS[s]) return;   // el flag se marca aqui, en un unico lugar
   loaded[s] = true;
   Promise.resolve()
     .then(INITS[s])
+    .then(prepararTips)        // terminos de glosario nacidos del render
     .then(ubicarTips)
+    .then(activarContadores)   // los KPI recien pintados: antes no existian
     .catch(e => { console.error('initSection '+s, e); loaded[s] = false; });
 }
 
+// ═══════════ EFECTOS VISUALES ═══════════
+// Regla que manda sobre todo lo de aqui abajo: una animacion puede cambiar como
+// aparece una cifra, nunca cual es. Los contadores terminan reescribiendo el
+// texto original tal cual, porque este sitio se sostiene en que el numero que se
+// lee es el que respalda el hash.
+//
+// SIN_MOVIMIENTO ("reducir movimiento" del sistema) apaga solo el magnet, que es
+// el unico efecto que desplaza algo de forma continua. El reveal del titulo, el
+// fade y los contadores son cambios de opacidad y de texto: se quedan.
+const SIN_MOVIMIENTO = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const HAY_IO = typeof IntersectionObserver !== 'undefined';
+
+// ── 1. Titulo letra por letra ──
+// Se recorren los nodos hijos en vez de leer textContent: asi sobrevive el
+// <span> que pinta "Civica" en azul.
+(function(){
+  const h1 = document.querySelector('header h1');
+  if(!h1) return;
+  const letras = [];
+  let n = 0;
+  const partir = nodo => {
+    [...nodo.childNodes].forEach(hijo => {
+      if(hijo.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        for(const ch of hijo.textContent){
+          const s = document.createElement('span');
+          s.className = 'l';   // lo excluye de la regla de color del titulo
+          s.textContent = ch;
+          // Sin white-space:pre un inline-block colapsa el espacio a ancho 0
+          // y el titulo queda pegado ("AuditoriaCivica").
+          s.style.cssText = 'display:inline-block;white-space:pre;opacity:0;transition:opacity .4s ease-out;transition-delay:'+(n++*.03)+'s';
+          frag.appendChild(s);
+          letras.push(s);
+        }
+        nodo.replaceChild(frag, hijo);
+      } else if(hijo.nodeType === 1) partir(hijo);
+    });
+  };
+  partir(h1);
+  // Dos frames: el opacity:0 tiene que quedar pintado antes de invertirlo.
+  requestAnimationFrame(()=>requestAnimationFrame(()=>letras.forEach(s=>s.style.opacity='1')));
+})();
+
+// ── 2. Magnet: el encabezado sigue al mouse ──
+// El unico que se apaga con "reducir movimiento".
+if(!SIN_MOVIMIENTO)(function(){
+  const header = document.querySelector('header');
+  if(!header) return;
+  const FUERZA = 15, SIGUE = 'transform .3s ease-out', VUELVE = 'transform .6s ease-in-out';
+  // Tope: con el mouse al fondo de una pantalla alta el desplazamiento llegaba a
+  // ~50px y el encabezado se metia bajo el nav sticky.
+  const TOPE = 18, topar = v => Math.max(-TOPE, Math.min(TOPE, v));
+  let x = 0, y = 0, pendiente = false;
+
+  header.style.willChange = 'transform';
+  header.style.transition = VUELVE;
+
+  const pintar = () => {
+    pendiente = false;
+    // offsetLeft/Top NO incluyen el transform propio. Con getBoundingClientRect
+    // el centro se movia junto al header y el efecto se realimentaba.
+    const cx = header.offsetLeft + header.offsetWidth / 2 - scrollX;
+    const cy = header.offsetTop + header.offsetHeight / 2 - scrollY;
+    header.style.transition = SIGUE;
+    header.style.transform = `translate3d(${topar((x-cx)/FUERZA)}px,${topar((y-cy)/FUERZA)}px,0)`;
+  };
+  const centrar = () => {
+    header.style.transition = VUELVE;
+    header.style.transform = 'translate3d(0,0,0)';
+  };
+
+  // El pointermove solo anota coordenadas: se repinta una vez por frame, no una
+  // vez por pixel recorrido.
+  addEventListener('pointermove', e => {
+    x = e.clientX; y = e.clientY;
+    if(!pendiente){ pendiente = true; requestAnimationFrame(pintar); }
+  }, {passive:true});
+  // mouseleave sobre document casi nunca dispara y el header quedaba pegado
+  // fuera de eje. El mouse saliendo de la ventana es un mouseout sin destino.
+  document.addEventListener('mouseout', e => { if(!e.relatedTarget) centrar(); });
+  addEventListener('blur', centrar);
+})();
+
+// ── 3. Contadores de los KPI ──
+// Lee un numero en formato es-CL (punto de miles, coma decimal) y tambien el que
+// sale de toFixed (punto decimal). Devuelve null ante cualquier duda: rangos como
+// "2019–2030", texto como "sin dato" o dos numeros en el mismo valor se dejan
+// quietos en vez de arriesgar mostrar una cifra que no es.
+function leerNumero(txt){
+  const m = /^([^\d-]*)(-?[\d.,]+)([^\d]*)$/.exec(txt.trim());
+  if(!m) return null;
+  const [, pre, cuerpo, post] = m;
+  let entera = cuerpo, dec = '', sepDec = ',';
+  if(cuerpo.includes(',')){
+    const p = cuerpo.split(',');
+    if(p.length !== 2) return null;
+    [entera, dec] = p;
+  } else {
+    const p = cuerpo.split('.');
+    // "11.935" es agrupacion de miles; "2.34" es un decimal de toFixed.
+    const miles = p.length > 1 && p.slice(1).every(g => g.length === 3);
+    if(p.length > 1 && !miles){
+      if(p.length !== 2) return null;
+      [entera, dec] = p;
+      sepDec = '.';
+    }
+  }
+  const limpia = entera.replace(/\./g, '');
+  if(!/^-?\d+$/.test(limpia) || (dec && !/^\d+$/.test(dec))) return null;
+  const valor = parseFloat(limpia + (dec ? '.'+dec : ''));
+  if(!isFinite(valor)) return null;
+  return {valor, decimales: dec.length, miles: entera.includes('.'), sepDec, pre, post};
+}
+// Reconstruye un frame con el mismo formato que traia el original.
+function formatearComo(v, f){
+  let [ent, dec] = Math.abs(v).toFixed(f.decimales).split('.');
+  if(f.miles) ent = ent.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return (v < 0 ? '-' : '') + ent + (dec ? f.sepDec + dec : '');
+}
+
+// Contadores a medio camino. requestAnimationFrame deja de entregar frames
+// cuando la pestana pasa a segundo plano, y entonces el ultimo frame —el unico
+// que restituye el texto exacto— no llega nunca: la cifra se queda congelada en
+// un valor PARCIAL y erroneo de forma indefinida. Se cierra por dos lados: un
+// temporizador de respaldo (los timers si corren con la pestana oculta, aunque
+// estrangulados) y este listener, que finaliza en el acto todo lo que este en
+// vuelo justo cuando la pestana se oculta.
+const pendientes = new Set();
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden) [...pendientes].forEach(fin => fin());
+});
+
+const contadorObs = HAY_IO ? new IntersectionObserver(entradas => {
+  entradas.forEach(({isIntersecting, target}) => {
+    if(!isIntersecting) return;
+    contadorObs.unobserve(target);
+    const texto = target.dataset.target, f = leerNumero(texto);
+    if(!f) return;
+    const DUR = 1200, t0 = performance.now();
+    let respaldo;
+    // Idempotente: la puede llamar el ultimo frame, el respaldo o el listener.
+    const finalizar = () => {
+      clearTimeout(respaldo); pendientes.delete(finalizar);
+      target.textContent = texto;   // en reposo, el original intacto
+    };
+    respaldo = setTimeout(finalizar, DUR + 250);
+    pendientes.add(finalizar);
+    const paso = ahora => {
+      const p = Math.min((ahora - t0) / DUR, 1);
+      if(p < 1){
+        target.textContent = f.pre + formatearComo(f.valor * (1 - Math.pow(1-p, 3)), f) + f.post;
+        requestAnimationFrame(paso);
+      } else finalizar();
+    };
+    requestAnimationFrame(paso);
+  });
+}, {threshold:.3}) : null;
+
+// La llama initSection despues de pintar cada seccion: en la carga inicial los
+// KPI todavia no existen (los datos llegan por fetch).
+function activarContadores(){
+  if(!contadorObs) return;
+  // Incluye la cifra heroe del sello, no solo los KPI de seccion.
+  // Los .value marcados .compuesta traen markup adentro (el boton de la ficha):
+  // el contador escribe textContent, asi que ahi anima el <span class="num"> y
+  // no el contenedor — si no, el primer frame se comeria el boton entero.
+  document.querySelectorAll('.kpi .value:not(.compuesta):not([data-target]), .kpi .value.compuesta .num:not([data-target]), .hero-cifra:not([data-target])').forEach(el => {
+    el.dataset.target = el.textContent;
+    if(leerNumero(el.textContent)) contadorObs.observe(el);
+  });
+}
+
+// ── 4. Aparicion escalonada de tarjetas ──
+// Un solo observer (habia dos sobre el mismo set) y el indice fijado al observar,
+// no dentro del callback: asi el escalonado sigue el orden del documento y no el
+// orden en que el navegador agrupa las entradas.
+// Con "reducir movimiento" activo no se condiciona NADA a un observer: el
+// contenido aparece y listo. La aparicion escalonada es un adorno; que el dato
+// se vea, no. Y de paso desaparece toda una clase de riesgo para quien pidio
+// menos movimiento, que es justamente quien menos deberia pelear con la pagina.
+if(HAY_IO && !SIN_MOVIMIENTO){
+  const fadeObs = new IntersectionObserver(entradas => {
+    entradas.forEach(({isIntersecting, target}) => {
+      if(!isIntersecting) return;
+      fadeObs.unobserve(target);
+      setTimeout(() => target.classList.add('visible'), (+target.dataset.stagger || 0) * 80);
+    });
+  }, {threshold:.1, rootMargin:'0px 0px -20px 0px'});
+
+  // Sin .kpi individual: se crean despues de este punto, no alcanzarian a ser
+  // observados y quedarian invisibles en opacity:0. Su contenedor .kpis si entra.
+  document.querySelectorAll('main section').forEach(sec => {
+    sec.querySelectorAll('.kpis, .chart-box, .panel, .explain').forEach((el, i) => {
+      el.classList.add('js-fade');
+      el.dataset.stagger = Math.min(i, 5);
+      fadeObs.observe(el);
+    });
+  });
+  // Red de seguridad, mismo criterio que el temporizador de respaldo de los
+  // contadores: si a los 2,5 s algo sigue tapado se destapa igual. Caso real
+  // comprobado — una pestana que carga en SEGUNDO PLANO no recibe entradas del
+  // observer, y el contenido se queda en opacity:0 hasta que alguien la mira.
+  // En un sitio de datos publicos ninguna cifra puede depender de eso.
+  setTimeout(() => document.querySelectorAll('.js-fade:not(.visible)')
+    .forEach(el => el.classList.add('visible')), 2500);
+} else {
+  // Sin IntersectionObserver nadie agrega .visible, y js-fade tambien viene
+  // escrito en el HTML: hay que destapar a mano o el contenido queda invisible
+  // para siempre. En un sitio de datos publicos eso no es negociable.
+  document.querySelectorAll('.js-fade').forEach(el => el.classList.add('visible'));
+}
+
 // Arranque: la seccion fiscal ya viene con class="activa" en el HTML.
+// Va al final para que los efectos ya esten definidos cuando initSection los use.
 mostrar('fiscal');
+// El sello se llena aparte: no pertenece a ninguna seccion, es el encabezado.
+// El manifiesto son 450 KB, asi que se pide sin bloquear el primer pintado.
+initSello().catch(e => console.error('sello', e));
+
 </script>
 </body>
 </html>
