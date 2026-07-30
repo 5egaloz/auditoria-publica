@@ -33,6 +33,7 @@ class TestSobres(unittest.TestCase):
             "comparar_publicaciones": {"variable": "balance_efectivo_pct_pib", "anno": 2026},
             "votacion": {"id": 87507},
             "buscar_votaciones": {"texto": "Acusacion"},
+            "votaciones_de_proyecto": {"boletin": "18216-05"},
             "serie_ac": {},
             "partido_de": {"parlamentario": "Romero Leiva"},
             "votos_de": {"parlamentario": "Romero Leiva"},
@@ -46,6 +47,11 @@ class TestSobres(unittest.TestCase):
             "concentracion_gasto": {},
         }
         self.assertEqual(set(muestras), set(h.CATALOGO), "el catalogo cambio sin tests")
+        # votaciones_de_proyecto solo responde por proyectos INGERIDOS: pedir un
+        # boletin que no esta no puede devolver resultados de otro proyecto.
+        vacio = h.invocar("votaciones_de_proyecto", {"boletin": "00000-00"})
+        self.assertFalse(vacio["hay_dato"])
+        self.assertEqual(vacio["resultados"], [])
         for nombre, args in muestras.items():
             with self.subTest(herramienta=nombre):
                 sobre = h.invocar(nombre, args)

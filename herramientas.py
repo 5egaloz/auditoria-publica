@@ -613,12 +613,44 @@ def pivotalidad(partido: str | None = None) -> dict:
                   derivado=True, formula=_PIVOTE.get("formula"))
 
 
+def votaciones_de_proyecto(boletin: str | None = None, fecha: str | None = None,
+                           limite: int = 25) -> dict:
+    """Votaciones de un proyecto de ley concreto, cuando su boletin fue ingerido.
+
+    Existe por una necesidad del modulo de Prensa: el corpus general cubre las
+    votaciones de Sala del ano, no todo proyecto en particular. Cuando una
+    afirmacion apunta a un proyecto que no estaba, la respuesta del sistema no es
+    adivinar ni estimar: es ingerir ese boletin desde la fuente oficial y
+    contrastarlo aca.
+    """
+    args = {"boletin": boletin, "fecha": fecha, "limite": limite}
+    resultados = []
+    for ruta in sorted((DERIVED / "legislativo").glob("proyecto-*.json")):
+        datos = json.loads(ruta.read_text(encoding="utf-8"))
+        if boletin and _plano(datos.get("boletin")) != _plano(boletin):
+            continue
+        for r in datos.get("registros", []):
+            if fecha and str(r.get("fecha") or "")[:10] != fecha:
+                continue
+            resultados.append({**r,
+                               "boletin": datos.get("boletin"),
+                               "titulo_oficial": datos.get("titulo_oficial"),
+                               "cita": _cita(datos.get("sha256_origen"))})
+    resultados.sort(key=lambda r: (str(r.get("fecha") or ""), r.get("id") or 0))
+    return _sobre("votaciones_de_proyecto", args, resultados[:limite],
+                  cobertura="Solo proyectos cuyo boletin fue ingerido explicitamente, y solo sus "
+                            "votaciones en la Camara de Diputados. El Senado publica su tramitacion "
+                            "en otro servicio y sus totales de votos no vienen en registro legible "
+                            "por maquina.")
+
+
 # --------------------------------------------------------------------------
 # Catalogo (lo consume el router; ninguna herramienta se invoca fuera de aqui)
 # --------------------------------------------------------------------------
 
 CATALOGO = {
     "resumen_corpus": resumen_corpus,
+    "votaciones_de_proyecto": votaciones_de_proyecto,
     "serie_balance": serie_balance,
     "comparar_publicaciones": comparar_publicaciones,
     "votacion": votacion,
