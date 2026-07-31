@@ -276,20 +276,109 @@ h2{font-size:var(--t-l);font-weight:600;color:var(--tinta);letter-spacing:-.01em
 .veredicto[data-v="difiere"]{color:var(--s1)}
 .veredicto[data-v="sin_dato_disponible"]{color:var(--tinta-2)}
 .veredicto[data-v="no_contrastable_con_este_corpus"]{color:var(--tinta-3)}
-.articulo{background:color-mix(in srgb,var(--acento) 6%,#141413);border:1px solid var(--regla);
-  border-radius:var(--r);padding:16px 18px;margin:14px 0}
-.articulo h3{font-size:var(--t-m);color:var(--tinta);font-weight:600;margin-bottom:3px}
-.articulo .meta{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);margin-bottom:12px}
-.articulo .meta a{color:var(--enlace)}
-/* La cita ajena se marca como ajena: sangrada, entre comillas y en otra voz. */
-.cita-prensa{border-left:2px solid var(--regla);padding-left:11px;color:var(--tinta-2);
-  font-size:var(--t-s);max-width:76ch}
-.afirmacion{padding:12px 0;border-bottom:1px solid var(--malla)}
-.afirmacion:last-child{border-bottom:none}
-.afirmacion .contra{font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);
-  margin-top:7px;line-height:1.6}
-.barra-densidad{display:flex;height:6px;border-radius:100px;overflow:hidden;background:var(--malla);margin:10px 0 4px}
+/* ── La tarjeta de un articulo ──
+   Antes abria con el titulo y una barra, y despues venian 17 filas del mismo
+   tamano: trece de ellas decian literalmente lo mismo ("sin dato detras") y
+   empujaban hacia abajo la unica afirmacion que si se pudo comprobar. El
+   rediseno invierte eso: primero el hallazgo, despues lo comprobado, y el
+   monton repetido queda plegado con su conteo a la vista. Nada se esconde:
+   plegado no es omitido, y el numero de lo plegado se lee sin abrirlo. */
+.articulo{background:var(--sup);border:1px solid var(--regla);border-top:3px solid var(--acento);
+  border-radius:var(--r);padding:0;margin:22px 0;overflow:hidden}
+.art-cab{padding:15px 20px 16px;border-bottom:1px solid var(--malla)}
+.art-cab .meta{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.11em;color:var(--acento);margin-bottom:7px}
+.art-cab .meta .sep{color:var(--tinta-3)}
+.articulo h3{font-size:var(--t-l);line-height:1.35;color:var(--tinta);font-weight:600;
+  letter-spacing:-.01em;text-wrap:balance;max-width:60ch}
+.art-cab .fuente{display:inline-block;margin-top:9px;font-size:var(--t-xs);color:var(--enlace)}
+
+/* El hallazgo: la cifra que resume la nota, en el tamano que le corresponde.
+   Es un cociente leido del conteo, no una calificacion: dice cuanto se pudo
+   comprobar, no si la nota es buena. */
+.hallazgo{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;
+  padding:16px 20px 6px}
+.hallazgo .fraccion{font-family:var(--mono);font-size:var(--t-xl);line-height:1;
+  color:var(--acento);font-weight:500;letter-spacing:-.02em;white-space:nowrap}
+/* El "de" no es una cifra: se aparta para que los dos numeros se lean como los
+   dos numeros y no como una frase de tres piezas del mismo peso. */
+.hallazgo .fraccion em{font-style:normal;font-size:var(--t-m);color:var(--tinta-3);
+  padding:0 7px;vertical-align:3px}
+.hallazgo .glosa{font-size:var(--t-m);color:var(--tinta-2);max-width:52ch}
+.hallazgo .glosa b{color:var(--tinta);font-weight:600}
+
+.barra-densidad{display:flex;height:9px;overflow:hidden;background:var(--malla);
+  margin:12px 20px 0;border-radius:2px}
 .barra-densidad span{display:block}
+/* Leyenda con texto: el color nunca es el unico portador del estado. */
+.leyenda{display:flex;flex-wrap:wrap;gap:5px 16px;padding:9px 20px 4px;
+  font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3)}
+.leyenda i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;
+  vertical-align:0}
+.leyenda b{color:var(--tinta-2);font-weight:500}
+
+/* Rotulo de grupo dentro de la tarjeta. */
+.grupo-af{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.13em;color:var(--tinta-3);font-weight:500;
+  padding:22px 20px 0}
+/* La explicacion que comparten todas las afirmaciones del grupo, dicha una vez. */
+.nota-grupo{padding:8px 20px 0;font-size:var(--t-s);color:var(--tinta-3);
+  line-height:1.6;max-width:74ch}
+.nota-grupo b{color:var(--tinta-2);font-weight:500}
+
+.afirmacion{padding:14px 20px 16px;border-top:1px solid var(--malla)}
+.grupo-af+.afirmacion{border-top:none}
+/* La cita ajena se marca como ajena: sangrada, entre comillas y en otra voz.
+   Sube de tamano respecto del resto porque es lo que se esta auditando. */
+.cita-prensa{border-left:2px solid var(--acento);padding-left:13px;color:var(--tinta);
+  font-size:var(--t-b);line-height:1.6;max-width:64ch}
+.cita-prensa.muda{border-left-color:var(--regla);color:var(--tinta-3);font-size:var(--t-s)}
+/* Las cifras dentro de una cita se realzan en tinta, no en color: la ayuda de
+   lectura no puede parecer una marca de sospecha sobre ese numero. */
+.num{color:var(--tinta);font-weight:600;font-family:var(--mono);font-size:.94em;
+  letter-spacing:-.01em}
+.cita-prensa .num{border-bottom:1px solid color-mix(in srgb,var(--acento) 55%,transparent)}
+
+/* El enfrentamiento de cifras: lo que dice la nota, y lo que dice el registro.
+   Las DOS columnas van en tinta neutra. Pintar una de verde y otra de rojo
+   diria "el medio mintio", que es justo lo que el sistema declara no dictaminar:
+   una diferencia puede ser otro ano, otra definicion, otra fuente o un error. */
+.enfrenta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:1px;background:var(--regla);border:1px solid var(--regla);border-radius:var(--r);
+  margin:13px 0 0;max-width:620px}
+.enfrenta>div{background:var(--sup-2);padding:11px 14px 12px}
+.enfrenta .de{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.11em;color:var(--tinta-3);margin-bottom:6px}
+.enfrenta .val{font-family:var(--mono);font-size:var(--t-l);color:var(--tinta);
+  line-height:1.45;letter-spacing:-.01em}
+/* La etiqueta acompana a la cifra; si pesan igual, no se lee ninguna. */
+.enfrenta .val .k{font-size:var(--t-xs);color:var(--tinta-3);margin-right:5px}
+.enfrenta .val .num{font-size:1em}
+.enfrenta .val.sin{font-size:var(--t-s);color:var(--tinta-3);line-height:1.5}
+.enfrenta .pie{font-size:var(--t-xs);color:var(--tinta-3);margin-top:5px;line-height:1.5}
+
+.afirmacion .contra{font-size:var(--t-s);color:var(--tinta-3);margin-top:11px;
+  line-height:1.65;max-width:74ch}
+.afirmacion .contra .veredicto{margin-right:8px;vertical-align:1px}
+.afirmacion .ancla{display:block;font-family:var(--mono);font-size:var(--t-xs);
+  color:var(--tinta-3);margin-top:7px}
+
+/* El monton repetido, plegado. El summary lleva SIEMPRE el conteo: quien no
+   abra igual sabe cuantas frases hay ahi y que estado tienen. */
+details.sin-detras{border-top:1px solid var(--malla);margin-top:6px}
+/* Se sale del summary global (mono en versalitas): esto no es el rotulo de un
+   panel tecnico sino una frase que se lee, y en versalitas cuesta el doble. */
+details.sin-detras>summary{cursor:pointer;list-style:none;padding:14px 20px;
+  font-family:var(--sans);font-size:var(--t-s);text-transform:none;letter-spacing:0;
+  font-weight:400;color:var(--tinta-2);display:flex;gap:10px;align-items:center}
+details.sin-detras[open]>summary{margin-bottom:0}
+details.sin-detras>summary::-webkit-details-marker{display:none}
+details.sin-detras>summary::before{content:'▸';color:var(--tinta-3);font-size:var(--t-xs)}
+details.sin-detras[open]>summary::before{content:'▾'}
+details.sin-detras>summary:hover{color:var(--tinta)}
+details.sin-detras .lista-muda{padding:0 20px 16px}
+details.sin-detras .lista-muda li{list-style:none;padding:7px 0;border-top:1px solid var(--malla);
+  font-size:var(--t-s);color:var(--tinta-3);line-height:1.55}
 
 /* ── PRENSA: indicadores estructurales (capa sellada) ──
    Miden FORMA del texto: cuanto de lo afirmado trae con que comprobarse. Se
@@ -297,16 +386,29 @@ h2{font-size:var(--t-l);font-weight:600;color:var(--tinta);letter-spacing:-.01em
    —una columna de opinion los tiene altos por definicion sin ser falsa— y
    teñirlo de rojo seria el adjetivo que el sitio no escribe, dicho en color.
    La unica pieza cromatica es la barra de proporcion, en tinta neutra. */
+/* La tarjeta ya no tiene padding propio (el rediseno lo puso por bloque), asi
+   que estos dos bloques traen el suyo. */
+.articulo .indicadores{margin:0 20px}
+.articulo>.nota{padding:0 20px 4px}
+.articulo .analisis-ia{margin:18px 20px 20px}
+.grupo-af.indic{padding-top:24px}
 .indicadores{margin:14px 0 4px;border-top:1px solid var(--malla)}
 .indicador{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:baseline;
   padding:9px 0;border-bottom:1px solid var(--malla)}
 .indicador:last-child{border-bottom:none}
-.indicador .nombre{font-size:var(--t-s);color:var(--tinta-2)}
-.indicador .cifra{font-family:var(--mono);font-size:var(--t-s);color:var(--tinta);white-space:nowrap}
-.indicador .cifra i{color:var(--tinta-3);font-style:normal}
-.indicador .glosa{grid-column:1/-1;font-size:var(--t-xs);color:var(--tinta-3);max-width:74ch}
-.proporcion{grid-column:1/-1;height:3px;background:var(--malla);border-radius:100px;overflow:hidden}
-.proporcion span{display:block;height:100%;background:var(--tinta-3)}
+.indicador .nombre{font-size:var(--t-m);color:var(--tinta);font-weight:500}
+.indicador .cifra{white-space:nowrap;text-align:right}
+/* El numero ancla la fila; la unidad lo acompana sin competirle. */
+.indicador .cifra b{font-family:var(--mono);font-size:var(--t-l);color:var(--tinta);
+  font-weight:500;letter-spacing:-.01em}
+.indicador .cifra i{display:inline-block;margin-left:8px;font-family:var(--mono);
+  font-size:var(--t-xs);color:var(--tinta-3);font-style:normal}
+.indicador .glosa{grid-column:1/-1;font-size:var(--t-xs);color:var(--tinta-3);
+  line-height:1.65;max-width:78ch}
+.indicador .glosa b{color:var(--tinta-2);font-weight:500}
+.proporcion{grid-column:1/-1;height:3px;background:var(--malla);border-radius:100px;
+  overflow:hidden;margin:2px 0 3px}
+.proporcion span{display:block;height:100%;background:var(--acento);opacity:.75}
 
 /* ── PRENSA: analisis de IA (capa NO sellada) ──
    Todo el resto del sitio se puede recalcular. Esto no. La separacion visual es
@@ -1613,39 +1715,162 @@ async function initPrensa(){
   const detalles=await Promise.all(arts.map(a=>f('../data/derived/prensa/'+a.archivo)));
   const retoricas=await Promise.all(arts.map(a=>f('../data/derived/prensa/retorica/'+a.sha256+'.json')));
   const analisis=await Promise.all(arts.map(a=>f('../data/derived/prensa/analisis/'+a.sha256+'.json')));
-  lista.innerHTML=arts.map((a,i)=>{
-    const d=detalles[i];
-    const c=a.conteo||{};
-    const total=a.total_afirmaciones||0;
-    const tramo=(k)=>total?`<span style="width:${(c[k]||0)/total*100}%;background:${COLOR_VEREDICTO[k]}" title="${esc(ETIQUETA_VEREDICTO[k])}: ${c[k]||0}"></span>`:'';
-    const afs=(d?.afirmaciones||[]).map(af=>{
-      const v=af.veredicto||'no_contrastable_con_este_corpus';
-      const corpus=af.del_corpus?`<br>Corpus: ${esc(JSON.stringify(af.del_corpus))}`:'';
-      // af.cita es la frase LITERAL del medio; af.cita_manifiesto es la entrada
-      // sellada contra la que se comprobo. Son cosas distintas y se muestran distinto.
-      const m=af.cita_manifiesto;
-      const cita=m?.seq!=null?`<br>Comprobado contra el manifiesto seq ${esc(m.seq)} · <span class="hash">${esc(String(m.sha256||'').slice(0,16))}…</span>`:'';
-      // Solo se reproduce la frase del medio cuando hubo algo que contrastar.
-      // Si no, se dice que no se cita y por que: republicar texto ajeno que el
-      // sistema no puede comprobar no aporta nada y si tiene un costo.
-      const frase=af.cita
-        ? `<p class="cita-prensa">«${esc(af.cita)}»</p>`
-        : `<p class="cita-prensa" style="color:var(--tinta-3)">${esc(af.cita_no_publicada||'Frase no reproducida.')}</p>`;
-      return `<div class="afirmacion">
-        ${frase}
-        <p class="contra"><span class="veredicto" data-v="${esc(v)}">${esc(ETIQUETA_VEREDICTO[v]||v)}</span>
-          ${esc(af.detalle||'')}${corpus}${cita}</p></div>`;
-    }).join('');
-    return `<div class="articulo">
-      <h3>${esc(a.titulo)}</h3>
-      <p class="meta">${esc(a.medio)} · ${esc(a.fecha_publicacion)} · <a href="${esc(a.url)}" target="_blank" rel="noopener">ver la nota original</a></p>
-      <div class="barra-densidad">${['coincide','difiere','sin_dato_disponible','no_contrastable_con_este_corpus'].map(tramo).join('')}</div>
-      <p class="nota">${esc(fmtCL(total,0))} afirmaciones con cifra · ${esc(fmtCL(c.coincide||0,0))} coinciden · ${esc(fmtCL(c.difiere||0,0))} difieren · ${esc(fmtCL(c.sin_dato_disponible||0,0))} sin dato disponible · ${esc(fmtCL(c.no_contrastable_con_este_corpus||0,0))} sin dato detrás</p>
-      ${afs||'<p class="sin-dato">Sin afirmaciones con cifra en esta nota.</p>'}
-      ${pintarIndicadores(retoricas[i])}
-      ${pintarAnalisis(analisis[i])}</div>`;
-  }).join('');
+  lista.innerHTML=arts.map((a,i)=>pintarArticulo(a,detalles[i],retoricas[i],analisis[i])).join('');
   await pintarCriterioPrensa(indice);
+}
+
+// Realce de cifras dentro de una frase. Se aplica DESPUES de escapar: esc()
+// produce &amp; &lt; &gt; &quot;, ninguna con digitos, asi que envolver numeros
+// no puede partir una entidad por la mitad.
+// El identificador con guion ("18216-05") va entero: partirlo en dos negritas
+// lo hacia leer como dos cifras distintas. Y el espacio previo al % solo se
+// come cuando el % existe, para no dejar un hueco despues de cada numero.
+const realzarCifras = s => esc(s).replace(/\d[\d.,]*(?:-\d+)*(?:\s?%)?/g,
+  m=>`<b class="num">${m}</b>`);
+
+// Orden de lectura: primero lo que se pudo comprobar, al final lo que no. No es
+// un ranking de importancia, es el orden en que la seccion se vuelve legible:
+// trece filas identicas de "sin dato detras" arriba entierran el unico caso que
+// tiene algo que mostrar.
+const ORDEN_VEREDICTO={difiere:0,coincide:1,sin_dato_disponible:2,no_contrastable_con_este_corpus:3};
+
+// Dos afirmaciones pueden salir de la MISMA oracion cuando calzan dos plantillas
+// distintas. Reproducir la cita dos veces seguidas se lee como un error del
+// sitio, asi que se agrupan por oracion: la frase se muestra una vez y debajo
+// van sus veredictos, todos, sin perder ninguno.
+function agruparPorOracion(afirmaciones){
+  const porOracion=new Map();
+  for(const af of afirmaciones){
+    const k=af.oracion??`n${af.n}`;
+    if(!porOracion.has(k)) porOracion.set(k,{cita:af.cita,cita_no_publicada:af.cita_no_publicada,ver:[]});
+    const g=porOracion.get(k);
+    if(af.cita&&!g.cita) g.cita=af.cita;
+    g.ver.push(af);
+  }
+  const grupos=[...porOracion.values()];
+  for(const g of grupos) g.ver.sort((x,y)=>ORDEN_VEREDICTO[x.veredicto]-ORDEN_VEREDICTO[y.veredicto]);
+  grupos.sort((x,y)=>ORDEN_VEREDICTO[x.ver[0].veredicto]-ORDEN_VEREDICTO[y.ver[0].veredicto]);
+  return grupos;
+}
+
+// El enfrentamiento: lo que dice la nota contra lo que dice el registro.
+// Se arma solo cuando hay algo estructurado que enfrentar; si no, no se inventa
+// una tabla vacia.
+function pintarEnfrentamiento(af){
+  const nota=af.del_articulo, corpus=af.del_corpus;
+  if(!nota&&!corpus) return '';
+  const cifras=o=>Object.entries(o||{})
+    .filter(([k,v])=>typeof v==='number'&&!/^id_|^fecha/.test(k))
+    .map(([k,v])=>`<span class="k">${esc(k.replace(/_/g,' '))}</span><b class="num">${esc(fmtCL(v,0))}</b>`)
+    .join('<span class="k"> · </span>');
+  const izq=cifras(nota);
+  const der=cifras(corpus);
+  const m=af.cita_manifiesto;
+  return `<div class="enfrenta">
+    <div><p class="de">Lo que dice la nota</p>
+      <p class="val${izq?'':' sin'}">${izq||'sin cifra estructurada'}</p></div>
+    <div><p class="de">Lo que dice el registro</p>
+      <p class="val${der?'':' sin'}">${der||'ninguna votación registrada de este boletín tiene esos totales'}</p>
+      ${m?.seq!=null?`<p class="pie">manifiesto seq ${esc(m.seq)} · <span class="hash">${esc(String(m.sha256||'').slice(0,12))}…</span></p>`:''}</div>
+  </div>`;
+}
+
+// 'comun' trae el detalle y la fuente que faltan cuando TODAS las afirmaciones
+// del grupo comparten los mismos: en ese caso el texto va una sola vez arriba y
+// aca solo queda el sello. Repetir palabra por palabra la misma explicacion bajo
+// cada frase es lo que volvia la seccion ilegible.
+function pintarAfirmacion(g,comun){
+  const principal=g.ver[0];
+  const frase=g.cita
+    ? `<p class="cita-prensa">«${realzarCifras(g.cita)}»</p>`
+    : `<p class="cita-prensa muda">${esc(g.cita_no_publicada||'Frase no reproducida.')}</p>`;
+  const veredictos=g.ver.map(af=>{
+    const v=af.veredicto||'no_contrastable_con_este_corpus';
+    const m=af.cita_manifiesto;
+    const ancla=m?.seq!=null
+      ? `<span class="ancla">Comprobado contra el manifiesto seq ${esc(m.seq)} · <span class="hash">${esc(String(m.sha256||'').slice(0,16))}…</span></span>`:'';
+    const repetido=comun&&comun.detalle===af.detalle&&comun.necesita===(af.necesita||null);
+    const detalle=repetido?'':realzarCifras(af.detalle||'');
+    const falta=(!repetido&&af.necesita)
+      ? `<span class="ancla">Para resolverla falta ingerir: ${esc(af.necesita)}</span>`:'';
+    return `<p class="contra"><span class="veredicto" data-v="${esc(v)}">${esc(ETIQUETA_VEREDICTO[v]||v)}</span>${detalle}${ancla}${falta}</p>`;
+  }).join('');
+  return `<div class="afirmacion">${frase}${pintarEnfrentamiento(principal)}${veredictos}</div>`;
+}
+
+// Devuelve el detalle compartido por todo el grupo, o null si no hay uno solo.
+function detalleComun(grupos){
+  if(grupos.length<2) return null;
+  const uno=grupos[0].ver[0];
+  const mismo=grupos.every(g=>g.ver.length===1&&g.ver[0].detalle===uno.detalle
+    &&(g.ver[0].necesita||null)===(uno.necesita||null));
+  return mismo?{detalle:uno.detalle,necesita:uno.necesita||null}:null;
+}
+
+// La frase que abre la tarjeta. Sale del conteo, no de una lectura: dice cuanto
+// se pudo comprobar y como resulto. Ninguna variante califica a la nota.
+// 'fraccion' se inserta como HTML y por eso solo puede contener numeros ya
+// formateados y el <em> de esta funcion — nunca texto que venga de un archivo.
+function hallazgo(c,total){
+  const comprobadas=(c.coincide||0)+(c.difiere||0);
+  if(!total) return {fraccion:'—',glosa:'Esta nota no trae frases con cifra que este corpus sepa leer.'};
+  if(!comprobadas) return {fraccion:`0 de ${fmtCL(total,0)}`,
+    glosa:'Ninguna de sus afirmaciones con cifra tiene hoy un dato público en este corpus contra el cual compararse.'};
+  const partes=[];
+  if(c.coincide) partes.push(`<b>${fmtCL(c.coincide,0)}</b> coincide${c.coincide>1?'n':''} con la fuente oficial`);
+  if(c.difiere) partes.push(`<b>${fmtCL(c.difiere,0)}</b> difiere${c.difiere>1?'n':''}`);
+  return {fraccion:`${fmtCL(comprobadas,0)}<em>de</em>${fmtCL(total,0)}`,
+    glosa:`afirmaciones con cifra se pudieron comparar contra un archivo sellado: ${partes.join(' y ')}.`};
+}
+
+function pintarArticulo(a,d,ret,ana){
+  const c=a.conteo||{}, total=a.total_afirmaciones||0;
+  const ESTADOS=['coincide','difiere','sin_dato_disponible','no_contrastable_con_este_corpus'];
+  const tramo=k=>total&&c[k]?`<span style="width:${c[k]/total*100}%;background:${COLOR_VEREDICTO[k]}"></span>`:'';
+  const leyenda=ESTADOS.filter(k=>c[k]).map(k=>
+    `<span><i style="background:${COLOR_VEREDICTO[k]}"></i><b>${esc(fmtCL(c[k],0))}</b> ${esc(ETIQUETA_VEREDICTO[k])}</span>`).join('');
+
+  // Tres grupos con rotulos distintos, porque son tres cosas distintas:
+  // comprobado contra el registro, dentro del alcance pero sin la fuente
+  // ingerida todavia, y fuera de lo que este corpus sabe resolver. Meterlos
+  // bajo un solo titulo hacia que el rotulo mintiera sobre dos tercios de ellos.
+  const grupos=agruparPorOracion(d?.afirmaciones||[]);
+  const esV=(g,...vs)=>vs.includes(g.ver[0].veredicto);
+  const comprobadas=grupos.filter(g=>esV(g,'difiere','coincide'));
+  const pendientes=grupos.filter(g=>esV(g,'sin_dato_disponible'));
+  const sinDato=grupos.filter(g=>esV(g,'no_contrastable_con_este_corpus'));
+  const comunPend=detalleComun(pendientes);
+  const h=hallazgo(c,total);
+
+  // Lo repetido se pliega, pero el conteo queda leible sin abrirlo: plegar no es
+  // omitir, y este estado es el mas frecuente y esperado, no una falla.
+  const plegado=sinDato.length?`<details class="sin-detras"><summary>
+      <span><b class="num">${esc(fmtCL(sinDato.length,0))}</b> frases con cifra que este corpus no sabe resolver</span></summary>
+      <ul class="lista-muda">${sinDato.map(g=>`<li>${g.cita?'«'+realzarCifras(g.cita)+'»':esc(g.cita_no_publicada||'Frase no reproducida.')}</li>`).join('')}</ul>
+    </details>`:'';
+
+  return `<article class="articulo">
+    <div class="art-cab">
+      <p class="meta">${esc(a.medio)} <span class="sep">·</span> ${esc(a.fecha_publicacion)}</p>
+      <h3>${esc(a.titulo)}</h3>
+      <a class="fuente" href="${esc(a.url)}" target="_blank" rel="noopener">ver la nota original ↗</a>
+    </div>
+    <div class="hallazgo">
+      <span class="fraccion">${h.fraccion}</span>
+      <span class="glosa">${h.glosa}</span>
+    </div>
+    <div class="barra-densidad">${ESTADOS.map(tramo).join('')}</div>
+    <div class="leyenda">${leyenda}</div>
+    ${comprobadas.length?'<p class="grupo-af">Comprobadas contra el registro</p>':''}
+    ${comprobadas.map(g=>pintarAfirmacion(g,null)).join('')}
+    ${pendientes.length?'<p class="grupo-af">Se pueden comprobar, pero falta ingerir la fuente</p>'
+      +(comunPend?`<p class="nota-grupo">${esc(comunPend.detalle||'')}${comunPend.necesita
+        ?` <b>Falta ingerir:</b> ${esc(comunPend.necesita)}`:''}</p>`:''):''}
+    ${pendientes.map(g=>pintarAfirmacion(g,comunPend)).join('')}
+    ${(!comprobadas.length&&!pendientes.length)?'<p class="sin-dato" style="padding:14px 20px">Ninguna afirmación de esta nota se pudo comparar contra el registro.</p>':''}
+    ${plegado}
+    ${pintarIndicadores(ret)}
+    ${pintarAnalisis(ana)}</article>`;
 }
 
 // ── Capa sellada: indicadores estructurales ──
@@ -1671,8 +1896,8 @@ function pintarIndicadores(r){
     const total=v.de_un_total_de;
     const esDensidad=k==='densidad_valorativa';
     const cifra=esDensidad
-      ? `${esc(fmtCL(v.valor,2))} <i>por cada 1.000 palabras</i>`
-      : `${esc(fmtCL(v.valor,0))} <i>de ${esc(fmtCL(total,0))} ${esc(v.unidad||'')}</i>`;
+      ? `<b>${esc(fmtCL(v.valor,2))}</b><i>por cada 1.000 palabras</i>`
+      : `<b>${esc(fmtCL(v.valor,0))}</b><i>de ${esc(fmtCL(total,0))} ${esc(v.unidad||'')}</i>`;
     // La barra solo tiene sentido cuando el indicador es una parte de un total.
     const barra=(!esDensidad&&total)
       ? `<div class="proporcion"><span style="width:${Math.min(100,v.valor/total*100)}%"></span></div>`:'';
@@ -1684,7 +1909,8 @@ function pintarIndicadores(r){
     </div>`;
   }).join('');
   const lex=r.lexico||{}, rec=r.recorte_del_cuerpo||{};
-  return `<div class="indicadores">${filas}</div>
+  return `<p class="grupo-af indic">Cómo está construido lo que la nota afirma</p>
+    <div class="indicadores">${filas}</div>
     <p class="nota">Medido sobre el cuerpo de la nota: ${esc(fmtCL(rec.caracteres_medidos||0,0))} de `+
     `${esc(fmtCL(rec.caracteres_servidos||0,0))} caracteres que sirve la página `+
     `(se descartan menú, titulares de otras notas y pie). Listas de palabras: `+
