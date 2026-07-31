@@ -7,6 +7,21 @@
   "palabras": 30,
   "caracteres": 240
  },
+ "recorte_del_cuerpo": {
+  "alcance": "cuerpo_del_articulo",
+  "apto_para_publicar": true,
+  "caracteres_servidos": 9109,
+  "caracteres_medidos": 5736,
+  "descartado": 3373,
+  "ancla_inicio": "El Gobierno sufrió este miércoles un duro revés legislativo",
+  "ancla_fin": "Inscríbete en el Newsletter",
+  "excluye": [
+   "menu completo de secciones y programas del medio",
+   "el bloque 'Resumen · Sintesis generada con OpenAI': lo publica el medio, pero no es texto del periodista y medir su retorica seria medir la de una maquina",
+   "formulario de newsletter, bloques 'Destacados' y 'Noticias del dia', publicidad y pie de pagina"
+  ],
+  "regla": "desde la primera aparicion literal del ancla de inicio (incluida) hasta justo antes de la primera aparicion literal del ancla de fin posterior a ella"
+ },
  "articulo": {
   "sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
   "seq_registro": 0,
@@ -16,20 +31,11 @@
   "fecha_publicacion": "2026-07-23",
   "tema": "mega-reforma"
  },
- "total_oraciones": 44,
- "oraciones_con_cantidad": 9,
+ "total_oraciones": 36,
+ "oraciones_con_cantidad": 5,
  "afirmaciones": [
   {
    "n": 1,
-   "oracion": 0,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 2,
    "oracion": 1,
    "cita": null,
    "plantilla": null,
@@ -38,26 +44,8 @@
    "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
   },
   {
-   "n": 3,
-   "oracion": 2,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 4,
-   "oracion": 6,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 5,
-   "oracion": 9,
+   "n": 2,
+   "oracion": 4,
    "cita": "El informe había sido aprobado previamente por la Cámara de Diputadas y Diputados por 80 votos a favor, 48 en contra y dos abstenciones.",
    "plantilla": "votacion_totales",
    "descripcion_plantilla": "votos a favor y en contra de una votacion",
@@ -91,35 +79,26 @@
    }
   },
   {
-   "n": 6,
+   "n": 3,
+   "oracion": 18,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 4,
+   "oracion": 21,
+   "cita": null,
+   "plantilla": null,
+   "veredicto": "no_contrastable_con_este_corpus",
+   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
+   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
+  },
+  {
+   "n": 5,
    "oracion": 23,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 7,
-   "oracion": 26,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 8,
-   "oracion": 28,
-   "cita": null,
-   "plantilla": null,
-   "veredicto": "no_contrastable_con_este_corpus",
-   "detalle": "La frase trae una cantidad, pero no calza con ninguna plantilla que este corpus sepa resolver.",
-   "cita_no_publicada": "La oracion no se reproduce: el sistema no puede contrastarla y citarla solo republicaria texto ajeno."
-  },
-  {
-   "n": 9,
-   "oracion": 43,
    "cita": null,
    "plantilla": null,
    "veredicto": "no_contrastable_con_este_corpus",
@@ -133,10 +112,10 @@
    "coincide": 1,
    "difiere": 0,
    "sin_dato_disponible": 0,
-   "no_contrastable_con_este_corpus": 8
+   "no_contrastable_con_este_corpus": 4
   },
-  "total_afirmaciones": 9,
-  "densidad_contrastable": 0.1111,
+  "total_afirmaciones": 5,
+  "densidad_contrastable": 0.2,
   "formula_densidad": "densidad_contrastable = (coincide + difiere) / total_afirmaciones",
   "ingestas_pendientes": []
  }

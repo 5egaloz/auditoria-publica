@@ -1,0 +1,60 @@
+{
+ "descripcion": "Criterio con que el modulo de Prensa decide QUE noticia politica entra al corpus. Se publica versionado porque es, de lejos, la decision con mas sesgo de todo el modulo: lo que no entra no existe para el sistema, y un recorte silencioso se lee como 'aca esta todo'.",
+ "actualizado": "2026-07-31",
+ "version": 1,
+ "criterio": "Cobertura cruzada. Entra un hecho cuando al menos 2 medios de prensa/medios.json lo publican dentro de la misma ventana de tiempo. La relevancia NO la decide este proyecto ni su autor: la decide la coincidencia entre salas de redaccion que compiten entre si.",
+ "por_que_este_criterio": [
+  "Cualquier lista de temas escrita por una persona es su agenda. La coincidencia entre medios es una senal externa, reproducible y que no requiere que nadie confie en el criterio del autor.",
+  "Es simetrico por construccion: no distingue de que sector es la noticia ni quien la protagoniza. Solo cuenta cuantas redacciones la publicaron.",
+  "Es falsable: cualquiera puede bajar los mismos RSS el mismo dia y obtener la misma lista."
+ ],
+ "que_sesgo_arrastra_igual": [
+  "Hereda entero el sesgo de la lista de medios. Si los medios que si tienen RSS utilizable se parecen entre si, la cobertura cruzada premia justamente el consenso de ese grupo. El sesgo declarado en 'sesgo_conocido' de medios.json aplica aca multiplicado.",
+  "Premia el hecho del dia y castiga la investigacion que un solo medio publica en solitario. Un reportaje unico de un medio nunca alcanza el umbral, por importante que sea. Esto es una consecuencia del criterio, no un efecto colateral que se pueda parchar.",
+  "La ventana de un RSS chileno cubre entre 1 y 5 dias: sin captura diaria continua, un hecho publicado y desplazado queda fuera para siempre."
+ ],
+ "parametros": {
+  "minimo_medios": 2,
+  "ventana_horas": 36,
+  "umbral_similitud": 0.34,
+  "minimo_tokens_titular": 3,
+  "nota_umbral": "Dos titulares son del mismo hecho si comparten al menos el 34 % de sus palabras significativas (indice de Jaccard sobre el titular, sin tildes, sin palabras vacias, sin palabras de menos de 4 letras). El valor se eligio probandolo contra titulares reales y se publica para que se pueda discutir: subirlo parte hechos en dos, bajarlo junta hechos distintos."
+ },
+ "alcance_politico": {
+  "que_es": "Un hecho entra solo si su titular toca alguno de estos terminos. Sin este filtro, la cobertura cruzada seleccionaria futbol y farandula, que es lo que mas coincide entre medios.",
+  "como_se_comparan": "Palabra completa, sin tildes, admitiendo el plural regular en -s/-es. Por eso la lista trae las formas escritas enteras ('tributaria', 'tributario') y no raices: cuando el emparejamiento era por prefijo, 'ley' calzaba dentro de 'leyenda' y la muerte de un futbolista entraba al corpus como noticia legislativa.",
+  "terminos": [
+   "senado", "senador", "senadora", "camara", "diputado", "diputada",
+   "congreso", "parlamento", "parlamentario", "comision mixta", "sala",
+   "gobierno", "moneda", "ministro", "ministra", "ministerio", "subsecretario",
+   "presidente", "presidenta", "ejecutivo", "gabinete", "vocera", "vocero",
+   "proyecto de ley", "ley", "boletin", "reforma", "veto", "urgencia",
+   "votacion", "voto", "quorum", "tramite", "indicacion",
+   "promulga", "promulgo", "promulgacion", "promulgada", "promulgado",
+   "acusacion constitucional", "libelo", "destitucion", "juicio politico",
+   "constitucional", "tribunal constitucional", "contraloria",
+   "presupuesto", "erario", "impuesto", "recaudacion",
+   "tributaria", "tributario", "tributacion",
+   "dipres", "hacienda", "fisco", "deficit", "deuda publica", "pib",
+   "eleccion", "elecciones", "candidato", "candidata", "partido",
+   "pacto", "primarias", "servel", "padron electoral",
+   "municipio", "municipal", "alcalde", "alcaldesa", "gobernador",
+   "gobernadora", "core", "region", "regional"
+  ]
+ },
+ "palabras_vacias": [
+  "para", "como", "pero", "esta", "este", "esto", "esos", "esas", "unos",
+  "unas", "sobre", "entre", "desde", "hasta", "porque", "cuando", "donde",
+  "sera", "seran", "tras", "ante", "todo", "toda", "todos", "todas", "otro",
+  "otra", "otros", "otras", "mismo", "misma", "cual", "quien", "quienes",
+  "hoy", "ayer", "manana", "anos", "dias", "vez", "asi", "aun", "solo",
+  "mas", "menos", "muy", "ya", "que", "con", "sin", "por", "del", "las",
+  "los", "una", "uno", "sus", "sus", "les", "nos", "sea", "son", "fue",
+  "han", "hay", "dice", "dijo", "tiene", "tras"
+ ],
+ "reglas_de_operacion": [
+  "Se leen solo los RSS declarados en prensa/medios.json. Un medio sin feed utilizable no participa y eso queda dicho en la salida.",
+  "De cada item se toma titular, enlace y fecha. NO se descarga el articulo: eso ocurre despues, y solo para los hechos seleccionados, por ingesta_prensa.py.",
+  "La salida declara siempre cuantos items se leyeron, cuantos hechos se formaron, cuantos alcanzaron el umbral y cuantos quedaron fuera. El descarte se cuenta; no se esconde."
+ ]
+}

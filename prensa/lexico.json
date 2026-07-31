@@ -1,0 +1,116 @@
+{
+ "descripcion": "Listas de palabras y giros que alimentan los indicadores estructurales de retorica.py. Se publican como DATO, no escondidas en el codigo, porque un indicador cuyo criterio no se puede leer es indistinguible de una opinion con formato de numero. Quien no este de acuerdo con una lista puede editarla, re-correr el script y obtener otros numeros: eso es exactamente lo que hace auditable al indicador.",
+ "actualizado": "2026-07-31",
+ "version": 1,
+ "que_mide_esto_y_que_no": {
+  "mide": "Rasgos de FORMA del texto publicado: si una promesa viene acompanada de una fuente de financiamiento, si una cifra trae base de comparacion, si trae atribucion de fuente, y cuanta palabra valorativa contiene por cada mil palabras.",
+  "no_mide": "Ni verdad, ni intencion, ni ideologia, ni 'populismo'. Un indicador alto no prueba demagogia y uno bajo no prueba honestidad. Una nota puede tener densidad valorativa alta porque CITA literalmente a un parlamentario, y una columna de opinion la tiene alta por definicion sin que eso la haga falsa.",
+  "a_quien_se_le_cuenta": "Al texto publicado, no a una persona. El sistema no atribuye estos conteos al medio ni al politico citado, y no los promedia por medio: un promedio por medio convertiria esto en un marcador de sesgo de prensa.",
+  "simetria": "Las listas son simetricas por construccion: cada termino valorativo positivo tiene su par negativo (exito/fracaso, responsable/irresponsable, solido/debil). Si una lista solo castigara un lado del espectro, el indicador seria el producto ideologico que este proyecto existe para no ser."
+ },
+ "listas": {
+  "valorativas": {
+   "que_es": "Adjetivos y sustantivos que implican juicio de valor. Es la misma lista negra del Bloque 4 del CLAUDE.md, la que el propio sistema tiene prohibido usar en sus salidas, aplicada ahora como instrumento de medicion sobre texto ajeno.",
+   "como_se_cuenta": "Ocurrencias por cada 1.000 palabras del texto. Se compara sin tildes y en minuscula, sobre palabra completa (no dentro de otra palabra).",
+   "no_significa": "Que la nota sea falsa, tendenciosa o mal escrita. El adjetivo es el modo normal del castellano periodistico. El numero solo dice cuanto hay.",
+   "terminos": [
+    "fracaso", "fracasado", "exito", "exitoso", "historico", "record",
+    "populista", "populismo", "demagogia", "demagogo", "demagogico",
+    "irresponsable", "responsable", "escandaloso", "escandalo", "alarmante",
+    "preocupante", "solido", "debil", "desastre", "desastroso", "logro",
+    "mezquino", "generoso", "austero", "derrochador", "sesgado", "valiente",
+    "cobarde", "brutal", "dramatico", "catastrofico", "milagroso", "ejemplar",
+    "vergonzoso", "inaceptable", "impresentable", "extraordinario", "temerario",
+    "prudente", "imprudente", "radical", "extremo", "moderado", "sensato",
+    "insensato", "delirante", "absurdo", "ridiculo", "grave", "gravisimo",
+    "urgente", "inedito", "sin precedentes", "letal", "devastador", "explosivo",
+    "millonario", "multimillonario", "abultado", "magro", "raquitico",
+    "regalo", "castigo", "saqueo", "despilfarro", "manotazo", "retroceso",
+    "avance", "triunfo", "derrota", "golpe", "portazo", "cocina", "amarre"
+   ]
+  },
+  "promesa": {
+   "que_es": "Giros que anuncian un efecto futuro. Son el ancla del indicador mas util del conjunto: una promesa de efecto acompanada de su fuente de financiamiento es verificable manana; sin ella, no hay nada que verificar nunca.",
+   "como_se_cuenta": "Oraciones que contienen al menos un giro de esta lista.",
+   "no_significa": "Que la promesa sea falsa. Significa que la oracion afirma un efecto futuro.",
+   "terminos": [
+    "permitira", "permitiran", "generara", "generaran", "creara", "crearan",
+    "beneficiara", "beneficiaran", "aumentara", "aumentaran", "reducira",
+    "reduciran", "bajara", "bajaran", "subira", "subiran", "mejorara",
+    "mejoraran", "impulsara", "impulsaran", "asegurara", "garantizara",
+    "garantizaran", "recaudara", "recaudaran", "ahorrara", "ahorraran",
+    "se traducira", "se traduciran", "va a permitir", "van a permitir",
+    "vamos a", "voy a", "se espera que", "se proyecta que", "espera recaudar",
+    "espera generar", "apunta a", "busca generar", "traera", "traeran",
+    "significara", "significaran", "dara paso", "abrira", "destrabara"
+   ]
+  },
+  "financiamiento": {
+   "que_es": "Giros que declaran de donde salen los recursos de lo prometido, o cuanto cuesta.",
+   "como_se_cuenta": "Se busca dentro de la MISMA oracion que trae la promesa, y tambien en la oracion inmediatamente siguiente: en castellano periodistico el costo suele ir en la frase de al lado, y exigirlo en la misma oracion inflaria el indicador por una razon puramente gramatical.",
+   "no_significa": "Que la cifra de financiamiento sea correcta ni suficiente. Solo que esta declarada.",
+   "terminos": [
+    "con cargo a", "financiado con", "financiada con", "financiamiento",
+    "recursos provenientes", "provenientes de", "se financia", "costo fiscal",
+    "costara", "cuesta", "informe financiero", "mayor recaudacion",
+    "menor recaudacion", "presupuesto de", "partida presupuestaria",
+    "us$", "usd", "millones de dolares", "millones de pesos", "mm$", "uf",
+    "% del pib", "puntos del pib", "reasignacion", "reasignaciones",
+    "deuda", "endeudamiento", "via impuestos", "con impuestos",
+    "dipres", "hacienda estimo", "hacienda proyecta"
+   ]
+  },
+  "comparacion": {
+   "que_es": "Giros que dan base explicita a una cifra. Es la regla de traduccion del Bloque 4 aplicada al reves: alli el sistema se obliga a poner base a cada magnitud; aca se cuenta cuantas cifras ajenas la traen.",
+   "como_se_cuenta": "Se busca en la misma oracion de la cifra y en la anterior y la siguiente.",
+   "no_significa": "Que la comparacion sea pertinente ni honesta. Una base de comparacion mal elegida es un problema distinto y este indicador no lo detecta.",
+   "terminos": [
+    "respecto de", "respecto a", "respecto al", "comparado con", "comparada con",
+    "en comparacion", "frente a", "versus", "vs.", "vs", "contra el",
+    "mientras que en", "mientras en", "en cambio", "en el mismo periodo",
+    "en igual periodo", "el ano pasado", "el ano anterior", "hace un ano",
+    "la mediana", "el promedio", "el promedio de", "por sobre el",
+    "por debajo del", "mas que en", "menos que en", "el doble", "la mitad",
+    "historicamente", "en la serie", "desde 20", "entre 20", "en 20"
+   ]
+  },
+  "atribucion": {
+   "que_es": "Giros que dicen QUIEN entrego la cifra. Sin atribucion, una cifra no se puede ir a buscar a ninguna parte.",
+   "como_se_cuenta": "Se busca en la misma oracion de la cifra y en la anterior.",
+   "no_significa": "Que la fuente atribuida sea confiable ni que la cifra este bien copiada. Solo que hay a quien preguntarle.",
+   "terminos": [
+    "segun", "de acuerdo a", "de acuerdo al", "de acuerdo con", "informo",
+    "informaron", "reporto", "reportaron", "consigno", "cifras de",
+    "datos de", "el informe", "el estudio", "la encuesta", "el ministerio",
+    "la subsecretaria", "el banco central", "dipres", "el instituto nacional",
+    "ine", "sii", "el consejo fiscal", "estimo", "estimaron", "proyecto el",
+    "detallo", "preciso", "explico", "senalo", "sostuvo", "afirmo", "dijo"
+   ]
+  },
+  "colectivo_indefinido": {
+   "que_es": "Apelaciones a un sujeto colectivo cuyo alcance no esta definido en el texto. Es el rasgo formal que la literatura sobre discurso politico describe con mas consistencia, y es el unico de esta lista que se acerca a lo que en la conversacion corriente se llama populismo.",
+   "como_se_cuenta": "Ocurrencias del giro cuando NO viene acompanado, en la misma oracion, de una delimitacion (un numero, un tramo, un porcentaje, un decil, un rango de ingreso o una region). 'Las familias' es indefinido; 'las 800 mil familias del primer quintil' no lo es.",
+   "no_significa": "Que quien habla sea populista. Un colectivo sin delimitar puede ser precision periodistica imposible en el espacio de una bajada. El indicador cuenta cuantas veces el texto no delimito, y nada mas.",
+   "terminos": [
+    "la gente", "los chilenos", "las chilenas", "los ciudadanos",
+    "la ciudadania", "el pueblo", "las familias", "la clase media",
+    "los trabajadores", "las trabajadoras", "los emprendedores",
+    "las pymes", "los adultos mayores", "los jovenes", "la mayoria",
+    "todos los", "todas las", "la calle", "la sociedad", "el pais entero",
+    "los de siempre", "la elite", "los poderosos", "la casta"
+   ],
+   "delimitadores": [
+    "quintil", "decil", "tramo", "por ciento", "%", "mil", "millones",
+    "region", "comuna", "entre los", "de mas de", "de menos de",
+    "cuyo ingreso", "con ingresos", "que ganan", "afiliados", "cotizantes",
+    "beneficiarios", "el padron", "inscritos"
+   ]
+  }
+ },
+ "limitaciones_conocidas": [
+  "El emparejamiento es lexico, no sintactico: no distingue una promesa afirmada de una promesa NEGADA ('no permitira') ni de una promesa CITADA ('el diputado dijo que permitira'). Los tres suman igual. Corregir esto exigiria analisis sintactico, que no es stdlib pura.",
+  "La lista es finita y castellana de Chile: un giro equivalente que no este aca no se cuenta. El indicador subestima siempre, nunca sobreestima, y ese sesgo es conocido y de un solo signo.",
+  "Las listas se comparan sin tildes: 'record' y 'record' colapsan al mismo termino, igual que 'grave' dentro de 'gravemente' NO colapsa porque el emparejamiento exige palabra completa.",
+  "Cambiar este archivo cambia todos los numeros publicados. Por eso cada salida de retorica.py graba el sha256 de este archivo: un indicador sin la version de su criterio al lado no significa nada."
+ ]
+}

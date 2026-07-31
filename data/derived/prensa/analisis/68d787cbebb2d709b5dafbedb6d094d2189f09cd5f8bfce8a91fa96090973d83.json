@@ -1,0 +1,56 @@
+{
+ "descripcion": "Lectura critica de un modelo de lenguaje sobre el material sellado de un articulo. NO es verificable: un modelo no es reproducible, asi que la misma entrada puede dar otra salida. Lo que se sella aca es la PROCEDENCIA (que modelo, con que prompt, sobre que entrada), no la verdad de lo que dice.",
+ "generado_por": "analisis_ia.py",
+ "capa": "B (no determinista, NO sellable como dato)",
+ "derivado_no_determinista": true,
+ "sellado": false,
+ "funda_algun_veredicto": false,
+ "como_leerlo": "Es opinion. Si este bloque desapareciera, ninguna cifra publicada por el sistema cambiaria. Los datos estan en los bloques sellados, con su hash.",
+ "procedencia": {
+  "modelo": "claude-opus-5",
+  "prompt": {
+   "archivo": "prompts/analisis-prensa.md",
+   "sha256": "295015e28fdb4a1b1c15d4d8d5cf482a3d477b879de71da0e6e44f68f99a05e1",
+   "tambien_publicado_en": "prompts/hashes.json"
+  },
+  "entrada": {
+   "articulo_sha256": "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83",
+   "articulo_sha256_texto": "48c65b5af7e84c89c4430640a9c6a8af5af1c8586ff3050a33833381aab35d96",
+   "retorica_sha256": "5ee3b927644ff90b0b715eab9d9e102187d4c659893f15f55de0ce920abf057e",
+   "afirmaciones_sha256": "8cc850bb5e57d9869366db942db91a57db47d87126544113d2043837c6d48971",
+   "lexico_sha256": "fb46426d64fb45d471e5f2e72c8598b0870796d257719e296d40300948de5cde"
+  },
+  "salida": {
+   "sha256": "8d4c1172bc637c960ea1cce9916ec56458a5fc513b1a4b6fa448fc6ace577755",
+   "palabras": 493
+  },
+  "generado_utc": "2026-07-31T15:06:29Z",
+  "que_prueba_esto": "Que este texto salio de ese prompt sobre ese material, y que no cambio desde entonces. NO prueba que sea correcto.",
+  "que_no_prueba": "Nada sobre la veracidad del analisis. Otra corrida del mismo modelo con el mismo prompt puede escribir algo distinto, y ninguna de las dos versiones es mas valida que la otra por venir sellada."
+ },
+ "revision": {
+  "aprobado": true,
+  "motivos": [],
+  "advertencias": [],
+  "cifras_citadas_del_articulo": [
+   "2027",
+   "2028",
+   "23",
+   "24",
+   "25,5",
+   "26"
+  ],
+  "citas_literales": 2,
+  "revisado_por": "filtro.py (cifras, lenguaje valorativo, giros de juicio, etiquetas ideologicas) + chequeos estructurales de analisis_ia.py"
+ },
+ "articulo": {
+  "sha256": "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83",
+  "seq_registro": 1,
+  "medio": "Diario y Radio Universidad de Chile",
+  "titulo": "A las 2:40 horas el Senado aprobo megarreforma: Proyecto volvio a la Camara",
+  "url": "https://radio.uchile.cl/2026/07/16/a-las-240-horas-el-senado-aprobo-megarreforma-proyecto-volvio-a-la-camara/",
+  "fecha_publicacion": "2026-07-16",
+  "tema": "mega-reforma"
+ },
+ "texto": "## Lo que se puede comprobar hoy\n\nDe las 17 afirmaciones con cifra del cuerpo de esta nota, 1 llegó a compararse contra el registro sellado y difiere. El texto dice que la disposición fue respaldada «por 26 votos a favor, la abstención de Araya y 23 en contra». Ninguna de las 117 votaciones del boletín 18216-05 registradas en la Cámara tiene esos dos totales (manifiesto seq 678, hash f0530a5c94a767c1). El sistema no dictamina a qué se debe: puede tratarse de una votación del Senado, que no está en el corpus, de otra sesión o de un traspaso equivocado. Se publican las dos cifras y el hash, y hasta ahí llega lo que se puede afirmar.\n\nOtras 3 afirmaciones caen dentro de lo que el sistema sabe resolver, pero la fuente que las resuelve no está ingerida: quedan en sin dato disponible.\n\n## Lo que no queda contra qué comprobar\n\n12 de las 16 oraciones con cifra no traen base de comparación, y 15 de esas 16 no dicen quién entregó el número. El cronograma tributario es el caso con más peso: «una reducción en 25,5% para el año 2027, 24% para 2028 y la tasa permanente de 23%» aparece sin fuente nombrada y sin la tasa vigente al lado. Sin ese punto de partida, tres porcentajes en fila describen una trayectoria cuya magnitud el lector no puede dimensionar, y sin autor no tiene a quién preguntarle de dónde salen.\n\nLo mismo con la tasa corporativa de 1,5% para quienes se acojan a la invariabilidad: es una cifra sobre el contenido del articulado, y el articulado no está publicado en un formato que una máquina pueda leer.\n\nHay 1 promesa de efecto futuro en el cuerpo, y llega sin declarar recursos ni costo. Está dentro de una cita textual a un parlamentario, de modo que el indicador cuenta el texto publicado, no una omisión atribuible a alguien.\n\nLa densidad de palabras con carga de juicio en el cuerpo es de 0,0 por cada 1.000 palabras, sobre 1.135. Es el resultado esperable de una nota que relata una sesión: el instrumento no premia ni castiga, cuenta.\n\n## Posibles soluciones\n\n1. Ingerir el texto articulado del boletín 18216-05 desde Ley Chile. Las 3 afirmaciones en sin dato disponible —tasa corporativa y cronograma— pasarían a resolverse contra la fuente.\n2. Publicar los totales de votación del Senado como dato legible por máquina. Es la fuente que probablemente explica la afirmación que hoy difiere.\n\n## Lo que este análisis no pudo evaluar\n\nSi las 13 afirmaciones no contrastables son correctas: no lo son ni dejan de serlo, este corpus no las resuelve. Tampoco qué votación es la que el texto describe, porque la del Senado no está ingerida.\n\nEste análisis es una lectura de un modelo de lenguaje sobre el material sellado. No es verificable y no sostiene ninguna cifra del sistema: las cifras están en los bloques sellados de arriba, con su hash."
+}

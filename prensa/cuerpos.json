@@ -1,0 +1,33 @@
+{
+ "descripcion": "Anclas literales que delimitan DONDE empieza y donde termina el articulo dentro del texto visible de la pagina. Una por articulo, identificado por su sha256 en prensa/registro.jsonl.",
+ "por_que_existe": "El texto que sirve la URL de un medio no es el articulo: es el articulo mas el menu del sitio, la barra de secciones, los titulares de OTRAS notas, el pie de pagina y la publicidad. Medido en el caso piloto: de 9.252 caracteres servidos por una nota, poco mas de la mitad eran el articulo. Contar indicadores sobre todo eso publica numeros que no describen la nota — el titular de otra nota entraba al conteo de palabras valorativas de esta. El sistema prefiere declarar el recorte a fingir que no hace falta.",
+ "regla": "La medicion empieza en la primera aparicion literal de 'inicio' (incluida) y termina justo antes de la primera aparicion literal de 'fin' posterior a ese punto. Comparacion exacta, sin normalizar: si un ancla no aparece, la pagina cambio y NO se mide. Un recorte que falla en silencio seria peor que no recortar.",
+ "que_queda_fuera_a_proposito": "Menu, pie de pagina, titulares relacionados, publicidad, formularios de suscripcion y —cuando el medio la publica marcada como tal— la sintesis generada por una maquina, que no es texto del periodista. Cada exclusion se anota en 'excluye' de la entrada.",
+ "sin_anclas": "Un articulo sin entrada aca igual se puede medir, pero su salida queda marcada alcance='pagina_completa' y apto_para_publicar=false, y el sitio no muestra sus indicadores como si describieran la nota.",
+ "actualizado": "2026-07-31",
+ "cuerpos": {
+  "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83": {
+   "medio": "Diario y Radio Universidad de Chile",
+   "inicio": "Nacional Política A las 2:40 horas de la madrugada",
+   "fin": "Entradas relacionadas:",
+   "excluye": [
+    "encabezado del sitio y barra de secciones",
+    "la bajada repetida antes de la firma (el mismo parrafo aparece dos veces en la pagina)",
+    "bloque 'Entradas relacionadas' y 'Destacados en Portada': titulares de otras notas",
+    "pie de pagina institucional de la radio"
+   ],
+   "declarado": "2026-07-31"
+  },
+  "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26": {
+   "medio": "El Mostrador",
+   "inicio": "El Gobierno sufrió este miércoles un duro revés legislativo",
+   "fin": "Inscríbete en el Newsletter",
+   "excluye": [
+    "menu completo de secciones y programas del medio",
+    "el bloque 'Resumen · Sintesis generada con OpenAI': lo publica el medio, pero no es texto del periodista y medir su retorica seria medir la de una maquina",
+    "formulario de newsletter, bloques 'Destacados' y 'Noticias del dia', publicidad y pie de pagina"
+   ],
+   "declarado": "2026-07-31"
+  }
+ }
+}

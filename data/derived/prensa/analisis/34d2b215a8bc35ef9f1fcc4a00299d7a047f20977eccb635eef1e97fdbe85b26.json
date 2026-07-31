@@ -1,0 +1,53 @@
+{
+ "descripcion": "Lectura critica de un modelo de lenguaje sobre el material sellado de un articulo. NO es verificable: un modelo no es reproducible, asi que la misma entrada puede dar otra salida. Lo que se sella aca es la PROCEDENCIA (que modelo, con que prompt, sobre que entrada), no la verdad de lo que dice.",
+ "generado_por": "analisis_ia.py",
+ "capa": "B (no determinista, NO sellable como dato)",
+ "derivado_no_determinista": true,
+ "sellado": false,
+ "funda_algun_veredicto": false,
+ "como_leerlo": "Es opinion. Si este bloque desapareciera, ninguna cifra publicada por el sistema cambiaria. Los datos estan en los bloques sellados, con su hash.",
+ "procedencia": {
+  "modelo": "claude-opus-5",
+  "prompt": {
+   "archivo": "prompts/analisis-prensa.md",
+   "sha256": "295015e28fdb4a1b1c15d4d8d5cf482a3d477b879de71da0e6e44f68f99a05e1",
+   "tambien_publicado_en": "prompts/hashes.json"
+  },
+  "entrada": {
+   "articulo_sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
+   "articulo_sha256_texto": "ad2183d9de44a91805c05d556417f157d8c4b7f36dc3cc31951eb7824339e154",
+   "retorica_sha256": "43dfcc80436e2c21b1a50f4c34baa7cf39acdc9b25b51fe7bce95e191c8f3506",
+   "afirmaciones_sha256": "31e857506a8c419a7a9cfeb61baeffb17b092066376e9c1976afa203a796cae4",
+   "lexico_sha256": "fb46426d64fb45d471e5f2e72c8598b0870796d257719e296d40300948de5cde"
+  },
+  "salida": {
+   "sha256": "fd88d6a2c188caab5c2631531f035a3e3605f2956ec6e94ad082d3b447af4ce8",
+   "palabras": 486
+  },
+  "generado_utc": "2026-07-31T15:06:29Z",
+  "que_prueba_esto": "Que este texto salio de ese prompt sobre ese material, y que no cambio desde entonces. NO prueba que sea correcto.",
+  "que_no_prueba": "Nada sobre la veracidad del analisis. Otra corrida del mismo modelo con el mismo prompt puede escribir algo distinto, y ninguna de las dos versiones es mas valida que la otra por venir sellada."
+ },
+ "revision": {
+  "aprobado": true,
+  "motivos": [],
+  "advertencias": [],
+  "cifras_citadas_del_articulo": [
+   "48",
+   "70",
+   "80"
+  ],
+  "citas_literales": 3,
+  "revisado_por": "filtro.py (cifras, lenguaje valorativo, giros de juicio, etiquetas ideologicas) + chequeos estructurales de analisis_ia.py"
+ },
+ "articulo": {
+  "sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
+  "seq_registro": 0,
+  "medio": "El Mostrador",
+  "titulo": "Megarreforma tropieza en la ultima valla: Gobierno retira urgencia y aplaza su despacho hasta agosto",
+  "url": "https://www.elmostrador.cl/noticias/pais/2026/07/23/megarreforma-tropieza-en-la-ultima-valla-gobierno-retira-urgencia-y-aplaza-su-despacho-hasta-agosto/",
+  "fecha_publicacion": "2026-07-23",
+  "tema": "mega-reforma"
+ },
+ "texto": "## Lo que se puede comprobar hoy\n\nDe las 5 afirmaciones con cifra que la capa determinista extrajo del cuerpo de esta nota, 1 se pudo comparar contra el registro sellado. El texto afirma que el informe de la comisión mixta fue aprobado en la Cámara «por 80 votos a favor, 48 en contra y dos abstenciones». La ficha oficial del boletín 18216-05 registra esos mismos tres valores para esa votación (manifiesto seq 678, hash f0530a5c94a767c1). Veredicto: coincide. Las otras 4 no tienen hoy un dato público en este corpus contra el cual compararse.\n\n## Lo que no queda contra qué comprobar\n\nLas 5 oraciones con cifra del cuerpo llegan sin base de comparación: ninguna dice respecto de qué habría que leer el número. La compensación municipal «estimada en cerca de US$70 millones» es el caso más nítido: sin el costo total del mecanismo, sin lo que hoy reciben los municipios y sin la cifra de un año anterior, US$70 millones no informa magnitud, solo tamaño tipográfico.\n\nDos de esas 5 tampoco dicen quién entregó la cifra. La de los US$70 millones es una de ellas: llega atribuida a la discusión, no a un informe con autor y fecha, de modo que el lector no tiene a quién preguntarle cómo se calculó.\n\nEl cuerpo invoca una vez a «la mayoría» sin acotar de quiénes se habla: ni cuántos, ni de qué comité, ni en qué votación. Una afirmación sobre un colectivo que el texto no delimita no se puede contradecir con datos, porque no hay universo que medir.\n\nLa densidad de palabras con carga de juicio es de 5,51 por cada 1.000 palabras, sobre un cuerpo de 907. El conteo no separa las que escribe el medio de las que cita textualmente de un parlamentario, y en esta nota hay de las dos.\n\n## Posibles soluciones\n\n1. Publicar el informe financiero de la indicación municipal en formato legible por máquina, con autor y fecha. Haría contrastable la cifra de US$70 millones, hoy sin dato disponible.\n2. Publicar los totales de votación del Senado como dato y no como acta en PDF. El Senado hoy entrega la tramitación pero no los totales legibles por máquina: por eso ninguna afirmación sobre esa sesión llegó al contraste.\n3. Ingerir el texto articulado del boletín 18216-05 desde Ley Chile. Cada afirmación sobre plazos, montos o condiciones del proyecto pasaría de no contrastable a resoluble.\n\n## Lo que este análisis no pudo evaluar\n\nNada sobre lo ocurrido en la sesión del Senado ni sobre el contenido del articulado: ninguna de las dos fuentes está ingerida. Tampoco si las 4 afirmaciones restantes son correctas; solo consta que este corpus no las resuelve.\n\nEste análisis es una lectura de un modelo de lenguaje sobre el material sellado. No es verificable y no sostiene ninguna cifra del sistema: las cifras están en los bloques sellados de arriba, con su hash."
+}

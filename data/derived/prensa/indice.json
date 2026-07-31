@@ -23,10 +23,10 @@
     "coincide": 0,
     "difiere": 1,
     "sin_dato_disponible": 3,
-    "no_contrastable_con_este_corpus": 20
+    "no_contrastable_con_este_corpus": 13
    },
-   "total_afirmaciones": 24,
-   "densidad_contrastable": 0.0417,
+   "total_afirmaciones": 17,
+   "densidad_contrastable": 0.0588,
    "ingestas_pendientes": [
     "texto oficial del proyecto o de la ley (BCN / Ley Chile), no ingerido"
    ]
@@ -44,10 +44,10 @@
     "coincide": 1,
     "difiere": 0,
     "sin_dato_disponible": 0,
-    "no_contrastable_con_este_corpus": 8
+    "no_contrastable_con_este_corpus": 4
    },
-   "total_afirmaciones": 9,
-   "densidad_contrastable": 0.1111,
+   "total_afirmaciones": 5,
+   "densidad_contrastable": 0.2,
    "ingestas_pendientes": []
   }
  ]

@@ -1,0 +1,280 @@
+{
+ "descripcion": "Indicadores estructurales de un articulo de prensa, medidos por reglas deterministas contra las listas publicadas en prensa/lexico.json. Miden FORMA del texto: que tanto de lo afirmado trae con que comprobarse. No miden verdad, ni intencion, ni ideologia, y no se promedian por medio.",
+ "generado_por": "retorica.py",
+ "derivado": true,
+ "capa": "A' (determinista, sin IA, sellable)",
+ "lexico": {
+  "archivo": "prensa/lexico.json",
+  "sha256": "fb46426d64fb45d471e5f2e72c8598b0870796d257719e296d40300948de5cde",
+  "version": 1,
+  "por_que_va_el_hash": "Cambiar una lista cambia todos los numeros. Un indicador sin la version de su criterio al lado no significa nada."
+ },
+ "tope_de_cita": {
+  "palabras": 30,
+  "caracteres": 240
+ },
+ "recorte_del_cuerpo": {
+  "alcance": "cuerpo_del_articulo",
+  "apto_para_publicar": true,
+  "caracteres_servidos": 9252,
+  "caracteres_medidos": 6944,
+  "descartado": 2308,
+  "ancla_inicio": "Nacional Política A las 2:40 horas de la madrugada",
+  "ancla_fin": "Entradas relacionadas:",
+  "excluye": [
+   "encabezado del sitio y barra de secciones",
+   "la bajada repetida antes de la firma (el mismo parrafo aparece dos veces en la pagina)",
+   "bloque 'Entradas relacionadas' y 'Destacados en Portada': titulares de otras notas",
+   "pie de pagina institucional de la radio"
+  ],
+  "regla": "desde la primera aparicion literal del ancla de inicio (incluida) hasta justo antes de la primera aparicion literal del ancla de fin posterior a ella"
+ },
+ "advertencia_de_lectura": "Un indicador alto no prueba demagogia y uno bajo no prueba honestidad. El emparejamiento es lexico: no distingue una promesa afirmada de una negada ni de una citada.",
+ "articulo": {
+  "sha256": "68d787cbebb2d709b5dafbedb6d094d2189f09cd5f8bfce8a91fa96090973d83",
+  "sha256_texto": "48c65b5af7e84c89c4430640a9c6a8af5af1c8586ff3050a33833381aab35d96",
+  "seq_registro": 1,
+  "medio": "Diario y Radio Universidad de Chile",
+  "titulo": "A las 2:40 horas el Senado aprobo megarreforma: Proyecto volvio a la Camara",
+  "url": "https://radio.uchile.cl/2026/07/16/a-las-240-horas-el-senado-aprobo-megarreforma-proyecto-volvio-a-la-camara/",
+  "fecha_publicacion": "2026-07-16",
+  "tema": "mega-reforma"
+ },
+ "total_oraciones": 39,
+ "total_palabras": 1135,
+ "indicadores": {
+  "promesas_sin_financiamiento_declarado": {
+   "valor": 1,
+   "de_un_total_de": 1,
+   "unidad": "oraciones",
+   "que_cuenta": "Oraciones que anuncian un efecto futuro sin declarar, ni en esa oracion ni en la siguiente, de donde salen los recursos o cuanto cuesta.",
+   "que_no_cuenta": "No dice que la promesa sea falsa. Dice que hoy no hay contra que comprobarla."
+  },
+  "cifras_sin_base_de_comparacion": {
+   "valor": 12,
+   "de_un_total_de": 16,
+   "unidad": "oraciones con cifra",
+   "que_cuenta": "Oraciones con una cantidad que no traen, en su vecindad, contra que compararla (otro periodo, una mediana, un promedio, otro pais).",
+   "que_no_cuenta": "No dice que la cifra sea incorrecta ni que la comparacion faltante cambiaria el sentido."
+  },
+  "cifras_sin_atribucion_de_fuente": {
+   "valor": 15,
+   "de_un_total_de": 16,
+   "unidad": "oraciones con cifra",
+   "que_cuenta": "Oraciones con una cantidad donde el texto no dice quien la entrego.",
+   "que_no_cuenta": "No dice que la cifra este inventada. Dice que el lector no tiene a quien ir a preguntarle."
+  },
+  "colectivos_sin_delimitar": {
+   "valor": 1,
+   "de_un_total_de": 1,
+   "unidad": "ocurrencias",
+   "que_cuenta": "Apelaciones a un sujeto colectivo ('la gente', 'las familias') sin un numero, tramo, decil o region que acote de quienes se habla.",
+   "que_no_cuenta": "No dice que quien habla sea populista. Un colectivo sin delimitar tambien es economia de lenguaje."
+  },
+  "densidad_valorativa": {
+   "valor": 0.0,
+   "de_un_total_de": 1135,
+   "unidad": "ocurrencias por cada 1.000 palabras",
+   "ocurrencias": 0,
+   "que_cuenta": "Cuanta palabra con carga de juicio contiene el texto publicado, contra la lista simetrica de prensa/lexico.json.",
+   "que_no_cuenta": "No dice que la nota sea tendenciosa. El adjetivo puede venir dentro de una cita literal a un tercero, y el conteo no los separa."
+  }
+ },
+ "casos": {
+  "promesas": [
+   {
+    "oracion": 36,
+    "cita": "Vamos a retroceder”, sostuvo.",
+    "giros_de_promesa": [
+     "vamos a"
+    ],
+    "financiamiento_declarado": false,
+    "terminos_de_financiamiento": [],
+    "ventana_financiamiento": "misma oracion y la siguiente"
+   }
+  ],
+  "cifras": [
+   {
+    "oracion": 0,
+    "cita": "Nacional Política A las 2:40 horas de la madrugada de este jueves, el Senado concluyó la votación en particular del proyecto de reconstrucción, que tenía asegurados los 26 votos de…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 1,
+    "cita": "La oposición solo pudo pronunciarse con un máximo de 24 en contra.",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 4,
+    "cita": "En el caso de la invariabilidad tributaria, que fijó condiciones impositivas en 10 años para las inversiones de 50 millones de dólares, en 15 años a las de entre 50…",
+    "base_de_comparacion": true,
+    "terminos_de_comparacion": [
+     "en 20"
+    ],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 5,
+    "cita": "Habrá una tasa corporativa de un 1,5% a las empresas que se acojan a la invariabilidad.",
+    "base_de_comparacion": true,
+    "terminos_de_comparacion": [
+     "en 20"
+    ],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 6,
+    "cita": "La disposición fue respaldada por 26 votos a favor, la abstención de Araya y 23 en contra, incluidos los senadores PPD Loreto Carvajal y Ricardo Celis, que habían llegado a…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 9,
+    "cita": "Como nosotros no estuvimos en conocimiento de que esto iba a ser el 22%, lamentablemente nos bajamos de este acuerdo, y no porque tengamos miedo o porque haya una aprensión…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": true,
+    "terminos_de_atribucion": [
+     "estimo"
+    ],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 11,
+    "cita": "En relación a la reducción de impuestos, se aprobó por 26 a favor y 24 en contra la rebaja gradual del Impuesto de Primera Categoría (IDPC) para grandes empresas del…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 12,
+    "cita": "El cronograma establece una reducción en 25,5% para el año 2027, 24% para 2028 y la tasa permanente de 23% desde el año comercial 2029 en adelante.",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 14,
+    "cita": "Un poco más holgada fue la aprobación del mecanismo para el cálculo del impuesto territorial, que incorpora la exención del pago de contribuciones para los propietarios de la primera vivienda…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 15,
+    "cita": "La disposición se aprobó por 28 votos a favor, con el respaldo del PPD Pedro Araya y del independiente Karim Bianchi.",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 16,
+    "cita": "Ligado a lo anterior, se aprobó la entrega de una compensación al Fondo Común Municipal (FCM) equivalente de 1 millón 500 mil UTM para exención del impuesto territorial.",
+    "base_de_comparacion": true,
+    "terminos_de_comparacion": [
+     "respecto a"
+    ],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 18,
+    "cita": "Pese a ello, se aprobaron los artículos relacionados con 26 favor y 24 en contra.",
+    "base_de_comparacion": true,
+    "terminos_de_comparacion": [
+     "respecto a"
+    ],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 19,
+    "cita": "También se respaldó una reintegración gradual del sistema tributario, cuya implementación total está contemplada para el año tributario 2031, y que las empresas contribuyentes de primera categoría puedan descontar del…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 20,
+    "cita": "Indicaciones de la oposición En tanto, se apoyó una indicación del Frente Amplio que se introdujo en el primer trámite, que busca terminar con la obligación exclusiva para empresas con…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 31,
+    "cita": "Luego de pronunciarse sobre el artículo 1 del proyecto -que fue aprobado por unanimidad y se refiere a la reconstrucción de regiones afectadas por incendios- los parlamentarios comenzaron a entregar…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 32,
+    "cita": "Desde la oposición, se reiteraron las críticas a medidas clave de la iniciativa, como la disminución del impuesto empresarial del 27 al 23%, la invariabilidad tributaria o la eliminación de…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   }
+  ],
+  "colectivos": [
+   {
+    "oracion": 10,
+    "cita": "A título personal, es porque creo que cuando uno hace políticas públicas tiene que mostrar todas las cartas arriba de la mesa”, aseveró.",
+    "colectivos": [
+     "todas las"
+    ],
+    "delimitado_en_la_oracion": false
+   }
+  ],
+  "valorativas": []
+ }
+}

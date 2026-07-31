@@ -1,0 +1,47 @@
+{
+ "descripcion": "Hechos politicos seleccionados por cobertura cruzada: los que al menos 2 medios de prensa/medios.json publicaron dentro de la misma ventana. La relevancia la decide la coincidencia entre redacciones, no este proyecto.",
+ "generado_por": "relevancia.py",
+ "derivado": true,
+ "fecha_corrida_utc": "2026-07-31T15:11:37Z",
+ "criterio": {
+  "archivo": "prensa/relevancia.json",
+  "version": 1,
+  "parametros": {
+   "minimo_medios": 2,
+   "ventana_horas": 36,
+   "umbral_similitud": 0.34,
+   "minimo_tokens_titular": 3,
+   "nota_umbral": "Dos titulares son del mismo hecho si comparten al menos el 34 % de sus palabras significativas (indice de Jaccard sobre el titular, sin tildes, sin palabras vacias, sin palabras de menos de 4 letras). El valor se eligio probandolo contra titulares reales y se publica para que se pueda discutir: subirlo parte hechos en dos, bajarlo junta hechos distintos."
+  },
+  "sesgo_que_arrastra": [
+   "Hereda entero el sesgo de la lista de medios. Si los medios que si tienen RSS utilizable se parecen entre si, la cobertura cruzada premia justamente el consenso de ese grupo. El sesgo declarado en 'sesgo_conocido' de medios.json aplica aca multiplicado.",
+   "Premia el hecho del dia y castiga la investigacion que un solo medio publica en solitario. Un reportaje unico de un medio nunca alcanza el umbral, por importante que sea. Esto es una consecuencia del criterio, no un efecto colateral que se pueda parchar.",
+   "La ventana de un RSS chileno cubre entre 1 y 5 dias: sin captura diaria continua, un hecho publicado y desplazado queda fuera para siempre."
+  ]
+ },
+ "cobertura_de_la_corrida": {
+  "medios_declarados": 7,
+  "medios_leidos": 6,
+  "items_por_medio": {
+   "BioBioChile": 20,
+   "CIPER Chile": 16,
+   "Cooperativa": 15,
+   "Diario y Radio Universidad de Chile": 30,
+   "El Ciudadano": 9,
+   "The Clinic": 10
+  },
+  "medios_sin_feed_utilizable": [
+   {
+    "medio": "El Mostrador",
+    "motivo": "sin dato disponible: no expone feed utilizable; solo sitemap_news.xml"
+   }
+  ],
+  "advertencia": "Un hecho que solo cubrio un medio NO entra, por importante que sea. El criterio premia el consenso y castiga la exclusiva; es una consecuencia del metodo, no un efecto que se pueda parchar."
+ },
+ "items_leidos": 100,
+ "descartados_por_alcance": 79,
+ "hechos_formados": 21,
+ "hechos_seleccionados": 0,
+ "hechos_bajo_el_umbral": 21,
+ "hechos": []
+}

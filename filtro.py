@@ -35,6 +35,11 @@ RAICES_VALORATIVAS = [
     "valient", "cobard", "desmedid", "desbordad", "exorbitant", "insuficient",
     "excesiv", "razonabl", "prudent", "temerari", "grav", "lev",
     "optimist", "pesimist", "polemic", "controvertid", "cuestionabl",
+    # Etiquetas de estilo politico. No se prohiben porque el fenomeno no exista,
+    # sino porque nombrarlo aplica una categoria que ningun dato de este sistema
+    # respalda, y ademas reemplaza el trabajo de mostrar el mecanismo: decir
+    # "demagogia" ahorra tener que decir a que colectivo se apela sin delimitar.
+    "demagog", "populism", "clientelar", "asistencialist", "tecnocrat",
 ]
 # "responsable" y "responsabilidad" se usan en sentido institucional; se vigila
 # solo la forma adjetiva valorativa.

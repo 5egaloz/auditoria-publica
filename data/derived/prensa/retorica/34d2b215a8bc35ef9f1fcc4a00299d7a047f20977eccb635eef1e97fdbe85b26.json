@@ -1,0 +1,190 @@
+{
+ "descripcion": "Indicadores estructurales de un articulo de prensa, medidos por reglas deterministas contra las listas publicadas en prensa/lexico.json. Miden FORMA del texto: que tanto de lo afirmado trae con que comprobarse. No miden verdad, ni intencion, ni ideologia, y no se promedian por medio.",
+ "generado_por": "retorica.py",
+ "derivado": true,
+ "capa": "A' (determinista, sin IA, sellable)",
+ "lexico": {
+  "archivo": "prensa/lexico.json",
+  "sha256": "fb46426d64fb45d471e5f2e72c8598b0870796d257719e296d40300948de5cde",
+  "version": 1,
+  "por_que_va_el_hash": "Cambiar una lista cambia todos los numeros. Un indicador sin la version de su criterio al lado no significa nada."
+ },
+ "tope_de_cita": {
+  "palabras": 30,
+  "caracteres": 240
+ },
+ "recorte_del_cuerpo": {
+  "alcance": "cuerpo_del_articulo",
+  "apto_para_publicar": true,
+  "caracteres_servidos": 9109,
+  "caracteres_medidos": 5736,
+  "descartado": 3373,
+  "ancla_inicio": "El Gobierno sufrió este miércoles un duro revés legislativo",
+  "ancla_fin": "Inscríbete en el Newsletter",
+  "excluye": [
+   "menu completo de secciones y programas del medio",
+   "el bloque 'Resumen · Sintesis generada con OpenAI': lo publica el medio, pero no es texto del periodista y medir su retorica seria medir la de una maquina",
+   "formulario de newsletter, bloques 'Destacados' y 'Noticias del dia', publicidad y pie de pagina"
+  ],
+  "regla": "desde la primera aparicion literal del ancla de inicio (incluida) hasta justo antes de la primera aparicion literal del ancla de fin posterior a ella"
+ },
+ "advertencia_de_lectura": "Un indicador alto no prueba demagogia y uno bajo no prueba honestidad. El emparejamiento es lexico: no distingue una promesa afirmada de una negada ni de una citada.",
+ "articulo": {
+  "sha256": "34d2b215a8bc35ef9f1fcc4a00299d7a047f20977eccb635eef1e97fdbe85b26",
+  "sha256_texto": "ad2183d9de44a91805c05d556417f157d8c4b7f36dc3cc31951eb7824339e154",
+  "seq_registro": 0,
+  "medio": "El Mostrador",
+  "titulo": "Megarreforma tropieza en la ultima valla: Gobierno retira urgencia y aplaza su despacho hasta agosto",
+  "url": "https://www.elmostrador.cl/noticias/pais/2026/07/23/megarreforma-tropieza-en-la-ultima-valla-gobierno-retira-urgencia-y-aplaza-su-despacho-hasta-agosto/",
+  "fecha_publicacion": "2026-07-23",
+  "tema": "mega-reforma"
+ },
+ "total_oraciones": 36,
+ "total_palabras": 907,
+ "indicadores": {
+  "promesas_sin_financiamiento_declarado": {
+   "valor": 0,
+   "de_un_total_de": 0,
+   "unidad": "oraciones",
+   "que_cuenta": "Oraciones que anuncian un efecto futuro sin declarar, ni en esa oracion ni en la siguiente, de donde salen los recursos o cuanto cuesta.",
+   "que_no_cuenta": "No dice que la promesa sea falsa. Dice que hoy no hay contra que comprobarla."
+  },
+  "cifras_sin_base_de_comparacion": {
+   "valor": 5,
+   "de_un_total_de": 5,
+   "unidad": "oraciones con cifra",
+   "que_cuenta": "Oraciones con una cantidad que no traen, en su vecindad, contra que compararla (otro periodo, una mediana, un promedio, otro pais).",
+   "que_no_cuenta": "No dice que la cifra sea incorrecta ni que la comparacion faltante cambiaria el sentido."
+  },
+  "cifras_sin_atribucion_de_fuente": {
+   "valor": 2,
+   "de_un_total_de": 5,
+   "unidad": "oraciones con cifra",
+   "que_cuenta": "Oraciones con una cantidad donde el texto no dice quien la entrego.",
+   "que_no_cuenta": "No dice que la cifra este inventada. Dice que el lector no tiene a quien ir a preguntarle."
+  },
+  "colectivos_sin_delimitar": {
+   "valor": 1,
+   "de_un_total_de": 1,
+   "unidad": "ocurrencias",
+   "que_cuenta": "Apelaciones a un sujeto colectivo ('la gente', 'las familias') sin un numero, tramo, decil o region que acote de quienes se habla.",
+   "que_no_cuenta": "No dice que quien habla sea populista. Un colectivo sin delimitar tambien es economia de lenguaje."
+  },
+  "densidad_valorativa": {
+   "valor": 5.51,
+   "de_un_total_de": 907,
+   "unidad": "ocurrencias por cada 1.000 palabras",
+   "ocurrencias": 5,
+   "que_cuenta": "Cuanta palabra con carga de juicio contiene el texto publicado, contra la lista simetrica de prensa/lexico.json.",
+   "que_no_cuenta": "No dice que la nota sea tendenciosa. El adjetivo puede venir dentro de una cita literal a un tercero, y el conteo no los separa."
+  }
+ },
+ "casos": {
+  "promesas": [],
+  "cifras": [
+   {
+    "oracion": 1,
+    "cita": "Pocas horas después de que la Cámara aprobara el informe de la comisión mixta, La Moneda retiró la urgencia y el Senado aplazó la votación al quedar en evidencia que…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": true,
+    "terminos_de_atribucion": [
+     "el informe"
+    ],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 4,
+    "cita": "El informe había sido aprobado previamente por la Cámara de Diputadas y Diputados por 80 votos a favor, 48 en contra y dos abstenciones.",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": true,
+    "terminos_de_atribucion": [
+     "el informe"
+    ],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 18,
+    "cita": "La fórmula municipal pendiente El informe resuelve el único artículo que permanecía abierto: el mecanismo para compensar a las municipalidades y al Fondo Común Municipal por la menor recaudación derivada…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": true,
+    "terminos_de_atribucion": [
+     "el informe"
+    ],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 21,
+    "cita": "Para acceder a los recursos, los municipios deberán mantener al día la información exigida por ley y acreditar una reducción de al menos 30% en sus tiempos de tramitación de…",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   },
+   {
+    "oracion": 23,
+    "cita": "La oposición ha cuestionado que la compensación —estimada en cerca de US$70 millones— sea financiada mediante recursos generales del Estado.",
+    "base_de_comparacion": false,
+    "terminos_de_comparacion": [],
+    "atribucion_de_fuente": false,
+    "terminos_de_atribucion": [],
+    "ventana_comparacion": "la oracion anterior, la misma y la siguiente",
+    "ventana_atribucion": "la oracion anterior y la misma"
+   }
+  ],
+  "colectivos": [
+   {
+    "oracion": 5,
+    "cita": "Sin embargo, la mayoría que La Moneda consiguió en esa corporación se evaporó al llegar al Senado. “Están los votos, pero no están acá” El senador Gustavo Sanhueza, de la…",
+    "colectivos": [
+     "la mayoria"
+    ],
+    "delimitado_en_la_oracion": false
+   }
+  ],
+  "valorativas": [
+   {
+    "oracion": 2,
+    "cita": "La petición para suspender la definición fue impulsada por el comité de la UDI, que buscó evitar que el Ejecutivo se expusiera a una derrota en la Sala.",
+    "terminos": [
+     "derrota"
+    ]
+   },
+   {
+    "oracion": 8,
+    "cita": "Con esos desmarques y ausencias, el Gobierno quedó sin margen para aprobar el texto y optó por retirar el apuro antes que registrar una derrota.",
+    "terminos": [
+     "derrota"
+    ]
+   },
+   {
+    "oracion": 15,
+    "cita": "Daniel Manouchehri (PS) incluso abandonó la comisión sin votar y acusó al Ejecutivo de dar un “portazo” a ambas regiones.",
+    "terminos": [
+     "portazo"
+    ]
+   },
+   {
+    "oracion": 25,
+    "cita": "De la fotografía del triunfo al repliegue El Gobierno pretendía cerrar la tramitación durante julio.",
+    "terminos": [
+     "triunfo"
+    ]
+   },
+   {
+    "oracion": 27,
+    "cita": "Pero en el Senado, la fotografía del triunfo fue reemplazada por un repliegue de emergencia.",
+    "terminos": [
+     "triunfo"
+    ]
+   }
+  ]
+ }
+}

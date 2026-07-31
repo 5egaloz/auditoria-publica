@@ -291,6 +291,48 @@ h2{font-size:var(--t-l);font-weight:600;color:var(--tinta);letter-spacing:-.01em
 .barra-densidad{display:flex;height:6px;border-radius:100px;overflow:hidden;background:var(--malla);margin:10px 0 4px}
 .barra-densidad span{display:block}
 
+/* ── PRENSA: indicadores estructurales (capa sellada) ──
+   Miden FORMA del texto: cuanto de lo afirmado trae con que comprobarse. Se
+   pintan como tabla y NO llevan color de estado: un indicador alto no es "malo"
+   —una columna de opinion los tiene altos por definicion sin ser falsa— y
+   teñirlo de rojo seria el adjetivo que el sitio no escribe, dicho en color.
+   La unica pieza cromatica es la barra de proporcion, en tinta neutra. */
+.indicadores{margin:14px 0 4px;border-top:1px solid var(--malla)}
+.indicador{display:grid;grid-template-columns:1fr auto;gap:4px 14px;align-items:baseline;
+  padding:9px 0;border-bottom:1px solid var(--malla)}
+.indicador:last-child{border-bottom:none}
+.indicador .nombre{font-size:var(--t-s);color:var(--tinta-2)}
+.indicador .cifra{font-family:var(--mono);font-size:var(--t-s);color:var(--tinta);white-space:nowrap}
+.indicador .cifra i{color:var(--tinta-3);font-style:normal}
+.indicador .glosa{grid-column:1/-1;font-size:var(--t-xs);color:var(--tinta-3);max-width:74ch}
+.proporcion{grid-column:1/-1;height:3px;background:var(--malla);border-radius:100px;overflow:hidden}
+.proporcion span{display:block;height:100%;background:var(--tinta-3)}
+
+/* ── PRENSA: analisis de IA (capa NO sellada) ──
+   Todo el resto del sitio se puede recalcular. Esto no. La separacion visual es
+   la funcion, no la decoracion: borde discontinuo (el resto del sitio es solido),
+   sin el tinte de acento del modulo y con el rotulo SIEMPRE visible, no detras
+   de un despliegue. Un lector que confunda este bloque con un dato sellado seria
+   un fallo del diseño, no un descuido de el. */
+.analisis-ia{margin:18px 0 4px;border:1px dashed var(--regla);border-radius:var(--r);
+  background:var(--plano);padding:0}
+.analisis-cab{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;
+  padding:11px 16px;border-bottom:1px dashed var(--regla)}
+.analisis-cab .rotulo{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.12em;color:var(--tinta-2);font-weight:500}
+.analisis-cab .aviso{font-size:var(--t-xs);color:var(--tinta-3)}
+.analisis-cuerpo{padding:6px 16px 16px;color:var(--tinta-2);font-size:var(--t-s);max-width:78ch}
+.analisis-cuerpo h4{font-family:var(--mono);font-size:var(--t-xs);text-transform:uppercase;
+  letter-spacing:.1em;color:var(--tinta-3);font-weight:500;margin:16px 0 6px}
+.analisis-cuerpo p{margin:8px 0;line-height:1.65}
+.analisis-cuerpo ol{margin:8px 0 8px 20px}
+.analisis-cuerpo li{margin:5px 0;line-height:1.6}
+.analisis-cuerpo .cierre{margin-top:14px;padding-top:10px;border-top:1px dashed var(--regla);
+  font-size:var(--t-xs);color:var(--tinta-3)}
+.procedencia{padding:0 16px 13px;font-family:var(--mono);font-size:var(--t-xs);
+  color:var(--tinta-3);line-height:1.7}
+.procedencia b{color:var(--tinta-2);font-weight:500}
+
 /* ── Ficha de origen ── */
 /* El margin:auto es explicito: al fijarle un width propio al dialogo, el
    centrado que trae el navegador de fabrica deja de aplicarse y la ficha
@@ -643,6 +685,12 @@ try{ if(localStorage.getItem('lectura')==='tecnico') document.documentElement.da
   <div class="explain"><b>Lo que este método no puede hacer</b><span
     class="t-simple">Una frase sin números no se puede comprobar acá, y eso no la hace falsa ni verdadera: queda marcada como lo que es, una afirmación sin dato detrás en este corpus. Y como no guardamos el texto de las notas —son de sus autores—, si un medio edita o baja una nota, el sello prueba que cambió, no lo que decía antes.</span><span
     class="t-tecnico">Una afirmación sin cantidad resoluble se marca no_contrastable_con_este_corpus, que es el estado esperado para la mayoría de las frases. No se conserva el texto del artículo: el hash prueba qué bytes sirvió esa URL en ese instante, no el contenido pasado.</span></div>
+  <div class="explain"><b>Las tres capas de cada nota, y cuál se puede comprobar</b><span
+    class="t-simple">Primero, las frases con cifra comparadas contra los archivos sellados: eso se puede rehacer. Después, unos indicadores que cuentan rasgos de forma —promesas que no dicen con qué se pagan, cifras sin contra qué compararse, apelaciones a «la gente» sin decir a cuál—: eso también se puede rehacer, y la lista de palabras que los produce está publicada. Y al final, en un recuadro aparte y con borde punteado, una lectura crítica escrita por una IA: eso es opinión, no se puede rehacer, y no sostiene ninguna cifra de las de arriba.</span><span
+    class="t-tecnico">Capa A (extraer/contrastar) y capa A' (retorica.py) son deterministas y sellables: misma entrada, misma salida byte a byte, con el sha256 del léxico que las produjo. La capa B es un LLM y no es reproducible: se publica marcada derivado_no_determinista, con procedencia (modelo, sha256 del prompt, de la entrada y de la salida) y sin fundar ningún veredicto.</span></div>
+  <div class="explain"><b>Por qué los indicadores no dicen «populismo»</b><span
+    class="t-simple">Poner esa etiqueta sería un juicio, y ningún hash respalda un juicio: el sitio se volvería aquello que existe para no ser. Lo que sí se puede contar es el mecanismo — cuántas veces se promete algo sin decir con qué se paga, cuántas cifras llegan sin decir de dónde salieron. El nombre se lo pone usted.</span><span
+    class="t-tecnico">Un clasificador de ideología emite un juicio no verificable y rompe el anti-objetivo del Bloque 0. Los indicadores miden forma del texto contra listas simétricas y publicadas: cada término valorativo negativo tiene su par positivo, y un valor alto no prueba nada por sí solo.</span></div>
   <div id="lista-prensa"></div>
   <details class="panel"><summary>Cómo se eligen los medios y las notas</summary><div id="criterio-prensa"></div></details>
 </section>
@@ -1560,7 +1608,11 @@ async function initPrensa(){
 
   // Cada articulo se pide aparte: el indice trae los conteos, el detalle vive
   // en su propio archivo y solo se baja el de los articulos que se muestran.
+  // Las otras dos capas pueden faltar (un articulo medido antes de que existieran,
+  // o un analisis que no paso el filtro): f() devuelve null y el bloque no se pinta.
   const detalles=await Promise.all(arts.map(a=>f('../data/derived/prensa/'+a.archivo)));
+  const retoricas=await Promise.all(arts.map(a=>f('../data/derived/prensa/retorica/'+a.sha256+'.json')));
+  const analisis=await Promise.all(arts.map(a=>f('../data/derived/prensa/analisis/'+a.sha256+'.json')));
   lista.innerHTML=arts.map((a,i)=>{
     const d=detalles[i];
     const c=a.conteo||{};
@@ -1589,9 +1641,97 @@ async function initPrensa(){
       <p class="meta">${esc(a.medio)} · ${esc(a.fecha_publicacion)} · <a href="${esc(a.url)}" target="_blank" rel="noopener">ver la nota original</a></p>
       <div class="barra-densidad">${['coincide','difiere','sin_dato_disponible','no_contrastable_con_este_corpus'].map(tramo).join('')}</div>
       <p class="nota">${esc(fmtCL(total,0))} afirmaciones con cifra · ${esc(fmtCL(c.coincide||0,0))} coinciden · ${esc(fmtCL(c.difiere||0,0))} difieren · ${esc(fmtCL(c.sin_dato_disponible||0,0))} sin dato disponible · ${esc(fmtCL(c.no_contrastable_con_este_corpus||0,0))} sin dato detrás</p>
-      ${afs||'<p class="sin-dato">Sin afirmaciones con cifra en esta nota.</p>'}</div>`;
+      ${afs||'<p class="sin-dato">Sin afirmaciones con cifra en esta nota.</p>'}
+      ${pintarIndicadores(retoricas[i])}
+      ${pintarAnalisis(analisis[i])}</div>`;
   }).join('');
   await pintarCriterioPrensa(indice);
+}
+
+// ── Capa sellada: indicadores estructurales ──
+// Nombres cortos para la pantalla. El texto largo que explica QUE cuenta y QUE
+// NO cuenta cada uno viaja en el propio JSON y se pinta debajo: un indicador sin
+// su descargo al lado se lee como una acusacion con formato de numero.
+const NOMBRE_INDICADOR={
+  promesas_sin_financiamiento_declarado:'Promesas sin decir con qué se pagan',
+  cifras_sin_base_de_comparacion:'Cifras sin contra qué compararse',
+  cifras_sin_atribucion_de_fuente:'Cifras sin decir quién las entregó',
+  colectivos_sin_delimitar:'Apelaciones a un colectivo sin acotar',
+  densidad_valorativa:'Palabras con carga de juicio'
+};
+
+function pintarIndicadores(r){
+  if(!r?.indicadores) return '';
+  // Un articulo medido sobre la pagina completa incluye menu y titulares de otras
+  // notas: sus numeros no describen la nota y no se publican como si lo hicieran.
+  if(r.recorte_del_cuerpo && r.recorte_del_cuerpo.apto_para_publicar===false)
+    return `<p class="sin-dato">Indicadores no publicados para esta nota: se midieron sobre la página completa, `+
+      `que incluye el menú del sitio y titulares de otras notas. ${esc(r.recorte_del_cuerpo.por_que||'')}</p>`;
+  const filas=Object.entries(r.indicadores).map(([k,v])=>{
+    const total=v.de_un_total_de;
+    const esDensidad=k==='densidad_valorativa';
+    const cifra=esDensidad
+      ? `${esc(fmtCL(v.valor,2))} <i>por cada 1.000 palabras</i>`
+      : `${esc(fmtCL(v.valor,0))} <i>de ${esc(fmtCL(total,0))} ${esc(v.unidad||'')}</i>`;
+    // La barra solo tiene sentido cuando el indicador es una parte de un total.
+    const barra=(!esDensidad&&total)
+      ? `<div class="proporcion"><span style="width:${Math.min(100,v.valor/total*100)}%"></span></div>`:'';
+    return `<div class="indicador">
+      <span class="nombre">${esc(NOMBRE_INDICADOR[k]||k)}</span>
+      <span class="cifra">${cifra}</span>
+      ${barra}
+      <span class="glosa">${esc(v.que_cuenta||'')} <b>No dice:</b> ${esc(v.que_no_cuenta||'')}</span>
+    </div>`;
+  }).join('');
+  const lex=r.lexico||{}, rec=r.recorte_del_cuerpo||{};
+  return `<div class="indicadores">${filas}</div>
+    <p class="nota">Medido sobre el cuerpo de la nota: ${esc(fmtCL(rec.caracteres_medidos||0,0))} de `+
+    `${esc(fmtCL(rec.caracteres_servidos||0,0))} caracteres que sirve la página `+
+    `(se descartan menú, titulares de otras notas y pie). Listas de palabras: `+
+    `<span class="hash">${esc(String(lex.sha256||'').slice(0,16))}…</span> (v${esc(lex.version??'?')}). `+
+    `${esc(r.advertencia_de_lectura||'')}</p>`;
+}
+
+// ── Capa NO sellada: la lectura crítica ──
+// Render mínimo de markdown, sobre texto ya escapado: encabezados '## ', items
+// numerados y párrafos. No se acepta HTML del archivo — el texto lo escribió un
+// modelo y este bloque no es lugar para confiar en nada.
+function markdownMinimo(txt, cierre){
+  const bloques=txt.split(/\n{2,}/).map(b=>b.trim()).filter(Boolean);
+  let html='', lista=[];
+  const cerrarLista=()=>{ if(lista.length){ html+=`<ol>${lista.join('')}</ol>`; lista=[]; } };
+  for(const b of bloques){
+    if(/^#{2,4}\s/.test(b)){ cerrarLista(); html+=`<h4>${esc(b.replace(/^#+\s*/,''))}</h4>`; continue; }
+    if(/^\d+[.)]\s/.test(b)){
+      for(const li of b.split('\n')) if(li.trim()) lista.push(`<li>${esc(li.replace(/^\s*\d+[.)]\s*/,''))}</li>`);
+      continue;
+    }
+    cerrarLista();
+    const plano=b.replace(/\s+/g,' ');
+    html+= plano===cierre ? `<p class="cierre">${esc(plano)}</p>` : `<p>${esc(plano)}</p>`;
+  }
+  cerrarLista();
+  return html;
+}
+
+function pintarAnalisis(d){
+  if(!d?.texto) return '';
+  const p=d.procedencia||{};
+  const cierre=(d.texto.split(/\n{2,}/).pop()||'').trim().replace(/\s+/g,' ');
+  return `<div class="analisis-ia">
+    <div class="analisis-cab">
+      <span class="rotulo">Análisis de IA · no sellado</span>
+      <span class="aviso">Es opinión de un modelo, no un dato. No es verificable y no sostiene ninguna cifra de arriba.</span>
+    </div>
+    <div class="analisis-cuerpo">${markdownMinimo(d.texto, cierre)}</div>
+    <p class="procedencia"><b>Procedencia:</b> modelo ${esc(p.modelo||'sin dato disponible')} ·
+      prompt <a href="../${esc(p.prompt?.archivo||'')}" target="_blank" rel="noopener">${esc(p.prompt?.archivo||'')}</a>
+      <span class="hash">${esc(String(p.prompt?.sha256||'').slice(0,16))}…</span> ·
+      entrada <span class="hash">${esc(String(p.entrada?.retorica_sha256||'').slice(0,12))}…</span> /
+      <span class="hash">${esc(String(p.entrada?.afirmaciones_sha256||'').slice(0,12))}…</span> ·
+      salida <span class="hash">${esc(String(p.salida?.sha256||'').slice(0,12))}…</span><br>
+      ${esc(p.que_prueba_esto||'')} ${esc(p.que_no_prueba||'')}</p>
+  </div>`;
 }
 
 // El criterio de seleccion es, en si mismo, un vector de sesgo: se publica junto

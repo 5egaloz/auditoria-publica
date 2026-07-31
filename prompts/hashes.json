@@ -1,10 +1,15 @@
 {
  "descripcion": "SHA-256 de los prompts que gobiernan al agente. Para comprobarlos: descargue el archivo del repo y calcule su sha256; debe coincidir byte a byte con el valor publicado aqui.",
- "generado_utc": "2026-07-27T15:57:14Z",
+ "generado_utc": "2026-07-31T14:58:05Z",
  "generado_por": "sellar_prompts.py",
  "cadena_de_custodia": "El historial de Git del repositorio publico fecha cada cambio de estos archivos. No entran a manifest.jsonl, reservado a los originales descargados de las fuentes del Estado.",
- "total_registros": 2,
+ "total_registros": 3,
  "registros": [
+  {
+   "archivo": "prompts/analisis-prensa.md",
+   "sha256": "295015e28fdb4a1b1c15d4d8d5cf482a3d477b879de71da0e6e44f68f99a05e1",
+   "bytes": 7358
+  },
   {
    "archivo": "prompts/redactor.md",
    "sha256": "0a25725169ffd57990f5fa753df6b1ccec577254678e390667bf4a7789dc9b69",

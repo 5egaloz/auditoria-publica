@@ -38,6 +38,14 @@ import sys
 import unicodedata
 from pathlib import Path
 
+# Unica cosa que esta capa importa de otra: el recorte del cuerpo del articulo.
+# Se comparte en vez de duplicarse —al reves que hash_canonico(), que si se
+# repite a proposito— porque el recorte TIENE que ser identico en las dos capas.
+# Cuando no lo era, esta capa contaba 9 afirmaciones sobre la pagina completa y
+# retorica.py contaba 5 sobre el cuerpo, y el sitio publicaba dos denominadores
+# distintos para la misma nota. Dos copias que pueden divergir son, aca, el bug.
+from retorica import cargar_cuerpos, recortar_cuerpo
+
 RAIZ = Path(__file__).resolve().parent
 REGISTRO = RAIZ / "prensa" / "registro.jsonl"
 SALIDA = RAIZ / "data" / "derived" / "prensa" / "afirmaciones"
@@ -315,6 +323,8 @@ def main() -> int:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--sha256", help="sha256 del articulo, ya registrado en prensa/registro.jsonl")
     p.add_argument("--texto", help="Archivo de trabajo con el texto del articulo (no se versiona)")
+    p.add_argument("--pagina-completa", action="store_true",
+                   help="Extraer sin anclas de cuerpo, asumiendo menu y notas vecinas")
     p.add_argument("--autotest", action="store_true")
     args = p.parse_args()
 
@@ -334,7 +344,19 @@ def main() -> int:
     if not ruta.exists():
         print(f"ERROR: no existe {ruta}")
         return 1
-    texto = ruta.read_text(encoding="utf-8")
+
+    anclas = cargar_cuerpos().get(entrada["sha256"])
+    if not anclas and not args.pagina_completa:
+        print(f"ERROR: {args.sha256[:12]}… no tiene anclas de cuerpo en prensa/cuerpos.json.")
+        print("  Sin ellas se extraen afirmaciones del menu y de los titulares de otras notas,")
+        print("  que se publicarian como si fueran de esta. Declara las anclas alli, o corre con")
+        print("  --pagina-completa asumiendo esa contaminacion.")
+        return 1
+    try:
+        texto, recorte = recortar_cuerpo(ruta.read_text(encoding="utf-8"), anclas)
+    except ValueError as e:
+        print(f"ERROR: {e}")
+        return 1
 
     resultado = extraer(texto)
     salida = {
@@ -345,6 +367,7 @@ def main() -> int:
         "derivado": True,
         "capa": "A (determinista, sin IA)",
         "tope_de_cita": {"palabras": MAX_PALABRAS_CITA, "caracteres": MAX_CARACTERES_CITA},
+        "recorte_del_cuerpo": recorte,
         "articulo": {
             "sha256": entrada["sha256"],
             "seq_registro": entrada["seq"],

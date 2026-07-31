@@ -15,9 +15,15 @@ Uso:  python -m unittest tests_agente -v
 
 import json
 import unittest
+from pathlib import Path
 
+import analisis_ia
 import filtro
 import herramientas as h
+import relevancia
+import retorica
+
+RAIZ = Path(__file__).resolve().parent
 
 
 class TestSobres(unittest.TestCase):
@@ -419,6 +425,229 @@ class TestFiltro(unittest.TestCase):
         self.assertTrue(ia["aprobado"], ia["motivos"])
         self.assertTrue(ib["aprobado"], ib["motivos"])
         self.assertEqual(ia["motivos"], ib["motivos"])
+
+
+class TestRetorica(unittest.TestCase):
+    """La capa que mide FORMA del texto. Lo que se vigila aca no es que cuente
+    bien, sino que no se pueda usar como marcador ideologico."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.lex = retorica.cargar_lexico()
+
+    def _ocurrencias(self, texto):
+        return retorica.medir(texto, self.lex)["indicadores"]["densidad_valorativa"]["ocurrencias"]
+
+    def test_la_lista_valorativa_es_simetrica(self):
+        """Si un par opuesto pesara distinto, el indicador castigaria a un lado."""
+        for a, b in (("exito", "fracaso"), ("responsable", "irresponsable"),
+                     ("solido", "debil"), ("logro", "desastre"),
+                     ("avance", "retroceso"), ("triunfo", "derrota")):
+            with self.subTest(par=(a, b)):
+                self.assertEqual(self._ocurrencias(f"Fue un {a} para el sector."),
+                                 self._ocurrencias(f"Fue un {b} para el sector."))
+
+    def test_el_resultado_no_depende_del_actor(self):
+        """Test de espejo: cambiar quien protagoniza no puede mover un indicador."""
+        plantilla = "{actor} asegura que la medida permitira crear empleo en la region."
+        valores = set()
+        for actor in ("El Gobierno", "La oposicion", "El Partido Comunista",
+                      "El Partido Republicano", "La Contraloria"):
+            r = retorica.medir(plantilla.format(actor=actor), self.lex)
+            valores.add(json.dumps({k: v["valor"] for k, v in r["indicadores"].items()},
+                                   sort_keys=True))
+        self.assertEqual(1, len(valores), "un indicador cambio al cambiar el actor")
+
+    def test_ningun_indicador_nombra_una_ideologia(self):
+        """El sistema mide mecanismo; nombrar la etiqueta seria el juicio que no emite.
+
+        Se revisa lo que el sistema AFIRMA —nombres de indicador, unidades y los
+        casos medidos—, no los descargos: 'no dice que quien habla sea populista'
+        contiene la palabra justamente para negarla, y borrarla de ahi debilitaria
+        el descargo en vez de reforzar la regla.
+        """
+        prohibidas = ("populis", "demagog", "ideolog", "izquierda", "derecha",
+                      "progresista", "conservador")
+        r = retorica.medir("La medida permitira crear empleo. Es por la gente.", self.lex)
+        afirmado = json.dumps(
+            {"nombres": sorted(r["indicadores"]),
+             "unidades": [i["unidad"] for i in r["indicadores"].values()],
+             "casos": r["casos"]}, ensure_ascii=False).lower()
+        for p in prohibidas:
+            with self.subTest(termino=p):
+                self.assertNotIn(p, afirmado)
+
+    def test_los_descargos_solo_nombran_la_etiqueta_para_negarla(self):
+        """Si un descargo la afirmara, el indicador seria el clasificador que no es."""
+        for i in retorica.medir("Es por la gente.", self.lex)["indicadores"].values():
+            with self.subTest(indicador=i["que_cuenta"][:40]):
+                self.assertNotIn("populis", i["que_cuenta"].lower())
+                if "populis" in i["que_no_cuenta"].lower():
+                    self.assertIn("no dice", i["que_no_cuenta"].lower())
+
+    def test_cada_indicador_publica_su_descargo(self):
+        """Un numero sin 'que NO cuenta' al lado se lee como una acusacion."""
+        r = retorica.medir("Segun Hacienda, son 45 obras. La medida permitira crecer.", self.lex)
+        for nombre, i in r["indicadores"].items():
+            with self.subTest(indicador=nombre):
+                self.assertTrue(i["que_cuenta"].strip())
+                self.assertTrue(i["que_no_cuenta"].strip())
+
+    def test_el_recorte_del_cuerpo_excluye_el_menu(self):
+        """Sin esto, el titular de otra nota entra al conteo de esta."""
+        pagina = "Inicio Politica Deportes CUERPO Ingreso a tramite el lunes. FIN Un fracaso historico"
+        cuerpo, info = retorica.recortar_cuerpo(pagina, {"inicio": "CUERPO", "fin": "FIN"})
+        self.assertTrue(info["apto_para_publicar"])
+        self.assertEqual(0, self._ocurrencias(cuerpo))
+
+    def test_sin_anclas_la_medicion_no_es_publicable(self):
+        _, info = retorica.recortar_cuerpo("cualquier texto", None)
+        self.assertFalse(info["apto_para_publicar"])
+        self.assertEqual("pagina_completa", info["alcance"])
+
+    def test_un_ancla_ausente_aborta(self):
+        """Si la pagina cambio, se falla; no se recorta a medias en silencio."""
+        with self.assertRaises(ValueError):
+            retorica.recortar_cuerpo("hola mundo", {"inicio": "NO ESTA", "fin": "FIN"})
+
+    def test_las_dos_capas_recortan_igual(self):
+        """Denominadores distintos para la misma nota serian un dato falso.
+
+        extraer_prensa.py importa el recorte de retorica.py justamente por esto:
+        cuando cada capa tenia el suyo, una contaba 17 afirmaciones sobre la
+        pagina completa y la otra 16 sobre el cuerpo.
+        """
+        import extraer_prensa
+        self.assertIs(extraer_prensa.recortar_cuerpo, retorica.recortar_cuerpo)
+
+    def test_el_lexico_viaja_con_su_hash(self):
+        """Cambiar una lista cambia los numeros: sin la version, no significan nada."""
+        self.assertEqual(64, len(self.lex.sha256))
+        otro = retorica.cargar_lexico()
+        self.assertEqual(self.lex.sha256, otro.sha256)
+
+
+class TestAnalisisIA(unittest.TestCase):
+    """La capa NO sellada. Se vigila que no pueda colarse como si fuera dato."""
+
+    def _base(self):
+        return ("## Lo que se puede comprobar hoy\n" + "palabra " * 90 +
+                "\n## Lo que no queda contra qué comprobar\n" + "palabra " * 90 +
+                "\n## Posibles soluciones\n" + "palabra " * 90 +
+                "\n## Lo que este análisis no pudo evaluar\n" + "palabra " * 40 +
+                "\n\n" + analisis_ia.CIERRE)
+
+    def _material(self):
+        return ({"indicadores": {"x": {"valor": 4}}},
+                {"afirmaciones": [{"cita_manifiesto": {"seq": 3, "sha256": "ab" * 32}}]})
+
+    def _con_cita(self, texto):
+        return texto.replace("palabra palabra", f" seq 3 hash {'ab' * 32} ", 1)
+
+    def test_rechaza_una_cifra_que_no_esta_en_el_material(self):
+        ret, afi = self._material()
+        informe = analisis_ia.revisar(
+            self._con_cita(self._base()).replace("palabra palabra", "917 casos", 1), ret, afi)
+        self.assertFalse(informe["aprobado"])
+        self.assertTrue(any("sin respaldo" in m for m in informe["motivos"]))
+
+    def test_rechaza_la_etiqueta_ideologica(self):
+        ret, afi = self._material()
+        for etiqueta in ("es demagogia pura", "un discurso populista", "puro populismo"):
+            with self.subTest(etiqueta=etiqueta):
+                informe = analisis_ia.revisar(
+                    self._con_cita(self._base()).replace("palabra palabra", etiqueta, 1), ret, afi)
+                self.assertFalse(informe["aprobado"])
+
+    def test_exige_las_cuatro_secciones_y_el_cierre(self):
+        base = self._con_cita(self._base())
+        self.assertFalse(analisis_ia.revisar_estructura(base))
+        self.assertTrue(analisis_ia.revisar_estructura(base.replace(analisis_ia.CIERRE, "")))
+        for seccion in analisis_ia.SECCIONES:
+            with self.subTest(seccion=seccion):
+                self.assertTrue(analisis_ia.revisar_estructura(base.replace(seccion, "## Otra")))
+
+    def test_los_analisis_publicados_pasan_su_propio_filtro(self):
+        """Lo que esta en data/derived tiene que seguir cumpliendo hoy."""
+        carpeta = RAIZ / "data" / "derived" / "prensa" / "analisis"
+        if not carpeta.is_dir() or not any(carpeta.glob("*.json")):
+            self.skipTest("todavia no hay analisis sellados")
+        for ruta in sorted(carpeta.glob("*.json")):
+            with self.subTest(archivo=ruta.name):
+                d = json.loads(ruta.read_text(encoding="utf-8"))
+                # Se publica marcado como lo que es, en tres campos distintos:
+                # que un lector confunda esto con un dato seria un fallo del sistema.
+                self.assertFalse(d["sellado"])
+                self.assertTrue(d["derivado_no_determinista"])
+                self.assertFalse(d["funda_algun_veredicto"])
+                ret, afi = analisis_ia.material(d["articulo"]["sha256"])
+                informe = analisis_ia.revisar(d["texto"], ret, afi)
+                self.assertTrue(informe["aprobado"], informe["motivos"])
+
+    def test_el_prompt_publicado_calza_con_su_hash(self):
+        """Si el prompt pudiera cambiar en silencio, el sello no probaria nada."""
+        hashes = json.loads((RAIZ / "prompts" / "hashes.json").read_text(encoding="utf-8"))
+        registro = {r["archivo"]: r["sha256"] for r in hashes["registros"]}
+        ruta = "prompts/analisis-prensa.md"
+        self.assertIn(ruta, registro)
+        self.assertEqual(registro[ruta], analisis_ia.sha256_de(RAIZ / ruta))
+
+
+class TestRelevancia(unittest.TestCase):
+    """La seleccion de noticias: el mayor vector de sesgo del modulo."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.criterio = json.loads(
+            (RAIZ / "prensa" / "relevancia.json").read_text(encoding="utf-8"))
+
+    def _item(self, medio, titulo, fecha="2026-07-31T10:00:00+00:00"):
+        return {"medio": medio, "titulo": titulo, "url": f"https://x/{medio}", "fecha": fecha}
+
+    def test_un_solo_medio_no_alcanza_el_umbral(self):
+        r = relevancia.seleccionar(
+            [self._item("A", "Senado aplaza la votacion de la reforma tributaria")], self.criterio)
+        self.assertEqual(0, r["hechos_seleccionados"])
+        self.assertEqual(1, r["hechos_bajo_el_umbral"])
+
+    def test_el_criterio_no_depende_del_actor(self):
+        """Test de espejo: la seleccion no puede favorecer a un sector."""
+        for actor in ("el Gobierno", "la oposicion", "el Partido Comunista",
+                      "el Partido Republicano"):
+            with self.subTest(actor=actor):
+                r = relevancia.seleccionar([
+                    self._item("A", f"Senado aplaza la votacion tras el informe de {actor}"),
+                    self._item("B", f"Aplazan en el Senado la votacion tras el informe de {actor}"),
+                ], self.criterio)
+                self.assertEqual(1, r["hechos_seleccionados"])
+
+    def test_es_determinista_ante_el_orden_de_llegada(self):
+        """Un resultado que depende de que servidor respondio antes no lo reproduce nadie."""
+        lote = [self._item("A", "Senado aplaza la votacion de la reforma tributaria"),
+                self._item("B", "El Senado aplaza votacion de la reforma tributaria hoy"),
+                self._item("C", "Contraloria abre sumario por contratos del ministerio")]
+        uno = json.dumps(relevancia.seleccionar(lote, self.criterio), sort_keys=True)
+        otro = json.dumps(relevancia.seleccionar(list(reversed(lote)), self.criterio),
+                          sort_keys=True)
+        self.assertEqual(uno, otro)
+
+    def test_el_termino_calza_como_palabra_y_no_como_prefijo(self):
+        """'ley' dentro de 'leyenda' metia deportes al corpus como legislacion."""
+        terminos = self.criterio["alcance_politico"]["terminos"]
+        self.assertFalse(relevancia.es_politico("Murio Baresi, leyenda del AC Milan", terminos))
+        self.assertIn("ley", relevancia.es_politico("Promulgan la ley de presupuestos", terminos))
+
+    def test_declara_siempre_cuanto_quedo_fuera(self):
+        """Un recorte silencioso se lee como 'aca esta todo'."""
+        r = relevancia.seleccionar([
+            self._item("A", "Senado aplaza la votacion de la reforma tributaria"),
+            self._item("B", "Colo Colo gana el clasico del futbol chileno"),
+        ], self.criterio)
+        for campo in ("items_leidos", "descartados_por_alcance",
+                      "hechos_formados", "hechos_bajo_el_umbral"):
+            self.assertIn(campo, r)
+        self.assertEqual(2, r["items_leidos"])
+        self.assertEqual(1, r["descartados_por_alcance"])
 
 
 if __name__ == "__main__":

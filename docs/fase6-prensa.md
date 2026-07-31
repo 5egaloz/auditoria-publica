@@ -158,3 +158,100 @@ cadena de `prensa/registro.jsonl` igual que la del manifiesto.
 3. **Largo de la cita.** Cuánto texto ajeno se muestra por afirmación.
 4. **Paywalls.** Qué se hace con lo que el RSS anuncia pero no entrega.
 5. **Agregación por medio.** La recomendación es no. Es tu llamado.
+
+---
+
+# Fase 7 — Mirada crítica: dos capas, y solo una se puede rehacer
+
+> Decidido por Fer el 2026-07-31 e implementado el mismo día. Esta sección
+> registra la decisión, el conflicto que abría y cómo se resolvió.
+
+## El conflicto, dicho completo
+
+El encargo fue: que en Prensa aparezcan las noticias políticas más relevantes y
+que la IA "baje la información de demagogismos, populismo etc", con mirada
+crítica y posibles soluciones.
+
+Eso choca de frente con dos cosas del propio proyecto. El **anti-objetivo del
+Bloque 0** ("si una salida pudiera leerse como editorial, está mal construida") y
+la **lista negra del Bloque 4**, donde *populista* está escrito con todas sus
+letras. Y con lo que este mismo documento argumentó más arriba: una etiqueta de
+"esto es demagogia" no la respalda ningún hash.
+
+La salida no fue elegir un lado. Fue **separar lo que se puede sellar de lo que
+no**, y publicar cada cosa con su etiqueta.
+
+## Capa A′ — indicadores estructurales (`retorica.py`), sellable
+
+En vez de calificar el discurso, se cuentan rasgos de **forma** que cualquiera
+recuenta sobre el mismo texto:
+
+| indicador | qué cuenta |
+|---|---|
+| `promesas_sin_financiamiento_declarado` | efecto futuro anunciado sin decir con cargo a qué |
+| `cifras_sin_base_de_comparacion` | cantidad sin nada contra qué leerla |
+| `cifras_sin_atribucion_de_fuente` | cantidad sin decir quién la entregó |
+| `colectivos_sin_delimitar` | "la gente", "las familias", sin tramo, número ni región |
+| `densidad_valorativa` | palabras con carga de juicio por cada 1.000 |
+
+Ninguno dice que alguien mienta. Dicen que hay afirmaciones que el lector no
+puede ir a comprobar a ninguna parte — que es exactamente lo que se pierde cuando
+el debate se corre de lo técnico a lo ideológico.
+
+El criterio no vive en el código sino en **`prensa/lexico.json`**, publicado, y
+cada salida graba su `sha256`: un indicador sin la versión de su criterio al lado
+no significa nada. Las listas son **simétricas por construcción** (cada término
+valorativo negativo tiene su par positivo) y hay un test que lo comprueba, más un
+test de espejo que corre el mismo titular cambiando el actor y exige el mismo
+número.
+
+## Capa B — la lectura crítica (`analisis_ia.py`), NO sellable
+
+La prosa la escribe el modelo siguiendo `prompts/analisis-prensa.md`, cuyo hash
+se publica. Lo que se sella **no es la verdad sino la procedencia**: qué modelo,
+con qué prompt, sobre qué entrada, con qué salida. Se publica marcada
+`derivado_no_determinista`, `sellado: false`, `funda_algun_veredicto: false`, en
+un recuadro de borde punteado con el rótulo siempre visible.
+
+Antes de sellarse pasa por **`filtro.py`**, el mismo validador que gobierna al
+agente, con el material sellado como payload. Rechaza si aparece una cifra que no
+está en el material, lenguaje valorativo, un giro de juicio o una etiqueta
+ideológica sin fuente nombrada. Se le agregaron a la lista negra las etiquetas de
+estilo político (`demagog`, `populism`, `clientelar`, `asistencialist`,
+`tecnocrat`): no porque el fenómeno no exista, sino porque nombrarlo reemplaza el
+trabajo de mostrar el mecanismo.
+
+## Selección: cobertura cruzada (`relevancia.py`)
+
+"Las noticias más relevantes" esconde una decisión, y si la toma el autor del
+proyecto el sistema publica su agenda con formato de dato. Entra un hecho cuando
+**2 o más medios** de `medios.json` lo publican en la misma ventana. La
+relevancia la decide la coincidencia entre redacciones que compiten.
+
+El sesgo que arrastra igual está publicado en `prensa/relevancia.json`: hereda
+entero el de la lista de medios, y **castiga la exclusiva** — un reportaje que un
+solo medio publica nunca alcanza el umbral. Es consecuencia del método, no un
+efecto parchable.
+
+## Dos hallazgos que cambiaron números publicados
+
+1. **El texto servido por un medio no es el artículo.** De 9.252 caracteres de
+   una nota, 2.308 eran menú, pie y titulares de otras notas. La densidad
+   valorativa de la nota de la U. de Chile bajó de 2,03 a **0,0** al recortar: sus
+   adjetivos eran de titulares vecinos. Se resolvió con anclas literales
+   declaradas en `prensa/cuerpos.json` — no con una heurística, porque una
+   heurística falla en silencio.
+2. **Las dos capas medían distinto.** `extraer_prensa.py` contaba 17 afirmaciones
+   sobre la página completa y `retorica.py` 16 sobre el cuerpo. Publicar dos
+   denominadores para la misma nota es un dato falso. Ahora `extraer_prensa.py`
+   importa el recorte de `retorica.py` (la única función compartida entre capas,
+   con el motivo escrito al lado) y hay un test que exige que sea la misma.
+
+## Lo que sigue pendiente
+
+- La lista de medios sigue sin RSS de Emol, El Mostrador, DF, T13 y El Líbero:
+  el sesgo declarado en `medios.json` aplica multiplicado a la cobertura cruzada.
+- `relevancia.py` corre a mano. Falta el cron de la Fase 5 que lo encadene con
+  `ingesta_prensa.py` → `extraer` → `contrastar` → `retorica`.
+- Las anclas de `cuerpos.json` son por artículo. Si un medio mantiene su
+  plantilla, podrían declararse por medio en `medios.json`.
